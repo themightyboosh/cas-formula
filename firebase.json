@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "realness-score",
     "public": "dist/standalone",
     "ignore": [
       "firebase.json",
