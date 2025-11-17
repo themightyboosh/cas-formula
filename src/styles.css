@@ -313,10 +313,11 @@ header {
 
 /* Rating Scale - Bolder, Cleaner */
 .rating-scale {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     gap: 12px;
-    flex-wrap: wrap;
     margin-top: 0;
+    max-width: 800px;
 }
 
 .rating-button {
@@ -332,6 +333,7 @@ header {
     cursor: pointer;
     transition: all 0.2s ease;
     text-align: center;
+    width: 100%;
 }
 
 .rating-button:hover {
