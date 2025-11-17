@@ -35,6 +35,39 @@ const state = {
 // DOM elements - initialize as empty object, populate after DOM is ready
 const elements = {};
 
+// Initialize DOM elements
+function initElements() {
+    elements.assessmentSection = document.getElementById('assessmentSection');
+    elements.resultsSection = document.getElementById('resultsSection');
+    elements.progressText = document.getElementById('progressText');
+    elements.progressFill = document.getElementById('progressFill');
+    elements.domainCategoryHeader = document.getElementById('domainCategoryHeader');
+    elements.domainCategoryTitle = document.getElementById('domainCategoryTitle');
+    elements.domainCategoryDescription = document.getElementById('domainCategoryDescription');
+    elements.errorBanner = document.getElementById('errorBanner');
+    elements.emailModal = document.getElementById('emailModal');
+    elements.emailForm = document.getElementById('emailForm');
+    elements.emailInput = document.getElementById('emailInput');
+    elements.questionNavigation = document.getElementById('questionNavigation');
+    elements.prevBtn = document.getElementById('prevBtn');
+    elements.nextBtn = document.getElementById('nextBtn');
+    elements.submitBtn = document.getElementById('submitBtn');
+    elements.submitButtonContainer = document.getElementById('submitButtonContainer');
+    elements.stickyButton = document.getElementById('stickyButton');
+    elements.stickySubmitBtn = document.getElementById('stickySubmitBtn');
+    elements.retakeBtn = document.getElementById('retakeBtn');
+    elements.archetypeName = document.getElementById('archetypeName');
+    elements.archetypeTag = document.getElementById('archetypeTag');
+    elements.archetypeDescription = document.getElementById('archetypeDescription');
+    elements.archetypeImage = document.getElementById('archetypeImage');
+    elements.domainCharts = document.getElementById('domainCharts');
+    elements.compatibilityInfo = document.getElementById('compatibilityInfo');
+    elements.imagePromptText = document.getElementById('imagePromptText');
+    elements.copyPromptBtn = document.getElementById('copyPromptBtn');
+    elements.shareButtons = document.querySelectorAll('.share-btn');
+    elements.nativeShareBtn = document.getElementById('nativeShareBtn');
+}
+
 // Initialize analytics
 async function initAnalytics() {
     try {
