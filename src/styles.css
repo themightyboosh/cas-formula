@@ -162,7 +162,7 @@ label {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 80px 0;
+    padding: 56px 0;
 }
 
 .landing-content {
@@ -174,24 +174,26 @@ label {
     font-size: 72px;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: 48px;
+    margin-bottom: 34px;
     letter-spacing: -0.03em;
     line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
+    flex-wrap: nowrap;
 }
 
 .landing-icon {
-    width: 72px;
-    height: 72px;
+    width: 90px;
+    height: 90px;
     color: var(--accent);
     flex-shrink: 0;
+    min-width: 90px;
 }
 
 .landing-description {
-    margin-bottom: 60px;
+    margin-bottom: 42px;
 }
 
 .landing-description p {
@@ -241,12 +243,16 @@ header {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
 }
 
 .header-icon {
     width: 28px;
     height: 28px;
     color: var(--accent);
+    flex-shrink: 0;
+    min-width: 28px;
 }
 
 .header-tagline {
@@ -412,8 +418,8 @@ header {
 
 /* Domain Category Header */
 .domain-category-header {
-    margin-bottom: 40px;
-    padding-bottom: 24px;
+    margin-bottom: 28px;
+    padding-bottom: 17px;
     border-bottom: 1px solid var(--border);
 }
 
@@ -422,7 +428,7 @@ header {
     color: var(--accent);
     font-weight: 500;
     letter-spacing: -0.01em;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .domain-category-description {
@@ -455,13 +461,13 @@ header {
 }
 
 .single-question {
-    padding: 60px 0;
+    padding: 42px 0;
     text-align: center;
 }
 
 .single-question .question-text {
     font-size: 24px;
-    margin-bottom: 40px;
+    margin-bottom: 28px;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -913,6 +919,28 @@ footer {
     h2 {
         font-size: 28px;
     }
+    
+    .landing-title {
+        font-size: 48px;
+        gap: 16px;
+    }
+    
+    .landing-icon {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+    }
+    
+    .header-title {
+        font-size: 20px;
+        gap: 10px;
+    }
+    
+    .header-icon {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+    }
 
     .domain-title {
         font-size: 24px;
@@ -1020,6 +1048,28 @@ footer {
 
     h1 {
         font-size: 32px;
+    }
+    
+    .landing-title {
+        font-size: 32px;
+        gap: 12px;
+    }
+    
+    .landing-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+    }
+    
+    .header-title {
+        font-size: 16px;
+        gap: 8px;
+    }
+    
+    .header-icon {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
     }
 
     .archetype-name {
