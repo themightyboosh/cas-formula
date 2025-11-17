@@ -37,6 +37,9 @@ const elements = {};
 
 // Initialize DOM elements
 function initElements() {
+    elements.landingScreen = document.getElementById('landingScreen');
+    elements.startBtn = document.getElementById('startBtn');
+    elements.compactHeader = document.getElementById('compactHeader');
     elements.assessmentSection = document.getElementById('assessmentSection');
     elements.resultsSection = document.getElementById('resultsSection');
     elements.progressText = document.getElementById('progressText');
@@ -709,11 +712,67 @@ function checkUrlParams() {
             };
             
             state.result = { archetype, sums, levels: { A, B, C, D } };
+            
+            // Hide landing, show results
+            if (elements.landingScreen) {
+                elements.landingScreen.style.display = 'none';
+            }
+            
             renderResults();
             return true;
         }
     }
     return false;
+}
+
+// Start assessment from landing screen
+function startAssessment() {
+    // Hide landing screen
+    if (elements.landingScreen) {
+        elements.landingScreen.style.display = 'none';
+    }
+    
+    // Show compact header
+    if (elements.compactHeader) {
+        elements.compactHeader.style.display = 'block';
+    }
+    
+    // Show progress bar
+    const progressBar = document.getElementById('progressBar');
+    if (progressBar) {
+        progressBar.style.display = 'block';
+    }
+    
+    // Show assessment section
+    if (elements.assessmentSection) {
+        elements.assessmentSection.style.display = 'block';
+    }
+    
+    // Show navigation
+    if (elements.questionNavigation) {
+        elements.questionNavigation.style.display = 'flex';
+    }
+    
+    // Track assessment started
+    if (window.trackAssessmentStarted) {
+        window.trackAssessmentStarted();
+    }
+    
+    // Render first question
+    renderAssessment();
+}
+
+// Randomize all responses for testing
+function randomizeResponses() {
+    state.responses = {};
+    state.questions.forEach(q => {
+        state.responses[q.id] = Math.floor(Math.random() * 5) + 1; // Random 1-5
+    });
+    
+    // Calculate and show random result
+    state.currentEmail = 'test@example.com';
+    state.emailOptIn = false;
+    calculateAndShowResults();
 }
 
 // Initialize app
@@ -739,11 +798,14 @@ async function init() {
         // Load saved progress (must be after questions are initialized)
         loadProgress();
         
-        // Render assessment
-        renderAssessment();
-        updateProgress();
+        // Don't render assessment yet - show landing screen first
+        // renderAssessment() and updateProgress() will be called by startAssessment()
         
         // Event listeners (check if elements exist first)
+        if (elements.startBtn) {
+            elements.startBtn.addEventListener('click', startAssessment);
+        }
+        
         if (elements.emailForm) {
             elements.emailForm.addEventListener('submit', handleEmailSubmit);
         }
@@ -784,10 +846,12 @@ async function init() {
             elements.nativeShareBtn.addEventListener('click', nativeShare);
         }
         
-        // Track assessment started
-        if (window.trackAssessmentStarted) {
-            window.trackAssessmentStarted();
-        }
+        // Keyboard shortcut for testing: 'r' key on results page randomizes
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'r' && elements.resultsSection && elements.resultsSection.style.display === 'block') {
+                randomizeResponses();
+            }
+        });
         
     } catch (error) {
         console.error('Error initializing app:', error);

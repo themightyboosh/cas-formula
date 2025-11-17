@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The Realness Score - A brief affect-based profile of how you feel, show, protect, and connect.">
+    <meta name="description" content="The Realness Score - Discover your authentic emotional archetype.">
     <title>The Realness Score</title>
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="The Realness Score">
-    <meta property="og:description" content="A brief affect-based profile of how you feel, show, protect, and connect.">
+    <meta property="og:description" content="Discover your authentic emotional archetype.">
     <meta property="og:url" content="">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="The Realness Score">
-    <meta name="twitter:description" content="A brief affect-based profile of how you feel, show, protect, and connect.">
+    <meta name="twitter:description" content="Discover your authentic emotional archetype.">
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -23,7 +23,7 @@
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "The Realness Score",
-      "description": "A brief affect-based profile of how you feel, show, protect, and connect.",
+      "description": "Discover your authentic emotional archetype.",
       "author": {
         "@type": "Person",
         "name": "Dr. Scott Conkright"
@@ -35,14 +35,28 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <header>
-            <h1>The Realness Score</h1>
-            <p class="tagline">A brief affect-based profile of how you feel, show, protect, and connect.</p>
+        <!-- Compact Header Bar (hidden on landing) -->
+        <header id="compactHeader" style="display: none;">
+            <div class="header-content">
+                <h1 class="header-title">The Realness Score</h1>
+                <p class="header-tagline">Discover your authentic self</p>
+            </div>
         </header>
 
+        <!-- Landing Screen -->
+        <section class="landing-screen" id="landingScreen">
+            <div class="landing-content">
+                <h1 class="landing-title">The Realness Score</h1>
+                <div class="landing-description">
+                    <p>Authenticity isn't about revealing everything—it's about knowing what you feel, how you show it, how you protect yourself, and how you connect with others.</p>
+                    <p>This brief assessment reveals your unique emotional archetype. Answer 40 quick questions and discover how you navigate the space between your inner world and the relationships that matter most.</p>
+                </div>
+                <button class="btn btn-primary btn-large" id="startBtn">Let's Start</button>
+            </div>
+        </section>
+
         <!-- Progress Bar -->
-        <div class="progress-bar" id="progressBar">
+        <div class="progress-bar" id="progressBar" style="display: none;">
             <div class="progress-text" id="progressText">Question 1 of 40</div>
             <div class="progress-fill" id="progressFill"></div>
         </div>
@@ -59,12 +73,12 @@
         </div>
 
         <!-- Assessment Section - Single Question View -->
-        <main id="assessmentSection">
+        <main id="assessmentSection" style="display: none;">
             <!-- Single question will be rendered here -->
         </main>
 
         <!-- Navigation Buttons -->
-        <div class="question-navigation" id="questionNavigation">
+        <div class="question-navigation" id="questionNavigation" style="display: none;">
             <button class="btn btn-secondary" id="prevBtn" style="display: none;">Previous</button>
             <button class="btn btn-primary" id="nextBtn">Next</button>
         </div>
