@@ -628,22 +628,23 @@ body:has(.results-section[style*="display: block"]) #progressBar {
 }
 
 .archetype-hero-overlay .archetype-tag {
-    font-size: 28px;
+    font-size: 56px;
     color: var(--accent);
-    margin-bottom: 32px;
+    margin-bottom: 40px;
     font-weight: 400;
-    font-style: italic;
+    font-style: normal;
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
 }
 
 .archetype-hero-overlay .archetype-description {
-    font-size: 20px;
+    font-size: 60px;
     color: var(--text-primary);
     margin-bottom: 0;
-    line-height: 1.7;
+    line-height: 1.4;
     white-space: pre-line;
-    max-width: 700px;
+    max-width: 1000px;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    font-weight: 400;
 }
 
 /* Legacy styles for non-hero elements */
@@ -1243,12 +1244,12 @@ footer {
     }
     
     .archetype-hero-overlay .archetype-tag {
-        font-size: 20px;
-        margin-bottom: 24px;
+        font-size: 32px;
+        margin-bottom: 28px;
     }
     
     .archetype-hero-overlay .archetype-description {
-        font-size: 16px;
+        font-size: 36px;
     }
     
     .insight-section {
@@ -1356,12 +1357,12 @@ footer {
     }
     
     .archetype-hero-overlay .archetype-tag {
-        font-size: 18px;
+        font-size: 24px;
         margin-bottom: 20px;
     }
     
     .archetype-hero-overlay .archetype-description {
-        font-size: 15px;
+        font-size: 28px;
     }
     
     .single-question {
