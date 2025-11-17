@@ -613,9 +613,18 @@ function updateMetaTags(archetype) {
 
 // Share functionality
 function shareResults(platform) {
-    const { archetype } = state.result;
+    console.log('shareResults called with platform:', platform);
+    
+    if (!state.result || !state.result.archetype) {
+        console.error('No result available to share');
+        return;
+    }
+    
+    const archetype = state.result.archetype;
     const shareUrl = window.location.href;
-    const shareText = `I'm ${archetype.name} - ${archetype.shortTag}. Discover your Realness Score: ${shareUrl}`;
+    const shareText = `I'm ${archetype.name} - ${archetype.tag}. Discover your Realness Score!`;
+    
+    console.log('Sharing:', { platform, archetype: archetype.name, url: shareUrl });
     
     // Track sharing
     if (window.trackResultsShared) {
@@ -624,24 +633,38 @@ function shareResults(platform) {
     
     switch (platform) {
         case 'twitter':
-            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}&hashtags=RealnessScore`;
+            console.log('Opening Twitter:', twitterUrl);
+            window.open(twitterUrl, '_blank', 'width=600,height=400');
             break;
         case 'facebook':
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank');
+            const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+            console.log('Opening Facebook:', fbUrl);
+            window.open(fbUrl, '_blank', 'width=600,height=400');
             break;
         case 'linkedin':
-            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, '_blank');
+            const liUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+            console.log('Opening LinkedIn:', liUrl);
+            window.open(liUrl, '_blank', 'width=600,height=400');
             break;
         case 'copy':
             navigator.clipboard.writeText(shareUrl).then(() => {
+                console.log('Link copied to clipboard');
                 const btn = event.target;
-                const originalText = btn.textContent;
-                btn.textContent = 'Link Copied!';
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                }, 2000);
+                if (btn) {
+                    const originalText = btn.textContent;
+                    btn.textContent = '✓ Link Copied!';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                    }, 2000);
+                }
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Link: ' + shareUrl);
             });
             break;
+        default:
+            console.error('Unknown platform:', platform);
     }
 }
 
@@ -883,10 +906,13 @@ async function init() {
         }
         
         if (elements.shareButtons && elements.shareButtons.length > 0) {
+            console.log('Setting up share buttons:', elements.shareButtons.length);
             Array.from(elements.shareButtons).forEach(btn => {
                 if (btn && typeof btn.addEventListener === 'function') {
                     btn.addEventListener('click', (e) => {
-                        const platform = e.target.dataset.platform;
+                        e.preventDefault();
+                        const platform = e.currentTarget.dataset.platform;
+                        console.log('Share button clicked:', platform);
                         if (platform === 'native') {
                             nativeShare();
                         } else {
