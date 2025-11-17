@@ -607,12 +607,12 @@ body:has(.results-section[style*="display: block"]) #progressBar {
     background: linear-gradient(
         to bottom,
         rgba(0, 0, 0, 0.85) 0%,
-        rgba(0, 0, 0, 0.6) 50%,
-        rgba(0, 0, 0, 0.3) 100%
+        rgba(0, 0, 0, 0.6) 40%,
+        rgba(0, 0, 0, 0) 70%
     );
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     padding: 60px 80px;
 }
@@ -691,7 +691,62 @@ body:has(.results-section[style*="display: block"]) #progressBar {
     border: none;
 }
 
-/* Archetype Insights (Shadow Side & Growth Path) */
+/* 2x2 Insights Grid (Shadow, Growth, Compatible, Challenge) */
+.insights-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+    margin-bottom: 60px;
+    background: transparent;
+    border: none;
+}
+
+.insights-grid .insight-section {
+    padding: 40px;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.insights-grid .insight-section:nth-child(2n) {
+    border-right: none;
+}
+
+.insights-grid .insight-section:nth-child(3),
+.insights-grid .insight-section:nth-child(4) {
+    border-bottom: none;
+}
+
+.insights-grid .insight-section h3 {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 16px;
+}
+
+.insights-grid .insight-section p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.insights-grid .compatibility-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.insights-grid .compatibility-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+/* Legacy styles */
 .archetype-insights {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1198,6 +1253,25 @@ footer {
         padding: 32px 24px;
     }
     
+    .insights-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .insights-grid .insight-section {
+        padding: 32px 24px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+    
+    .insights-grid .insight-section:last-child {
+        border-bottom: none;
+    }
+    
+    .insights-grid .compatibility-image {
+        width: 60px;
+        height: 60px;
+    }
+    
     .archetype-insights {
         grid-template-columns: 1fr;
         margin-bottom: 40px;
@@ -1210,6 +1284,15 @@ footer {
     .compatibility-image {
         width: 60px;
         height: 60px;
+    }
+    
+    .insights-grid .insight-section {
+        padding: 24px 20px;
+    }
+    
+    .insights-grid .compatibility-image {
+        width: 50px;
+        height: 50px;
     }
     
     .insight-section:first-child {
