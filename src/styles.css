@@ -177,6 +177,17 @@ label {
     margin-bottom: 48px;
     letter-spacing: -0.03em;
     line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.landing-icon {
+    width: 72px;
+    height: 72px;
+    color: var(--accent);
+    flex-shrink: 0;
 }
 
 .landing-description {
@@ -227,6 +238,15 @@ header {
     color: var(--text-primary);
     margin: 0;
     letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--accent);
 }
 
 .header-tagline {

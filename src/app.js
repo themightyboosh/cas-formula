@@ -210,7 +210,7 @@ function updateProgress() {
     if (currentQuestion) {
         const domain = config.domains.find(d => d.id === currentQuestion.domain);
         if (domain) {
-            elements.domainCategoryTitle.textContent = `${domain.id}. ${domain.name}`;
+            elements.domainCategoryTitle.textContent = domain.name;
             elements.domainCategoryDescription.textContent = domain.description;
             elements.domainCategoryHeader.style.display = 'block';
         }
@@ -506,7 +506,7 @@ function renderResults() {
         
         const label = document.createElement('div');
         label.className = 'chart-label';
-        label.textContent = `${domain.id}. ${domain.name}`;
+        label.textContent = domain.name;
         
         const visual = document.createElement('div');
         visual.className = 'chart-visual';
