@@ -1178,12 +1178,22 @@ footer {
 
     .rating-scale {
         gap: 8px;
+        grid-template-columns: 1fr;
+        max-width: 320px;
+        margin: 0 auto;
     }
 
     .rating-button {
-        min-width: 60px;
+        min-width: 100%;
+        width: 100%;
+        max-width: 320px;
         padding: 14px 12px;
         font-size: 16px;
+    }
+    
+    /* Hide navigation buttons on mobile */
+    .question-navigation {
+        display: none !important;
     }
 
     .chart-label {
