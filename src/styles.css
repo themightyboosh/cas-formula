@@ -615,10 +615,23 @@ body:has(.results-section[style*="display: block"]) #progressBar {
     justify-content: flex-start;
     align-items: flex-start;
     padding: 60px 80px;
+    opacity: 0;
+    animation: fadeInText 0.8s ease-out 0.5s forwards;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .archetype-hero-overlay .archetype-name {
-    font-size: 64px;
+    font-size: 96px;
     color: var(--text-primary);
     margin-bottom: 16px;
     font-weight: 600;
@@ -1353,7 +1366,7 @@ footer {
     }
     
     .archetype-hero-overlay .archetype-name {
-        font-size: 32px;
+        font-size: 48px;
     }
     
     .archetype-hero-overlay .archetype-tag {
