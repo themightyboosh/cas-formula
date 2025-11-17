@@ -82,11 +82,15 @@
                         required
                         aria-label="Email address"
                     >
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="emailOptIn" checked>
+                        <span>I'd like to receive updates about The Realness Score (optional)</span>
+                    </label>
                     <div class="modal-buttons">
                         <button type="submit" class="btn btn-primary">Get My Results</button>
                     </div>
                 </form>
-                <p class="privacy-notice">We respect your privacy. Your email will only be used to send your results.</p>
+                <p class="privacy-notice">We respect your privacy. Your email will only be used to send your results. You can unsubscribe at any time.</p>
             </div>
         </div>
 
@@ -111,13 +115,6 @@
                 <div id="compatibilityInfo"></div>
             </div>
 
-            <!-- Image Prompt -->
-            <div class="card image-prompt-section">
-                <h3>Image Prompt</h3>
-                <p class="helper-text">The prompt used to generate your archetype image:</p>
-                <textarea id="imagePromptText" readonly></textarea>
-                <button class="btn btn-secondary" id="copyPromptBtn">Copy Prompt</button>
-            </div>
 
             <!-- Share Section -->
             <div class="card share-section">

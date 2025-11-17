@@ -62,8 +62,6 @@ function initElements() {
     elements.archetypeImage = document.getElementById('archetypeImage');
     elements.domainCharts = document.getElementById('domainCharts');
     elements.compatibilityInfo = document.getElementById('compatibilityInfo');
-    elements.imagePromptText = document.getElementById('imagePromptText');
-    elements.copyPromptBtn = document.getElementById('copyPromptBtn');
     elements.shareButtons = document.querySelectorAll('.share-btn');
     elements.nativeShareBtn = document.getElementById('nativeShareBtn');
 }
@@ -327,8 +325,6 @@ function nextQuestion() {
         state.currentQuestionIndex++;
         renderCurrentQuestion();
         updateProgress();
-        // Scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
         // Last question - check if all answered
         if (allQuestionsAnswered()) {
@@ -348,8 +344,6 @@ function prevQuestion() {
         state.currentQuestionIndex--;
         renderCurrentQuestion();
         updateProgress();
-        // Scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
@@ -381,6 +375,7 @@ function handleEmailSubmit(e) {
     e.preventDefault();
     
     const email = elements.emailInput.value.trim();
+    const optIn = document.getElementById('emailOptIn')?.checked || false;
     
     if (!email || !isValidEmail(email)) {
         elements.emailInput.focus();
@@ -388,6 +383,7 @@ function handleEmailSubmit(e) {
     }
     
     state.currentEmail = email;
+    state.emailOptIn = optIn;
     saveProgress();
     
     // Track email collected
@@ -402,6 +398,43 @@ function handleEmailSubmit(e) {
 // Validate email
 function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Send results email
+async function sendResultsEmail(email, optIn, archetype, sums, levels) {
+    // Note: Emails are currently stored in localStorage only
+    // To actually send emails, you need to implement a backend service
+    // This function prepares the data that would be sent
+    
+    const emailData = {
+        email: email,
+        optIn: optIn,
+        timestamp: new Date().toISOString(),
+        archetype: {
+            id: archetype.id,
+            name: archetype.name,
+            shortTag: archetype.shortTag,
+            description: archetype.description
+        },
+        domainScores: {
+            A: sums.A,
+            B: sums.B,
+            C: sums.C,
+            D: sums.D
+        },
+        levels: levels,
+        resultsUrl: window.location.href
+    };
+    
+    // Store email data locally
+    const storedEmails = JSON.parse(localStorage.getItem('realnessScore_emails') || '[]');
+    storedEmails.push(emailData);
+    localStorage.setItem('realnessScore_emails', JSON.stringify(storedEmails));
+    
+    // TODO: Send actual email via backend service
+    // Example endpoint: await fetch('/api/send-results-email', { method: 'POST', body: JSON.stringify(emailData) });
+    
+    console.log('Email data prepared for:', email, emailData);
 }
 
 // Calculate and show results
@@ -426,6 +459,9 @@ function calculateAndShowResults() {
         window.trackArchetypeResult(archetype.id, archetype.name);
     }
     
+    // Send email with results
+    sendResultsEmail(state.currentEmail, state.emailOptIn, archetype, sums, levels);
+    
     renderResults();
     
     // Scroll to results
@@ -447,12 +483,9 @@ function renderResults() {
     const imageName = archetype.name.toLowerCase()
         .replace(/the /g, '')
         .replace(/\s+/g, '-');
-    const imagePath = `assets/images/archetype-${archetype.id}-${imageName}.png`;
+    const imagePath = `./assets/images/archetype-${archetype.id}-${imageName}.png`;
     elements.archetypeImage.src = imagePath;
     elements.archetypeImage.alt = archetype.name;
-    
-    // Image prompt
-    elements.imagePromptText.value = archetype.imagePrompt;
     
     // Domain charts
     elements.domainCharts.innerHTML = '';
@@ -479,7 +512,7 @@ function renderResults() {
         
         const value = document.createElement('div');
         value.className = 'chart-value';
-        value.textContent = `${sum} (Level ${level})`;
+        value.textContent = `${sum}`;
         
         chartBar.appendChild(label);
         chartBar.appendChild(visual);
@@ -512,6 +545,12 @@ function renderResults() {
     elements.domainCategoryHeader.style.display = 'none';
     elements.submitButtonContainer.style.display = 'none';
     elements.stickyButton.style.display = 'none';
+    
+    // Hide progress bar on results screen
+    const progressBar = document.getElementById('progressBar');
+    if (progressBar) {
+        progressBar.style.display = 'none';
+    }
 }
 
 // Update meta tags for social sharing
@@ -539,18 +578,6 @@ function updateMetaTags(archetype) {
     
     window.history.replaceState({}, '', url);
     document.querySelector('meta[property="og:url"]').setAttribute('content', url.toString());
-}
-
-// Copy image prompt
-function copyImagePrompt() {
-    elements.imagePromptText.select();
-    document.execCommand('copy');
-    
-    const originalText = elements.copyPromptBtn.textContent;
-    elements.copyPromptBtn.textContent = 'Copied!';
-    setTimeout(() => {
-        elements.copyPromptBtn.textContent = originalText;
-    }, 2000);
 }
 
 // Share functionality
@@ -729,9 +756,6 @@ async function init() {
         }
         if (elements.retakeBtn) {
             elements.retakeBtn.addEventListener('click', retakeAssessment);
-        }
-        if (elements.copyPromptBtn) {
-            elements.copyPromptBtn.addEventListener('click', copyImagePrompt);
         }
         if (elements.prevBtn) {
             elements.prevBtn.addEventListener('click', prevQuestion);
