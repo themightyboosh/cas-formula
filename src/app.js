@@ -708,28 +708,44 @@ async function init() {
         renderAssessment();
         updateProgress();
         
-        // Event listeners
-        elements.emailForm.addEventListener('submit', handleEmailSubmit);
-        elements.submitBtn.addEventListener('click', handleSubmit);
-        elements.stickySubmitBtn.addEventListener('click', handleSubmit);
-        elements.retakeBtn.addEventListener('click', retakeAssessment);
-        elements.copyPromptBtn.addEventListener('click', copyImagePrompt);
-        elements.prevBtn.addEventListener('click', prevQuestion);
-        elements.nextBtn.addEventListener('click', handleNext);
+        // Event listeners (check if elements exist first)
+        if (elements.emailForm) {
+            elements.emailForm.addEventListener('submit', handleEmailSubmit);
+        }
+        if (elements.submitBtn) {
+            elements.submitBtn.addEventListener('click', handleSubmit);
+        }
+        if (elements.stickySubmitBtn) {
+            elements.stickySubmitBtn.addEventListener('click', handleSubmit);
+        }
+        if (elements.retakeBtn) {
+            elements.retakeBtn.addEventListener('click', retakeAssessment);
+        }
+        if (elements.copyPromptBtn) {
+            elements.copyPromptBtn.addEventListener('click', copyImagePrompt);
+        }
+        if (elements.prevBtn) {
+            elements.prevBtn.addEventListener('click', prevQuestion);
+        }
+        if (elements.nextBtn) {
+            elements.nextBtn.addEventListener('click', handleNext);
+        }
         
-        elements.shareButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const platform = e.target.dataset.platform;
-                if (platform === 'native') {
-                    nativeShare();
-                } else {
-                    shareResults(platform);
-                }
+        if (elements.shareButtons && elements.shareButtons.length > 0) {
+            elements.shareButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const platform = e.target.dataset.platform;
+                    if (platform === 'native') {
+                        nativeShare();
+                    } else {
+                        shareResults(platform);
+                    }
+                });
             });
-        });
+        }
         
         // Check for native share support
-        if (navigator.share) {
+        if (navigator.share && elements.nativeShareBtn) {
             elements.nativeShareBtn.style.display = 'block';
             elements.nativeShareBtn.addEventListener('click', nativeShare);
         }

@@ -4,7 +4,9 @@
  */
 
 // Configuration
-const GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || import.meta.env.VITE_GA_MEASUREMENT_ID;
+// Note: import.meta.env is Vite-specific, not available in vanilla JS
+// Use window.GA_MEASUREMENT_ID or set via script tag before loading
+const GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || null;
 const USE_FIREBASE_ANALYTICS = window.USE_FIREBASE_ANALYTICS !== false;
 
 /**
