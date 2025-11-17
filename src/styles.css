@@ -774,6 +774,17 @@ footer {
     margin-bottom: 16px;
 }
 
+.copyright a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.copyright a:hover {
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
 .footer-links {
     font-size: 14px;
     color: var(--text-secondary);

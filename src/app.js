@@ -70,6 +70,7 @@ function initElements() {
     elements.growthPath = document.getElementById('growthPath');
     elements.shareButtons = document.querySelectorAll('.share-btn');
     elements.nativeShareBtn = document.getElementById('nativeShareBtn');
+    elements.resetLink = document.getElementById('resetLink');
 }
 
 // Initialize analytics
@@ -643,19 +644,38 @@ function nativeShare() {
     }
 }
 
-// Retake assessment
+// Retake assessment - complete reset
 function retakeAssessment() {
+    // Clear progress and responses
     clearProgress();
     state.result = null;
     state.currentQuestionIndex = 0;
+    state.emailCollected = false;
     
+    // Clear localStorage including email
+    localStorage.removeItem('userEmail');
+    
+    // Clear URL params
+    const url = new URL(window.location);
+    url.search = '';
+    window.history.replaceState({}, '', url);
+    
+    // Hide everything, show landing
     elements.resultsSection.style.display = 'none';
-    elements.assessmentSection.style.display = 'block';
-    elements.questionNavigation.style.display = 'flex';
+    elements.assessmentSection.style.display = 'none';
+    elements.questionNavigation.style.display = 'none';
+    elements.domainCategoryHeader.style.display = 'none';
+    elements.submitButtonContainer.style.display = 'none';
+    elements.stickyButton.style.display = 'none';
     elements.errorBanner.style.display = 'none';
+    elements.compactHeader.style.display = 'none';
+    elements.landingScreen.style.display = 'flex';
     
-    renderAssessment();
-    updateProgress();
+    // Hide progress bar
+    const progressBar = document.getElementById('progressBar');
+    if (progressBar) {
+        progressBar.style.display = 'none';
+    }
     
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -827,6 +847,15 @@ async function init() {
         if (elements.retakeBtn) {
             elements.retakeBtn.addEventListener('click', retakeAssessment);
         }
+        
+        // Reset link in footer (copyright link)
+        if (elements.resetLink) {
+            elements.resetLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                retakeAssessment();
+            });
+        }
+        
         if (elements.prevBtn) {
             elements.prevBtn.addEventListener('click', prevQuestion);
         }
