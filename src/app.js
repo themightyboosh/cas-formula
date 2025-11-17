@@ -481,7 +481,6 @@ function renderResults() {
     
     // Archetype image - match actual file names
     const imageName = archetype.name.toLowerCase()
-        .replace(/the /g, '')
         .replace(/\s+/g, '-');
     const imagePath = `./assets/images/archetype-${archetype.id}-${imageName}.png`;
     elements.archetypeImage.src = imagePath;
