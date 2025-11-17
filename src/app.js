@@ -326,6 +326,14 @@ function selectRating(questionId, value) {
     }
     
     updateProgress();
+    
+    // Auto-advance on mobile (screen width <= 768px)
+    if (window.innerWidth <= 768) {
+        // Small delay for visual feedback
+        setTimeout(() => {
+            nextQuestion();
+        }, 300);
+    }
 }
 
 // Navigate to next question
