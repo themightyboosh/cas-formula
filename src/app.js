@@ -201,7 +201,7 @@ function updateProgress() {
     const answered = state.questions.filter(q => 
         state.responses[q.id] && state.responses[q.id] >= 1 && state.responses[q.id] <= 5
     ).length;
-    const percentage = (answered / total) * 100;
+    const percentage = (questionNumber / total) * 100;
     
     // Update progress text and bar
     elements.progressText.textContent = `Question ${questionNumber} of ${total}`;

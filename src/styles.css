@@ -300,11 +300,12 @@ header {
 }
 
 .question-text {
-    font-size: 20px;
+    font-size: 48px;
     color: var(--text-primary);
-    margin-bottom: 24px;
-    line-height: 1.5;
-    font-weight: 400;
+    margin-bottom: 56px;
+    line-height: 1.3;
+    font-weight: 500;
+    letter-spacing: -0.02em;
 }
 
 /* Rating Scale - Bolder, Cleaner */
@@ -396,23 +397,32 @@ header {
 .progress-bar {
     background: transparent;
     border: none;
-    border-bottom: 1px solid var(--border);
     border-radius: 0;
-    padding: 24px 0;
-    margin-bottom: 40px;
+    padding: 0;
+    margin: 0 0 60px;
 }
 
 .progress-text {
-    font-size: 16px;
+    font-size: 14px;
     color: var(--text-secondary);
     margin-bottom: 12px;
     font-weight: 400;
+    text-align: left;
+}
+
+.progress-visual {
+    width: 100%;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
 }
 
 .progress-fill {
-    height: 2px;
-    background: var(--text-primary);
-    border-radius: 0;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
     transition: width 0.3s ease;
 }
 
@@ -1013,7 +1023,8 @@ footer {
             }
 
             .single-question .question-text {
-                font-size: 20px;
+                font-size: 32px;
+                margin-bottom: 40px;
             }
 
             .question-navigation {
@@ -1105,6 +1116,11 @@ footer {
 
     .archetype-name {
         font-size: 36px;
+    }
+    
+    .single-question .question-text {
+        font-size: 28px;
+        margin-bottom: 32px;
     }
     
     .archetype-image {
