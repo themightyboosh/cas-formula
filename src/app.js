@@ -66,6 +66,8 @@ function initElements() {
     elements.domainCharts = document.getElementById('domainCharts');
     elements.mostCompatibleInfo = document.getElementById('mostCompatibleInfo');
     elements.leastCompatibleInfo = document.getElementById('leastCompatibleInfo');
+    elements.mostCompatibleImage = document.getElementById('mostCompatibleImage');
+    elements.leastCompatibleImage = document.getElementById('leastCompatibleImage');
     elements.shadowSide = document.getElementById('shadowSide');
     elements.growthPath = document.getElementById('growthPath');
     elements.shareButtons = document.querySelectorAll('.share-btn');
@@ -530,12 +532,29 @@ function renderResults() {
     });
     
     // Compatibility
-    if (elements.mostCompatibleInfo) {
-        elements.mostCompatibleInfo.textContent = archetype.mostCompatible;
+    const mostCompatible = archetypes.archetypes.find(a => a.name === archetype.mostCompatible);
+    const leastCompatible = archetypes.archetypes.find(a => a.name === archetype.leastCompatible);
+    
+    if (elements.mostCompatibleInfo && mostCompatible) {
+        elements.mostCompatibleInfo.textContent = mostCompatible.name;
+        
+        // Set compatible archetype image
+        if (elements.mostCompatibleImage) {
+            const compatImageName = mostCompatible.name.toLowerCase().replace(/\s+/g, '-');
+            elements.mostCompatibleImage.src = `assets/images/archetype-${mostCompatible.id}-${compatImageName}.png`;
+            elements.mostCompatibleImage.alt = mostCompatible.name;
+        }
     }
     
-    if (elements.leastCompatibleInfo) {
-        elements.leastCompatibleInfo.textContent = archetype.leastCompatible;
+    if (elements.leastCompatibleInfo && leastCompatible) {
+        elements.leastCompatibleInfo.textContent = leastCompatible.name;
+        
+        // Set challenging archetype image
+        if (elements.leastCompatibleImage) {
+            const challengeImageName = leastCompatible.name.toLowerCase().replace(/\s+/g, '-');
+            elements.leastCompatibleImage.src = `assets/images/archetype-${leastCompatible.id}-${challengeImageName}.png`;
+            elements.leastCompatibleImage.alt = leastCompatible.name;
+        }
     }
     
     // Shadow Side and Growth Path
