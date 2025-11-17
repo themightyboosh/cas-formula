@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realness Score - Design Preview</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Color Palette - VMV Studio inspired */
+            --bg-primary: #000000;
+            --bg-secondary: #0A0A0A;
+            --text-primary: #FFFFFF;
+            --text-secondary: #999999;
+            --accent: #4FD1C5;
+            --error: #F56565;
+            --border: #1A1A1A;
+            
+            /* Typography - Bold, Modern */
+            --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            --h1-size: 48px;
+            --h2-size: 32px;
+            --h3-size: 24px;
+            --body-size: 18px;
+            --label-size: 16px;
+            --helper-size: 14px;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Dark Gray Circles Background */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        body::before {
+            background: radial-gradient(circle, rgba(30, 30, 30, 0.6) 0%, transparent 50%),
+                        radial-gradient(circle, rgba(25, 25, 25, 0.55) 0%, transparent 50%),
+                        radial-gradient(circle, rgba(35, 35, 35, 0.5) 0%, transparent 60%),
+                        radial-gradient(circle, rgba(20, 20, 20, 0.6) 0%, transparent 45%);
+            background-size: 400px 400px, 600px 600px, 500px 500px, 350px 350px;
+            background-position: 20% 30%, 80% 70%, 50% 50%, 10% 80%;
+            animation: circlesMove1 40s ease-in-out infinite;
+            will-change: background-position;
+        }
+
+        body::after {
+            background: radial-gradient(circle, rgba(28, 28, 28, 0.55) 0%, transparent 55%),
+                        radial-gradient(circle, rgba(22, 22, 22, 0.5) 0%, transparent 50%),
+                        radial-gradient(circle, rgba(32, 32, 32, 0.6) 0%, transparent 48%),
+                        radial-gradient(circle, rgba(18, 18, 18, 0.55) 0%, transparent 52%);
+            background-size: 550px 550px, 450px 450px, 380px 380px, 520px 520px;
+            background-position: 90% 20%, 60% 10%, 30% 90%, 70% 40%;
+            animation: circlesMove2 50s ease-in-out infinite;
+            will-change: background-position;
+        }
+
+        @keyframes circlesMove1 {
+            0% { background-position: 20% 30%, 80% 70%, 50% 50%, 10% 80%; }
+            25% { background-position: 25% 25%, 75% 75%, 55% 45%, 15% 75%; }
+            50% { background-position: 15% 35%, 85% 65%, 45% 55%, 5% 85%; }
+            75% { background-position: 22% 28%, 78% 72%, 52% 48%, 12% 82%; }
+            100% { background-position: 20% 30%, 80% 70%, 50% 50%, 10% 80%; }
+        }
+
+        @keyframes circlesMove2 {
+            0% { background-position: 90% 20%, 60% 10%, 30% 90%, 70% 40%; }
+            25% { background-position: 85% 25%, 65% 5%, 35% 85%, 65% 45%; }
+            50% { background-position: 95% 15%, 55% 15%, 25% 95%, 75% 35%; }
+            75% { background-position: 88% 22%, 62% 8%, 32% 88%, 68% 42%; }
+            100% { background-position: 90% 20%, 60% 10%, 30% 90%, 70% 40%; }
+        }
+
+
+        /* Typography - Bold, Confident */
+        h1 {
+            font-size: var(--h1-size);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: var(--h2-size);
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-size: var(--h3-size);
+            font-weight: 500;
+            line-height: 1.3;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        p {
+            font-size: var(--body-size);
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .tagline {
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+            margin-top: 16px;
+            line-height: 1.5;
+            max-width: 600px;
+        }
+
+        label {
+            font-size: var(--label-size);
+            font-weight: 500;
+            color: var(--text-secondary);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .helper-text {
+            font-size: var(--helper-size);
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* Layout - VMV Studio inspired: Bold, Spacious */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        header {
+            text-align: left;
+            margin-bottom: 80px;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        /* Cards - Cleaner, More Minimal */
+        .card {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            border-radius: 0;
+            padding: 32px 0;
+            margin-bottom: 0;
+            box-shadow: none;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: var(--h2-size);
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* Question Card - Cleaner, More Spacious */
+        .question-card {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            border-radius: 0;
+            padding: 40px 0;
+            margin-bottom: 0;
+        }
+
+        .question-text {
+            font-size: 20px;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        /* Rating Scale - Bolder, Cleaner */
+        .rating-scale {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 0;
+        }
+
+        .rating-button {
+            flex: 1;
+            min-width: 80px;
+            padding: 16px 20px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            color: var(--text-secondary);
+            font-size: 18px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .rating-button:hover {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+            background: transparent;
+        }
+
+        .rating-button.selected {
+            background: var(--text-primary);
+            border-color: var(--text-primary);
+            color: var(--bg-primary);
+            font-weight: 500;
+        }
+
+        .rating-label {
+            font-size: var(--helper-size);
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* Buttons - Bold, Confident */
+        .btn {
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 500;
+            border: 1px solid var(--text-primary);
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-stack);
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border-color: var(--text-primary);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+        }
+
+        .btn-primary:disabled {
+            background: transparent;
+            color: var(--text-secondary);
+            border-color: var(--border);
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        /* Progress Indicator - Minimal */
+        .progress-bar {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            border-radius: 0;
+            padding: 24px 0;
+            margin-bottom: 60px;
+        }
+
+        .progress-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-weight: 400;
+        }
+
+        .progress-fill {
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 0;
+            transition: width 0.3s ease;
+        }
+
+        /* Domain Section - Bold, Spacious */
+        .domain-section {
+            margin-bottom: 80px;
+        }
+
+        .domain-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            border-radius: 0;
+            cursor: pointer;
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            transition: all 0.2s ease;
+        }
+
+        .domain-header:hover {
+            border-color: var(--text-primary);
+        }
+
+        .domain-title {
+            font-size: 32px;
+            color: var(--text-primary);
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        .domain-status {
+            font-size: var(--helper-size);
+            color: var(--text-secondary);
+            padding: 4px 12px;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .domain-status.complete {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Results Section - Bold, Confident */
+        .results-section {
+            margin-top: 120px;
+        }
+
+        .archetype-display {
+            text-align: left;
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 80px;
+            padding-bottom: 60px;
+        }
+
+        .archetype-name {
+            font-size: 56px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .archetype-tag {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        .archetype-image {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            border-radius: 0;
+            margin: 40px 0;
+            border: none;
+        }
+
+        /* Charts - Clean, Minimal */
+        .chart-container {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            border-radius: 0;
+            padding: 60px 0;
+            margin-bottom: 0;
+        }
+
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .chart-label {
+            min-width: 280px;
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .chart-visual {
+            flex: 1;
+            height: 2px;
+            background: var(--border);
+            border-radius: 0;
+            overflow: hidden;
+            margin: 0 24px;
+        }
+
+        .chart-fill {
+            height: 100%;
+            background: var(--text-primary);
+            transition: width 0.3s ease;
+        }
+
+        .chart-value {
+            min-width: 80px;
+            text-align: right;
+            font-size: 18px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Footer - Minimal */
+        footer {
+            text-align: left;
+            padding: 80px 0 40px 0;
+            margin-top: 120px;
+            border-top: 1px solid var(--border);
+        }
+
+        .copyright {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        /* Error Banner */
+        .error-banner {
+            background: rgba(245, 101, 101, 0.1);
+            border: 1px solid var(--error);
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 24px;
+            color: var(--error);
+            font-size: var(--body-size);
+        }
+
+        /* Sticky Button (Mobile) */
+        .sticky-button {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 20px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+        }
+
+        /* Responsive Design - Maintain Bold Feel */
+        
+        /* Tablet */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 60px 32px;
+            }
+            
+            .chart-label {
+                min-width: 200px;
+            }
+        }
+
+        /* Mobile Portrait */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 24px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            .domain-title {
+                font-size: 24px;
+            }
+
+            .archetype-name {
+                font-size: 40px;
+            }
+
+            .tagline {
+                font-size: 18px;
+            }
+
+            .question-text {
+                font-size: 18px;
+            }
+
+            .rating-scale {
+                gap: 8px;
+            }
+
+            .rating-button {
+                min-width: 60px;
+                padding: 14px 12px;
+                font-size: 16px;
+            }
+
+            .chart-label {
+                min-width: 140px;
+                font-size: 16px;
+            }
+
+            .chart-bar {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .chart-visual {
+                width: 100%;
+                margin: 0;
+            }
+
+            .chart-value {
+                width: 100%;
+                text-align: left;
+                margin-top: 4px;
+            }
+
+            .sticky-button {
+                display: block;
+            }
+
+            .domain-section {
+                margin-bottom: 60px;
+            }
+
+            .question-card {
+                padding: 32px 0;
+            }
+
+            .archetype-image {
+                max-width: 100%;
+            }
+        }
+
+        /* Mobile Landscape & Small Screens */
+        @media (max-width: 480px) {
+            .container {
+                padding: 32px 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .archetype-name {
+                font-size: 36px;
+            }
+
+            .rating-button {
+                min-width: 50px;
+                padding: 12px 8px;
+                font-size: 14px;
+            }
+
+            .rating-label {
+                font-size: 11px;
+            }
+
+            .btn {
+                padding: 16px 32px;
+                font-size: 16px;
+                width: 100%;
+                margin-bottom: 12px;
+            }
+
+            .chart-label {
+                min-width: 100%;
+                margin-bottom: 8px;
+            }
+        }
+
+        /* Touch-friendly adjustments */
+        @media (hover: none) and (pointer: coarse) {
+            .rating-button {
+                min-height: 56px;
+                padding: 16px 12px;
+            }
+
+            .btn {
+                min-height: 56px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .sticky-button {
+                display: none;
+            }
+        }
+
+        /* Accessibility */
+        *:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        button:focus,
+        .rating-button:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+            
+            body::before,
+            body::after {
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>The Realness Score</h1>
+            <p class="tagline">A brief affect-based profile of how you feel, show, protect, and connect.</p>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-text">Question 15 of 40</div>
+            <div class="progress-fill" style="width: 37.5%;"></div>
+        </div>
+
+        <!-- Domain Section Example -->
+        <div class="domain-section">
+            <div class="domain-header">
+                <div>
+                    <h2 class="domain-title">A. Noticing Your Feelings</h2>
+                    <p style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">
+                        How well you notice and handle your feelings.
+                    </p>
+                </div>
+                <span class="domain-status complete">Complete</span>
+            </div>
+
+            <!-- Question Examples -->
+            <div class="question-card">
+                <p class="question-text">I can notice emotions in my body.</p>
+                <div class="rating-scale">
+                    <button class="rating-button selected">
+                        <div>1</div>
+                        <div class="rating-label">Not at all</div>
+                    </button>
+                    <button class="rating-button">
+                        <div>2</div>
+                        <div class="rating-label">Slightly</div>
+                    </button>
+                    <button class="rating-button">
+                        <div>3</div>
+                        <div class="rating-label">Somewhat</div>
+                    </button>
+                    <button class="rating-button">
+                        <div>4</div>
+                        <div class="rating-label">Mostly</div>
+                    </button>
+                    <button class="rating-button">
+                        <div>5</div>
+                        <div class="rating-label">Very true</div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <p class="question-text">When I feel uncomfortable, I act okay.</p>
+                <div class="rating-scale">
+                    <button class="rating-button">
+                        <div>1</div>
+                        <div class="rating-label">Not at all</div>
+                    </button>
+                    <button class="rating-button">
+                        <div>2</div>
+                        <div class="rating-label">Slightly</div>
+                    </button>
+                    <button class="rating-button selected">
+                        <div>3</div>
+                        <div class="rating-label">Somewhat</div>
+                    </button>
+                    <button class="rating-button">
+                        <div>4</div>
+                        <div class="rating-label">Mostly</div>
+                    </button>
+                    <button class="rating-button">
+                        <div>5</div>
+                        <div class="rating-label">Very true</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Domain Section (Incomplete) -->
+        <div class="domain-section">
+            <div class="domain-header">
+                <div>
+                    <h2 class="domain-title">B. Showing Your Real Self</h2>
+                    <p style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">
+                        How well your outside matches your inside.
+                    </p>
+                </div>
+                <span class="domain-status">In Progress</span>
+            </div>
+        </div>
+
+        <!-- Results Preview Section -->
+        <div class="results-section">
+            <div class="archetype-display">
+                <h2 class="archetype-name">You are The Resonant Sage</h2>
+                <p class="archetype-tag">Wise Regulator</p>
+                <p style="font-size: 18px; color: var(--text-secondary); margin-bottom: 24px;">
+                    Deep-feeling, steady, and emotionally grounded.
+                </p>
+                <img src="src/assets/images/archetype-1-the-resonant-sage.png" alt="The Resonant Sage" class="archetype-image">
+            </div>
+
+            <!-- Chart Example -->
+            <div class="chart-container">
+                <h3 style="font-size: 32px; margin-bottom: 40px; color: var(--text-primary); font-weight: 500; letter-spacing: -0.01em;">Your Domain Scores</h3>
+                
+                <div class="chart-bar">
+                    <div class="chart-label">A. Noticing Your Feelings</div>
+                    <div class="chart-visual">
+                        <div class="chart-fill" style="width: 85%;"></div>
+                    </div>
+                    <div class="chart-value">42 (Level 3)</div>
+                </div>
+
+                <div class="chart-bar">
+                    <div class="chart-label">B. Showing Your Real Self</div>
+                    <div class="chart-visual">
+                        <div class="chart-fill" style="width: 75%;"></div>
+                    </div>
+                    <div class="chart-value">38 (Level 3)</div>
+                </div>
+
+                <div class="chart-bar">
+                    <div class="chart-label">C. How You Protect Yourself</div>
+                    <div class="chart-visual">
+                        <div class="chart-fill" style="width: 30%;"></div>
+                    </div>
+                    <div class="chart-value">15 (Level 1)</div>
+                </div>
+
+                <div class="chart-bar">
+                    <div class="chart-label">D. How You Connect With Others</div>
+                    <div class="chart-visual">
+                        <div class="chart-fill" style="width: 90%;"></div>
+                    </div>
+                    <div class="chart-value">45 (Level 3)</div>
+                </div>
+            </div>
+
+            <!-- Compatibility Section -->
+            <div class="card">
+                <h3 style="font-size: 24px; margin-bottom: 24px; color: var(--text-primary); font-weight: 500;">Compatibility</h3>
+                <p style="margin-bottom: 16px; font-size: 18px;">
+                    <strong style="color: var(--text-primary); font-weight: 500;">Most Compatible:</strong> 
+                    <span style="color: var(--text-secondary);">The Soft Anchor</span>
+                </p>
+                <p style="font-size: 18px;">
+                    <strong style="color: var(--text-primary); font-weight: 500;">Challenging Match:</strong> 
+                    <span style="color: var(--text-secondary);">The Iron Mask</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div style="text-align: left; margin: 80px 0;">
+            <button class="btn btn-primary" style="margin-right: 16px; margin-bottom: 16px;">See My Realness Archetype</button>
+            <button class="btn btn-secondary">Retake Assessment</button>
+        </div>
+
+        <!-- Error Banner Example -->
+        <div class="error-banner" style="display: none;">
+            Please answer all questions to see your Realness Archetype.
+        </div>
+    </div>
+
+    <!-- Sticky Button (Mobile) -->
+    <div class="sticky-button">
+        <button class="btn btn-primary" style="width: 100%;">See My Realness Archetype</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p class="copyright">© Dr. Scott Conkright</p>
+    </footer>
+</body>
+</html>
+

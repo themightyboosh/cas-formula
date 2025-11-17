@@ -129,7 +129,21 @@ This guide will help you set up Google Cloud to use Imagen API for automated ima
 
 ---
 
-## Step 7: Update the Script
+## Step 7: Install Google Auth Library (Optional)
+
+If using service account authentication, install the Google Auth library:
+
+```bash
+npm install google-auth-library
+# or
+pnpm add google-auth-library
+```
+
+This is needed for proper OAuth token generation with service accounts.
+
+---
+
+## Step 8: Update the Script
 
 Update your `.env` file or environment variables:
 
@@ -146,7 +160,7 @@ export GOOGLE_PROJECT_ID="your-project-id"
 
 ---
 
-## Step 8: Test the Setup
+## Step 9: Test the Setup
 
 Run the image generation script:
 

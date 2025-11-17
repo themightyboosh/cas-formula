@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "name": "Realness Score",
+    "tagline": "A brief affect-based profile of how you feel, show, protect, and connect.",
+    "version": "1.0.0",
+    "author": "Dr. Scott Conkright"
+  },
+  "scaleLevels": {
+    "low": { "min": 10, "max": 23, "level": 1 },
+    "medium": { "min": 24, "max": 36, "level": 2 },
+    "high": { "min": 37, "max": 50, "level": 3 }
+  },
+  "domains": [
+    {
+      "id": "A",
+      "name": "Noticing Your Feelings",
+      "description": "How well you notice and handle your feelings.",
+      "itemRange": [1, 10]
+    },
+    {
+      "id": "B",
+      "name": "Showing Your Real Self",
+      "description": "How well your outside matches your inside.",
+      "itemRange": [11, 20]
+    },
+    {
+      "id": "C",
+      "name": "How You Protect Yourself",
+      "description": "How you react when you feel watched or judged.",
+      "itemRange": [21, 30]
+    },
+    {
+      "id": "D",
+      "name": "How You Connect With Others",
+      "description": "How you usually act in close relationships.",
+      "itemRange": [31, 40]
+    }
+  ]
+}
+

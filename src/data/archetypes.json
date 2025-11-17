@@ -1,0 +1,165 @@
+{
+  "archetypes": [
+    {
+      "id": 1,
+      "name": "The Resonant Sage",
+      "shortTag": "Wise Regulator",
+      "levels": { "A": 3, "B": 3, "C": 1, "D": 3 },
+      "description": "Deep-feeling, steady, and emotionally grounded.",
+      "mostCompatible": "The Soft Anchor",
+      "leastCompatible": "The Iron Mask",
+      "imagePrompt": "A calm guardian carved from shadowed stone, soft light glowing inside their chest, standing alone in a field at dusk, realistic, dark muted palette, subtle inner glow, highly detailed."
+    },
+    {
+      "id": 2,
+      "name": "The Soft Anchor",
+      "shortTag": "Warm Stabilizer",
+      "levels": { "A": 3, "B": 2, "C": 1, "D": 3 },
+      "description": "Gentle, steady, and nurturing in relationships.",
+      "mostCompatible": "The Resonant Sage",
+      "leastCompatible": "The Stormbound",
+      "imagePrompt": "A figure sitting on a weathered pier over dark water at sunset, soft light around them, posture relaxed and inviting, semi-realistic, moody but warm atmosphere."
+    },
+    {
+      "id": 3,
+      "name": "The Stormbound",
+      "shortTag": "Hidden Storm",
+      "levels": { "A": 3, "B": 1, "C": 3, "D": 1 },
+      "description": "Feels intensely inside but stays guarded and overwhelmed.",
+      "mostCompatible": "The Truth Teller",
+      "leastCompatible": "The Soft Anchor",
+      "imagePrompt": "A person made of swirling storm clouds, faint lightning under the skin, seated in a dim room, shafts of light from a single window, cinematic realism, dramatic shadows."
+    },
+    {
+      "id": 4,
+      "name": "The Truth Teller",
+      "shortTag": "Blunt Realist",
+      "levels": { "A": 3, "B": 3, "C": 2, "D": 1 },
+      "description": "Emotionally aware and radically honest, sometimes too sharp.",
+      "mostCompatible": "The Stormbound",
+      "leastCompatible": "The Gentle Ghost",
+      "imagePrompt": "A figure speaking into the dark, words forming visible glowing lines in the air, sharp edges of light, high contrast, realistic style with a slightly surreal twist."
+    },
+    {
+      "id": 5,
+      "name": "The Open Flame",
+      "shortTag": "Impulsive Feeler",
+      "levels": { "A": 2, "B": 3, "C": 1, "D": 2 },
+      "description": "Expressive and passionate, quick to feel and show emotions.",
+      "mostCompatible": "The Inner Compass",
+      "leastCompatible": "The Fortress-Keeper",
+      "imagePrompt": "A person surrounded by small floating sparks in a dark room, eyes bright, mid-motion as if laughing or talking, warm highlights against deep shadow, expressive realism."
+    },
+    {
+      "id": 6,
+      "name": "The Magnetic Poet",
+      "shortTag": "Soul Storyteller",
+      "levels": { "A": 3, "B": 3, "C": 2, "D": 3 },
+      "description": "Emotionally articulate, romantic, and deeply sensitive.",
+      "mostCompatible": "The Quiet Depth",
+      "leastCompatible": "The Mirror Mask",
+      "imagePrompt": "A lone figure writing at a desk lit by a single lamp, pages drifting into faint glowing symbols, dark room, rich shadows, painterly realistic style."
+    },
+    {
+      "id": 7,
+      "name": "The Mirror Mask",
+      "shortTag": "Social Chameleon",
+      "levels": { "A": 2, "B": 3, "C": 3, "D": 2 },
+      "description": "Reads the room fast and adjusts their emotional display.",
+      "mostCompatible": "The Quiet Depth",
+      "leastCompatible": "The Magnetic Poet",
+      "imagePrompt": "A person holding a half-mirror mask, one eye visible and observant, reflections of other faces in the mask surface, cool tones, realistic with subtle surreal reflections."
+    },
+    {
+      "id": 8,
+      "name": "The Boundary Breaker",
+      "shortTag": "Radical Sharer",
+      "levels": { "A": 2, "B": 3, "C": 1, "D": 3 },
+      "description": "Open, intense, and quick to share deeply and directly.",
+      "mostCompatible": "The Fortress-Keeper",
+      "leastCompatible": "The Stormbound",
+      "imagePrompt": "Two figures facing each other in a dark space, one pouring glowing light from their chest toward the other, bold and intimate, realistic style, strong contrast."
+    },
+    {
+      "id": 9,
+      "name": "The Iron Mask",
+      "shortTag": "Locked Down",
+      "levels": { "A": 1, "B": 1, "C": 3, "D": 1 },
+      "description": "Emotionally shut down, highly self-protective, hard to read.",
+      "mostCompatible": "The Boundary Breaker",
+      "leastCompatible": "The Resonant Sage",
+      "imagePrompt": "A figure in a smooth dark metal mask, eyes hidden, standing against a black background, faint cracks with tiny light leaking through, hyperreal texture."
+    },
+    {
+      "id": 10,
+      "name": "The Strategist",
+      "shortTag": "Controlled Planner",
+      "levels": { "A": 2, "B": 2, "C": 3, "D": 1 },
+      "description": "Thinks before feeling, manages emotions through logic.",
+      "mostCompatible": "The Open Flame",
+      "leastCompatible": "The Boundary Breaker",
+      "imagePrompt": "A person at a table covered in maps and diagrams lit from above, expression calm and focused, everything else fading into darkness, realistic, clean lines."
+    },
+    {
+      "id": 11,
+      "name": "The Gentle Ghost",
+      "shortTag": "Quiet Withdrawer",
+      "levels": { "A": 1, "B": 1, "C": 3, "D": 2 },
+      "description": "Pulls back softly when overwhelmed, avoids conflict.",
+      "mostCompatible": "The Magnetic Poet",
+      "leastCompatible": "The Truth Teller",
+      "imagePrompt": "A faint, semi-transparent figure walking down a dim hallway, edges blurred into the shadows, soft cool tones, melancholic but peaceful realism."
+    },
+    {
+      "id": 12,
+      "name": "The Fortress-Keeper",
+      "shortTag": "Guarded Loyalist",
+      "levels": { "A": 2, "B": 1, "C": 3, "D": 3 },
+      "description": "Slow to trust but fiercely loyal once you are inside.",
+      "mostCompatible": "The Boundary Breaker",
+      "leastCompatible": "The Open Flame",
+      "imagePrompt": "A tall stone gate in the night with a single warm light deep inside, heavy doors slightly open, realistic stone texture, moody sky above."
+    },
+    {
+      "id": 13,
+      "name": "The Quiet Depth",
+      "shortTag": "Selective Intimate",
+      "levels": { "A": 2, "B": 2, "C": 1, "D": 3 },
+      "description": "Private but deeply loyal and emotionally present with a few.",
+      "mostCompatible": "The Magnetic Poet",
+      "leastCompatible": "The Strategist",
+      "imagePrompt": "A person sitting by a dark lake at night, stars reflected in the water, posture relaxed and turned slightly away, subtle glow on the shoreline, serene realism."
+    },
+    {
+      "id": 14,
+      "name": "The Open Seeker",
+      "shortTag": "Connection Explorer",
+      "levels": { "A": 2, "B": 3, "C": 2, "D": 3 },
+      "description": "Actively looks for meaningful connection and new emotional experiences.",
+      "mostCompatible": "The Resonant Sage",
+      "leastCompatible": "The Iron Mask",
+      "imagePrompt": "A traveler standing at a crossroads under a twilight sky, paths lit with soft lanterns, figure looking ahead with curiosity, detailed and atmospheric."
+    },
+    {
+      "id": 15,
+      "name": "The Tethered Caretaker",
+      "shortTag": "Self-Losing Helper",
+      "levels": { "A": 1, "B": 2, "C": 2, "D": 3 },
+      "description": "Takes care of others first and often forgets their own needs.",
+      "mostCompatible": "The Inner Compass",
+      "leastCompatible": "The Truth Teller",
+      "imagePrompt": "A person helping another person, one figure glowing brightly while tending to the other, their own form slightly faded, warm and compassionate atmosphere, realistic style."
+    },
+    {
+      "id": 16,
+      "name": "The Inner Compass",
+      "shortTag": "Centered Guide",
+      "levels": { "A": 2, "B": 2, "C": 2, "D": 3 },
+      "description": "Balanced between independence and closeness, steady and clear.",
+      "mostCompatible": "The Open Flame",
+      "leastCompatible": "The Gentle Ghost",
+      "imagePrompt": "A figure standing in a dark space with a softly glowing compass in their hands, light illuminating their face, calm expression, grounded, hyperreal detail."
+    }
+  ]
+}
+

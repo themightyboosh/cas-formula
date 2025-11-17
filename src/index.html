@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Realness Score - A brief affect-based profile of how you feel, show, protect, and connect.">
+    <title>The Realness Score</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="The Realness Score">
+    <meta property="og:description" content="A brief affect-based profile of how you feel, show, protect, and connect.">
+    <meta property="og:url" content="">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Realness Score">
+    <meta name="twitter:description" content="A brief affect-based profile of how you feel, show, protect, and connect.">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "The Realness Score",
+      "description": "A brief affect-based profile of how you feel, show, protect, and connect.",
+      "author": {
+        "@type": "Person",
+        "name": "Dr. Scott Conkright"
+      }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>The Realness Score</h1>
+            <p class="tagline">A brief affect-based profile of how you feel, show, protect, and connect.</p>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar" id="progressBar">
+            <div class="progress-text" id="progressText">Question 0 of 40</div>
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- Error Banner -->
+        <div class="error-banner" id="errorBanner" style="display: none;">
+            Please answer all questions to see your Realness Archetype.
+        </div>
+
+        <!-- Assessment Section -->
+        <main id="assessmentSection">
+            <!-- Domain sections will be rendered here -->
+        </main>
+
+        <!-- Submit Button -->
+        <div class="action-buttons" id="submitButtonContainer" style="display: none;">
+            <button class="btn btn-primary" id="submitBtn">See My Realness Archetype</button>
+        </div>
+
+        <!-- Email Collection Modal -->
+        <div class="modal-overlay" id="emailModal" style="display: none;">
+            <div class="modal-content">
+                <h2>Enter your email to receive your results</h2>
+                <p class="modal-description">We'll send your Realness Score archetype results to your email address.</p>
+                <form id="emailForm">
+                    <input 
+                        type="email" 
+                        id="emailInput" 
+                        placeholder="your.email@example.com" 
+                        required
+                        aria-label="Email address"
+                    >
+                    <div class="modal-buttons">
+                        <button type="submit" class="btn btn-primary">Get My Results</button>
+                    </div>
+                </form>
+                <p class="privacy-notice">We respect your privacy. Your email will only be used to send your results.</p>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <section class="results-section" id="resultsSection" style="display: none;">
+            <div class="archetype-display">
+                <h2 class="archetype-name" id="archetypeName"></h2>
+                <p class="archetype-tag" id="archetypeTag"></p>
+                <p class="archetype-description" id="archetypeDescription"></p>
+                <img id="archetypeImage" class="archetype-image" alt="Archetype visualization">
+            </div>
+
+            <!-- Domain Scores Chart -->
+            <div class="chart-container">
+                <h3>Your Domain Scores</h3>
+                <div id="domainCharts"></div>
+            </div>
+
+            <!-- Compatibility Section -->
+            <div class="card compatibility-section">
+                <h3>Compatibility</h3>
+                <div id="compatibilityInfo"></div>
+            </div>
+
+            <!-- Image Prompt -->
+            <div class="card image-prompt-section">
+                <h3>Image Prompt</h3>
+                <p class="helper-text">The prompt used to generate your archetype image:</p>
+                <textarea id="imagePromptText" readonly></textarea>
+                <button class="btn btn-secondary" id="copyPromptBtn">Copy Prompt</button>
+            </div>
+
+            <!-- Share Section -->
+            <div class="card share-section">
+                <h3>Share Your Results</h3>
+                <div class="share-buttons">
+                    <button class="btn btn-secondary share-btn" data-platform="twitter">Share on Twitter/X</button>
+                    <button class="btn btn-secondary share-btn" data-platform="facebook">Share on Facebook</button>
+                    <button class="btn btn-secondary share-btn" data-platform="linkedin">Share on LinkedIn</button>
+                    <button class="btn btn-secondary share-btn" data-platform="copy">Copy Link</button>
+                    <button class="btn btn-secondary share-btn" id="nativeShareBtn" style="display: none;">Share</button>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="retakeBtn">Retake Assessment</button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p class="copyright">© Dr. Scott Conkright</p>
+            <div class="footer-links">
+                <a href="#" id="methodologyLink" class="footer-link">Learn more about the methodology</a>
+                <span class="footer-separator">•</span>
+                <a href="#" id="websiteLink" class="footer-link">Dr. Conkright's website</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Sticky Button (Mobile) -->
+    <div class="sticky-button" id="stickyButton" style="display: none;">
+        <button class="btn btn-primary" id="stickySubmitBtn" disabled>See My Realness Archetype</button>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
+

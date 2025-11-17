@@ -1,0 +1,23 @@
+{
+  "name": "realness-score",
+  "version": "1.0.0",
+  "description": "Realness Score - Self-Assessment Tool",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "deploy": "firebase deploy --only hosting",
+    "generate-images": "node scripts/generate-image.js"
+  },
+  "keywords": [
+    "assessment",
+    "self-assessment",
+    "archetype"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "dependencies": {}
+}
+
