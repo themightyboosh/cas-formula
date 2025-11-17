@@ -32,38 +32,8 @@ const state = {
     questions: [] // Will be populated with all questions in order
 };
 
-// DOM elements
-const elements = {
-    assessmentSection: document.getElementById('assessmentSection'),
-    resultsSection: document.getElementById('resultsSection'),
-    progressText: document.getElementById('progressText'),
-    progressFill: document.getElementById('progressFill'),
-    domainCategoryHeader: document.getElementById('domainCategoryHeader'),
-    domainCategoryTitle: document.getElementById('domainCategoryTitle'),
-    domainCategoryDescription: document.getElementById('domainCategoryDescription'),
-    errorBanner: document.getElementById('errorBanner'),
-    emailModal: document.getElementById('emailModal'),
-    emailForm: document.getElementById('emailForm'),
-    emailInput: document.getElementById('emailInput'),
-    questionNavigation: document.getElementById('questionNavigation'),
-    prevBtn: document.getElementById('prevBtn'),
-    nextBtn: document.getElementById('nextBtn'),
-    submitBtn: document.getElementById('submitBtn'),
-    submitButtonContainer: document.getElementById('submitButtonContainer'),
-    stickyButton: document.getElementById('stickyButton'),
-    stickySubmitBtn: document.getElementById('stickySubmitBtn'),
-    retakeBtn: document.getElementById('retakeBtn'),
-    archetypeName: document.getElementById('archetypeName'),
-    archetypeTag: document.getElementById('archetypeTag'),
-    archetypeDescription: document.getElementById('archetypeDescription'),
-    archetypeImage: document.getElementById('archetypeImage'),
-    domainCharts: document.getElementById('domainCharts'),
-    compatibilityInfo: document.getElementById('compatibilityInfo'),
-    imagePromptText: document.getElementById('imagePromptText'),
-    copyPromptBtn: document.getElementById('copyPromptBtn'),
-    shareButtons: document.querySelectorAll('.share-btn'),
-    nativeShareBtn: document.getElementById('nativeShareBtn')
-};
+// DOM elements - initialize as empty object, populate after DOM is ready
+const elements = {};
 
 // Initialize analytics
 async function initAnalytics() {
@@ -687,6 +657,9 @@ function checkUrlParams() {
 // Initialize app
 async function init() {
     try {
+        // Initialize DOM elements first
+        initElements();
+        
         // Load data
         await loadData();
         
@@ -733,14 +706,16 @@ async function init() {
         
         if (elements.shareButtons && elements.shareButtons.length > 0) {
             elements.shareButtons.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const platform = e.target.dataset.platform;
-                    if (platform === 'native') {
-                        nativeShare();
-                    } else {
-                        shareResults(platform);
-                    }
-                });
+                if (btn) {
+                    btn.addEventListener('click', (e) => {
+                        const platform = e.target.dataset.platform;
+                        if (platform === 'native') {
+                            nativeShare();
+                        } else {
+                            shareResults(platform);
+                        }
+                    });
+                }
             });
         }
         
@@ -751,13 +726,15 @@ async function init() {
         }
         
         // Track assessment started
-        if (typeof trackAssessmentStarted === 'function') {
-            trackAssessmentStarted();
+        if (window.trackAssessmentStarted) {
+            window.trackAssessmentStarted();
         }
         
     } catch (error) {
         console.error('Error initializing app:', error);
-        elements.assessmentSection.innerHTML = '<p>Error loading assessment. Please refresh the page.</p>';
+        if (elements.assessmentSection) {
+            elements.assessmentSection.innerHTML = '<p>Error loading assessment. Please refresh the page.</p>';
+        }
     }
 }
 

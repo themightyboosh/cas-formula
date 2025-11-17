@@ -6,8 +6,19 @@
 // Configuration
 // Note: import.meta.env is Vite-specific, not available in vanilla JS
 // Use window.GA_MEASUREMENT_ID or set via script tag before loading
-const GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || null;
-const USE_FIREBASE_ANALYTICS = window.USE_FIREBASE_ANALYTICS !== false;
+let GA_MEASUREMENT_ID = null;
+let USE_FIREBASE_ANALYTICS = true;
+
+// Initialize config safely
+try {
+    if (typeof window !== 'undefined') {
+        GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || null;
+        USE_FIREBASE_ANALYTICS = window.USE_FIREBASE_ANALYTICS !== false;
+    }
+} catch (e) {
+    // Silently fail if window is not available
+    console.warn('Could not initialize analytics config:', e);
+}
 
 /**
  * Initialize Google Analytics
