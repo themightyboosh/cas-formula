@@ -61,7 +61,8 @@ function initElements() {
     elements.retakeBtn = document.getElementById('retakeBtn');
     elements.archetypeName = document.getElementById('archetypeName');
     elements.archetypeTag = document.getElementById('archetypeTag');
-    elements.archetypeDescription = document.getElementById('archetypeDescription');
+    elements.archetypeDescriptionMobile = document.getElementById('archetypeDescriptionMobile');
+    elements.archetypeDescriptionDesktop = document.getElementById('archetypeDescriptionDesktop');
     elements.archetypeImage = document.getElementById('archetypeImage');
     elements.domainCharts = document.getElementById('domainCharts');
     elements.mostCompatibleInfo = document.getElementById('mostCompatibleInfo');
@@ -497,7 +498,14 @@ function renderResults() {
     
     // Use expanded description if available, fallback to short description
     const description = archetype.expandedDescription || archetype.description;
-    elements.archetypeDescription.textContent = description;
+    
+    // Set description in both mobile and desktop locations
+    if (elements.archetypeDescriptionMobile) {
+        elements.archetypeDescriptionMobile.textContent = description;
+    }
+    if (elements.archetypeDescriptionDesktop) {
+        elements.archetypeDescriptionDesktop.textContent = description;
+    }
     
     // Archetype image - match actual file names
     const imageName = archetype.name.toLowerCase()

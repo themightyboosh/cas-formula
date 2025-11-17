@@ -1261,8 +1261,21 @@ footer {
         margin-bottom: 28px;
     }
     
-    .archetype-hero-overlay .archetype-description {
-        font-size: 36px;
+    /* On mobile: hide desktop description, show mobile description below image */
+    .archetype-description-desktop {
+        display: none;
+    }
+    
+    .archetype-description-mobile {
+        display: block;
+        padding: 32px 24px;
+    }
+    
+    .archetype-description-mobile .archetype-description {
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--text-primary);
+        margin: 0;
     }
     
     .insight-section {
