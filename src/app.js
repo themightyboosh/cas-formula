@@ -572,10 +572,19 @@ function renderResults() {
     // Show results section
     elements.resultsSection.style.display = 'block';
     elements.assessmentSection.style.display = 'none';
-    elements.questionNavigation.style.display = 'none';
-    elements.domainCategoryHeader.style.display = 'none';
-    elements.submitButtonContainer.style.display = 'none';
-    elements.stickyButton.style.display = 'none';
+    
+    if (elements.questionNavigation) {
+        elements.questionNavigation.style.display = 'none';
+    }
+    if (elements.domainCategoryHeader) {
+        elements.domainCategoryHeader.style.display = 'none';
+    }
+    if (elements.submitButtonContainer) {
+        elements.submitButtonContainer.style.display = 'none';
+    }
+    if (elements.stickyButton) {
+        elements.stickyButton.style.display = 'none';
+    }
     
     // Hide progress bar on results screen
     const progressBar = document.getElementById('progressBar');
