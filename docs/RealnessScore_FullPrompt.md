@@ -500,18 +500,39 @@ function classifyArchetype(A_level, B_level, C_level, D_level, archetypes) {
 - Each question appears as:
   - Question text
   - A 1–5 horizontal scale (radio buttons or pill-shaped selectable buttons).
-- Disabled “See My Realness Archetype” button until all 40 questions are answered.
+- **Progress indicator:** Display "Question X of 40" prominently.
+- **Domain completion status:** Show visual indicators (checkmarks or progress bars) for each completed domain section.
+- Disabled "See My Realness Archetype" button until all 40 questions are answered.
 
-### 7.2 On Answer Completion
+### 7.2 Progress Tracking & Data Persistence
+- **Progress indicator:** Show current question number (e.g., "Question 15 of 40") and overall completion percentage.
+- **Domain completion status:** Visual indicators showing which domains (A, B, C, D) are complete.
+- **Save progress:** Automatically save responses to `localStorage` as user answers questions.
+- **Resume capability:** On page load, check `localStorage` for saved progress and allow user to resume from where they left off.
+- **Retake assessment:** Provide a "Retake Assessment" button on results page that clears saved data and restarts the assessment.
+- **Single result storage:** Store only the most recent result in `localStorage` (no multiple result comparison).
+
+### 7.3 Email Collection (Before Results)
+- **Required step:** Before showing results, collect user email address.
+- Display a clean email collection form with:
+  - Email input field
+  - Submit button
+  - Brief explanation: "Enter your email to receive your Realness Score results"
+- Validate email format before proceeding.
+- Store email (for analytics/email list purposes) before displaying results.
+
+### 7.4 On Answer Completion
 - Validate that each question has a numeric value 1–5.
 - If incomplete:
   - Show a small, subtle error banner:  
-    *“Please answer all questions to see your Realness Archetype.”*
+    *"Please answer all questions to see your Realness Archetype."*
 - If complete:
-  - Compute sums, levels, and best archetype.
-  - Scroll smoothly to the Results section.
+  - Show email collection form (see 7.3).
+  - After email submission:
+    - Compute sums, levels, and best archetype.
+    - Animate smooth scroll to the Results section with transition effects.
 
-### 7.3 Results Section
+### 7.5 Results Section
 Show:
 
 - **Archetype Title:**  
@@ -520,36 +541,229 @@ Show:
   e.g., `Wise Regulator`
 - **Description:**  
   e.g., `Deep-feeling, steady, and emotionally grounded.`
-- **Subscale Profile:**
+- **Subscale Profile with Visualizations:**
+  - Visual charts/graphs for domain scores (bar charts or radial charts).
+  - Progress bars for each domain level (visual representation of Low/Medium/High).
   - A – Noticing Your Feelings: `[A_sum] (Level [A_level])`
   - B – Showing Your Real Self: `[B_sum] (Level [B_level])`
   - C – How You Protect Yourself: `[C_sum] (Level [C_level])`
   - D – How You Connect With Others: `[D_sum] (Level [D_level])`
 - **Compatibility section:**
-  - Most compatible archetype
-  - Challenging match archetype
+  - Most compatible archetype (with link to learn more)
+  - Challenging match archetype (with link to learn more)
+  - Visual representation of archetype compatibility (compatibility scores displayed)
+- **Expandable sections:** Allow users to expand/collapse detailed archetype information.
+- **Archetype Image:** Display pre-generated archetype image (see Section 12).
 - **Image Prompt box:**
-  - Label: “Image prompt for your archetype”
+  - Label: "Image prompt for your archetype"
   - Show the `imagePrompt` string in a copyable text area or readonly input.
-
-### 7.4 Generate Image Button
-
-- Button label: `Generate Image (using this prompt)`
-- JS function (placeholder for later API integration):
-
-```js
-function generateImage(prompt) {
-  // Placeholder for future integration with an image model API
-  console.log("Use this prompt with your image model:", prompt);
-  alert("Copy this prompt and paste it into your image generator:
-
-" + prompt);
-}
-```
+- **Retake Assessment button:** Allow users to retake the assessment.
+- **Links:**
+  - Link to Dr. Conkright's website/resources
+  - "Learn more" about the methodology link
 
 ---
 
-## 8. Implementation Notes (Vanilla JS Only)
+## 8. Animations & Transitions
+
+### 8.1 Smooth Transitions
+- **Question transitions:** Smooth fade/slide animations when moving between questions or sections.
+- **Results reveal:** Animated reveal of results (fade in, slide up, or similar effect).
+- **Micro-interactions:** 
+  - Subtle hover effects on rating buttons.
+  - Click/tap feedback animations.
+  - Smooth transitions when selecting rating values.
+- **Section expansion:** Smooth expand/collapse animations for domain sections.
+
+### 8.2 Animation Guidelines
+- Keep animations subtle and purposeful (not distracting).
+- Use CSS transitions where possible for performance.
+- Ensure animations respect user preferences (prefers-reduced-motion media query).
+
+---
+
+## 9. Viral & Sharing Features
+
+### 9.1 Social Sharing
+- **Shareable image cards:** Generate Open Graph (OG) images for each archetype result that include:
+  - Archetype name
+  - Short tag
+  - Description
+  - Visual representation/graphic
+- **Direct share buttons:** Include share buttons for:
+  - Twitter/X
+  - Facebook
+  - LinkedIn
+  - Native share API (for mobile devices)
+- **Shareable URLs:** Encode results in URL parameters so shared links can display results directly.
+  - Format: `?archetype=[id]&A=[level]&B=[level]&C=[level]&D=[level]`
+  - On page load, check for URL parameters and display results if valid.
+
+### 9.2 Share Functionality Implementation
+- Generate shareable text: "I'm The [Archetype Name] - [Short Tag]. Discover your Realness Score: [URL]"
+- Copy-to-clipboard functionality for sharing links.
+- Track sharing events for analytics (see Section 16).
+
+---
+
+## 10. Comparison Features
+
+### 10.1 Archetype Comparison
+- **Compare with friends:** Allow users to enter archetype codes or share links to compare results.
+- **Compatibility scores:** Display numerical compatibility scores between archetypes based on level differences.
+- **Visual comparison:** Show side-by-side comparison of:
+  - Domain levels
+  - Compatibility indicators
+  - Relationship dynamics
+
+### 10.2 Statistics & Distribution
+- **Most common archetype stats:** Display anonymized statistics showing:
+  - Most common archetype (percentage)
+  - Distribution across all 16 archetypes
+  - Domain level distributions
+- Update statistics dynamically as more users complete the assessment.
+- Ensure all statistics are anonymized (no personal data).
+
+---
+
+## 11. Results Visualization
+
+### 11.1 Visual Charts & Graphs
+- **Domain score charts:** 
+  - Bar charts showing raw scores (10-50 range) for each domain.
+  - Color-coded by level (Low/Medium/High).
+- **Progress bars:** Visual progress bars for each domain level (1-3 scale).
+- **Compatibility visualization:** 
+  - Visual representation showing compatibility between user's archetype and others.
+  - Compatibility scores displayed visually (e.g., percentage bars, compatibility meters).
+
+### 11.2 Chart Implementation
+- Use SVG or Canvas for charts (vanilla JS charting library or custom implementation).
+- Ensure charts are responsive and accessible.
+- Include chart labels and legends for clarity.
+
+---
+
+## 12. Image Generation
+
+### 12.1 Image Generation Requirements
+- **API Integration:** Integrate with image generation API (DALL-E, Midjourney, Stable Diffusion, or similar).
+- **Master Style:** All archetype images must include the style: **"Pen and Ink mixed with water color"**
+- **Build-time generation:** Generate all 16 archetype images once during build time (not at runtime).
+- **Image storage:** Store generated images as static assets in the app.
+- **Image display:** Display the appropriate archetype image on results page.
+
+### 12.2 Image Prompt Enhancement
+- Append master style to each archetype's `imagePrompt`:
+  - Original prompt + ", Pen and Ink mixed with water color"
+- Example: `"A calm guardian carved from shadowed stone, soft light glowing inside their chest, standing alone in a field at dusk, realistic, dark muted palette, subtle inner glow, highly detailed, Pen and Ink mixed with water color"`
+
+### 12.3 Image Usage
+- Use generated images in:
+  - Results page display
+  - Shareable OG images
+  - Comparison views
+- Ensure images are optimized for web (appropriate file size, format).
+
+---
+
+## 13. Mobile Experience
+
+### 13.1 Touch-Friendly Controls
+- **Rating controls:** 
+  - Large, touch-friendly buttons for 1-5 rating selection.
+  - Swipe gestures for rating selection (optional enhancement).
+  - Tap-friendly interface (minimum 44x44px touch targets).
+- **Responsive design:** 
+  - Optimized for both portrait and landscape orientations.
+  - Adaptive layout that works well in both orientations.
+- **Mobile-specific UI:**
+  - Sticky submit button at bottom of viewport.
+  - Collapsible sections work smoothly on touch devices.
+  - Smooth scrolling and touch interactions.
+
+### 13.2 Mobile Considerations
+- No PWA/offline capability required.
+- Ensure all features work on mobile browsers (iOS Safari, Chrome Mobile, etc.).
+
+---
+
+## 14. SEO & Meta Tags
+
+### 14.1 Meta Tags for Social Sharing
+- **Open Graph tags:** Include OG tags for each archetype:
+  - `og:title`: "The Realness Score - You are The [Archetype Name]"
+  - `og:description`: Archetype description
+  - `og:image`: Archetype-specific OG image
+  - `og:url`: Shareable URL with encoded results
+  - `og:type`: "website"
+- **Twitter Card tags:** Include Twitter Card meta tags for better Twitter sharing.
+- **Structured data (JSON-LD):** Include JSON-LD structured data for search engines:
+  - Organization schema
+  - WebApplication schema
+  - Assessment/Quiz schema (if applicable)
+
+### 14.2 Dynamic Meta Tags
+- Update meta tags dynamically based on user's archetype result.
+- Ensure each archetype has unique OG image and meta description.
+
+---
+
+## 15. Accessibility
+
+### 15.1 Screen Reader Optimizations
+- **ARIA labels:** Proper ARIA labels for all interactive elements.
+- **Semantic HTML:** Use semantic HTML elements (`<header>`, `<main>`, `<section>`, `<nav>`, etc.).
+- **Form labels:** All form inputs have associated labels.
+- **Radio groups:** Properly grouped and labeled radio button groups.
+- **Alt text:** Descriptive alt text for all images and charts.
+
+### 15.2 Accessibility Requirements
+- No specific keyboard navigation requirements beyond standard browser behavior.
+- No high contrast mode required.
+- No font size adjustment controls required.
+- Ensure visible focus states for keyboard navigation.
+
+---
+
+## 16. Analytics
+
+### 16.1 Tracking Requirements
+- **Completion rates:** Track how many users start vs. complete the assessment.
+- **Archetype distribution:** Track anonymized distribution of archetype results.
+- **Sharing events:** Track when users share results (which platform, which archetype).
+- **Email collection:** Track email collection completion rate.
+
+### 16.2 Analytics Implementation
+- Use analytics service (Google Analytics, Plausible, or similar).
+- Ensure all tracking is privacy-compliant and anonymized.
+- Track events:
+  - Assessment started
+  - Assessment completed
+  - Email collected
+  - Results shared (with platform)
+  - Archetype result (anonymized)
+
+---
+
+## 17. Call-to-Action & Links
+
+### 17.1 Email Collection
+- **Required before results:** Collect email address before showing results (see Section 7.3).
+- **Purpose:** Build email list for follow-up communication.
+- **Privacy:** Include privacy notice about email usage.
+
+### 17.2 External Links
+- **Dr. Conkright's website:** Include link to Dr. Conkright's website/resources.
+- **Methodology link:** Include "Learn more about the methodology" link with explanation of the Realness Score approach.
+- **Placement:** Include links in:
+  - Footer
+  - Results page
+  - About/Info section
+
+---
+
+## 18. Implementation Notes (Vanilla JS Only)
 
 - No frameworks (no React, Vue, Angular, etc.).
 - Use:
@@ -566,7 +780,7 @@ function generateImage(prompt) {
 
 ---
 
-## 9. Footer
+## 19. Footer
 
 At the bottom of the page, always display in small, muted text:
 
@@ -574,6 +788,45 @@ At the bottom of the page, always display in small, muted text:
 
 Font size: 11–12px  
 Color: same muted gray as secondary text (#A0A4AF).
+
+Include links to:
+- Dr. Conkright's website/resources
+- Learn more about the methodology
+
+---
+
+## 20. Summary of Key Features
+
+### Required Features:
+1. ✅ Email collection before results display
+2. ✅ Progress tracking (question counter, domain completion)
+3. ✅ Save/resume functionality (localStorage)
+4. ✅ Smooth animations and transitions
+5. ✅ Visual charts/graphs for domain scores
+6. ✅ Shareable image cards (OG images)
+7. ✅ Social sharing buttons (Twitter/X, Facebook, LinkedIn)
+8. ✅ Shareable URLs with encoded results
+9. ✅ Archetype comparison features
+10. ✅ Compatibility scores visualization
+11. ✅ Anonymized archetype distribution statistics
+12. ✅ Pre-generated archetype images (build-time, Pen and Ink + watercolor style)
+13. ✅ Touch-friendly mobile controls (portrait & landscape)
+14. ✅ SEO meta tags and structured data
+15. ✅ Screen reader optimizations
+16. ✅ Analytics tracking (completion, distribution, sharing)
+17. ✅ Links to Dr. Conkright's website and methodology info
+18. ✅ Retake assessment functionality
+
+### Not Required:
+- Copy-paste text results (optional)
+- Loading states (not specified)
+- Multiple result storage/comparison
+- PWA/offline capability
+- Keyboard navigation requirements
+- High contrast mode
+- Font size adjustments
+- Print-friendly version
+- Performance optimization requirements
 
 ---
 
