@@ -64,7 +64,8 @@ function initElements() {
     elements.archetypeDescription = document.getElementById('archetypeDescription');
     elements.archetypeImage = document.getElementById('archetypeImage');
     elements.domainCharts = document.getElementById('domainCharts');
-    elements.compatibilityInfo = document.getElementById('compatibilityInfo');
+    elements.mostCompatibleInfo = document.getElementById('mostCompatibleInfo');
+    elements.leastCompatibleInfo = document.getElementById('leastCompatibleInfo');
     elements.shadowSide = document.getElementById('shadowSide');
     elements.growthPath = document.getElementById('growthPath');
     elements.shareButtons = document.querySelectorAll('.share-btn');
@@ -528,19 +529,13 @@ function renderResults() {
     });
     
     // Compatibility
-    const mostCompatible = archetypes.archetypes.find(a => a.name === archetype.mostCompatible);
-    const leastCompatible = archetypes.archetypes.find(a => a.name === archetype.leastCompatible);
+    if (elements.mostCompatibleInfo) {
+        elements.mostCompatibleInfo.textContent = archetype.mostCompatible;
+    }
     
-    elements.compatibilityInfo.innerHTML = `
-        <p>
-            <strong>Most Compatible:</strong> 
-            <span>${archetype.mostCompatible}</span>
-        </p>
-        <p>
-            <strong>Challenging Match:</strong> 
-            <span>${archetype.leastCompatible}</span>
-        </p>
-    `;
+    if (elements.leastCompatibleInfo) {
+        elements.leastCompatibleInfo.textContent = archetype.leastCompatible;
+    }
     
     // Shadow Side and Growth Path
     if (elements.shadowSide && archetype.shadowSide) {

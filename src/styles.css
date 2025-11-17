@@ -684,19 +684,16 @@ header {
 /* Compatibility Section */
 .compatibility-section h3 {
     font-size: 24px;
-    margin-bottom: 24px;
-    color: var(--text-primary);
     font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 16px;
 }
 
 .compatibility-section p {
-    margin-bottom: 16px;
-    font-size: 18px;
-}
-
-.compatibility-section strong {
-    color: var(--text-primary);
-    font-weight: 500;
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
 }
 
 /* Image Prompt Section */
@@ -1050,6 +1047,10 @@ footer {
     .archetype-insights {
         grid-template-columns: 1fr;
         margin-bottom: 40px;
+    }
+    
+    .compatibility-section {
+        grid-template-columns: 1fr;
     }
     
     .insight-section:first-child {
