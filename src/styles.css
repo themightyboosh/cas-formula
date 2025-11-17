@@ -707,6 +707,7 @@ body:has(.results-section[style*="display: block"]) #progressBar {
     background: var(--bg-secondary);
     border-right: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
+    min-height: 200px;
 }
 
 .insights-grid .insight-section:nth-child(2n) {
@@ -734,13 +735,14 @@ body:has(.results-section[style*="display: block"]) #progressBar {
 
 .insights-grid .compatibility-content {
     display: flex;
-    align-items: center;
-    gap: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
 }
 
 .insights-grid .compatibility-image {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     object-fit: cover;
     border-radius: 4px;
     flex-shrink: 0;
@@ -1254,22 +1256,17 @@ footer {
     }
     
     .insights-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
     
     .insights-grid .insight-section {
         padding: 32px 24px;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-    }
-    
-    .insights-grid .insight-section:last-child {
-        border-bottom: none;
+        min-height: 180px;
     }
     
     .insights-grid .compatibility-image {
-        width: 60px;
-        height: 60px;
+        width: 100px;
+        height: 100px;
     }
     
     .archetype-insights {
@@ -1288,11 +1285,12 @@ footer {
     
     .insights-grid .insight-section {
         padding: 24px 20px;
+        min-height: 160px;
     }
     
     .insights-grid .compatibility-image {
-        width: 50px;
-        height: 50px;
+        width: 80px;
+        height: 80px;
     }
     
     .insight-section:first-child {
