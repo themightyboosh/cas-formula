@@ -697,30 +697,31 @@ function nativeShare() {
 
 // Retake assessment - complete reset
 function retakeAssessment() {
-    // Clear progress and responses
+    // Clear ALL data
     clearProgress();
     state.result = null;
     state.currentQuestionIndex = 0;
     state.emailCollected = false;
+    state.responses = {};
     
-    // Clear localStorage including email
-    localStorage.removeItem('userEmail');
+    // Clear ALL localStorage
+    localStorage.clear();
     
     // Clear URL params
     const url = new URL(window.location);
     url.search = '';
     window.history.replaceState({}, '', url);
     
-    // Hide everything, show landing
-    elements.resultsSection.style.display = 'none';
-    elements.assessmentSection.style.display = 'none';
-    elements.questionNavigation.style.display = 'none';
-    elements.domainCategoryHeader.style.display = 'none';
-    elements.submitButtonContainer.style.display = 'none';
-    elements.stickyButton.style.display = 'none';
-    elements.errorBanner.style.display = 'none';
-    elements.compactHeader.style.display = 'none';
-    elements.landingScreen.style.display = 'flex';
+    // Hide everything
+    if (elements.resultsSection) elements.resultsSection.style.display = 'none';
+    if (elements.assessmentSection) elements.assessmentSection.style.display = 'none';
+    if (elements.questionNavigation) elements.questionNavigation.style.display = 'none';
+    if (elements.domainCategoryHeader) elements.domainCategoryHeader.style.display = 'none';
+    if (elements.submitButtonContainer) elements.submitButtonContainer.style.display = 'none';
+    if (elements.stickyButton) elements.stickyButton.style.display = 'none';
+    if (elements.errorBanner) elements.errorBanner.style.display = 'none';
+    if (elements.compactHeader) elements.compactHeader.style.display = 'none';
+    if (elements.emailModal) elements.emailModal.style.display = 'none';
     
     // Hide progress bar
     const progressBar = document.getElementById('progressBar');
@@ -728,13 +729,13 @@ function retakeAssessment() {
         progressBar.style.display = 'none';
     }
     
+    // Show landing screen
+    if (elements.landingScreen) {
+        elements.landingScreen.style.display = 'flex';
+    }
+    
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    
-    // Track assessment started
-    if (window.trackAssessmentStarted) {
-        window.trackAssessmentStarted();
-    }
 }
 
 // Handle submit button
