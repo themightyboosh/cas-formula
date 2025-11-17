@@ -6,6 +6,9 @@
       "shortTag": "Wise Regulator",
       "levels": { "A": 3, "B": 3, "C": 1, "D": 3 },
       "description": "Deep-feeling, steady, and emotionally grounded.",
+      "expandedDescription": "You feel everything deeply yet stay grounded and calm. Others trust your emotional steadiness.\n\nYour wisdom comes from matching your inner and outer worlds with clarity and authenticity.",
+      "shadowSide": "Can become overly responsible for others' emotions, suppressing their own needs to maintain calm.",
+      "growthPath": "Practice sharing your own emotional needs rather than only supporting others.",
       "mostCompatible": "The Soft Anchor",
       "leastCompatible": "The Iron Mask",
       "imagePrompt": "A calm guardian carved from shadowed stone, soft light glowing inside their chest, standing alone in a field at dusk, realistic, dark muted palette, subtle inner glow, highly detailed."
@@ -16,6 +19,9 @@
       "shortTag": "Warm Stabilizer",
       "levels": { "A": 3, "B": 2, "C": 1, "D": 3 },
       "description": "Gentle, steady, and nurturing in relationships.",
+      "expandedDescription": "You are gentle, warm, and grounding. People feel safe and comfortable around you.\n\nYour quiet steadiness helps others settle into themselves and feel emotionally supported.",
+      "shadowSide": "May absorb others' feelings so deeply that they lose track of their own boundaries and desires.",
+      "growthPath": "Strengthen boundaries by naming what you need before offering comfort.",
       "mostCompatible": "The Resonant Sage",
       "leastCompatible": "The Stormbound",
       "imagePrompt": "A figure sitting on a weathered pier over dark water at sunset, soft light around them, posture relaxed and inviting, semi-realistic, moody but warm atmosphere."
@@ -26,6 +32,9 @@
       "shortTag": "Hidden Storm",
       "levels": { "A": 3, "B": 1, "C": 3, "D": 1 },
       "description": "Feels intensely inside but stays guarded and overwhelmed.",
+      "expandedDescription": "You hold deep emotional intensity beneath the surface, like a quiet storm.\n\nYour challenge is allowing others to witness your depth without retreating.",
+      "shadowSide": "Intensity can become overwhelm; withdrawing into emotional storms creates isolation.",
+      "growthPath": "Let trusted people witness small pieces of your emotional intensity.",
       "mostCompatible": "The Truth Teller",
       "leastCompatible": "The Soft Anchor",
       "imagePrompt": "A person made of swirling storm clouds, faint lightning under the skin, seated in a dim room, shafts of light from a single window, cinematic realism, dramatic shadows."
@@ -36,6 +45,9 @@
       "shortTag": "Blunt Realist",
       "levels": { "A": 3, "B": 3, "C": 2, "D": 1 },
       "description": "Emotionally aware and radically honest, sometimes too sharp.",
+      "expandedDescription": "You value honesty and emotional clarity above all else.\n\nYour insight cuts through confusion and encourages real connection.",
+      "shadowSide": "Directness can slip into bluntness, creating conflict or emotional distance.",
+      "growthPath": "Balance honesty with empathy—soften delivery without diluting truth.",
       "mostCompatible": "The Stormbound",
       "leastCompatible": "The Gentle Ghost",
       "imagePrompt": "A figure speaking into the dark, words forming visible glowing lines in the air, sharp edges of light, high contrast, realistic style with a slightly surreal twist."
@@ -46,6 +58,9 @@
       "shortTag": "Impulsive Feeler",
       "levels": { "A": 2, "B": 3, "C": 1, "D": 2 },
       "description": "Expressive and passionate, quick to feel and show emotions.",
+      "expandedDescription": "Your emotions are vivid and expressive, lighting up every room you enter.\n\nYou create instant connection through openness and authenticity.",
+      "shadowSide": "Emotional impulsivity can burn relationships, leading to misunderstandings or hurt feelings.",
+      "growthPath": "Pause before reacting; channel emotional energy into expression with intention.",
       "mostCompatible": "The Inner Compass",
       "leastCompatible": "The Fortress-Keeper",
       "imagePrompt": "A person surrounded by small floating sparks in a dark room, eyes bright, mid-motion as if laughing or talking, warm highlights against deep shadow, expressive realism."
@@ -56,6 +71,9 @@
       "shortTag": "Soul Storyteller",
       "levels": { "A": 3, "B": 3, "C": 2, "D": 3 },
       "description": "Emotionally articulate, romantic, and deeply sensitive.",
+      "expandedDescription": "You live in emotional richness and speak in metaphor and meaning.\n\nPeople are drawn to your depth, sensitivity, and emotional insight.",
+      "shadowSide": "May romanticize pain or over-idealize relationships, making connection feel dramatic or heavy.",
+      "growthPath": "Ground your deep feelings in daily reality and lighten emotional narratives.",
       "mostCompatible": "The Quiet Depth",
       "leastCompatible": "The Mirror Mask",
       "imagePrompt": "A lone figure writing at a desk lit by a single lamp, pages drifting into faint glowing symbols, dark room, rich shadows, painterly realistic style."
@@ -66,6 +84,9 @@
       "shortTag": "Social Chameleon",
       "levels": { "A": 2, "B": 3, "C": 3, "D": 2 },
       "description": "Reads the room fast and adjusts their emotional display.",
+      "expandedDescription": "You read emotional environments instantly and adapt to them.\n\nYour social intuition is strong, though your true self deserves more space.",
+      "shadowSide": "Adapting too much can erase personal identity, leaving them unsure who they really are.",
+      "growthPath": "Reveal small authentic truths even when unsure how they will land.",
       "mostCompatible": "The Quiet Depth",
       "leastCompatible": "The Magnetic Poet",
       "imagePrompt": "A person holding a half-mirror mask, one eye visible and observant, reflections of other faces in the mask surface, cool tones, realistic with subtle surreal reflections."
@@ -76,78 +97,102 @@
       "shortTag": "Radical Sharer",
       "levels": { "A": 2, "B": 3, "C": 1, "D": 3 },
       "description": "Open, intense, and quick to share deeply and directly.",
+      "expandedDescription": "You connect quickly and deeply, with fearless emotional openness.\n\nYou invite intensity and authenticity into relationships.",
+      "shadowSide": "Oversharing too fast can push people away or create unstable intimacy.",
+      "growthPath": "Learn to pace vulnerability and read cues before diving deep.",
       "mostCompatible": "The Fortress-Keeper",
       "leastCompatible": "The Stormbound",
-      "imagePrompt": "Two figures facing each other in a dark space, one pouring glowing light from their chest toward the other, bold and intimate, realistic style, strong contrast."
+      "imagePrompt": "A person reaching through an open doorway, hand extended in invitation, light spilling through, dramatic shadows and bright highlights, photo-realistic with emotional intensity."
     },
     {
       "id": 9,
       "name": "The Iron Mask",
-      "shortTag": "Locked Down",
-      "levels": { "A": 1, "B": 1, "C": 3, "D": 1 },
-      "description": "Emotionally shut down, highly self-protective, hard to read.",
-      "mostCompatible": "The Boundary Breaker",
+      "shortTag": "Stoic Guardian",
+      "levels": { "A": 2, "B": 1, "C": 3, "D": 1 },
+      "description": "Keeps emotions private and controlled, appearing steady and composed.",
+      "expandedDescription": "You keep your emotional world closely guarded, valuing privacy and control.\n\nUnderneath your calm exterior lies grounded depth.",
+      "shadowSide": "Emotional walls can become impenetrable, blocking closeness and support.",
+      "growthPath": "Experiment with sharing mild emotions to build trust gradually.",
+      "mostCompatible": "The Gentle Ghost",
       "leastCompatible": "The Resonant Sage",
-      "imagePrompt": "A figure in a smooth dark metal mask, eyes hidden, standing against a black background, faint cracks with tiny light leaking through, hyperreal texture."
+      "imagePrompt": "A person wearing a smooth metallic mask standing in misty shadows, arms crossed, posture composed, hints of texture under the surface, muted cool tones, hyperreal."
     },
     {
       "id": 10,
       "name": "The Strategist",
-      "shortTag": "Controlled Planner",
-      "levels": { "A": 2, "B": 2, "C": 3, "D": 1 },
-      "description": "Thinks before feeling, manages emotions through logic.",
+      "shortTag": "Controlled Thinker",
+      "levels": { "A": 2, "B": 2, "C": 3, "D": 2 },
+      "description": "Measured and thoughtful, balancing feeling and thinking.",
+      "expandedDescription": "You move through emotions with logic and careful thought.\n\nYour steadiness helps you navigate complex emotional situations.",
+      "shadowSide": "Overthinking replaces vulnerability, making relationships feel controlled or distant.",
+      "growthPath": "Replace analysis with presence—try feeling before interpreting.",
       "mostCompatible": "The Open Flame",
       "leastCompatible": "The Boundary Breaker",
-      "imagePrompt": "A person at a table covered in maps and diagrams lit from above, expression calm and focused, everything else fading into darkness, realistic, clean lines."
+      "imagePrompt": "A figure seated at a chess board in dim light, pieces slightly glowing, thoughtful expression, calm and calculating, realistic but softly lit."
     },
     {
       "id": 11,
       "name": "The Gentle Ghost",
-      "shortTag": "Quiet Withdrawer",
-      "levels": { "A": 1, "B": 1, "C": 3, "D": 2 },
-      "description": "Pulls back softly when overwhelmed, avoids conflict.",
-      "mostCompatible": "The Magnetic Poet",
+      "shortTag": "Soft Avoider",
+      "levels": { "A": 2, "B": 1, "C": 2, "D": 2 },
+      "description": "Gentle and withdrawn, seeking calm over confrontation.",
+      "expandedDescription": "You withdraw when overwhelmed, seeking internal calm.\n\nYour softness is soothing, but your disappearing act confuses others.",
+      "shadowSide": "Avoidance patterns can make others feel shut out or abandoned.",
+      "growthPath": "Stay present for 10 seconds longer when you want to withdraw.",
+      "mostCompatible": "The Resonant Sage",
       "leastCompatible": "The Truth Teller",
-      "imagePrompt": "A faint, semi-transparent figure walking down a dim hallway, edges blurred into the shadows, soft cool tones, melancholic but peaceful realism."
+      "imagePrompt": "A faint translucent figure standing in fog, barely visible, serene expression, soft light filtering through, pale colors, dreamlike realism."
     },
     {
       "id": 12,
       "name": "The Fortress-Keeper",
-      "shortTag": "Guarded Loyalist",
-      "levels": { "A": 2, "B": 1, "C": 3, "D": 3 },
-      "description": "Slow to trust but fiercely loyal once you are inside.",
+      "shortTag": "Guarded Protector",
+      "levels": { "A": 3, "B": 1, "C": 3, "D": 3 },
+      "description": "Emotionally rich but guarded, protecting their inner world.",
+      "expandedDescription": "You love with loyalty and strength once trust is earned.\n\nYour emotional world is warm but protected.",
+      "shadowSide": "Strong barriers may keep out support, leaving them lonely or misunderstood.",
+      "growthPath": "Allow safe people gradual entry to your inner world.",
       "mostCompatible": "The Boundary Breaker",
       "leastCompatible": "The Open Flame",
-      "imagePrompt": "A tall stone gate in the night with a single warm light deep inside, heavy doors slightly open, realistic stone texture, moody sky above."
+      "imagePrompt": "A person standing inside a stone fortress with thick walls, light glowing warmly from within, shadows outside, protective but inviting once inside, realistic architecture."
     },
     {
       "id": 13,
       "name": "The Quiet Depth",
-      "shortTag": "Selective Intimate",
-      "levels": { "A": 2, "B": 2, "C": 1, "D": 3 },
-      "description": "Private but deeply loyal and emotionally present with a few.",
+      "shortTag": "Reserved Loyalist",
+      "levels": { "A": 3, "B": 2, "C": 3, "D": 2 },
+      "description": "Private but emotionally grounded, offering depth to those they trust.",
+      "expandedDescription": "You offer quiet loyalty and meaningful presence to those you trust.\n\nYour emotional world is selective but rich.",
+      "shadowSide": "Keeping emotions private can lead to missed intimacy or unspoken resentment.",
+      "growthPath": "Communicate your internal world more openly with trusted people.",
       "mostCompatible": "The Magnetic Poet",
-      "leastCompatible": "The Strategist",
-      "imagePrompt": "A person sitting by a dark lake at night, stars reflected in the water, posture relaxed and turned slightly away, subtle glow on the shoreline, serene realism."
+      "leastCompatible": "The Boundary Breaker",
+      "imagePrompt": "A person standing at the edge of a still, deep lake at twilight, reflection perfectly mirrored, calm and contemplative, dark muted tones, serene realism."
     },
     {
       "id": 14,
       "name": "The Open Seeker",
-      "shortTag": "Connection Explorer",
+      "shortTag": "Curious Explorer",
       "levels": { "A": 2, "B": 3, "C": 2, "D": 3 },
-      "description": "Actively looks for meaningful connection and new emotional experiences.",
-      "mostCompatible": "The Resonant Sage",
-      "leastCompatible": "The Iron Mask",
-      "imagePrompt": "A traveler standing at a crossroads under a twilight sky, paths lit with soft lanterns, figure looking ahead with curiosity, detailed and atmospheric."
+      "description": "Curious and open, exploring emotions and connection.",
+      "expandedDescription": "You explore emotional landscapes with curiosity and openness.\n\nYou thrive on meaningful connection and heartfelt discovery.",
+      "shadowSide": "Chasing emotional novelty may prevent long-term grounding or commitment.",
+      "growthPath": "Focus on deepening existing connections instead of seeking new emotional highs.",
+      "mostCompatible": "The Strategist",
+      "leastCompatible": "The Fortress-Keeper",
+      "imagePrompt": "A person walking forward on a winding path through clouds, arms slightly outstretched, hopeful expression, soft light ahead, ethereal realism."
     },
     {
       "id": 15,
       "name": "The Tethered Caretaker",
       "shortTag": "Self-Losing Helper",
-      "levels": { "A": 1, "B": 2, "C": 2, "D": 3 },
-      "description": "Takes care of others first and often forgets their own needs.",
+      "levels": { "A": 3, "B": 2, "C": 1, "D": 2 },
+      "description": "Deeply empathetic and giving, sometimes to their own detriment.",
+      "expandedDescription": "You care deeply for others, often putting their needs first.\n\nYour empathy is powerful and heartfelt.",
+      "shadowSide": "Over-functioning can lead to burnout and resentment when care is not returned.",
+      "growthPath": "Prioritize self-care first to prevent emotional depletion.",
       "mostCompatible": "The Inner Compass",
-      "leastCompatible": "The Truth Teller",
+      "leastCompatible": "The Iron Mask",
       "imagePrompt": "A person helping another person, one figure glowing brightly while tending to the other, their own form slightly faded, warm and compassionate atmosphere, realistic style."
     },
     {
@@ -155,11 +200,13 @@
       "name": "The Inner Compass",
       "shortTag": "Centered Guide",
       "levels": { "A": 2, "B": 2, "C": 2, "D": 3 },
-      "description": "Balanced between independence and closeness, steady and clear.",
+      "description": "Balanced and self-aware, navigating emotions with clarity.",
+      "expandedDescription": "You navigate emotions with balance, clarity, and self-awareness.\n\nPeople find your presence grounding and trustworthy.",
+      "shadowSide": "Self-reliance can turn into rigidity, resisting help even when needed.",
+      "growthPath": "Invite others to support you, even when you feel steady on your own.",
       "mostCompatible": "The Open Flame",
-      "leastCompatible": "The Gentle Ghost",
+      "leastCompatible": "The Tethered Caretaker",
       "imagePrompt": "A figure standing in a dark space with a softly glowing compass in their hands, light illuminating their face, calm expression, grounded, hyperreal detail."
     }
   ]
 }
-

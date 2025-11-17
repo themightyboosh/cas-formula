@@ -553,6 +553,7 @@ header {
     font-size: 18px;
     color: var(--text-secondary);
     margin-bottom: 24px;
+    white-space: pre-line;
 }
 
 .archetype-image {
@@ -562,6 +563,32 @@ header {
     border-radius: 0;
     margin: 40px 0;
     border: none;
+}
+
+/* Archetype Insights (Shadow Side & Growth Path) */
+.archetype-insights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    padding: 60px 0;
+    margin-bottom: 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+}
+
+.insight-section h3 {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 16px;
+}
+
+.insight-section p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
 }
 
 /* Charts - Clean, Minimal */

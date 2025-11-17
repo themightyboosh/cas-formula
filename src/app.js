@@ -65,6 +65,8 @@ function initElements() {
     elements.archetypeImage = document.getElementById('archetypeImage');
     elements.domainCharts = document.getElementById('domainCharts');
     elements.compatibilityInfo = document.getElementById('compatibilityInfo');
+    elements.shadowSide = document.getElementById('shadowSide');
+    elements.growthPath = document.getElementById('growthPath');
     elements.shareButtons = document.querySelectorAll('.share-btn');
     elements.nativeShareBtn = document.getElementById('nativeShareBtn');
 }
@@ -480,7 +482,10 @@ function renderResults() {
     // Archetype info
     elements.archetypeName.textContent = `You are ${archetype.name}`;
     elements.archetypeTag.textContent = archetype.shortTag;
-    elements.archetypeDescription.textContent = archetype.description;
+    
+    // Use expanded description if available, fallback to short description
+    const description = archetype.expandedDescription || archetype.description;
+    elements.archetypeDescription.textContent = description;
     
     // Archetype image - match actual file names
     const imageName = archetype.name.toLowerCase()
@@ -536,6 +541,15 @@ function renderResults() {
             <span>${archetype.leastCompatible}</span>
         </p>
     `;
+    
+    // Shadow Side and Growth Path
+    if (elements.shadowSide && archetype.shadowSide) {
+        elements.shadowSide.textContent = archetype.shadowSide;
+    }
+    
+    if (elements.growthPath && archetype.growthPath) {
+        elements.growthPath.textContent = archetype.growthPath;
+    }
     
     // Update meta tags for sharing
     updateMetaTags(archetype);
