@@ -39,28 +39,31 @@ const elements = {};
 async function initAnalytics() {
     try {
         const analyticsModule = await import('./utils/analytics.js');
-        if (analyticsModule.initAnalytics) {
+        if (analyticsModule && analyticsModule.initAnalytics) {
             analyticsModule.initAnalytics();
         }
         
-        // Make analytics functions available globally
-        window.trackAssessmentStarted = analyticsModule.trackAssessmentStarted || (() => {});
-        window.trackAssessmentCompleted = analyticsModule.trackAssessmentCompleted || (() => {});
-        window.trackEmailCollected = analyticsModule.trackEmailCollected || (() => {});
-        window.trackResultsShared = analyticsModule.trackResultsShared || (() => {});
-        window.trackArchetypeResult = analyticsModule.trackArchetypeResult || (() => {});
-        window.trackQuestionAnswered = analyticsModule.trackQuestionAnswered || (() => {});
-        window.trackDomainCompleted = analyticsModule.trackDomainCompleted || (() => {});
+        // Make analytics functions available globally (with fallbacks)
+        if (typeof window !== 'undefined') {
+            window.trackAssessmentStarted = (analyticsModule && analyticsModule.trackAssessmentStarted) || (() => {});
+            window.trackAssessmentCompleted = (analyticsModule && analyticsModule.trackAssessmentCompleted) || (() => {});
+            window.trackEmailCollected = (analyticsModule && analyticsModule.trackEmailCollected) || (() => {});
+            window.trackResultsShared = (analyticsModule && analyticsModule.trackResultsShared) || (() => {});
+            window.trackArchetypeResult = (analyticsModule && analyticsModule.trackArchetypeResult) || (() => {});
+            window.trackQuestionAnswered = (analyticsModule && analyticsModule.trackQuestionAnswered) || (() => {});
+            window.trackDomainCompleted = (analyticsModule && analyticsModule.trackDomainCompleted) || (() => {});
+        }
     } catch (error) {
-        console.warn('Analytics initialization failed:', error);
-        // Create no-op functions
-        window.trackAssessmentStarted = () => {};
-        window.trackAssessmentCompleted = () => {};
-        window.trackEmailCollected = () => {};
-        window.trackResultsShared = () => {};
-        window.trackArchetypeResult = () => {};
-        window.trackQuestionAnswered = () => {};
-        window.trackDomainCompleted = () => {};
+        // Silently handle analytics errors - not critical for app functionality
+        if (typeof window !== 'undefined') {
+            window.trackAssessmentStarted = () => {};
+            window.trackAssessmentCompleted = () => {};
+            window.trackEmailCollected = () => {};
+            window.trackResultsShared = () => {};
+            window.trackArchetypeResult = () => {};
+            window.trackQuestionAnswered = () => {};
+            window.trackDomainCompleted = () => {};
+        }
     }
 }
 
@@ -705,8 +708,8 @@ async function init() {
         }
         
         if (elements.shareButtons && elements.shareButtons.length > 0) {
-            elements.shareButtons.forEach(btn => {
-                if (btn) {
+            Array.from(elements.shareButtons).forEach(btn => {
+                if (btn && typeof btn.addEventListener === 'function') {
                     btn.addEventListener('click', (e) => {
                         const platform = e.target.dataset.platform;
                         if (platform === 'native') {

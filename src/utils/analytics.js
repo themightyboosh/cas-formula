@@ -9,16 +9,21 @@
 let GA_MEASUREMENT_ID = null;
 let USE_FIREBASE_ANALYTICS = true;
 
-// Initialize config safely
-try {
-    if (typeof window !== 'undefined') {
-        GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || null;
-        USE_FIREBASE_ANALYTICS = window.USE_FIREBASE_ANALYTICS !== false;
+// Initialize config safely - wrap everything in try-catch
+(function initConfig() {
+    try {
+        if (typeof window !== 'undefined' && window !== null) {
+            GA_MEASUREMENT_ID = (window.GA_MEASUREMENT_ID) ? window.GA_MEASUREMENT_ID : null;
+            if (window.USE_FIREBASE_ANALYTICS !== undefined) {
+                USE_FIREBASE_ANALYTICS = window.USE_FIREBASE_ANALYTICS !== false;
+            }
+        }
+    } catch (e) {
+        // Silently fail if window is not available
+        GA_MEASUREMENT_ID = null;
+        USE_FIREBASE_ANALYTICS = true;
     }
-} catch (e) {
-    // Silently fail if window is not available
-    console.warn('Could not initialize analytics config:', e);
-}
+})();
 
 /**
  * Initialize Google Analytics
