@@ -43,8 +43,14 @@
 
         <!-- Progress Bar -->
         <div class="progress-bar" id="progressBar">
-            <div class="progress-text" id="progressText">Question 0 of 40</div>
+            <div class="progress-text" id="progressText">Question 1 of 40</div>
             <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- Domain Category Header -->
+        <div class="domain-category-header" id="domainCategoryHeader" style="display: none;">
+            <h2 class="domain-category-title" id="domainCategoryTitle"></h2>
+            <p class="domain-category-description" id="domainCategoryDescription"></p>
         </div>
 
         <!-- Error Banner -->
@@ -52,14 +58,15 @@
             Please answer all questions to see your Realness Archetype.
         </div>
 
-        <!-- Assessment Section -->
+        <!-- Assessment Section - Single Question View -->
         <main id="assessmentSection">
-            <!-- Domain sections will be rendered here -->
+            <!-- Single question will be rendered here -->
         </main>
 
-        <!-- Submit Button -->
-        <div class="action-buttons" id="submitButtonContainer" style="display: none;">
-            <button class="btn btn-primary" id="submitBtn">See My Realness Archetype</button>
+        <!-- Navigation Buttons -->
+        <div class="question-navigation" id="questionNavigation">
+            <button class="btn btn-secondary" id="prevBtn" style="display: none;">Previous</button>
+            <button class="btn btn-primary" id="nextBtn">Next</button>
         </div>
 
         <!-- Email Collection Modal -->

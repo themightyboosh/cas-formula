@@ -28,7 +28,8 @@ const state = {
     responses: {},
     currentEmail: null,
     result: null,
-    domainCollapsed: {}
+    currentQuestionIndex: 0, // Track current question (0-39)
+    questions: [] // Will be populated with all questions in order
 };
 
 // DOM elements
@@ -37,10 +38,16 @@ const elements = {
     resultsSection: document.getElementById('resultsSection'),
     progressText: document.getElementById('progressText'),
     progressFill: document.getElementById('progressFill'),
+    domainCategoryHeader: document.getElementById('domainCategoryHeader'),
+    domainCategoryTitle: document.getElementById('domainCategoryTitle'),
+    domainCategoryDescription: document.getElementById('domainCategoryDescription'),
     errorBanner: document.getElementById('errorBanner'),
     emailModal: document.getElementById('emailModal'),
     emailForm: document.getElementById('emailForm'),
     emailInput: document.getElementById('emailInput'),
+    questionNavigation: document.getElementById('questionNavigation'),
+    prevBtn: document.getElementById('prevBtn'),
+    nextBtn: document.getElementById('nextBtn'),
     submitBtn: document.getElementById('submitBtn'),
     submitButtonContainer: document.getElementById('submitButtonContainer'),
     stickyButton: document.getElementById('stickyButton'),
@@ -95,6 +102,13 @@ function loadProgress() {
             const data = JSON.parse(saved);
             state.responses = data.responses || {};
             state.currentEmail = data.email || null;
+            // Find first unanswered question
+            if (data.responses) {
+                const firstUnanswered = state.questions.findIndex(q => !data.responses[q.id]);
+                if (firstUnanswered >= 0) {
+                    state.currentQuestionIndex = firstUnanswered;
+                }
+            }
             return true;
         } catch (error) {
             console.warn('Error loading saved progress:', error);
@@ -171,28 +185,38 @@ function allQuestionsAnswered() {
 
 // Update progress indicator
 function updateProgress() {
-    const answered = questions.questions.filter(q => 
+    const currentQuestion = state.questions[state.currentQuestionIndex];
+    const questionNumber = state.currentQuestionIndex + 1;
+    const total = state.questions.length;
+    const answered = state.questions.filter(q => 
         state.responses[q.id] && state.responses[q.id] >= 1 && state.responses[q.id] <= 5
     ).length;
-    
-    const total = questions.questions.length;
     const percentage = (answered / total) * 100;
     
-    elements.progressText.textContent = `Question ${answered} of ${total}`;
+    // Update progress text and bar
+    elements.progressText.textContent = `Question ${questionNumber} of ${total}`;
     elements.progressFill.style.width = `${percentage}%`;
     
-    // Show/hide submit button
-    const allAnswered = allQuestionsAnswered();
-    if (allAnswered) {
-        elements.submitButtonContainer.style.display = 'block';
-        elements.stickyButton.style.display = window.innerWidth < 769 ? 'block' : 'none';
-        elements.submitBtn.disabled = false;
-        elements.stickySubmitBtn.disabled = false;
+    // Update domain category header
+    if (currentQuestion) {
+        const domain = config.domains.find(d => d.id === currentQuestion.domain);
+        if (domain) {
+            elements.domainCategoryTitle.textContent = `${domain.id}. ${domain.name}`;
+            elements.domainCategoryDescription.textContent = domain.description;
+            elements.domainCategoryHeader.style.display = 'block';
+        }
+    }
+    
+    // Update navigation buttons
+    elements.prevBtn.style.display = state.currentQuestionIndex > 0 ? 'inline-block' : 'none';
+    
+    if (state.currentQuestionIndex === total - 1) {
+        // Last question - show submit button
+        elements.nextBtn.textContent = 'See My Results';
+        elements.nextBtn.className = 'btn btn-primary';
     } else {
-        elements.submitButtonContainer.style.display = 'none';
-        elements.stickyButton.style.display = 'none';
-        elements.submitBtn.disabled = true;
-        elements.stickySubmitBtn.disabled = true;
+        elements.nextBtn.textContent = 'Next';
+        elements.nextBtn.className = 'btn btn-primary';
     }
 }
 
@@ -204,102 +228,68 @@ function isDomainComplete(domainId) {
     );
 }
 
-// Render questions for a domain
-function renderDomainQuestions(domain) {
-    const domainQuestions = questions.questions.filter(q => q.domain === domain.id);
-    const isComplete = isDomainComplete(domain.id);
-    const isCollapsed = state.domainCollapsed[domain.id] || false;
+// Render single question
+function renderCurrentQuestion() {
+    const question = state.questions[state.currentQuestionIndex];
+    if (!question) return;
     
-    const domainSection = document.createElement('div');
-    domainSection.className = 'domain-section';
-    domainSection.id = `domain-${domain.id}`;
+    elements.assessmentSection.innerHTML = '';
+    elements.assessmentSection.className = 'question-view';
     
-    const domainHeader = document.createElement('div');
-    domainHeader.className = 'domain-header';
-    domainHeader.onclick = () => toggleDomain(domain.id);
+    const questionCard = document.createElement('div');
+    questionCard.className = 'question-card single-question';
+    questionCard.setAttribute('data-question-id', question.id);
     
-    const headerContent = document.createElement('div');
-    const title = document.createElement('h2');
-    title.className = 'domain-title';
-    title.textContent = `${domain.id}. ${domain.name}`;
+    const questionText = document.createElement('p');
+    questionText.className = 'question-text';
+    questionText.textContent = question.text;
     
-    const description = document.createElement('p');
-    description.className = 'domain-description';
-    description.textContent = domain.description;
+    const ratingScale = document.createElement('div');
+    ratingScale.className = 'rating-scale';
+    ratingScale.setAttribute('role', 'group');
+    ratingScale.setAttribute('aria-label', `Rate: ${question.text}`);
     
-    headerContent.appendChild(title);
-    headerContent.appendChild(description);
+    const labels = ['Not at all', 'Slightly', 'Somewhat', 'Mostly', 'Very true'];
     
-    const status = document.createElement('span');
-    status.className = `domain-status ${isComplete ? 'complete' : ''}`;
-    status.textContent = isComplete ? 'Complete' : 'In Progress';
-    
-    domainHeader.appendChild(headerContent);
-    domainHeader.appendChild(status);
-    
-    const questionsContainer = document.createElement('div');
-    questionsContainer.className = `domain-questions ${isCollapsed ? 'collapsed' : ''}`;
-    
-        domainQuestions.forEach(question => {
-        const questionCard = document.createElement('div');
-        questionCard.className = 'question-card';
-        questionCard.setAttribute('data-question-id', question.id);
+    for (let i = 1; i <= 5; i++) {
+        const button = document.createElement('button');
+        button.className = `rating-button ${state.responses[question.id] === i ? 'selected' : ''}`;
+        button.type = 'button';
+        button.setAttribute('aria-label', `${i} - ${labels[i - 1]}`);
+        button.onclick = () => {
+            selectRating(question.id, i);
+            // Auto-advance after a short delay (optional - can be removed)
+            // setTimeout(() => nextQuestion(), 300);
+        };
         
-        const questionText = document.createElement('p');
-        questionText.className = 'question-text';
-        questionText.textContent = question.text;
+        const value = document.createElement('div');
+        value.textContent = i;
         
-        const ratingScale = document.createElement('div');
-        ratingScale.className = 'rating-scale';
-        ratingScale.setAttribute('role', 'group');
-        ratingScale.setAttribute('aria-label', `Rate: ${question.text}`);
+        const label = document.createElement('div');
+        label.className = 'rating-label';
+        label.textContent = labels[i - 1];
         
-        const labels = ['Not at all', 'Slightly', 'Somewhat', 'Mostly', 'Very true'];
-        
-        for (let i = 1; i <= 5; i++) {
-            const button = document.createElement('button');
-            button.className = `rating-button ${state.responses[question.id] === i ? 'selected' : ''}`;
-            button.type = 'button';
-            button.setAttribute('aria-label', `${i} - ${labels[i - 1]}`);
-            button.onclick = () => selectRating(question.id, i);
-            
-            const value = document.createElement('div');
-            value.textContent = i;
-            
-            const label = document.createElement('div');
-            label.className = 'rating-label';
-            label.textContent = labels[i - 1];
-            
-            button.appendChild(value);
-            button.appendChild(label);
-            ratingScale.appendChild(button);
-        }
-        
-        questionCard.appendChild(questionText);
-        questionCard.appendChild(ratingScale);
-        questionsContainer.appendChild(questionCard);
-    });
-    
-    domainSection.appendChild(domainHeader);
-    domainSection.appendChild(questionsContainer);
-    
-    return domainSection;
-}
-
-// Toggle domain collapse
-function toggleDomain(domainId) {
-    state.domainCollapsed[domainId] = !state.domainCollapsed[domainId];
-    const questionsContainer = document.querySelector(`#domain-${domainId} .domain-questions`);
-    if (questionsContainer) {
-        questionsContainer.classList.toggle('collapsed');
+        button.appendChild(value);
+        button.appendChild(label);
+        ratingScale.appendChild(button);
     }
+    
+    questionCard.appendChild(questionText);
+    questionCard.appendChild(ratingScale);
+    elements.assessmentSection.appendChild(questionCard);
+    
+    // Add fade-in animation
+    elements.assessmentSection.style.opacity = '0';
+    setTimeout(() => {
+        elements.assessmentSection.style.transition = 'opacity 0.3s ease';
+        elements.assessmentSection.style.opacity = '1';
+    }, 10);
 }
 
 // Select rating for a question
 function selectRating(questionId, value) {
     state.responses[questionId] = value;
     saveProgress();
-    updateProgress();
     
     // Update UI immediately
     const questionCard = document.querySelector(`[data-question-id="${questionId}"]`);
@@ -312,46 +302,56 @@ function selectRating(questionId, value) {
                 btn.classList.remove('selected');
             }
         });
-        
-        // Update domain status
-        const question = questions.questions.find(q => q.id === questionId);
-        const domainSection = questionCard.closest('.domain-section');
-        if (domainSection) {
-            const domainId = domainSection.id.replace('domain-', '');
-            const isComplete = isDomainComplete(domainId);
-            const statusEl = domainSection.querySelector('.domain-status');
-            if (statusEl) {
-                statusEl.textContent = isComplete ? 'Complete' : 'In Progress';
-                statusEl.classList.toggle('complete', isComplete);
-            }
-        }
     }
     
     // Track question answered
     if (window.trackQuestionAnswered) {
-        const question = questions.questions.find(q => q.id === questionId);
-        window.trackQuestionAnswered(questionId, question.domain, value);
+        const question = state.questions.find(q => q.id === questionId);
+        if (question) {
+            window.trackQuestionAnswered(questionId, question.domain, value);
+        }
+    }
+    
+    updateProgress();
+}
+
+// Navigate to next question
+function nextQuestion() {
+    if (state.currentQuestionIndex < state.questions.length - 1) {
+        state.currentQuestionIndex++;
+        renderCurrentQuestion();
+        updateProgress();
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        // Last question - check if all answered
+        if (allQuestionsAnswered()) {
+            handleSubmit();
+        } else {
+            elements.errorBanner.style.display = 'block';
+            setTimeout(() => {
+                elements.errorBanner.style.display = 'none';
+            }, 5000);
+        }
     }
 }
 
-// Render assessment
+// Navigate to previous question
+function prevQuestion() {
+    if (state.currentQuestionIndex > 0) {
+        state.currentQuestionIndex--;
+        renderCurrentQuestion();
+        updateProgress();
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+// Render assessment (single question view)
 function renderAssessment() {
-    elements.assessmentSection.innerHTML = '';
-    
-    config.domains.forEach(domain => {
-        const domainSection = renderDomainQuestions(domain);
-        elements.assessmentSection.appendChild(domainSection);
-    });
-    
-    // Update domain statuses
-    config.domains.forEach(domain => {
-        const statusEl = document.querySelector(`#domain-${domain.id} .domain-status`);
-        if (statusEl) {
-            const isComplete = isDomainComplete(domain.id);
-            statusEl.textContent = isComplete ? 'Complete' : 'In Progress';
-            statusEl.classList.toggle('complete', isComplete);
-        }
-    });
+    // Render current question
+    renderCurrentQuestion();
+    updateProgress();
 }
 
 // Show email modal
@@ -502,6 +502,8 @@ function renderResults() {
     // Show results section
     elements.resultsSection.style.display = 'block';
     elements.assessmentSection.style.display = 'none';
+    elements.questionNavigation.style.display = 'none';
+    elements.domainCategoryHeader.style.display = 'none';
     elements.submitButtonContainer.style.display = 'none';
     elements.stickyButton.style.display = 'none';
 }
@@ -601,9 +603,11 @@ function nativeShare() {
 function retakeAssessment() {
     clearProgress();
     state.result = null;
+    state.currentQuestionIndex = 0;
     
     elements.resultsSection.style.display = 'none';
     elements.assessmentSection.style.display = 'block';
+    elements.questionNavigation.style.display = 'flex';
     elements.errorBanner.style.display = 'none';
     
     renderAssessment();
@@ -634,6 +638,21 @@ function handleSubmit() {
     } else {
         showEmailModal();
     }
+}
+
+// Handle next button click
+function handleNext() {
+    const currentQuestion = state.questions[state.currentQuestionIndex];
+    if (currentQuestion && !state.responses[currentQuestion.id]) {
+        // Question not answered
+        elements.errorBanner.textContent = 'Please answer this question before continuing.';
+        elements.errorBanner.style.display = 'block';
+        setTimeout(() => {
+            elements.errorBanner.style.display = 'none';
+        }, 3000);
+        return;
+    }
+    nextQuestion();
 }
 
 // Check URL parameters for shared results
@@ -679,7 +698,10 @@ async function init() {
             return;
         }
         
-        // Load saved progress
+        // Initialize questions array
+        state.questions = questions.questions.sort((a, b) => a.id - b.id);
+        
+        // Load saved progress (must be after questions are initialized)
         loadProgress();
         
         // Render assessment
@@ -692,6 +714,8 @@ async function init() {
         elements.stickySubmitBtn.addEventListener('click', handleSubmit);
         elements.retakeBtn.addEventListener('click', retakeAssessment);
         elements.copyPromptBtn.addEventListener('click', copyImagePrompt);
+        elements.prevBtn.addEventListener('click', prevQuestion);
+        elements.nextBtn.addEventListener('click', handleNext);
         
         elements.shareButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {

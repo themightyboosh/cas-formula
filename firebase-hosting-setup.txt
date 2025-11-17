@@ -1,0 +1,40 @@
+FIREBASE HOSTING SETUP INSTRUCTIONS
+====================================
+
+Since you're at an interactive prompt, follow these steps:
+
+STEP 1: Create the site
+------------------------
+At the prompt asking for site ID, type:
+  realness-score
+Then press Enter
+
+STEP 2: Public directory
+-------------------------
+When asked "What do you want to use as your public directory?"
+Type:
+  dist/standalone
+Then press Enter
+
+STEP 3: Single-page app
+------------------------
+When asked "Configure as a single-page app (rewrite all urls to /index.html)?"
+Type:
+  Yes
+Then press Enter
+
+STEP 4: Automatic builds
+-------------------------
+When asked "Set up automatic builds and deploys with GitHub?"
+Type:
+  No
+Then press Enter
+
+STEP 5: Deploy
+--------------
+After setup completes, run:
+  firebase deploy --only hosting
+
+Your app will be live at:
+  https://realness-score.web.app
+
