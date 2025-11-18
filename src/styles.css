@@ -665,6 +665,11 @@ body:has(.results-section[style*="display: block"]) #progressBar {
     font-weight: 400;
 }
 
+/* Mobile description - hidden on desktop, shown only on mobile */
+.archetype-description-mobile {
+    display: none;
+}
+
 /* Legacy styles for non-hero elements */
 .archetype-display {
     text-align: left;
