@@ -1179,16 +1179,33 @@ footer {
     .rating-scale {
         gap: 8px;
         grid-template-columns: 1fr;
-        max-width: 320px;
+        max-width: 100%;
         margin: 0 auto;
     }
 
     .rating-button {
         min-width: 100%;
         width: 100%;
-        max-width: 320px;
-        padding: 14px 12px;
-        font-size: 16px;
+        max-width: 100%;
+        padding: 16px 20px;
+        font-size: 18px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+        text-align: left;
+    }
+    
+    .rating-button > div:first-child {
+        font-size: 24px;
+        font-weight: 500;
+        flex-shrink: 0;
+    }
+    
+    .rating-button .rating-label {
+        margin-top: 0;
+        flex: 1;
     }
     
     /* Hide navigation buttons on mobile */
