@@ -22,17 +22,15 @@
     <meta property="twitter:description" content="Understand what your body is telling you through affect theory. Discover your core feelings and get personalized therapeutic guidance.">
     <meta property="twitter:image" content="https://realness-score.web.app/og-image.svg">
 
-    <!-- Apple -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Mobile App -->
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Feel it, Don't Think It">
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <!-- Firebase SDK - removed duplicate, only loaded at bottom of page -->
 
     <style>
         :root {
@@ -101,10 +99,10 @@
         }
 
         .body-large {
-            font-size: 18px;
-            line-height: 1.6;
-            font-weight: 400;
-            color: var(--gray-300);
+            font-size: 28px; /* Bigger subheads: was 18px, now 28px */
+            line-height: 1.5;
+            font-weight: 500; /* Slightly bolder */
+            color: var(--gray-200); /* Lighter for more prominence */
         }
 
         .body {
@@ -159,6 +157,7 @@
             flex-direction: column;
             justify-content: flex-start;
             flex: 1;
+            text-align: center; /* Center text on all screens */
         }
 
         /* Buttons */
@@ -202,7 +201,7 @@
         input[type="text"] {
             width: 100%;
             padding: calc(var(--spacing-unit) * 2);
-            font-size: 16px;
+            font-size: 34px; /* 30% smaller: was 48px, now ~34px */
             border: none;
             border-bottom: 1px solid var(--gray-700);
             background: transparent;
@@ -210,6 +209,7 @@
             outline: none;
             transition: border-color 0.3s;
             font-family: inherit;
+            text-align: center; /* Center the input text */
         }
 
         input[type="text"]:focus {
@@ -243,11 +243,13 @@
             display: flex;
             align-items: center;
             gap: calc(var(--spacing-unit) * 2);
+            flex-direction: row; /* Icon on right */
         }
 
         .sort-header h2 {
             font-weight: 700;
             flex: 1;
+            order: 1; /* Text first */
         }
 
         .sort-header-icon {
@@ -258,6 +260,7 @@
             fill: none;
             flex-shrink: 0;
             transition: stroke 0.3s ease;
+            order: 2; /* Icon second (on right) */
         }
 
         /* Valence color states for sort header icon */
@@ -424,104 +427,121 @@
 
         /* Results */
         .results-header {
-            margin-bottom: calc(var(--spacing-unit) * 4);
-            padding-bottom: calc(var(--spacing-unit) * 3);
-            border-bottom: 1px solid var(--gray-800);
+            margin-bottom: calc(var(--spacing-unit) * 2); /* Tightened from 4 to 2 */
+            padding-bottom: 0; /* Removed padding */
+            border-bottom: none; /* Removed border */
             position: relative;
         }
 
         .result-image-container {
             width: 100%;
             max-width: 400px;
-            aspect-ratio: 1 / 1;
-            margin: 0 auto;
+            margin: 0 auto calc(var(--spacing-unit) * 2) auto; /* Tightened bottom margin */
             position: relative;
-            overflow: hidden;
-        }
-
-        .result-image-placeholder {
-            width: 100%;
-            height: 100%;
-            background: var(--gray-900);
-            position: relative;
-            overflow: hidden;
-            transition: background-color 0.6s ease;
-        }
-
-        /* Valence background states for results */
-        .result-image-placeholder.state-1 { background-color: #cc0000; }
-        .result-image-placeholder.state-2 { background-color: #dd3300; }
-        .result-image-placeholder.state-3 { background-color: #ee5500; }
-        .result-image-placeholder.state-4 { background-color: #ff7700; }
-        .result-image-placeholder.state-5 { background-color: #ffaa00; }
-        .result-image-placeholder.state-6 { background-color: #ddbb00; }
-        .result-image-placeholder.state-7 { background-color: #bbcc00; }
-        .result-image-placeholder.state-8 { background-color: #88dd00; }
-        .result-image-placeholder.state-9 { background-color: #44ee00; }
-
-        .result-image {
-            display: none; /* Hide image element - no longer using images */
-        }
-
-        /* CAS element badge in upper right */
-        .cas-element {
-            position: absolute;
-            top: 0;
-            right: 0;
-            font-family: 'SF Mono', monospace;
-            font-size: 11px;
-            letter-spacing: 0.15em;
-            color: var(--white);
-            background: rgba(0, 0, 0, 0.75);
-            padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1.5);
-            z-index: 3;
-        }
-
-        /* Centered overlay on image */
-        .result-title-overlay {
-            position: absolute;
-            inset: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            z-index: 2;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .result-image-placeholder {
+            display: none; /* Remove color square completely */
+        }
+
+        /* CAS element badge - huge gray background under icon */
+        .cas-element {
+            font-family: 'SF Mono', monospace;
+            font-size: 32px; /* Huge size */
+            font-weight: 700; /* Bold */
+            letter-spacing: 0.15em;
+            color: var(--white); /* White text */
+            background: rgba(255, 255, 255, 0.2); /* 20% white/gray background */
+            padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4);
             text-align: center;
-            padding: calc(var(--spacing-unit) * 3);
+            display: inline-block;
+            border-radius: 8px;
+            margin-top: calc(var(--spacing-unit) * 3);
+            backdrop-filter: blur(10px); /* Subtle blur effect */
+        }
+
+        /* Icon and title with valence color */
+        .result-title-overlay {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: calc(var(--spacing-unit) * 2);
         }
 
         .selected-icon {
-            width: 288px;
-            height: 288px;
-            stroke: var(--white);
+            width: 240px; /* 2x bigger: was 120px, now 240px */
+            height: 240px;
+            stroke: var(--white); /* Will be overridden by valence color */
             stroke-width: 1.5;
             fill: none;
-            margin-bottom: calc(var(--spacing-unit) * 3);
-            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
+            transition: stroke 0.6s ease;
         }
+
+        /* Valence color states for result icon */
+        .selected-icon.state-1 { stroke: #cc0000; }
+        .selected-icon.state-2 { stroke: #dd3300; }
+        .selected-icon.state-3 { stroke: #ee5500; }
+        .selected-icon.state-4 { stroke: #ff7700; }
+        .selected-icon.state-5 { stroke: #ffaa00; }
+        .selected-icon.state-6 { stroke: #ddbb00; }
+        .selected-icon.state-7 { stroke: #bbcc00; }
+        .selected-icon.state-8 { stroke: #88dd00; }
+        .selected-icon.state-9 { stroke: #44ee00; }
 
         .result-title-overlay h2 {
-            color: var(--white);
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9), 0 4px 24px rgba(0, 0, 0, 0.6);
+            color: var(--white); /* Will be overridden by valence color */
             margin: 0;
+            transition: color 0.6s ease;
+            font-size: 96px; /* 2x bigger: was ~48px from heading-1, now 96px */
+            text-transform: uppercase; /* All caps */
+            font-weight: 800; /* Extra bold */
+            letter-spacing: 0.02em;
         }
 
+        /* Valence color states for result title */
+        .result-title-overlay h2.state-1 { color: #cc0000; }
+        .result-title-overlay h2.state-2 { color: #dd3300; }
+        .result-title-overlay h2.state-3 { color: #ee5500; }
+        .result-title-overlay h2.state-4 { color: #ff7700; }
+        .result-title-overlay h2.state-5 { color: #ffaa00; }
+        .result-title-overlay h2.state-6 { color: #ddbb00; }
+        .result-title-overlay h2.state-7 { color: #bbcc00; }
+        .result-title-overlay h2.state-8 { color: #88dd00; }
+        .result-title-overlay h2.state-9 { color: #44ee00; }
+
         .feeling-section {
-            margin: calc(var(--spacing-unit) * 4) 0;
+            margin: calc(var(--spacing-unit) * 2) 0; /* Tightened from 4 to 2 */
+            text-align: left; /* Align left */
         }
 
         .feeling {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--gray-600);
+            font-size: 24px; /* Larger, title-like */
+            font-weight: 600; /* Bolder */
+            letter-spacing: -0.01em; /* Tighter tracking */
+            color: var(--white); /* White instead of gray */
             margin-bottom: calc(var(--spacing-unit) * 2);
+            text-transform: none; /* Remove uppercase */
+            text-align: left; /* Align left */
         }
 
         .approach {
-            font-size: 20px;
-            line-height: 1.7;
-            color: var(--gray-400);
+            font-size: 18px; /* Slightly smaller */
+            line-height: 1.8; /* More space for line breaks */
+            color: var(--gray-300); /* Lighter gray for better contrast */
+            text-align: left; /* Align left */
+        }
+
+        .approach p {
+            margin: 0 0 calc(var(--spacing-unit) * 2) 0; /* Space between paragraphs */
+        }
+
+        .approach p:last-child {
+            margin-bottom: 0; /* Remove margin from last paragraph */
         }
 
         .expandable {
@@ -660,24 +680,26 @@
         }
 
         .loading-quote {
-            font-size: clamp(56px, 14vw, 96px);
+            font-size: clamp(45px, 11vw, 77px); /* 20% smaller: was 56-96px, now ~45-77px */
+            font-weight: 500; /* Lighter weight */
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: rgba(255, 255, 255, 0.7); /* Slightly transparent */
+            margin-top: calc(var(--spacing-unit) * 4); /* Move to bottom with top margin */
+            text-align: center;
+            max-width: 800px;
+            order: 3; /* Place last in flex order */
+        }
+
+        .loading-processing {
+            font-size: clamp(56px, 14vw, 96px); /* Same size as affect name */
             font-weight: 700;
             line-height: 1.1;
             letter-spacing: -0.02em;
             color: var(--white);
             margin-bottom: calc(var(--spacing-unit) * 2);
             text-align: center;
-            max-width: 800px;
-        }
-
-        .loading-processing {
-            font-size: 11px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--white);
-            margin-bottom: calc(var(--spacing-unit) * 2);
-            text-align: center;
+            order: 1; /* Place first */
         }
 
         .loading-affect-name {
@@ -687,6 +709,7 @@
             letter-spacing: -0.02em;
             color: var(--white);
             text-align: center;
+            order: 2; /* Place second */
         }
 
         /* Spacing utilities */
@@ -704,11 +727,15 @@
             }
 
             .display-1 {
-                font-size: 24px;
+                font-size: 72px; /* 3x larger: was 24px, now 72px */
             }
 
             .affect-card {
                 padding: calc(var(--spacing-unit) * 1.25);
+            }
+
+            .result-title-overlay h2 {
+                font-size: 48px; /* Smaller on mobile: 96px desktop, 48px mobile */
             }
         }
     </style>
@@ -717,9 +744,9 @@
     <!-- Full-screen Loading Overlay -->
     <div id="loadingOverlay" class="loading-overlay">
         <div class="loading-icon-background" id="loadingIconBackground"></div>
-        <div class="loading-quote" style="position: relative; z-index: 1;">Your body already knows the truth.</div>
         <div class="loading-processing" style="position: relative; z-index: 1;">Processing</div>
         <div id="loadingAffectName" class="loading-affect-name" style="position: relative; z-index: 1;"></div>
+        <div class="loading-quote" style="position: relative; z-index: 1;">(Your body already knows the truth.)</div>
     </div>
 
     <!-- Persistent Header -->
@@ -743,8 +770,8 @@
     <div id="screen2" class="screen">
         <div class="screen-container">
             <h2 class="display-1">What do you want to understand?</h2>
-            <p class="body mb-4">Enter the person, object, relationship, or situation you want to explore.</p>
-            <input type="text" id="subjectInput" placeholder="e.g., my mother, my job, moving to Seattle" autocomplete="off">
+            <p class="body mb-4">Enter a person, place, or situation.</p>
+            <input type="text" id="subjectInput" placeholder="my mother" autocomplete="off">
             <button class="btn" id="continueBtn" onclick="validateAndContinue()">Continue</button>
         </div>
     </div>
@@ -753,10 +780,10 @@
     <div id="screen3" class="screen">
         <div class="screen-container">
             <div class="sort-header">
+                <h2 class="heading-1 mb-2">When I think about <span id="sortSubjectInline"></span> my body feels like it's...</h2>
                 <svg class="sort-header-icon" viewBox="0 0 24 24" id="sortHeaderIcon">
                     <circle cx="12" cy="12" r="10"/>
                 </svg>
-                <h2 class="heading-1 mb-2">When I think about <span id="sortSubjectInline"></span> my body feels like it's...</h2>
             </div>
             <p class="sort-instruction">Drag from strongest (top) to weakest (bottom)</p>
 
@@ -774,10 +801,6 @@
 
             <div class="results-header">
                 <div class="result-image-container">
-                    <div class="result-image-placeholder">
-                        <img id="resultImage" class="result-image" src="" alt="">
-                    </div>
-                    <div class="cas-element" id="casElement">CuJoSt</div>
                     <div class="result-title-overlay">
                         <svg class="selected-icon" viewBox="0 0 24 24" id="resultIcon">
                             <circle cx="12" cy="12" r="10"/>
@@ -819,6 +842,8 @@
                     <div style="display: none;" id="spotifyQuery">indie pop joyful discovery</div>
                 </div>
             </div>
+
+            <div class="cas-element" id="casElement">CuJoSt</div>
 
             <div class="share-grid">
                 <button class="share-btn" onclick="shareToTwitter()">Twitter</button>
@@ -868,6 +893,7 @@
 
         const state = {
             subject: '',
+            normalizedSubject: '',
             affectRanking: [],
             top3: [],
             valenceScore: 0,
@@ -875,7 +901,8 @@
             detectedIcon: null,
             detectedPronouns: null,
             detectedSubjectType: null,
-            spotifyQuery: null
+            spotifyQuery: null,
+            spotifySeed: null
         };
 
         // Icons for each affect (Lucide-inspired)
@@ -1005,8 +1032,10 @@
                 state.detectedIcon = result.result.icon;
                 state.detectedPronouns = result.result.pronouns;
                 state.detectedSubjectType = result.result.subjectType;
+                state.normalizedSubject = result.result.normalizedSubject || input;
 
-                document.getElementById('sortSubjectInline').textContent = state.subject;
+                // Use normalized subject for display
+                document.getElementById('sortSubjectInline').textContent = state.normalizedSubject;
 
                 // Set the icon in the sort header
                 renderLucideIcon('sortHeaderIcon', state.detectedIcon || 'circle');
@@ -1014,17 +1043,19 @@
                 goToScreen(3);
 
                 // Trigger demo card swap animation after a brief delay
+                // Start animation from top and sequence down quickly
                 setTimeout(() => {
                     const cards = document.querySelectorAll('.affect-card');
-                    if (cards.length >= 2) {
-                        cards[0].classList.add('swap-animation');
-                        cards[1].classList.add('swap-animation');
+                    cards.forEach((card, index) => {
+                        // Stagger animation: start at top, sequence down with 100ms delay each
                         setTimeout(() => {
-                            cards[0].classList.remove('swap-animation');
-                            cards[1].classList.remove('swap-animation');
-                        }, 600);
-                    }
-                }, 500);
+                            card.classList.add('swap-animation');
+                            setTimeout(() => {
+                                card.classList.remove('swap-animation');
+                            }, 600);
+                        }, index * 100); // 100ms delay between each card
+                    });
+                }, 300); // Start sooner (was 500ms)
             } catch (error) {
                 console.error('Error detecting icon:', error);
                 alert('Failed to analyze. Please try again.');
@@ -1306,16 +1337,23 @@
                     document.getElementById('casElement').textContent = data.casElement;
                     document.getElementById('feeling').textContent = data.feeling;
 
-                    // Parse markdown in approach (bold text)
-                    const approachHTML = data.approach.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                    // Parse markdown in approach (bold text and wrap each sentence in paragraph)
+                    let approachHTML = data.approach
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Handle bold
+
+                    // Split by double line breaks (sentences) and wrap each in <p> tags
+                    const sentences = approachHTML.split(/\n\n/).filter(s => s.trim());
+                    approachHTML = sentences.map(sentence => `<p>${sentence.trim()}</p>`).join('');
+
                     document.getElementById('approach').innerHTML = approachHTML;
                     document.getElementById('weather').textContent = data.weather;
                     document.getElementById('musicGenre').textContent = data.musicGenre;
 
-                    // Store Spotify query, image prompt, and fetch song
+                    // Store Spotify query, seed params, image prompt, and fetch song
                     state.spotifyQuery = data.spotifyQuery;
+                    state.spotifySeed = data.spotifySeed;
                     state.imagePrompt = data.imagePrompt;
-                    fetchSpotifySong(data.spotifyQuery);
+                    fetchSpotifySong(data.spotifySeed, data.spotifyQuery);
 
                     // IMAGE PROMPT PIPELINE - Debug logging
                     console.log('═══════════════════════════════════════════');
@@ -1331,8 +1369,28 @@
                     // Set result icon to AI-detected Lucide icon
                     renderLucideIcon('resultIcon', state.detectedIcon || 'circle');
 
-                    // Load result image with colored placeholder
-                    loadResultImage(data.casElement);
+                    // Apply valence color to icon and title
+                    const resultIcon = document.getElementById('resultIcon');
+                    const resultsSubjectTitle = document.getElementById('resultsSubject');
+                    const animationState = state.animationState || 5;
+
+                    if (resultIcon) {
+                        // Remove any existing state classes
+                        for (let i = 1; i <= 9; i++) {
+                            resultIcon.classList.remove('state-' + i);
+                        }
+                        // Add current state class
+                        resultIcon.classList.add('state-' + animationState);
+                    }
+
+                    if (resultsSubjectTitle) {
+                        // Remove any existing state classes
+                        for (let i = 1; i <= 9; i++) {
+                            resultsSubjectTitle.classList.remove('state-' + i);
+                        }
+                        // Add current state class
+                        resultsSubjectTitle.classList.add('state-' + animationState);
+                    }
 
                     // Log submission to Firestore
                     logSubmission(data.casElement, top3Names);
@@ -1379,53 +1437,51 @@
             console.log('Applied valence background color: state-' + animationState);
         }
 
-        // Fetch Spotify songs using the query (get 3 tracks)
-        async function fetchSpotifySong(query) {
+        // Fetch Spotify songs using spotifySeed (Recommendations API) or query (Search API)
+        async function fetchSpotifySong(spotifySeed, query) {
             try {
-                console.log('Spotify query:', query);
+                console.log('Spotify seed params:', spotifySeed);
+                console.log('Spotify query (fallback):', query);
 
-                // Call our Cloud Function to get Spotify tracks (returns 3)
+                // Call our Cloud Function to get Spotify tracks
                 const response = await fetch('https://us-central1-realness-score.cloudfunctions.net/getSpotifyTrack', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ query })
+                    body: JSON.stringify({ spotifySeed, query })
                 });
 
                 if (!response.ok) {
-                    throw new Error('Failed to fetch Spotify track');
+                    throw new Error('Failed to fetch Spotify tracks');
                 }
 
                 const result = await response.json();
-                const tracks = result.result; // Now an array of 3 tracks
+                const tracks = result.result; // Array of up to 3 tracks
 
-                // Update music section with 3 track options
+                // Update music section with list of 3 Spotify tracks
                 const musicContent = document.getElementById('musicContent');
                 if (musicContent && tracks && tracks.length > 0) {
-                    let html = '<div style="display: flex; flex-direction: column; gap: calc(var(--spacing-unit) * 2);">';
+                    // Build HTML for 3 tracks in a list
+                    const tracksHTML = tracks.map(track => `
+                        <div style="margin-bottom: calc(var(--spacing-unit) * 2);">
+                            <iframe
+                                style="border-radius: 12px; width: 100%;"
+                                src="https://open.spotify.com/embed/track/${track.id}?utm_source=generator"
+                                width="100%"
+                                height="152"
+                                frameBorder="0"
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                    `).join('');
 
-                    tracks.forEach((track, index) => {
-                        html += `
-                            <div style="display: flex; align-items: center; gap: calc(var(--spacing-unit) * 2); padding: calc(var(--spacing-unit) * 1.5); background: rgba(255, 255, 255, 0.05); border-radius: 8px; cursor: pointer;" onclick="window.open('${track.spotifyUrl}', '_blank')">
-                                <img src="${track.albumArt}" alt="${track.name}" style="width: 60px; height: 60px; border-radius: 4px; flex-shrink: 0;">
-                                <div style="flex: 1; min-width: 0;">
-                                    <div style="font-weight: 500; font-size: 14px; margin-bottom: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${track.name}</div>
-                                    <div style="font-size: 12px; color: var(--gray-400); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${track.artist}</div>
-                                </div>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink: 0; color: var(--gray-400);">
-                                    <path d="M5 12h14m-7-7l7 7-7 7"/>
-                                </svg>
-                            </div>
-                        `;
-                    });
-
-                    html += '</div>';
-                    musicContent.innerHTML = html;
+                    musicContent.innerHTML = tracksHTML;
                 }
             } catch (error) {
-                console.error('Error fetching Spotify song:', error);
+                console.error('Error fetching Spotify songs:', error);
                 // Fallback to search link if embed fails
                 const musicContent = document.getElementById('musicContent');
-                if (musicContent) {
+                if (musicContent && query) {
                     musicContent.innerHTML = `<a href="https://open.spotify.com/search/${encodeURIComponent(query)}" target="_blank" style="color: var(--white);">Open Spotify Search →</a>`;
                 }
             }
@@ -1454,6 +1510,7 @@
         function resetApp() {
             state.subject = '';
             state.spotifyQuery = '';
+            state.spotifySeed = '';
 
             // Randomize affects on reset
             const shuffled = [...affects];
@@ -1474,14 +1531,11 @@
                 continueBtn.disabled = false;
             }
 
-            // Reset music content to default
+            // Reset music content to default (no embed until results load)
             const musicContent = document.getElementById('musicContent');
             if (musicContent) {
                 musicContent.innerHTML = `
-                    <p class="body" style="margin-bottom: calc(var(--spacing-unit) * 1.5);"><span id="musicGenre">Synth Pop / Indie Pop</span></p>
-                    <a href="#" class="spotify-link" onclick="openSpotifySearch(); return false;">
-                        Open in Spotify →
-                    </a>
+                    <p class="body" style="margin-bottom: calc(var(--spacing-unit) * 1.5);"><span id="musicGenre">Loading...</span></p>
                 `;
             }
 

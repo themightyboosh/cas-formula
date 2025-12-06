@@ -36,8 +36,9 @@ export const detectIconAndPronouns = functions.https.onRequest((req, res) => {
 1. **A semantic icon match** from the Lucide icon library
 2. **The appropriate pronouns** for the subject
 3. **The subject type** classification
+4. **A grammatically normalized version** of the subject for use in "When I think about [X]..."
 
-Be empathetic, accurate, and thoughtful in your analysis.
+Be empathetic, creative, and flexible in your analysis. Use loose semantic matching for icons - focus on emotional resonance and metaphorical meaning rather than literal matches.
 
 ## Output Format
 
@@ -47,57 +48,58 @@ You MUST respond with ONLY a valid JSON object (no markdown, no explanations):
 {
   "icon": "lucide-icon-name",
   "pronouns": "she/her" | "he/him" | "they/them" | "it",
-  "subjectType": "person" | "place" | "thing" | "concept" | "relationship"
+  "subjectType": "person" | "place" | "thing" | "concept" | "relationship",
+  "normalizedSubject": "grammatically correct subject text"
 }
 \`\`\`
 
 ## Icon Selection Guidelines
 
-Choose icons that semantically match the subject. Consider the emotional and symbolic meaning, not just the literal object.
+**BE CREATIVE AND FLEXIBLE** - Choose icons that capture the emotional essence, not just the literal meaning. Use metaphorical and symbolic associations. Don't be afraid to make unexpected connections.
+
+**Examples of loose/creative matching:**
+- "anxiety" → "storm-warning" (turbulent energy)
+- "depression" → "cloud-drizzle" (heavy, persistent)
+- "excitement" → "zap" (electric energy)
+- "my future" → "compass" (direction, navigation)
+- "change" → "wind" (invisible force)
+- "therapy" → "flower" (growth, healing)
+- "grief" → "droplet" (tears, heaviness)
+- "hope" → "sunrise" (new light)
+
+**Available Icons (STRICT LIST - use ONLY these):**
 
 **People & Relationships:**
-- "user-heart" - for loved ones, close relationships (mother, father, partner, spouse)
-- "users" - for groups, teams, family
-- "heart-handshake" - for partnerships, collaborations
-- "user" - for general person reference
-- "user-circle" - for self, identity
+heart, users, user, baby, smile, frown
 
 **Work & Career:**
-- "briefcase" - for jobs, careers, work in general
-- "briefcase-medical" - for healthcare jobs
-- "building" - for companies, organizations
-- "building-2" - for offices, workplaces
-- "laptop" - for remote work, tech jobs
+briefcase, building, laptop, coffee, pencil
 
 **Places:**
-- "home" - for house, residence, living space
-- "map-pin" - for locations, specific places
-- "plane" - for travel, relocation, moving
-- "landmark" - for cities, destinations
-- "map" - for journeys, paths
+home, map-pin, plane, landmark, map, globe, mountain
 
 **Objects & Possessions:**
-- "car" - for vehicles
-- "book" - for education, learning, studies
-- "music" - for music, art, creative pursuits
-- "phone" - for technology, communication
-- "camera" - for photography, memories
+car, book, music, phone, camera, gift, package
 
-**Concepts & Emotions:**
-- "brain" - for thoughts, mental health, intellect
-- "sparkles" - for new beginnings, excitement
-- "cloud" - for anxiety, uncertainty, confusion
-- "sun" - for happiness, positivity
-- "moon" - for night, dreams, reflection
-- "heart" - for love, passion, emotions
-- "shield" - for protection, safety, security
+**Nature & Elements:**
+sun, moon, cloud, wind, droplet, flame, leaf, tree, flower, waves
 
-**Situations:**
-- "activity" - for busy situations, transitions
-- "calendar" - for events, schedules, time-based situations
-- "message-circle" - for communication, conversations
-- "trending-up" - for growth, improvement, progress
-- "trending-down" - for decline, challenge, difficulty
+**Emotions & States:**
+heart, sparkles, brain, shield, smile, frown, meh, zap, alert-triangle
+
+**Movement & Change:**
+trending-up, trending-down, arrow-right, compass, navigation, move
+
+**Time & Process:**
+calendar, clock, hourglass, timer
+
+**Communication:**
+message-circle, mail, phone, megaphone
+
+**Abstract Concepts:**
+lightbulb, key, lock, puzzle, target, flag
+
+**CRITICAL: You MUST use one of these exact icon names. NO VARIATIONS or compound names allowed (e.g., no "user-heart", "briefcase-medical", "cloud-drizzle"). Keep it simple and use only the base icons listed above.**
 
 ## Pronoun Detection Guidelines
 
@@ -132,12 +134,28 @@ Choose icons that semantically match the subject. Consider the emotional and sym
 **concept** - Abstract idea or feeling (my anxiety, success, failure, change)
 **relationship** - Dynamic between people (my relationship with X, my marriage)
 
+## Normalized Subject Guidelines
+
+Transform the user's input into grammatically correct text that flows naturally in the sentence "When I think about [normalizedSubject] my body feels like it's..."
+
+**Examples:**
+- "my mom" → "my mom" (already correct)
+- "seattle" → "Seattle" (capitalize proper nouns)
+- "moving to seattle" → "moving to Seattle"
+- "my anxiety" → "my anxiety" (keep as-is if correct)
+- "the job" → "the job"
+- "girlfriend" → "my girlfriend" (add possessive if missing and contextually appropriate)
+- "future" → "the future" (add article if needed)
+- "therapy session" → "therapy sessions" or "therapy" (singular/plural as appropriate)
+
+Keep it natural and conversational. Fix obvious grammar/capitalization issues but preserve the user's intent and voice.
+
 ## Important Rules
 
 1. **ALWAYS output valid JSON only** - no explanations, no markdown code blocks
-2. **Be consistent** - use exact icon names from the Lucide library
+2. **Be creative with icons** - use loose metaphorical matching, emotional resonance
 3. **Default to "it"** when pronoun is unclear
-4. **Choose meaningful icons** - prioritize emotional/symbolic meaning over literal matching
+4. **Normalize grammar naturally** - fix capitalization, add articles, but keep user's voice
 5. **Handle typos gracefully** - interpret intent even if spelling is imperfect`;
 
     const prompt = `${systemPrompt}\n\nInput:\n${JSON.stringify({ subject })}`;
@@ -158,7 +176,7 @@ Choose icons that semantically match the subject. Consider the emotional and sym
     }
 
       // Validate response structure
-      if (!parsed.icon || !parsed.pronouns || !parsed.subjectType) {
+      if (!parsed.icon || !parsed.pronouns || !parsed.subjectType || !parsed.normalizedSubject) {
         res.status(500).json({ error: 'Incomplete response from AI' });
         return;
       }
@@ -167,7 +185,8 @@ Choose icons that semantically match the subject. Consider the emotional and sym
         result: {
           icon: parsed.icon,
           pronouns: parsed.pronouns,
-          subjectType: parsed.subjectType
+          subjectType: parsed.subjectType,
+          normalizedSubject: parsed.normalizedSubject
         }
       });
     } catch (error: any) {
@@ -223,22 +242,43 @@ export const personalizeApproach = functions.https.onRequest((req, res) => {
         return;
       }
 
+      // Support both CSV field names (Affect1) and legacy names (affect1)
+      const feeling = matrixData.feeling;
+      const approach = matrixData.approach;
+      const weather = matrixData.weather;
+      const spotifySeed = matrixData.spotify_seed;
+
+      // Extract music genre from spotify_seed for display
+      const musicGenre = extractMusicGenre(spotifySeed);
+
     // Use Gemini to personalize the approach text
       const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
-    const systemPrompt = `You are personalizing therapeutic guidance for an affect assessment app.
+    const systemPrompt = `You are a therapeutic copywriter crafting personalized affect guidance for users.
 
-**Task:** Adapt the therapeutic approach text to feel natural and personal to the user's specific subject while preserving the core affect-based guidance.
+**Task:** Transform the therapeutic approach text into compelling, natural copy that feels deeply personal to the user's specific subject while preserving the core affect-based wisdom.
 
-**Guidelines:**
-1. Make the text feel conversational and natural - you have creative freedom to rephrase for better flow
-2. Replace generic references ("the world", "the thing", etc.) with the user's specific subject
-3. Adjust pronouns naturally if the subject is a person (she/her, he/him, they/them)
-4. Preserve the core therapeutic message and the three-part structure (addressing each of the 3 affects)
-5. Keep the closing phrase "Don't push it away, just let it sit." exactly as written
-6. Maintain a poetic, compassionate, grounded tone
-7. Feel free to adjust sentence structure, word choice, and phrasing to sound more natural
-8. IMPORTANT: Readability and natural language flow are more important than rigid template adherence
+**CRITICAL REQUIREMENTS:**
+1. **Length: 400-500 characters** (approximately 3-4 sentences) - make it substantial and flowing
+2. **Think like a copywriter** - create narrative flow, rhythm, and emotional resonance
+3. **Three-part structure**: Address each of the 3 affects, but weave them together naturally
+
+**Copywriting Guidelines:**
+1. Replace generic references ("the world", "the thing", etc.) with the user's specific subject
+2. Adjust pronouns naturally if the subject is a person (she/her, he/him, they/them)
+3. **Create flow** - use transitional phrases to connect ideas smoothly
+4. **Build momentum** - start with observation, move to understanding, end with actionable wisdom
+5. **Use varied sentence lengths** - mix short punchy sentences with longer flowing ones
+6. **CRITICAL: Put each sentence on its own line** - insert \n\n after EVERY sentence to create clear separation and breathing room
+7. **Use simple, everyday language** - prefer common words over complex vocabulary:
+   - Instead of "cultivate" → use "grow" or "build"
+   - Instead of "navigate" → use "move through" or "handle"
+   - Instead of "illuminate" → use "show" or "reveal"
+   - Instead of "embrace" → use "welcome" or "accept"
+   - Instead of "acknowledge" → use "notice" or "recognize"
+   - Keep it conversational and accessible, like talking to a friend
+8. **Be conversational yet profound** - sound like a wise friend, not a clinical textbook
+9. Maintain warmth and groundedness - this is therapeutic guidance, not marketing copy
 
 **Subject Type Strategies:**
 
@@ -268,33 +308,25 @@ export const personalizeApproach = functions.https.onRequest((req, res) => {
   * Subject "my mother" → "folk emotional mother family"
   * Subject "moving to Seattle" → "ambient hopeful change moving"
 
-**Also synthesize an image generation prompt:**
-- Take the base image prompt and add a subtle reference to the user's subject
-- Keep the surrealist, abstract style
-- Example: If base is "A fractal structure expanding outward" and subject is "my mother", add "with a warm, maternal presence woven throughout"
-- 1-2 sentences max
-
 **Output Format (JSON only, no markdown):**
 {
   "personalizedApproach": "Mirror your Curiosity about [personalized subject]. Let Joy help you celebrate [personalized discovery]...",
-  "spotifyQuery": "genre emotional-tone",
-  "imagePrompt": "synthesized image prompt with subject reference"
+  "spotifyQuery": "genre emotional-tone"
 }`;
 
     const prompt = `${systemPrompt}
 
 **Original Approach Text:**
-"${matrixData.approach}"
+"${approach}"
 
 **User's Subject:** "${subject}"
 **Pronouns:** "${pronouns}"
 **Subject Type:** "${subjectType}"
 
-**Music Genre (for Spotify query):** "${matrixData.musicGenre}"
-**Feeling (for Spotify query):** "${matrixData.feeling}"
-**Base Image Prompt:** "${matrixData.imagePromptBase || 'Abstract surrealist composition'}"
+**Music Genre (for Spotify query):** "${musicGenre}"
+**Feeling (for Spotify query):** "${feeling}"
 
-Personalize the approach text, generate the Spotify query, and synthesize the image prompt. Return JSON only.`;
+Personalize the approach text and generate the Spotify query. Return JSON only.`;
 
     const result = await model.generateContent(prompt);
     const response = result.response.text();
@@ -310,16 +342,25 @@ Personalize the approach text, generate the Spotify query, and synthesize the im
       return;
     }
 
+    // Enforce character limit (truncate if needed)
+    if (parsed.personalizedApproach && parsed.personalizedApproach.length > 550) {
+      console.warn('Approach text too long (' + parsed.personalizedApproach.length + ' chars), truncating...');
+      parsed.personalizedApproach = parsed.personalizedApproach.substring(0, 547) + '...';
+    }
+
+      // Replace {subject} placeholder in weather text
+      const personalizedWeather = weather ? weather.replace(/\{subject\}/g, subject) : weather;
+
       // Return complete results
       res.status(200).json({
         result: {
           casElement,
-          feeling: matrixData.feeling, // Direct from Firestore
+          feeling: feeling, // Direct from Firestore
           approach: parsed.personalizedApproach, // From Gemini
-          weather: matrixData.weather, // Direct from Firestore
-          musicGenre: matrixData.musicGenre, // Direct from Firestore
-          spotifyQuery: parsed.spotifyQuery, // From Gemini
-          imagePrompt: parsed.imagePrompt || matrixData.imagePromptBase // From Gemini or fallback to matrix
+          weather: personalizedWeather, // Personalized weather
+          musicGenre: musicGenre, // Extracted from spotify_seed
+          spotifyQuery: parsed.spotifyQuery, // From Gemini (for backwards compatibility)
+          spotifySeed: spotifySeed // NEW: Spotify Recommendations API parameters
         }
       });
     } catch (error: any) {
@@ -330,17 +371,17 @@ Personalize the approach text, generate the Spotify query, and synthesize the im
 });
 
 /**
- * Cloud Function 3: Get Spotify Track
- * Fetches a Spotify track based on search query
- * Returns track details including album art and preview URL
+ * Cloud Function 3: Get Spotify Tracks
+ * Supports both Recommendations API (with seed params) and Search API (with query)
+ * Returns 3 track details including album art and preview URL
  */
 export const getSpotifyTrack = functions.https.onRequest((req, res) => {
   return corsHandler(req, res, async () => {
     try {
-      const { query } = req.body;
+      const { query, spotifySeed } = req.body;
 
-      if (!query || typeof query !== 'string') {
-        res.status(400).json({ error: 'Query is required and must be a string' });
+      if (!query && !spotifySeed) {
+        res.status(400).json({ error: 'Either query or spotifySeed is required' });
         return;
       }
 
@@ -374,28 +415,63 @@ export const getSpotifyTrack = functions.https.onRequest((req, res) => {
       const tokenData: any = await tokenResponse.json();
       const accessToken = tokenData.access_token;
 
-      // Search for tracks using the query (get 3 tracks)
-      const searchResponse = await fetch(
-        `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=3`,
-        {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`
-          }
-        }
-      );
+      let tracks: any[] = [];
 
-      if (!searchResponse.ok) {
-        const errorText = await searchResponse.text();
-        console.error('Failed to search Spotify:', errorText);
-        res.status(500).json({ error: 'Failed to search Spotify' });
-        return;
+      // Use Recommendations API if spotifySeed is provided (preferred method)
+      if (spotifySeed) {
+        console.log('Using Spotify Recommendations API with params:', spotifySeed);
+
+        const recommendationsResponse = await fetch(
+          `https://api.spotify.com/v1/recommendations?${spotifySeed}&limit=3`,
+          {
+            headers: {
+              'Authorization': `Bearer ${accessToken}`
+            }
+          }
+        );
+
+        if (!recommendationsResponse.ok) {
+          const errorText = await recommendationsResponse.text();
+          console.error('Failed to get Spotify recommendations:', errorText);
+          // Fallback to search if recommendations fail
+          if (query) {
+            console.log('Falling back to search API with query:', query);
+          } else {
+            res.status(500).json({ error: 'Failed to get Spotify recommendations' });
+            return;
+          }
+        } else {
+          const recommendationsData: any = await recommendationsResponse.json();
+          tracks = recommendationsData.tracks || [];
+        }
       }
 
-      const searchData: any = await searchResponse.json();
-      const tracks = searchData.tracks?.items || [];
+      // Fallback to Search API if no tracks from recommendations or only query provided
+      if (tracks.length === 0 && query) {
+        console.log('Using Spotify Search API with query:', query);
+
+        const searchResponse = await fetch(
+          `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=3`,
+          {
+            headers: {
+              'Authorization': `Bearer ${accessToken}`
+            }
+          }
+        );
+
+        if (!searchResponse.ok) {
+          const errorText = await searchResponse.text();
+          console.error('Failed to search Spotify:', errorText);
+          res.status(500).json({ error: 'Failed to search Spotify' });
+          return;
+        }
+
+        const searchData: any = await searchResponse.json();
+        tracks = searchData.tracks?.items || [];
+      }
 
       if (tracks.length === 0) {
-        res.status(404).json({ error: 'No tracks found for query: ' + query });
+        res.status(404).json({ error: 'No tracks found' });
         return;
       }
 
@@ -530,4 +606,37 @@ function getCASCode(affect: string): string {
     'The Drop': 'Dr' // Legacy support
   };
   return codes[affect] || 'Xx';
+}
+
+/**
+ * Helper function: Extract music genre from spotify_seed parameter
+ * Example: "seed_genres=indie-rock,art-pop&target_valence=0.90" -> "Indie Rock / Art Pop"
+ */
+function extractMusicGenre(spotifySeed: string | undefined): string {
+  if (!spotifySeed) {
+    return 'Various Genres';
+  }
+
+  try {
+    // Extract seed_genres parameter
+    const match = spotifySeed.match(/seed_genres=([^&]+)/);
+    if (!match) {
+      return 'Various Genres';
+    }
+
+    const genres = match[1].split(',');
+
+    // Format genre names: indie-rock -> Indie Rock
+    const formattedGenres = genres.map(genre =>
+      genre
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ')
+    );
+
+    return formattedGenres.join(' / ');
+  } catch (error) {
+    console.error('Error extracting music genre:', error);
+    return 'Various Genres';
+  }
 }

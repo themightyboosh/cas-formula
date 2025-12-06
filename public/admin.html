@@ -440,9 +440,10 @@
 
                 <div class="actions">
                     <button onclick="loadCombinations()">Refresh</button>
+                    <button onclick="exportCombinationsCSV()">Export CSV</button>
                     <button onclick="exportCombinationsJSON()">Export JSON</button>
-                    <button onclick="document.getElementById('importFile').click()">Import JSON</button>
-                    <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importCombinationsJSON(event)">
+                    <button onclick="document.getElementById('importFile').click()">Import CSV/JSON</button>
+                    <input type="file" id="importFile" accept=".csv,.json" style="display:none;" onchange="importFile(event)">
                     <div style="color: var(--gray-400); font-size: 14px; display: flex; align-items: center; margin-left: auto;">
                         <span id="combinationsCount">0 combinations</span>
                     </div>
@@ -920,8 +921,7 @@
                             feeling: data.feeling || '',
                             approach: data.approach || '',
                             weather: data.weather || '',
-                            musicGenre: data.musicGenre || '',
-                            imagePromptBase: data.imagePromptBase || ''
+                            musicGenre: data.musicGenre || ''
                         });
                     });
 
@@ -941,11 +941,156 @@
                 });
         }
 
-        // Import Combinations from JSON
-        async function importCombinationsJSON(event) {
+        // Import file - supports both CSV and JSON
+        async function importFile(event) {
             const file = event.target.files[0];
             if (!file) return;
 
+            const fileName = file.name.toLowerCase();
+
+            if (fileName.endsWith('.csv')) {
+                await importCombinationsCSV(file);
+            } else if (fileName.endsWith('.json')) {
+                await importCombinationsJSON(file);
+            } else {
+                showImportStatus('Invalid file type. Please upload a CSV or JSON file.', 'error');
+            }
+
+            // Reset file input
+            event.target.value = '';
+        }
+
+        // Import Combinations from CSV
+        async function importCombinationsCSV(file) {
+            try {
+                const text = await file.text();
+                const lines = text.split('\n');
+
+                if (lines.length < 2) {
+                    throw new Error('CSV file is empty or invalid');
+                }
+
+                // Parse CSV header
+                const header = lines[0].split(',').map(h => h.trim());
+
+                // Expected CSV columns: Affect1,Affect2,Affect3,approach,valence_raw,valence_category,spotify_seed,spotify_prompt,weather,feeling
+                const requiredColumns = ['Affect1', 'Affect2', 'Affect3', 'approach', 'feeling', 'weather'];
+                const missingColumns = requiredColumns.filter(col => !header.includes(col));
+
+                if (missingColumns.length > 0) {
+                    throw new Error(`Missing required columns: ${missingColumns.join(', ')}`);
+                }
+
+                showImportStatus(`Importing ${lines.length - 1} combinations from CSV...`, 'info');
+
+                let updateCount = 0;
+                let createCount = 0;
+                let skipCount = 0;
+
+                // Process in batches of 500 (Firestore batch limit)
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (!line) continue;
+
+                    try {
+                        const values = parseCSVLine(line);
+                        if (values.length < header.length) {
+                            console.warn(`Skipping line ${i}: insufficient columns`);
+                            skipCount++;
+                            continue;
+                        }
+
+                        const combo: any = {};
+                        header.forEach((col, idx) => {
+                            combo[col] = values[idx];
+                        });
+
+                        // Validate required fields
+                        if (!combo.Affect1 || !combo.Affect2 || !combo.Affect3) {
+                            console.warn(`Skipping line ${i}: missing affects`);
+                            skipCount++;
+                            continue;
+                        }
+
+                        // Generate CAS element code as document ID
+                        const casElement = getCASCodeFromAffect(combo.Affect1) +
+                                         getCASCodeFromAffect(combo.Affect2) +
+                                         getCASCodeFromAffect(combo.Affect3);
+
+                        const docRef = db.collection('affectCombinations').doc(casElement);
+
+                        // Check if document exists
+                        const doc = await docRef.get();
+                        if (doc.exists) {
+                            updateCount++;
+                        } else {
+                            createCount++;
+                        }
+
+                        // Store with CSV field names (Affect1, not affect1)
+                        await docRef.set({
+                            Affect1: combo.Affect1,
+                            Affect2: combo.Affect2,
+                            Affect3: combo.Affect3,
+                            approach: combo.approach || '',
+                            valence_raw: combo.valence_raw || '',
+                            valence_category: combo.valence_category || '',
+                            spotify_seed: combo.spotify_seed || '',
+                            spotify_prompt: combo.spotify_prompt || '',
+                            weather: combo.weather || '',
+                            feeling: combo.feeling || ''
+                        }, { merge: true });
+
+                        // Show progress every 100 items
+                        if (i % 100 === 0) {
+                            showImportStatus(`Processing... ${i} of ${lines.length - 1}`, 'info');
+                        }
+
+                    } catch (lineError) {
+                        console.error(`Error processing line ${i}:`, lineError);
+                        skipCount++;
+                    }
+                }
+
+                showImportStatus(
+                    `✓ CSV import complete! ${createCount} created, ${updateCount} updated, ${skipCount} skipped`,
+                    'success'
+                );
+
+                // Reload combinations
+                await loadCombinations();
+
+            } catch (error) {
+                showImportStatus('Error importing CSV: ' + error.message, 'error');
+                console.error('CSV import error:', error);
+            }
+        }
+
+        // Helper: Parse CSV line handling quoted values
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+
+            result.push(current.trim());
+            return result;
+        }
+
+        // Import Combinations from JSON
+        async function importCombinationsJSON(file) {
             try {
                 const text = await file.text();
                 const combinations = JSON.parse(text);
@@ -954,7 +1099,7 @@
                     throw new Error('Invalid JSON format. Expected an array of combinations.');
                 }
 
-                showImportStatus(`Importing ${combinations.length} combinations...`, 'info');
+                showImportStatus(`Importing ${combinations.length} combinations from JSON...`, 'info');
 
                 const batch = db.batch();
                 let updateCount = 0;
@@ -991,15 +1136,14 @@
                         feeling: combo.feeling || '',
                         approach: combo.approach || '',
                         weather: combo.weather || '',
-                        musicGenre: combo.musicGenre || '',
-                        imagePromptBase: combo.imagePromptBase || ''
+                        musicGenre: combo.musicGenre || ''
                     }, { merge: true });
                 }
 
                 await batch.commit();
 
                 showImportStatus(
-                    `✓ Import complete! ${createCount} created, ${updateCount} updated`,
+                    `✓ JSON import complete! ${createCount} created, ${updateCount} updated`,
                     'success'
                 );
 
@@ -1007,12 +1151,51 @@
                 await loadCombinations();
 
             } catch (error) {
-                showImportStatus('Error importing: ' + error.message, 'error');
-                console.error('Import error:', error);
+                showImportStatus('Error importing JSON: ' + error.message, 'error');
+                console.error('JSON import error:', error);
             }
+        }
 
-            // Reset file input
-            event.target.value = '';
+        // Export Combinations as CSV
+        function exportCombinationsCSV() {
+            db.collection('affectCombinations').get()
+                .then(snapshot => {
+                    const rows = [['Affect1', 'Affect2', 'Affect3', 'approach', 'valence_raw', 'valence_category', 'spotify_seed', 'spotify_prompt', 'weather', 'feeling']];
+
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        rows.push([
+                            data.Affect1 || data.affect1 || '',
+                            data.Affect2 || data.affect2 || '',
+                            data.Affect3 || data.affect3 || '',
+                            data.approach || '',
+                            data.valence_raw || '',
+                            data.valence_category || '',
+                            data.spotify_seed || '',
+                            data.spotify_prompt || '',
+                            data.weather || '',
+                            data.feeling || ''
+                        ]);
+                    });
+
+                    // Escape quotes and wrap fields in quotes
+                    const csv = rows.map(row =>
+                        row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')
+                    ).join('\n');
+
+                    const blob = new Blob([csv], { type: 'text/csv' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `affect-combinations-${Date.now()}.csv`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+
+                    showImportStatus(`Exported ${snapshot.size} combinations as CSV`, 'success');
+                })
+                .catch(error => {
+                    showImportStatus('Error exporting CSV: ' + error.message, 'error');
+                });
         }
 
         // Helper: Get CAS code from affect name
