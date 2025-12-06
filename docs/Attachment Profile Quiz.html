@@ -1,0 +1,2814 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)https://realness-score.web.app/attachment-quiz/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attachment Profile Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2a2a2a;
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+            --accent: #4a9eff;
+            --accent-hover: #3a8eef;
+            --border: #333;
+            --success: #4ade80;
+            --warning: #fbbf24;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding: 40px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--accent);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .progress-info {
+            text-align: center;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .question-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: border-color 0.2s;
+        }
+
+        .question-card:hover {
+            border-color: var(--accent);
+        }
+
+        .question-label {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .question-number {
+            color: var(--accent);
+            margin-right: 8px;
+        }
+
+        .likert-scale {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .likert-option {
+            position: relative;
+        }
+
+        .likert-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .likert-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 8px;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .likert-option input[type="radio"]:checked + label {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .likert-option label:hover {
+            border-color: var(--accent);
+        }
+
+        .likert-number {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .likert-text {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .likert-option input[type="radio"]:checked + label .likert-text {
+            color: white;
+        }
+
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .result-section {
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .profile-name {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .profile-description {
+            font-size: 20px;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .profile-detail {
+            margin-bottom: 24px;
+            padding: 20px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .profile-detail h3 {
+            font-size: 16px;
+            color: var(--accent);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-detail p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .commentary-section {
+            margin-top: 32px;
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+        }
+
+        .commentary-toggle {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 15px;
+            text-decoration: underline;
+            padding: 0;
+        }
+
+        .commentary-toggle:hover {
+            color: var(--accent-hover);
+        }
+
+        .commentary-content {
+            margin-top: 20px;
+            padding: 24px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .commentary-content h4 {
+            color: var(--accent);
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .scale-score {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .scale-score:last-child {
+            border-bottom: none;
+        }
+
+        .scale-name {
+            color: var(--text-secondary);
+        }
+
+        .scale-value {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .rule-matched {
+            margin-top: 20px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            color: var(--warning);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .likert-scale {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .likert-option label {
+                flex-direction: row;
+                justify-content: flex-start;
+                padding: 12px 16px;
+            }
+
+            .scale-labels {
+                display: none;
+            }
+
+            .result-section {
+                padding: 24px;
+            }
+
+            .profile-name {
+                font-size: 28px;
+            }
+
+            .profile-description {
+                font-size: 18px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Attachment Profile Quiz</h1>
+            <p class="subtitle">Discover your attachment style and relationship patterns</p>
+        </header>
+
+        <div class="controls">
+            <button class="btn" onclick="randomizeAnswers()">Randomize Answers</button>
+            <button class="btn" onclick="clearAll()">Clear All</button>
+            <button class="btn btn-primary" id="calculateBtn" onclick="calculateProfile()" disabled="">Calculate Profile</button>
+        </div>
+
+        <div class="progress-info">
+            <div id="progressText">0 of 40 questions answered</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <form id="quizForm">
+            <!-- Questions will be generated here -->
+        <div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q1.</span>
+                        My emotions feel intense and hard to manage
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q1_1" name="Q1" value="1" onchange="handleAnswer(&#39;Q1&#39;, 1)">
+                                <label for="Q1_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q1_2" name="Q1" value="2" onchange="handleAnswer(&#39;Q1&#39;, 2)">
+                                <label for="Q1_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q1_3" name="Q1" value="3" onchange="handleAnswer(&#39;Q1&#39;, 3)">
+                                <label for="Q1_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q1_4" name="Q1" value="4" onchange="handleAnswer(&#39;Q1&#39;, 4)">
+                                <label for="Q1_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q1_5" name="Q1" value="5" onchange="handleAnswer(&#39;Q1&#39;, 5)">
+                                <label for="Q1_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q2.</span>
+                        I can stay calm even when upset
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q2_1" name="Q2" value="1" onchange="handleAnswer(&#39;Q2&#39;, 1)">
+                                <label for="Q2_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q2_2" name="Q2" value="2" onchange="handleAnswer(&#39;Q2&#39;, 2)">
+                                <label for="Q2_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q2_3" name="Q2" value="3" onchange="handleAnswer(&#39;Q2&#39;, 3)">
+                                <label for="Q2_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q2_4" name="Q2" value="4" onchange="handleAnswer(&#39;Q2&#39;, 4)">
+                                <label for="Q2_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q2_5" name="Q2" value="5" onchange="handleAnswer(&#39;Q2&#39;, 5)">
+                                <label for="Q2_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q3.</span>
+                        I worry a lot about being abandoned or rejected
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q3_1" name="Q3" value="1" onchange="handleAnswer(&#39;Q3&#39;, 1)">
+                                <label for="Q3_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q3_2" name="Q3" value="2" onchange="handleAnswer(&#39;Q3&#39;, 2)">
+                                <label for="Q3_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q3_3" name="Q3" value="3" onchange="handleAnswer(&#39;Q3&#39;, 3)">
+                                <label for="Q3_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q3_4" name="Q3" value="4" onchange="handleAnswer(&#39;Q3&#39;, 4)">
+                                <label for="Q3_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q3_5" name="Q3" value="5" onchange="handleAnswer(&#39;Q3&#39;, 5)">
+                                <label for="Q3_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q4.</span>
+                        I'm most comfortable keeping people at a distance
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q4_1" name="Q4" value="1" onchange="handleAnswer(&#39;Q4&#39;, 1)">
+                                <label for="Q4_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q4_2" name="Q4" value="2" onchange="handleAnswer(&#39;Q4&#39;, 2)">
+                                <label for="Q4_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q4_3" name="Q4" value="3" onchange="handleAnswer(&#39;Q4&#39;, 3)">
+                                <label for="Q4_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q4_4" name="Q4" value="4" onchange="handleAnswer(&#39;Q4&#39;, 4)">
+                                <label for="Q4_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q4_5" name="Q4" value="5" onchange="handleAnswer(&#39;Q4&#39;, 5)">
+                                <label for="Q4_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q5.</span>
+                        I often feel like I'm fundamentally flawed or broken
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q5_1" name="Q5" value="1" onchange="handleAnswer(&#39;Q5&#39;, 1)">
+                                <label for="Q5_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q5_2" name="Q5" value="2" onchange="handleAnswer(&#39;Q5&#39;, 2)">
+                                <label for="Q5_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q5_3" name="Q5" value="3" onchange="handleAnswer(&#39;Q5&#39;, 3)">
+                                <label for="Q5_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q5_4" name="Q5" value="4" onchange="handleAnswer(&#39;Q5&#39;, 4)">
+                                <label for="Q5_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q5_5" name="Q5" value="5" onchange="handleAnswer(&#39;Q5&#39;, 5)">
+                                <label for="Q5_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q6.</span>
+                        I hide parts of myself because I'm ashamed of them
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q6_1" name="Q6" value="1" onchange="handleAnswer(&#39;Q6&#39;, 1)">
+                                <label for="Q6_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q6_2" name="Q6" value="2" onchange="handleAnswer(&#39;Q6&#39;, 2)">
+                                <label for="Q6_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q6_3" name="Q6" value="3" onchange="handleAnswer(&#39;Q6&#39;, 3)">
+                                <label for="Q6_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q6_4" name="Q6" value="4" onchange="handleAnswer(&#39;Q6&#39;, 4)">
+                                <label for="Q6_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q6_5" name="Q6" value="5" onchange="handleAnswer(&#39;Q6&#39;, 5)">
+                                <label for="Q6_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q7.</span>
+                        When I'm upset, I prefer to be alone
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q7_1" name="Q7" value="1" onchange="handleAnswer(&#39;Q7&#39;, 1)">
+                                <label for="Q7_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q7_2" name="Q7" value="2" onchange="handleAnswer(&#39;Q7&#39;, 2)">
+                                <label for="Q7_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q7_3" name="Q7" value="3" onchange="handleAnswer(&#39;Q7&#39;, 3)">
+                                <label for="Q7_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q7_4" name="Q7" value="4" onchange="handleAnswer(&#39;Q7&#39;, 4)">
+                                <label for="Q7_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q7_5" name="Q7" value="5" onchange="handleAnswer(&#39;Q7&#39;, 5)">
+                                <label for="Q7_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q8.</span>
+                        I reach out to others when I'm distressed
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q8_1" name="Q8" value="1" onchange="handleAnswer(&#39;Q8&#39;, 1)">
+                                <label for="Q8_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q8_2" name="Q8" value="2" onchange="handleAnswer(&#39;Q8&#39;, 2)">
+                                <label for="Q8_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q8_3" name="Q8" value="3" onchange="handleAnswer(&#39;Q8&#39;, 3)">
+                                <label for="Q8_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q8_4" name="Q8" value="4" onchange="handleAnswer(&#39;Q8&#39;, 4)">
+                                <label for="Q8_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q8_5" name="Q8" value="5" onchange="handleAnswer(&#39;Q8&#39;, 5)">
+                                <label for="Q8_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q9.</span>
+                        I need a lot of reassurance in relationships
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q9_1" name="Q9" value="1" onchange="handleAnswer(&#39;Q9&#39;, 1)">
+                                <label for="Q9_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q9_2" name="Q9" value="2" onchange="handleAnswer(&#39;Q9&#39;, 2)">
+                                <label for="Q9_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q9_3" name="Q9" value="3" onchange="handleAnswer(&#39;Q9&#39;, 3)">
+                                <label for="Q9_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q9_4" name="Q9" value="4" onchange="handleAnswer(&#39;Q9&#39;, 4)">
+                                <label for="Q9_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q9_5" name="Q9" value="5" onchange="handleAnswer(&#39;Q9&#39;, 5)">
+                                <label for="Q9_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q10.</span>
+                        The idea of needing someone bothers me
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q10_1" name="Q10" value="1" onchange="handleAnswer(&#39;Q10&#39;, 1)">
+                                <label for="Q10_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q10_2" name="Q10" value="2" onchange="handleAnswer(&#39;Q10&#39;, 2)">
+                                <label for="Q10_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q10_3" name="Q10" value="3" onchange="handleAnswer(&#39;Q10&#39;, 3)">
+                                <label for="Q10_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q10_4" name="Q10" value="4" onchange="handleAnswer(&#39;Q10&#39;, 4)">
+                                <label for="Q10_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q10_5" name="Q10" value="5" onchange="handleAnswer(&#39;Q10&#39;, 5)">
+                                <label for="Q10_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q11.</span>
+                        I think about my relationships constantly
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q11_1" name="Q11" value="1" onchange="handleAnswer(&#39;Q11&#39;, 1)">
+                                <label for="Q11_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q11_2" name="Q11" value="2" onchange="handleAnswer(&#39;Q11&#39;, 2)">
+                                <label for="Q11_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q11_3" name="Q11" value="3" onchange="handleAnswer(&#39;Q11&#39;, 3)">
+                                <label for="Q11_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q11_4" name="Q11" value="4" onchange="handleAnswer(&#39;Q11&#39;, 4)">
+                                <label for="Q11_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q11_5" name="Q11" value="5" onchange="handleAnswer(&#39;Q11&#39;, 5)">
+                                <label for="Q11_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q12.</span>
+                        My emotions seem unpredictable, even to me
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q12_1" name="Q12" value="1" onchange="handleAnswer(&#39;Q12&#39;, 1)">
+                                <label for="Q12_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q12_2" name="Q12" value="2" onchange="handleAnswer(&#39;Q12&#39;, 2)">
+                                <label for="Q12_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q12_3" name="Q12" value="3" onchange="handleAnswer(&#39;Q12&#39;, 3)">
+                                <label for="Q12_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q12_4" name="Q12" value="4" onchange="handleAnswer(&#39;Q12&#39;, 4)">
+                                <label for="Q12_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q12_5" name="Q12" value="5" onchange="handleAnswer(&#39;Q12&#39;, 5)">
+                                <label for="Q12_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q13.</span>
+                        I can describe my emotional states clearly
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q13_1" name="Q13" value="1" onchange="handleAnswer(&#39;Q13&#39;, 1)">
+                                <label for="Q13_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q13_2" name="Q13" value="2" onchange="handleAnswer(&#39;Q13&#39;, 2)">
+                                <label for="Q13_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q13_3" name="Q13" value="3" onchange="handleAnswer(&#39;Q13&#39;, 3)">
+                                <label for="Q13_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q13_4" name="Q13" value="4" onchange="handleAnswer(&#39;Q13&#39;, 4)">
+                                <label for="Q13_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q13_5" name="Q13" value="5" onchange="handleAnswer(&#39;Q13&#39;, 5)">
+                                <label for="Q13_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q14.</span>
+                        I intellectualize emotions rather than feel them
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q14_1" name="Q14" value="1" onchange="handleAnswer(&#39;Q14&#39;, 1)">
+                                <label for="Q14_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q14_2" name="Q14" value="2" onchange="handleAnswer(&#39;Q14&#39;, 2)">
+                                <label for="Q14_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q14_3" name="Q14" value="3" onchange="handleAnswer(&#39;Q14&#39;, 3)">
+                                <label for="Q14_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q14_4" name="Q14" value="4" onchange="handleAnswer(&#39;Q14&#39;, 4)">
+                                <label for="Q14_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q14_5" name="Q14" value="5" onchange="handleAnswer(&#39;Q14&#39;, 5)">
+                                <label for="Q14_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q15.</span>
+                        I feel things more intensely than most people
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q15_1" name="Q15" value="1" onchange="handleAnswer(&#39;Q15&#39;, 1)">
+                                <label for="Q15_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q15_2" name="Q15" value="2" onchange="handleAnswer(&#39;Q15&#39;, 2)">
+                                <label for="Q15_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q15_3" name="Q15" value="3" onchange="handleAnswer(&#39;Q15&#39;, 3)">
+                                <label for="Q15_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q15_4" name="Q15" value="4" onchange="handleAnswer(&#39;Q15&#39;, 4)">
+                                <label for="Q15_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q15_5" name="Q15" value="5" onchange="handleAnswer(&#39;Q15&#39;, 5)">
+                                <label for="Q15_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q16.</span>
+                        I feel shame about having needs
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q16_1" name="Q16" value="1" onchange="handleAnswer(&#39;Q16&#39;, 1)">
+                                <label for="Q16_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q16_2" name="Q16" value="2" onchange="handleAnswer(&#39;Q16&#39;, 2)">
+                                <label for="Q16_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q16_3" name="Q16" value="3" onchange="handleAnswer(&#39;Q16&#39;, 3)">
+                                <label for="Q16_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q16_4" name="Q16" value="4" onchange="handleAnswer(&#39;Q16&#39;, 4)">
+                                <label for="Q16_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q16_5" name="Q16" value="5" onchange="handleAnswer(&#39;Q16&#39;, 5)">
+                                <label for="Q16_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q17.</span>
+                        I pursue partners who seem distant or unavailable
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q17_1" name="Q17" value="1" onchange="handleAnswer(&#39;Q17&#39;, 1)">
+                                <label for="Q17_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q17_2" name="Q17" value="2" onchange="handleAnswer(&#39;Q17&#39;, 2)">
+                                <label for="Q17_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q17_3" name="Q17" value="3" onchange="handleAnswer(&#39;Q17&#39;, 3)">
+                                <label for="Q17_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q17_4" name="Q17" value="4" onchange="handleAnswer(&#39;Q17&#39;, 4)">
+                                <label for="Q17_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q17_5" name="Q17" value="5" onchange="handleAnswer(&#39;Q17&#39;, 5)">
+                                <label for="Q17_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q18.</span>
+                        I withdraw when my partner wants more closeness
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q18_1" name="Q18" value="1" onchange="handleAnswer(&#39;Q18&#39;, 1)">
+                                <label for="Q18_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q18_2" name="Q18" value="2" onchange="handleAnswer(&#39;Q18&#39;, 2)">
+                                <label for="Q18_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q18_3" name="Q18" value="3" onchange="handleAnswer(&#39;Q18&#39;, 3)">
+                                <label for="Q18_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q18_4" name="Q18" value="4" onchange="handleAnswer(&#39;Q18&#39;, 4)">
+                                <label for="Q18_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q18_5" name="Q18" value="5" onchange="handleAnswer(&#39;Q18&#39;, 5)">
+                                <label for="Q18_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q19.</span>
+                        Sometimes I desperately want closeness, other times I push it away
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q19_1" name="Q19" value="1" onchange="handleAnswer(&#39;Q19&#39;, 1)">
+                                <label for="Q19_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q19_2" name="Q19" value="2" onchange="handleAnswer(&#39;Q19&#39;, 2)">
+                                <label for="Q19_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q19_3" name="Q19" value="3" onchange="handleAnswer(&#39;Q19&#39;, 3)">
+                                <label for="Q19_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q19_4" name="Q19" value="4" onchange="handleAnswer(&#39;Q19&#39;, 4)">
+                                <label for="Q19_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q19_5" name="Q19" value="5" onchange="handleAnswer(&#39;Q19&#39;, 5)">
+                                <label for="Q19_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q20.</span>
+                        I generally like myself and feel comfortable being me
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q20_1" name="Q20" value="1" onchange="handleAnswer(&#39;Q20&#39;, 1)">
+                                <label for="Q20_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q20_2" name="Q20" value="2" onchange="handleAnswer(&#39;Q20&#39;, 2)">
+                                <label for="Q20_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q20_3" name="Q20" value="3" onchange="handleAnswer(&#39;Q20&#39;, 3)">
+                                <label for="Q20_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q20_4" name="Q20" value="4" onchange="handleAnswer(&#39;Q20&#39;, 4)">
+                                <label for="Q20_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q20_5" name="Q20" value="5" onchange="handleAnswer(&#39;Q20&#39;, 5)">
+                                <label for="Q20_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q21.</span>
+                        I feel like I have to perform or achieve to be acceptable
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q21_1" name="Q21" value="1" onchange="handleAnswer(&#39;Q21&#39;, 1)">
+                                <label for="Q21_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q21_2" name="Q21" value="2" onchange="handleAnswer(&#39;Q21&#39;, 2)">
+                                <label for="Q21_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q21_3" name="Q21" value="3" onchange="handleAnswer(&#39;Q21&#39;, 3)">
+                                <label for="Q21_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q21_4" name="Q21" value="4" onchange="handleAnswer(&#39;Q21&#39;, 4)">
+                                <label for="Q21_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q21_5" name="Q21" value="5" onchange="handleAnswer(&#39;Q21&#39;, 5)">
+                                <label for="Q21_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q22.</span>
+                        Deep down, I believe I'm worthless
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q22_1" name="Q22" value="1" onchange="handleAnswer(&#39;Q22&#39;, 1)">
+                                <label for="Q22_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q22_2" name="Q22" value="2" onchange="handleAnswer(&#39;Q22&#39;, 2)">
+                                <label for="Q22_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q22_3" name="Q22" value="3" onchange="handleAnswer(&#39;Q22&#39;, 3)">
+                                <label for="Q22_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q22_4" name="Q22" value="4" onchange="handleAnswer(&#39;Q22&#39;, 4)">
+                                <label for="Q22_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q22_5" name="Q22" value="5" onchange="handleAnswer(&#39;Q22&#39;, 5)">
+                                <label for="Q22_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q23.</span>
+                        I test my partner to see if they'll stay
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q23_1" name="Q23" value="1" onchange="handleAnswer(&#39;Q23&#39;, 1)">
+                                <label for="Q23_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q23_2" name="Q23" value="2" onchange="handleAnswer(&#39;Q23&#39;, 2)">
+                                <label for="Q23_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q23_3" name="Q23" value="3" onchange="handleAnswer(&#39;Q23&#39;, 3)">
+                                <label for="Q23_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q23_4" name="Q23" value="4" onchange="handleAnswer(&#39;Q23&#39;, 4)">
+                                <label for="Q23_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q23_5" name="Q23" value="5" onchange="handleAnswer(&#39;Q23&#39;, 5)">
+                                <label for="Q23_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q24.</span>
+                        I keep emotional walls up even in committed relationships
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q24_1" name="Q24" value="1" onchange="handleAnswer(&#39;Q24&#39;, 1)">
+                                <label for="Q24_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q24_2" name="Q24" value="2" onchange="handleAnswer(&#39;Q24&#39;, 2)">
+                                <label for="Q24_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q24_3" name="Q24" value="3" onchange="handleAnswer(&#39;Q24&#39;, 3)">
+                                <label for="Q24_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q24_4" name="Q24" value="4" onchange="handleAnswer(&#39;Q24&#39;, 4)">
+                                <label for="Q24_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q24_5" name="Q24" value="5" onchange="handleAnswer(&#39;Q24&#39;, 5)">
+                                <label for="Q24_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q25.</span>
+                        When things get intense, I become quieter or try to disappear
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q25_1" name="Q25" value="1" onchange="handleAnswer(&#39;Q25&#39;, 1)">
+                                <label for="Q25_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q25_2" name="Q25" value="2" onchange="handleAnswer(&#39;Q25&#39;, 2)">
+                                <label for="Q25_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q25_3" name="Q25" value="3" onchange="handleAnswer(&#39;Q25&#39;, 3)">
+                                <label for="Q25_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q25_4" name="Q25" value="4" onchange="handleAnswer(&#39;Q25&#39;, 4)">
+                                <label for="Q25_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q25_5" name="Q25" value="5" onchange="handleAnswer(&#39;Q25&#39;, 5)">
+                                <label for="Q25_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q26.</span>
+                        I'm good at showing people the version of myself they expect
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q26_1" name="Q26" value="1" onchange="handleAnswer(&#39;Q26&#39;, 1)">
+                                <label for="Q26_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q26_2" name="Q26" value="2" onchange="handleAnswer(&#39;Q26&#39;, 2)">
+                                <label for="Q26_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q26_3" name="Q26" value="3" onchange="handleAnswer(&#39;Q26&#39;, 3)">
+                                <label for="Q26_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q26_4" name="Q26" value="4" onchange="handleAnswer(&#39;Q26&#39;, 4)">
+                                <label for="Q26_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q26_5" name="Q26" value="5" onchange="handleAnswer(&#39;Q26&#39;, 5)">
+                                <label for="Q26_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q27.</span>
+                        My mood is relatively stable from day to day
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q27_1" name="Q27" value="1" onchange="handleAnswer(&#39;Q27&#39;, 1)">
+                                <label for="Q27_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q27_2" name="Q27" value="2" onchange="handleAnswer(&#39;Q27&#39;, 2)">
+                                <label for="Q27_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q27_3" name="Q27" value="3" onchange="handleAnswer(&#39;Q27&#39;, 3)">
+                                <label for="Q27_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q27_4" name="Q27" value="4" onchange="handleAnswer(&#39;Q27&#39;, 4)">
+                                <label for="Q27_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q27_5" name="Q27" value="5" onchange="handleAnswer(&#39;Q27&#39;, 5)">
+                                <label for="Q27_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q28.</span>
+                        I can tolerate emotional discomfort without shutting down
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q28_1" name="Q28" value="1" onchange="handleAnswer(&#39;Q28&#39;, 1)">
+                                <label for="Q28_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q28_2" name="Q28" value="2" onchange="handleAnswer(&#39;Q28&#39;, 2)">
+                                <label for="Q28_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q28_3" name="Q28" value="3" onchange="handleAnswer(&#39;Q28&#39;, 3)">
+                                <label for="Q28_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q28_4" name="Q28" value="4" onchange="handleAnswer(&#39;Q28&#39;, 4)">
+                                <label for="Q28_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q28_5" name="Q28" value="5" onchange="handleAnswer(&#39;Q28&#39;, 5)">
+                                <label for="Q28_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q29.</span>
+                        I avoid feelings by staying busy or being intellectual
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q29_1" name="Q29" value="1" onchange="handleAnswer(&#39;Q29&#39;, 1)">
+                                <label for="Q29_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q29_2" name="Q29" value="2" onchange="handleAnswer(&#39;Q29&#39;, 2)">
+                                <label for="Q29_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q29_3" name="Q29" value="3" onchange="handleAnswer(&#39;Q29&#39;, 3)">
+                                <label for="Q29_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q29_4" name="Q29" value="4" onchange="handleAnswer(&#39;Q29&#39;, 4)">
+                                <label for="Q29_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q29_5" name="Q29" value="5" onchange="handleAnswer(&#39;Q29&#39;, 5)">
+                                <label for="Q29_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q30.</span>
+                        I crave more closeness than I usually get
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q30_1" name="Q30" value="1" onchange="handleAnswer(&#39;Q30&#39;, 1)">
+                                <label for="Q30_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q30_2" name="Q30" value="2" onchange="handleAnswer(&#39;Q30&#39;, 2)">
+                                <label for="Q30_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q30_3" name="Q30" value="3" onchange="handleAnswer(&#39;Q30&#39;, 3)">
+                                <label for="Q30_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q30_4" name="Q30" value="4" onchange="handleAnswer(&#39;Q30&#39;, 4)">
+                                <label for="Q30_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q30_5" name="Q30" value="5" onchange="handleAnswer(&#39;Q30&#39;, 5)">
+                                <label for="Q30_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q31.</span>
+                        I'm comfortable being authentic with others
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q31_1" name="Q31" value="1" onchange="handleAnswer(&#39;Q31&#39;, 1)">
+                                <label for="Q31_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q31_2" name="Q31" value="2" onchange="handleAnswer(&#39;Q31&#39;, 2)">
+                                <label for="Q31_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q31_3" name="Q31" value="3" onchange="handleAnswer(&#39;Q31&#39;, 3)">
+                                <label for="Q31_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q31_4" name="Q31" value="4" onchange="handleAnswer(&#39;Q31&#39;, 4)">
+                                <label for="Q31_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q31_5" name="Q31" value="5" onchange="handleAnswer(&#39;Q31&#39;, 5)">
+                                <label for="Q31_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q32.</span>
+                        When overwhelmed, I completely shut down or go blank
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q32_1" name="Q32" value="1" onchange="handleAnswer(&#39;Q32&#39;, 1)">
+                                <label for="Q32_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q32_2" name="Q32" value="2" onchange="handleAnswer(&#39;Q32&#39;, 2)">
+                                <label for="Q32_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q32_3" name="Q32" value="3" onchange="handleAnswer(&#39;Q32&#39;, 3)">
+                                <label for="Q32_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q32_4" name="Q32" value="4" onchange="handleAnswer(&#39;Q32&#39;, 4)">
+                                <label for="Q32_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q32_5" name="Q32" value="5" onchange="handleAnswer(&#39;Q32&#39;, 5)">
+                                <label for="Q32_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q33.</span>
+                        I can set boundaries without excessive guilt
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q33_1" name="Q33" value="1" onchange="handleAnswer(&#39;Q33&#39;, 1)">
+                                <label for="Q33_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q33_2" name="Q33" value="2" onchange="handleAnswer(&#39;Q33&#39;, 2)">
+                                <label for="Q33_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q33_3" name="Q33" value="3" onchange="handleAnswer(&#39;Q33&#39;, 3)">
+                                <label for="Q33_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q33_4" name="Q33" value="4" onchange="handleAnswer(&#39;Q33&#39;, 4)">
+                                <label for="Q33_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q33_5" name="Q33" value="5" onchange="handleAnswer(&#39;Q33&#39;, 5)">
+                                <label for="Q33_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q34.</span>
+                        I worry constantly that people will see the real me and leave
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q34_1" name="Q34" value="1" onchange="handleAnswer(&#39;Q34&#39;, 1)">
+                                <label for="Q34_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q34_2" name="Q34" value="2" onchange="handleAnswer(&#39;Q34&#39;, 2)">
+                                <label for="Q34_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q34_3" name="Q34" value="3" onchange="handleAnswer(&#39;Q34&#39;, 3)">
+                                <label for="Q34_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q34_4" name="Q34" value="4" onchange="handleAnswer(&#39;Q34&#39;, 4)">
+                                <label for="Q34_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q34_5" name="Q34" value="5" onchange="handleAnswer(&#39;Q34&#39;, 5)">
+                                <label for="Q34_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q35.</span>
+                        I prefer being self-sufficient to being emotionally close
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q35_1" name="Q35" value="1" onchange="handleAnswer(&#39;Q35&#39;, 1)">
+                                <label for="Q35_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q35_2" name="Q35" value="2" onchange="handleAnswer(&#39;Q35&#39;, 2)">
+                                <label for="Q35_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q35_3" name="Q35" value="3" onchange="handleAnswer(&#39;Q35&#39;, 3)">
+                                <label for="Q35_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q35_4" name="Q35" value="4" onchange="handleAnswer(&#39;Q35&#39;, 4)">
+                                <label for="Q35_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q35_5" name="Q35" value="5" onchange="handleAnswer(&#39;Q35&#39;, 5)">
+                                <label for="Q35_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q36.</span>
+                        My relationships often feel chaotic or unpredictable
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q36_1" name="Q36" value="1" onchange="handleAnswer(&#39;Q36&#39;, 1)">
+                                <label for="Q36_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q36_2" name="Q36" value="2" onchange="handleAnswer(&#39;Q36&#39;, 2)">
+                                <label for="Q36_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q36_3" name="Q36" value="3" onchange="handleAnswer(&#39;Q36&#39;, 3)">
+                                <label for="Q36_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q36_4" name="Q36" value="4" onchange="handleAnswer(&#39;Q36&#39;, 4)">
+                                <label for="Q36_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q36_5" name="Q36" value="5" onchange="handleAnswer(&#39;Q36&#39;, 5)">
+                                <label for="Q36_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q37.</span>
+                        I can be vulnerable without it feeling threatening
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q37_1" name="Q37" value="1" onchange="handleAnswer(&#39;Q37&#39;, 1)">
+                                <label for="Q37_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q37_2" name="Q37" value="2" onchange="handleAnswer(&#39;Q37&#39;, 2)">
+                                <label for="Q37_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q37_3" name="Q37" value="3" onchange="handleAnswer(&#39;Q37&#39;, 3)">
+                                <label for="Q37_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q37_4" name="Q37" value="4" onchange="handleAnswer(&#39;Q37&#39;, 4)">
+                                <label for="Q37_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q37_5" name="Q37" value="5" onchange="handleAnswer(&#39;Q37&#39;, 5)">
+                                <label for="Q37_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q38.</span>
+                        I become very self-conscious when I think I'm being watched or judged
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q38_1" name="Q38" value="1" onchange="handleAnswer(&#39;Q38&#39;, 1)">
+                                <label for="Q38_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q38_2" name="Q38" value="2" onchange="handleAnswer(&#39;Q38&#39;, 2)">
+                                <label for="Q38_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q38_3" name="Q38" value="3" onchange="handleAnswer(&#39;Q38&#39;, 3)">
+                                <label for="Q38_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q38_4" name="Q38" value="4" onchange="handleAnswer(&#39;Q38&#39;, 4)">
+                                <label for="Q38_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q38_5" name="Q38" value="5" onchange="handleAnswer(&#39;Q38&#39;, 5)">
+                                <label for="Q38_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q39.</span>
+                        My real feelings often stay hidden, even when I want to share them
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q39_1" name="Q39" value="1" onchange="handleAnswer(&#39;Q39&#39;, 1)">
+                                <label for="Q39_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q39_2" name="Q39" value="2" onchange="handleAnswer(&#39;Q39&#39;, 2)">
+                                <label for="Q39_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q39_3" name="Q39" value="3" onchange="handleAnswer(&#39;Q39&#39;, 3)">
+                                <label for="Q39_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q39_4" name="Q39" value="4" onchange="handleAnswer(&#39;Q39&#39;, 4)">
+                                <label for="Q39_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q39_5" name="Q39" value="5" onchange="handleAnswer(&#39;Q39&#39;, 5)">
+                                <label for="Q39_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div><div class="question-card">
+                    <label class="question-label">
+                        <span class="question-number">Q40.</span>
+                        I can maintain stable, satisfying relationships
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q40_1" name="Q40" value="1" onchange="handleAnswer(&#39;Q40&#39;, 1)">
+                                <label for="Q40_1">
+                                    <div class="likert-number">1</div>
+                                    <div class="likert-text">Not at all</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q40_2" name="Q40" value="2" onchange="handleAnswer(&#39;Q40&#39;, 2)">
+                                <label for="Q40_2">
+                                    <div class="likert-number">2</div>
+                                    <div class="likert-text">A little</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q40_3" name="Q40" value="3" onchange="handleAnswer(&#39;Q40&#39;, 3)">
+                                <label for="Q40_3">
+                                    <div class="likert-number">3</div>
+                                    <div class="likert-text">Somewhat</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q40_4" name="Q40" value="4" onchange="handleAnswer(&#39;Q40&#39;, 4)">
+                                <label for="Q40_4">
+                                    <div class="likert-number">4</div>
+                                    <div class="likert-text">Quite a bit</div>
+                                </label>
+                            </div>
+                        
+                            <div class="likert-option">
+                                <input type="radio" id="Q40_5" name="Q40" value="5" onchange="handleAnswer(&#39;Q40&#39;, 5)">
+                                <label for="Q40_5">
+                                    <div class="likert-number">5</div>
+                                    <div class="likert-text">Very much</div>
+                                </label>
+                            </div>
+                        
+                    </div>
+                </div></form>
+
+        <div id="resultSection" class="result-section hidden">
+            <div class="profile-name" id="profileName"></div>
+            <div class="profile-description" id="profileDescription"></div>
+            
+            <div class="profile-detail">
+                <h3>Core Pattern</h3>
+                <p id="profilePattern"></p>
+            </div>
+            
+            <div class="profile-detail">
+                <h3>Strengths</h3>
+                <p id="profileStrengths"></p>
+            </div>
+            
+            <div class="profile-detail">
+                <h3>Growth Edge</h3>
+                <p id="profileGrowth"></p>
+            </div>
+
+            <div class="commentary-section">
+                <button class="commentary-toggle" onclick="toggleCommentary()">
+                    <span id="commentaryToggleText">Show how this was calculated</span>
+                </button>
+                <div id="commentaryContent" class="commentary-content hidden"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Questions data
+        const questions = [
+            { id: "Q1", text: "My emotions feel intense and hard to manage" },
+            { id: "Q2", text: "I can stay calm even when upset" },
+            { id: "Q3", text: "I worry a lot about being abandoned or rejected" },
+            { id: "Q4", text: "I'm most comfortable keeping people at a distance" },
+            { id: "Q5", text: "I often feel like I'm fundamentally flawed or broken" },
+            { id: "Q6", text: "I hide parts of myself because I'm ashamed of them" },
+            { id: "Q7", text: "When I'm upset, I prefer to be alone" },
+            { id: "Q8", text: "I reach out to others when I'm distressed" },
+            { id: "Q9", text: "I need a lot of reassurance in relationships" },
+            { id: "Q10", text: "The idea of needing someone bothers me" },
+            { id: "Q11", text: "I think about my relationships constantly" },
+            { id: "Q12", text: "My emotions seem unpredictable, even to me" },
+            { id: "Q13", text: "I can describe my emotional states clearly" },
+            { id: "Q14", text: "I intellectualize emotions rather than feel them" },
+            { id: "Q15", text: "I feel things more intensely than most people" },
+            { id: "Q16", text: "I feel shame about having needs" },
+            { id: "Q17", text: "I pursue partners who seem distant or unavailable" },
+            { id: "Q18", text: "I withdraw when my partner wants more closeness" },
+            { id: "Q19", text: "Sometimes I desperately want closeness, other times I push it away" },
+            { id: "Q20", text: "I generally like myself and feel comfortable being me" },
+            { id: "Q21", text: "I feel like I have to perform or achieve to be acceptable" },
+            { id: "Q22", text: "Deep down, I believe I'm worthless" },
+            { id: "Q23", text: "I test my partner to see if they'll stay" },
+            { id: "Q24", text: "I keep emotional walls up even in committed relationships" },
+            { id: "Q25", text: "When things get intense, I become quieter or try to disappear" },
+            { id: "Q26", text: "I'm good at showing people the version of myself they expect" },
+            { id: "Q27", text: "My mood is relatively stable from day to day" },
+            { id: "Q28", text: "I can tolerate emotional discomfort without shutting down" },
+            { id: "Q29", text: "I avoid feelings by staying busy or being intellectual" },
+            { id: "Q30", text: "I crave more closeness than I usually get" },
+            { id: "Q31", text: "I'm comfortable being authentic with others" },
+            { id: "Q32", text: "When overwhelmed, I completely shut down or go blank" },
+            { id: "Q33", text: "I can set boundaries without excessive guilt" },
+            { id: "Q34", text: "I worry constantly that people will see the real me and leave" },
+            { id: "Q35", text: "I prefer being self-sufficient to being emotionally close" },
+            { id: "Q36", text: "My relationships often feel chaotic or unpredictable" },
+            { id: "Q37", text: "I can be vulnerable without it feeling threatening" },
+            { id: "Q38", text: "I become very self-conscious when I think I'm being watched or judged" },
+            { id: "Q39", text: "My real feelings often stay hidden, even when I want to share them" },
+            { id: "Q40", text: "I can maintain stable, satisfying relationships" }
+        ];
+
+        // Profile metadata
+        const profiles = {
+            GN: {
+                name: "Grounded Navigator",
+                description: "You're secure in yourself and your relationships. You can be close without losing yourself, and independent without pushing others away.",
+                pattern: "Secure attachment. Comfortable with intimacy and autonomy.",
+                strengths: "Emotionally balanced, adaptable, authentic, steady",
+                growth: "Avoid complacency; keep choosing growth even when comfortable"
+            },
+            EE: {
+                name: "Emotional Enthusiast",
+                description: "You feel everything intensely and wear your heart on your sleeve. You want deep connection and aren't afraid to show how much you care.",
+                pattern: "Anxious attachment. High emotional intensity, seeks closeness.",
+                strengths: "Passionate, expressive, emotionally attuned, loyal",
+                growth: "Learn intensity ≠ intimacy; develop self-soothing capacity"
+            },
+            LW: {
+                name: "Lone Wolf",
+                description: "You value independence and self-sufficiency. You protect yourself by maintaining distance and staying in control.",
+                pattern: "Avoidant attachment. Withdraws to maintain boundaries.",
+                strengths: "Self-reliant, calm under pressure, respectful of boundaries",
+                growth: "Allow safe vulnerability; connection doesn't mean engulfment"
+            },
+            MM: {
+                name: "Mystery Mosaic",
+                description: "Your early experiences were confusing or frightening. You may swing between wanting closeness and needing distance.",
+                pattern: "Disorganized attachment. Variable, unpredictable patterns.",
+                strengths: "Resilient, adaptable, deep capacity for growth",
+                growth: "Develop stable patterns; healing is possible with support"
+            },
+            HD: {
+                name: "Heartfelt Defender",
+                description: "You show the world a polished version of yourself while hiding the messy parts. You achieve to feel worthy.",
+                pattern: "Anxious attachment + high shame + performance defense.",
+                strengths: "Competent, giving, socially skilled, dependable",
+                growth: "Let the mask crack; you're lovable without performing"
+            },
+            CC: {
+                name: "Chill Conductor",
+                description: "You live in your head and observe life from a slight distance. You're brilliant at understanding but struggle to feel.",
+                pattern: "Avoidant attachment + intellectual defense.",
+                strengths: "Analytical, objective, calm, insightful",
+                growth: "Drop from head to body; experiencing > understanding"
+            },
+            PP: {
+                name: "Passionate Pilgrim",
+                description: "You long to belong completely to someone. You'll do almost anything to prove your devotion and avoid abandonment.",
+                pattern: "Anxious attachment + devotional intensity.",
+                strengths: "Devoted, loyal, passionate, willing to grow",
+                growth: "Ownership ≠ security; develop internal stability"
+            },
+            II: {
+                name: "Independent Icon",
+                description: "You pride yourself on needing no one. You're powerful, self-contained, and possibly lonely without knowing it.",
+                pattern: "Avoidant attachment + dismissive of needs.",
+                strengths: "Strong, capable, self-sufficient, high-achieving",
+                growth: "Dismissal ≠ transcendence; allow yourself to need"
+            }
+        };
+
+        // State
+        let answers = {};
+
+        // Initialize form
+        function initForm() {
+            const form = document.getElementById('quizForm');
+            questions.forEach((q, index) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                
+                card.innerHTML = `
+                    <label class="question-label">
+                        <span class="question-number">Q${index + 1}.</span>
+                        ${q.text}
+                    </label>
+                    <div class="scale-labels">
+                        <span>Not at all like me</span>
+                        <span>Very much like me</span>
+                    </div>
+                    <div class="likert-scale">
+                        ${[1, 2, 3, 4, 5].map(value => `
+                            <div class="likert-option">
+                                <input type="radio" 
+                                       id="${q.id}_${value}" 
+                                       name="${q.id}" 
+                                       value="${value}"
+                                       onchange="handleAnswer('${q.id}', ${value})">
+                                <label for="${q.id}_${value}">
+                                    <div class="likert-number">${value}</div>
+                                    <div class="likert-text">${getLikertLabel(value)}</div>
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+                form.appendChild(card);
+            });
+        }
+
+        function getLikertLabel(value) {
+            const labels = {
+                1: "Not at all",
+                2: "A little",
+                3: "Somewhat",
+                4: "Quite a bit",
+                5: "Very much"
+            };
+            return labels[value];
+        }
+
+        function handleAnswer(questionId, value) {
+            answers[questionId] = value;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const answered = Object.keys(answers).length;
+            const total = questions.length;
+            const percentage = (answered / total) * 100;
+            
+            document.getElementById('progressText').textContent = `${answered} of ${total} questions answered`;
+            document.getElementById('progressFill').style.width = `${percentage}%`;
+            document.getElementById('calculateBtn').disabled = answered < total;
+        }
+
+        function randomizeAnswers() {
+            answers = {};
+            questions.forEach(q => {
+                const value = Math.floor(Math.random() * 5) + 1;
+                answers[q.id] = value;
+                document.querySelector(`input[name="${q.id}"][value="${value}"]`).checked = true;
+            });
+            updateProgress();
+            calculateProfile();
+        }
+
+        function clearAll() {
+            answers = {};
+            document.getElementById('quizForm').reset();
+            updateProgress();
+            document.getElementById('resultSection').classList.add('hidden');
+            document.getElementById('commentaryContent').classList.add('hidden');
+            document.getElementById('commentaryToggleText').textContent = 'Show how this was calculated';
+        }
+
+        function calculateProfile() {
+            // Calculate scales
+            const AA = (answers.Q3 || 0) + (answers.Q9 || 0) + (answers.Q11 || 0) + 
+                       (answers.Q15 || 0) + (answers.Q17 || 0) + (answers.Q23 || 0) + 
+                       (answers.Q30 || 0);
+            
+            const AV = (answers.Q4 || 0) + (answers.Q7 || 0) + (answers.Q10 || 0) + 
+                       (answers.Q14 || 0) + (answers.Q18 || 0) + (answers.Q24 || 0) + 
+                       (answers.Q29 || 0) + (answers.Q35 || 0);
+            
+            const DIS = (answers.Q12 || 0) + (answers.Q19 || 0) + (answers.Q32 || 0) + 
+                        (answers.Q36 || 0);
+            
+            const SEC = (answers.Q2 || 0) + (answers.Q8 || 0) + (answers.Q13 || 0) + 
+                        (answers.Q20 || 0) + (answers.Q27 || 0) + (answers.Q28 || 0) + 
+                        (answers.Q31 || 0) + (answers.Q33 || 0) + (answers.Q37 || 0) + 
+                        (answers.Q40 || 0);
+            
+            const SH = (answers.Q5 || 0) + (answers.Q6 || 0) + (answers.Q16 || 0) + 
+                       (answers.Q22 || 0) + (answers.Q34 || 0);
+            
+            const PD = (answers.Q21 || 0) + (answers.Q26 || 0) + (answers.Q39 || 0);
+            
+            const IA = (answers.Q14 || 0) + (answers.Q29 || 0);
+            
+            const SR = (answers.Q25 || 0) + (answers.Q38 || 0);
+
+            // Individual questions
+            const q10 = answers.Q10 || 0;
+            const q11 = answers.Q11 || 0;
+            const q23 = answers.Q23 || 0;
+            const q35 = answers.Q35 || 0;
+
+            // Determine profile
+            let profileCode = 'GN';
+            let ruleMatched = 'Default: Grounded Navigator';
+
+            if (DIS >= 15) {
+                profileCode = 'MM';
+                ruleMatched = `DIS (${DIS}) ≥ 15 → Mystery Mosaic`;
+            } else if (SEC >= 36 && AA < 15 && AV < 17) {
+                profileCode = 'GN';
+                ruleMatched = `SEC (${SEC}) ≥ 36 AND AA (${AA}) < 15 AND AV (${AV}) < 17 → Grounded Navigator`;
+            } else if (AA >= 25 && ((SH >= 18 && PD >= 11) || (PD >= 15) || (SH >= 11 && SH <= 17))) {
+                profileCode = 'HD';
+                ruleMatched = `AA (${AA}) ≥ 25 AND ((SH (${SH}) ≥ 18 AND PD (${PD}) ≥ 11) OR PD ≥ 15 OR SH BETWEEN 11-17) → Heartfelt Defender`;
+            } else if (AA >= 25 && q11 >= 4 && q23 >= 4) {
+                profileCode = 'PP';
+                ruleMatched = `AA (${AA}) ≥ 25 AND Q11 (${q11}) ≥ 4 AND Q23 (${q23}) ≥ 4 → Passionate Pilgrim`;
+            } else if (AA >= 25) {
+                profileCode = 'EE';
+                ruleMatched = `AA (${AA}) ≥ 25 → Emotional Enthusiast`;
+            } else if (AV >= 29 && IA >= 8) {
+                profileCode = 'CC';
+                ruleMatched = `AV (${AV}) ≥ 29 AND IA (${IA}) ≥ 8 → Chill Conductor`;
+            } else if (AV >= 29 && q10 >= 4 && q35 >= 4) {
+                profileCode = 'II';
+                ruleMatched = `AV (${AV}) ≥ 29 AND Q10 (${q10}) ≥ 4 AND Q35 (${q35}) ≥ 4 → Independent Icon`;
+            } else if (AV >= 29) {
+                profileCode = 'LW';
+                ruleMatched = `AV (${AV}) ≥ 29 → Lone Wolf`;
+            }
+
+            // Display results
+            const profile = profiles[profileCode];
+            document.getElementById('profileName').textContent = profile.name;
+            document.getElementById('profileDescription').textContent = profile.description;
+            document.getElementById('profilePattern').textContent = profile.pattern;
+            document.getElementById('profileStrengths').textContent = profile.strengths;
+            document.getElementById('profileGrowth').textContent = profile.growth;
+
+            // Generate commentary
+            const commentary = `
+                <h4>Scale Scores</h4>
+                <div class="scale-score">
+                    <span class="scale-name">Attachment Anxiety (AA)</span>
+                    <span class="scale-value">${AA}</span>
+                </div>
+                <div class="scale-score">
+                    <span class="scale-name">Attachment Avoidance (AV)</span>
+                    <span class="scale-value">${AV}</span>
+                </div>
+                <div class="scale-score">
+                    <span class="scale-name">Disorganization (DIS)</span>
+                    <span class="scale-value">${DIS}</span>
+                </div>
+                <div class="scale-score">
+                    <span class="scale-name">Secure Foundation (SEC)</span>
+                    <span class="scale-value">${SEC}</span>
+                </div>
+                <div class="scale-score">
+                    <span class="scale-name">Shame Intensity (SH)</span>
+                    <span class="scale-value">${SH}</span>
+                </div>
+                <div class="scale-score">
+                    <span class="scale-name">Performance Defense (PD)</span>
+                    <span class="scale-value">${PD}</span>
+                </div>
+                <div class="scale-score">
+                    <span class="scale-name">Intellectual Avoidance (IA)</span>
+                    <span class="scale-value">${IA}</span>
+                </div>
+                <div class="scale-score">
+                    <span class="scale-name">Shrinking Response (SR)</span>
+                    <span class="scale-value">${SR}</span>
+                </div>
+                <div class="rule-matched">
+                    <strong>Rule Matched:</strong><br>
+                    ${ruleMatched}
+                </div>
+            `;
+
+            document.getElementById('commentaryContent').innerHTML = commentary;
+            document.getElementById('resultSection').classList.remove('hidden');
+
+            // Scroll to results
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleCommentary() {
+            const content = document.getElementById('commentaryContent');
+            const toggleText = document.getElementById('commentaryToggleText');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                toggleText.textContent = 'Hide calculation details';
+            } else {
+                content.classList.add('hidden');
+                toggleText.textContent = 'Show how this was calculated';
+            }
+        }
+
+        // Initialize on load
+        initForm();
+    </script>
+
+
+
+</body></html>

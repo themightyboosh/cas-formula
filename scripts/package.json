@@ -1,0 +1,11 @@
+{
+  "name": "feel-it-scripts",
+  "version": "1.0.0",
+  "description": "Utility scripts for Feel it, Don't Think It",
+  "scripts": {
+    "populate": "node populateFirestore.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.0.0"
+  }
+}

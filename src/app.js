@@ -149,45 +149,101 @@ function clearProgress() {
     state.result = null;
 }
 
-// Calculate domain sums
-function calculateDomainSums() {
-    const sums = { A: 0, B: 0, C: 0, D: 0 };
+// Calculate scale scores
+function calculateScales() {
+    const scores = {};
     
-    questions.questions.forEach(q => {
-        const answer = state.responses[q.id];
-        if (answer && answer >= 1 && answer <= 5) {
-            sums[q.domain] += answer;
-        }
+    config.scales.forEach(scale => {
+        let sum = 0;
+        scale.questionIds.forEach(qid => {
+            const answer = state.responses[qid];
+            if (answer && answer >= 1 && answer <= 5) {
+                sum += answer;
+            }
+        });
+        scores[scale.id] = sum;
     });
     
-    return sums;
+    return scores;
 }
 
-// Convert sum to level
-function sumToLevel(sum) {
-    if (sum <= 23) return 1;
-    if (sum <= 36) return 2;
-    return 3;
-}
-
-// Classify archetype using Manhattan distance
-function classifyArchetype(A_level, B_level, C_level, D_level) {
-    let best = null;
-    let minDist = Infinity;
+// Classify archetype based on new decision tree
+function classifyArchetype(scores, responses) {
+    // Helper to get response value (default 0 if missing)
+    const getResp = (id) => responses[id] || 0;
     
-    archetypes.archetypes.forEach(archetype => {
-        const dist = Math.abs(A_level - archetype.levels.A) +
-                     Math.abs(B_level - archetype.levels.B) +
-                     Math.abs(C_level - archetype.levels.C) +
-                     Math.abs(D_level - archetype.levels.D);
+    // 1. Mystery Mosaic (MM)
+    if (scores.Disorganization >= 15) {
+        // Subtype check: The Shrinker
+        if (scores.Shrinking_Response >= 8) {
+            return archetypes.archetypes.find(a => a.id === 9); // The Shrinker
+        }
+        return archetypes.archetypes.find(a => a.id === 4); // Mystery Mosaic
+    }
+    
+    // 2. Grounded Navigator (GN)
+    if (scores.Secure_Foundation >= 36 && 
+        scores.Attachment_Anxiety < 15 && 
+        scores.Attachment_Avoidance < 17) {
+        return archetypes.archetypes.find(a => a.id === 1);
+    }
+    
+    // 3. Heartfelt Defender (HD) - Check both Core and Performer logic
+    // Core: Anxiety >= 25, Shame >= 18, Performance >= 11
+    // Performer: Anxiety >= 25, Performance >= 11, Shame [11, 17]
+    if (scores.Attachment_Anxiety >= 25) {
+        if (scores.Performance_Defense >= 11) {
+            if (scores.Shame_Intensity >= 18) {
+                return archetypes.archetypes.find(a => a.id === 5); // Heartfelt Defender (Core)
+            }
+            if (scores.Shame_Intensity >= 11 && scores.Shame_Intensity <= 17) {
+                return archetypes.archetypes.find(a => a.id === 10); // The Performer
+            }
+        }
         
-        if (dist < minDist || (dist === minDist && archetype.id < best.id)) {
-            minDist = dist;
-            best = archetype;
+        // Also check if it matches HD criteria generally if above specific checks fail? 
+        // The text says "Heartfelt Defender (core): Anxiety >= 25, Shame >= 18, Performance >= 11"
+        // I'll stick to the strict checks.
+        // Wait, if it matches HD core but not Performer, it returns HD.
+        
+        // Let's re-read the priority list.
+        // 3. HD Core
+        if (scores.Shame_Intensity >= 18 && scores.Performance_Defense >= 11) {
+             return archetypes.archetypes.find(a => a.id === 5);
         }
-    });
+        // 4. HD Performer
+        if (scores.Performance_Defense >= 11 && scores.Shame_Intensity >= 11 && scores.Shame_Intensity <= 17) {
+             return archetypes.archetypes.find(a => a.id === 10);
+        }
+        
+        // 5. Passionate Pilgrim (PP)
+        // Anxiety >= 25 AND Q11 >= 4 AND Q23 >= 4
+        if (getResp(11) >= 4 && getResp(23) >= 4) {
+             return archetypes.archetypes.find(a => a.id === 7);
+        }
+        
+        // 6. Emotional Enthusiast (EE)
+        // Anxiety >= 25 (Catch all for high anxiety if above don't match)
+        return archetypes.archetypes.find(a => a.id === 2);
+    }
     
-    return best;
+    // 7. Chill Conductor (CC)
+    if (scores.Attachment_Avoidance >= 29 && scores.Intellectual_Avoidance >= 8) {
+        return archetypes.archetypes.find(a => a.id === 6);
+    }
+    
+    // 8. Independent Icon (II)
+    if (scores.Attachment_Avoidance >= 29 && getResp(10) >= 4 && getResp(35) >= 4) {
+        return archetypes.archetypes.find(a => a.id === 8);
+    }
+    
+    // 9. Lone Wolf (LW)
+    if (scores.Attachment_Avoidance >= 29) {
+        return archetypes.archetypes.find(a => a.id === 3);
+    }
+    
+    // 10. Default: Grounded Navigator
+    return archetypes.archetypes.find(a => a.id === 1);
 }
 
 // Check if all questions are answered
@@ -211,8 +267,13 @@ function updateProgress() {
     elements.progressText.textContent = `Question ${questionNumber} of ${total}`;
     elements.progressFill.style.width = `${percentage}%`;
     
-    // Update domain category header
+    // Update domain category header - REMOVED in new version as questions are not grouped by display domain
+    if (elements.domainCategoryHeader) {
+        elements.domainCategoryHeader.style.display = 'none';
+    }
+    /*
     if (currentQuestion) {
+        // Old domain logic
         const domain = config.domains.find(d => d.id === currentQuestion.domain);
         if (domain) {
             elements.domainCategoryTitle.textContent = domain.name;
@@ -220,6 +281,7 @@ function updateProgress() {
             elements.domainCategoryHeader.style.display = 'block';
         }
     }
+    */
     
     // Update navigation buttons
     elements.prevBtn.style.display = state.currentQuestionIndex > 0 ? 'inline-block' : 'none';
@@ -419,7 +481,7 @@ function isValidEmail(email) {
 }
 
 // Send results email
-async function sendResultsEmail(email, optIn, archetype, sums, levels) {
+async function sendResultsEmail(email, optIn, archetype, scores, scaleLevels) {
     // Note: Emails are currently stored in localStorage only
     // To actually send emails, you need to implement a backend service
     // This function prepares the data that would be sent
@@ -434,13 +496,8 @@ async function sendResultsEmail(email, optIn, archetype, sums, levels) {
             shortTag: archetype.shortTag,
             description: archetype.description
         },
-        domainScores: {
-            A: sums.A,
-            B: sums.B,
-            C: sums.C,
-            D: sums.D
-        },
-        levels: levels,
+        scores: scores,
+        scaleLevels: scaleLevels,
         resultsUrl: window.location.href
     };
     
@@ -457,16 +514,19 @@ async function sendResultsEmail(email, optIn, archetype, sums, levels) {
 
 // Calculate and show results
 function calculateAndShowResults() {
-    const sums = calculateDomainSums();
-    const levels = {
-        A: sumToLevel(sums.A),
-        B: sumToLevel(sums.B),
-        C: sumToLevel(sums.C),
-        D: sumToLevel(sums.D)
-    };
+    const scores = calculateScales();
     
-    const archetype = classifyArchetype(levels.A, levels.B, levels.C, levels.D);
-    state.result = { archetype, sums, levels };
+    // Calculate levels for display/email
+    const scaleLevels = {};
+    config.scales.forEach(scale => {
+        const sum = scores[scale.id];
+        if (sum >= scale.levels.high.min) scaleLevels[scale.id] = 'high';
+        else if (sum >= scale.levels.moderate.min) scaleLevels[scale.id] = 'moderate';
+        else scaleLevels[scale.id] = 'low';
+    });
+    
+    const archetype = classifyArchetype(scores, state.responses);
+    state.result = { archetype, scores, scaleLevels };
     
     // Track assessment completed
     if (window.trackAssessmentCompleted) {
@@ -478,7 +538,7 @@ function calculateAndShowResults() {
     }
     
     // Send email with results
-    sendResultsEmail(state.currentEmail, state.emailOptIn, archetype, sums, levels);
+    sendResultsEmail(state.currentEmail, state.emailOptIn, archetype, scores, scaleLevels);
     
     renderResults();
     
@@ -490,7 +550,7 @@ function calculateAndShowResults() {
 
 // Render results
 function renderResults() {
-    const { archetype, sums, levels } = state.result;
+    const { archetype, scores, scaleLevels } = state.result;
     
     // Archetype info
     elements.archetypeName.textContent = `You are ${archetype.name}`;
@@ -510,23 +570,27 @@ function renderResults() {
     // Archetype image - match actual file names
     const imageName = archetype.name.toLowerCase()
         .replace(/\s+/g, '-');
+    // Note: Image paths might need update if new images are not available. 
+    // For now keeping same logic, hoping images exist or fallback.
     const imagePath = `./assets/images/archetype-${archetype.id}-${imageName}.png`;
     elements.archetypeImage.src = imagePath;
     elements.archetypeImage.alt = archetype.name;
     
-    // Domain charts
+    // Domain charts (now Scale charts)
     elements.domainCharts.innerHTML = '';
-    config.domains.forEach(domain => {
-        const sum = sums[domain.id];
-        const level = levels[domain.id];
-        const percentage = ((sum - 10) / 40) * 100; // Scale from 10-50 to 0-100%
+    config.scales.forEach(scale => {
+        const sum = scores[scale.id];
+        const level = scaleLevels[scale.id]; // 'low', 'moderate', 'high'
+        
+        // Calculate percentage based on min/max of the scale
+        const percentage = ((sum - scale.min) / (scale.max - scale.min)) * 100;
         
         const chartBar = document.createElement('div');
         chartBar.className = 'chart-bar';
         
         const label = document.createElement('div');
         label.className = 'chart-label';
-        label.textContent = domain.name;
+        label.textContent = scale.name;
         
         const visual = document.createElement('div');
         visual.className = 'chart-visual';
@@ -534,6 +598,11 @@ function renderResults() {
         const fill = document.createElement('div');
         fill.className = 'chart-fill';
         fill.style.width = `${Math.max(0, Math.min(100, percentage))}%`;
+        
+        // Optional: Color code based on level
+        if (level === 'high') fill.classList.add('level-high');
+        else if (level === 'moderate') fill.classList.add('level-moderate');
+        else fill.classList.add('level-low');
         
         visual.appendChild(fill);
         
@@ -547,14 +616,14 @@ function renderResults() {
         elements.domainCharts.appendChild(chartBar);
     });
     
-    // Compatibility
+    // Compatibility (Hidden for now as data structure changed/is incomplete)
+    // If you want to show it, need to ensure data exists in archetypes.json
+    /*
     const mostCompatible = archetypes.archetypes.find(a => a.name === archetype.mostCompatible);
     const leastCompatible = archetypes.archetypes.find(a => a.name === archetype.leastCompatible);
     
     if (elements.mostCompatibleInfo && mostCompatible) {
         elements.mostCompatibleInfo.textContent = mostCompatible.name;
-        
-        // Set compatible archetype image
         if (elements.mostCompatibleImage) {
             const compatImageName = mostCompatible.name.toLowerCase().replace(/\s+/g, '-');
             elements.mostCompatibleImage.src = `assets/images/archetype-${mostCompatible.id}-${compatImageName}.png`;
@@ -564,14 +633,17 @@ function renderResults() {
     
     if (elements.leastCompatibleInfo && leastCompatible) {
         elements.leastCompatibleInfo.textContent = leastCompatible.name;
-        
-        // Set challenging archetype image
         if (elements.leastCompatibleImage) {
             const challengeImageName = leastCompatible.name.toLowerCase().replace(/\s+/g, '-');
             elements.leastCompatibleImage.src = `assets/images/archetype-${leastCompatible.id}-${challengeImageName}.png`;
             elements.leastCompatibleImage.alt = leastCompatible.name;
         }
     }
+    */
+    // Hide compatibility sections if they exist in DOM but we don't have data
+    if (elements.mostCompatibleInfo) elements.mostCompatibleInfo.parentElement.style.display = 'none';
+    if (elements.leastCompatibleInfo) elements.leastCompatibleInfo.parentElement.style.display = 'none';
+
     
     // Shadow Side and Growth Path
     if (elements.shadowSide && archetype.shadowSide) {
@@ -617,23 +689,27 @@ function updateMetaTags(archetype) {
     document.title = title;
     
     // Update Open Graph tags
-    document.querySelector('meta[property="og:title"]').setAttribute('content', title);
-    document.querySelector('meta[property="og:description"]').setAttribute('content', description);
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', title);
+    
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', description);
     
     // Update Twitter tags
-    document.querySelector('meta[name="twitter:title"]').setAttribute('content', title);
-    document.querySelector('meta[name="twitter:description"]').setAttribute('content', description);
+    const twTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twTitle) twTitle.setAttribute('content', title);
+    
+    const twDesc = document.querySelector('meta[name="twitter:description"]');
+    if (twDesc) twDesc.setAttribute('content', description);
     
     // Update URL with encoded results
     const url = new URL(window.location.href);
     url.searchParams.set('archetype', archetype.id);
-    url.searchParams.set('A', state.result.levels.A);
-    url.searchParams.set('B', state.result.levels.B);
-    url.searchParams.set('C', state.result.levels.C);
-    url.searchParams.set('D', state.result.levels.D);
+    // Removed specific levels params
     
     window.history.replaceState({}, '', url);
-    document.querySelector('meta[property="og:url"]').setAttribute('content', url.toString());
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute('content', url.toString());
 }
 
 // Share functionality
@@ -795,20 +871,12 @@ function checkUrlParams() {
     if (archetypeId) {
         const archetype = archetypes.archetypes.find(a => a.id === parseInt(archetypeId));
         if (archetype) {
-            const A = parseInt(params.get('A')) || 2;
-            const B = parseInt(params.get('B')) || 2;
-            const C = parseInt(params.get('C')) || 2;
-            const D = parseInt(params.get('D')) || 2;
-            
-            // Calculate approximate sums from levels
-            const sums = {
-                A: A === 1 ? 15 : A === 2 ? 30 : 45,
-                B: B === 1 ? 15 : B === 2 ? 30 : 45,
-                C: C === 1 ? 15 : C === 2 ? 30 : 45,
-                D: D === 1 ? 15 : D === 2 ? 30 : 45
+            // Simplified: just show archetype, no charts if scores missing
+            state.result = { 
+                archetype, 
+                scores: {}, 
+                scaleLevels: {} 
             };
-            
-            state.result = { archetype, sums, levels: { A, B, C, D } };
             
             // Hide landing, show results
             if (elements.landingScreen) {

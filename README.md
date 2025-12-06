@@ -1,6 +1,12 @@
-# Realness Score Assessment App
+# Feel it, Don't Think It
 
-A fully responsive self-assessment tool designed to be fun and viral. Built with vanilla HTML, CSS, and JavaScript for maximum portability and embeddability.
+An affect assessment app powered by AI that helps users understand their bodily signals (affects) toward people, situations, or concepts using Silvan Tomkins' Core Affect System (CAS).
+
+---
+
+## 🎯 Project Status: Ready for Deployment
+
+All infrastructure, AI prompts, admin tools, and integration guides are complete. Ready to deploy to Firebase.
 
 ## Features
 

@@ -2,39 +2,81 @@
   "meta": {
     "name": "Realness Score",
     "tagline": "A brief affect-based profile of how you feel, show, protect, and connect.",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "author": "Dr. Scott Conkright"
   },
-  "scaleLevels": {
-    "low": { "min": 10, "max": 23, "level": 1 },
-    "medium": { "min": 24, "max": 36, "level": 2 },
-    "high": { "min": 37, "max": 50, "level": 3 }
-  },
-  "domains": [
+  "scales": [
     {
-      "id": "A",
-      "name": "Noticing Your Feelings",
-      "description": "How well you notice and handle your feelings.",
-      "itemRange": [1, 10]
+      "id": "Attachment_Anxiety",
+      "name": "Attachment Anxiety",
+      "description": "Worries about abandonment and rejection.",
+      "questionIds": [3, 9, 11, 15, 17, 23, 30],
+      "min": 7,
+      "max": 35,
+      "levels": { "low": {"min": 7, "max": 14}, "moderate": {"min": 15, "max": 24}, "high": {"min": 25, "max": 35} }
     },
     {
-      "id": "B",
-      "name": "Showing Your Real Self",
-      "description": "How well your outside matches your inside.",
-      "itemRange": [11, 20]
+      "id": "Attachment_Avoidance",
+      "name": "Attachment Avoidance",
+      "description": "Discomfort with closeness and dependency.",
+      "questionIds": [4, 7, 10, 14, 18, 24, 29, 35],
+      "min": 8,
+      "max": 40,
+      "levels": { "low": {"min": 8, "max": 16}, "moderate": {"min": 17, "max": 28}, "high": {"min": 29, "max": 40} }
     },
     {
-      "id": "C",
-      "name": "How You Protect Yourself",
-      "description": "How you react when you feel watched or judged.",
-      "itemRange": [21, 30]
+      "id": "Disorganization",
+      "name": "Disorganization",
+      "description": "Difficulty maintaining consistent strategies.",
+      "questionIds": [12, 19, 32, 36],
+      "min": 4,
+      "max": 20,
+      "levels": { "low": {"min": 4, "max": 8}, "moderate": {"min": 9, "max": 14}, "high": {"min": 15, "max": 20} }
     },
     {
-      "id": "D",
-      "name": "How You Connect With Others",
-      "description": "How you usually act in close relationships.",
-      "itemRange": [31, 40]
+      "id": "Secure_Foundation",
+      "name": "Secure Foundation",
+      "description": "Comfort with intimacy and autonomy.",
+      "questionIds": [2, 8, 13, 20, 27, 28, 31, 33, 37, 40],
+      "min": 10,
+      "max": 50,
+      "levels": { "low": {"min": 10, "max": 20}, "moderate": {"min": 21, "max": 35}, "high": {"min": 36, "max": 50} }
+    },
+    {
+      "id": "Shame_Intensity",
+      "name": "Shame Intensity",
+      "description": "Feelings of unworthiness or defectiveness.",
+      "questionIds": [5, 6, 16, 22, 34],
+      "min": 5,
+      "max": 25,
+      "levels": { "low": {"min": 5, "max": 10}, "moderate": {"min": 11, "max": 17}, "high": {"min": 18, "max": 25} }
+    },
+    {
+      "id": "Performance_Defense",
+      "name": "Performance Defense",
+      "description": "Using achievement to hide vulnerability.",
+      "questionIds": [21, 26, 39],
+      "min": 3,
+      "max": 15,
+      "levels": { "low": {"min": 3, "max": 6}, "moderate": {"min": 7, "max": 10}, "high": {"min": 11, "max": 15} }
+    },
+    {
+      "id": "Intellectual_Avoidance",
+      "name": "Intellectual Avoidance",
+      "description": "Thinking instead of feeling.",
+      "questionIds": [14, 29],
+      "min": 2,
+      "max": 10,
+      "levels": { "low": {"min": 2, "max": 4}, "moderate": {"min": 5, "max": 7}, "high": {"min": 8, "max": 10} }
+    },
+    {
+      "id": "Shrinking_Response",
+      "name": "Shrinking Response",
+      "description": "Withdrawing or disappearing under stress.",
+      "questionIds": [25, 38],
+      "min": 2,
+      "max": 10,
+      "levels": { "low": {"min": 2, "max": 4}, "moderate": {"min": 5, "max": 7}, "high": {"min": 8, "max": 10} }
     }
   ]
 }
-

@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Public read access to affect combinations
+    // Admin-only write access (requires authentication)
+    match /affectCombinations/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Sessions are write-only for users (analytics)
+    // Admin-only read access
+    match /sessions/{sessionId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // Submissions are write-only for users (analytics)
+    // Admin-only read access
+    match /submissions/{submissionId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // Image cache is public read, admin write
+    match /generatedImages/{imageId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}

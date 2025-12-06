@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAS Assessment</title>
+    <meta name="description" content="Discover your attachment style and relationship patterns through 40 questions">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2a2a2a;
+            --text-primary: #ffffff; /* Increased contrast for ADA */
+            --text-secondary: #cccccc; /* Increased contrast for ADA */
+            --accent: #4a9eff;
+            --accent-hover: #3a8eef;
+            --border: #444; /* Increased contrast */
+            --success: #4ade80;
+            --warning: #fbbf24;
+            /* Base font sizes - increased for accessibility */
+            --font-size-base: 20px; /* Increased from ~16px */
+            --font-size-large: 24px;
+            --font-size-xl: 28px;
+            --font-size-2xl: 36px;
+            --font-size-3xl: 48px;
+            --font-size-4xl: 56px;
+        }
+
+        /* Color themes for 8 archetypes */
+        body.theme-GN {
+            --accent: #4ade80;
+            --accent-hover: #22c55e;
+        }
+        body.theme-EE {
+            --accent: #f59e0b;
+            --accent-hover: #d97706;
+        }
+        body.theme-LW {
+            --accent: #6366f1;
+            --accent-hover: #4f46e5;
+        }
+        body.theme-MM {
+            --accent: #ec4899;
+            --accent-hover: #db2777;
+        }
+        body.theme-HD {
+            --accent: #ef4444;
+            --accent-hover: #dc2626;
+        }
+        body.theme-CC {
+            --accent: #06b6d4;
+            --accent-hover: #0891b2;
+        }
+        body.theme-PP {
+            --accent: #f97316;
+            --accent-hover: #ea580c;
+        }
+        body.theme-II {
+            --accent: #8b5cf6;
+            --accent-hover: #7c3aed;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-size: var(--font-size-base);
+            line-height: 1.7; /* Increased for readability */
+            padding: 20px;
+            padding-top: 240px; /* Space for sticky header */
+            transition: background-color 0.5s ease;
+        }
+
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-primary);
+            border-bottom: 2px solid var(--accent);
+            padding: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .sticky-header-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 16px 32px; /* Increased padding for larger touch targets */
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 2px solid var(--border); /* Thicker border for visibility */
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: var(--font-size-base); /* Increased from 15px */
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            min-height: 48px; /* ADA minimum touch target size */
+        }
+
+        /* Enhanced focus indicators for ADA compliance */
+        .btn:focus-visible,
+        .likert-option input[type="radio"]:focus-visible + label,
+        .modal-close:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 5px var(--accent);
+        }
+
+        .btn:focus {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.5);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            border-color: var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--accent);
+        }
+
+        /* Scoring Editor Styles */
+        .editor-modal {
+            overflow-y: auto;
+        }
+
+        .editor-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 8px;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: var(--text-secondary);
+            font-size: var(--font-size-base);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .tab-btn.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .editor-tab-content {
+            min-height: 400px;
+        }
+
+        .editor-tab-content.hidden {
+            display: none;
+        }
+
+        .scale-editor-item {
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .scale-editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .scale-editor-name {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .scale-editor-description {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .question-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .question-checkbox {
+            display: none;
+        }
+
+        .question-checkbox-label {
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: var(--font-size-base);
+            user-select: none;
+        }
+
+        .question-checkbox:checked + .question-checkbox-label {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .question-checkbox-label:hover {
+            border-color: var(--accent);
+        }
+
+        .rule-editor-item {
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .rule-editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .rule-editor-profile {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .rule-editor-order {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            padding: 4px 12px;
+            border-radius: 4px;
+        }
+
+        .rule-condition {
+            margin-bottom: 12px;
+        }
+
+        .rule-condition-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .rule-select {
+            padding: 8px 12px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: var(--font-size-base);
+            min-width: 150px;
+        }
+
+        .rule-select:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .rule-input {
+            padding: 8px 12px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: var(--font-size-base);
+            width: 80px;
+        }
+
+        .rule-input:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .rule-connector {
+            font-size: var(--font-size-base);
+            color: var(--text-secondary);
+            padding: 0 8px;
+        }
+
+        .saved-config-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .saved-config-name {
+            font-size: var(--font-size-base);
+            color: var(--text-primary);
+        }
+
+        .saved-config-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: var(--font-size-base);
+        }
+
+        .progress-info {
+            text-align: center;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            border: 2px solid var(--border);
+            animation: pulse 2s ease-in-out infinite;
+            font-size: var(--font-size-base);
+        }
+
+        #progressText {
+            font-size: var(--font-size-base);
+            font-weight: 500;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(74, 158, 255, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 8px rgba(74, 158, 255, 0);
+            }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding: 40px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            animation: fadeInScale 0.8s ease-out;
+        }
+
+        .logo-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 4px 16px rgba(74, 158, 255, 0.3);
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), transparent);
+        }
+
+        .logo-icon svg {
+            width: 48px;
+            height: 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .logo-main {
+            font-size: var(--font-size-3xl); /* 48px */
+            font-weight: 700;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: var(--accent); /* Fallback */
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtitle {
+            font-size: var(--font-size-base); /* 20px */
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        h1 {
+            display: none; /* Hide h1, using logo instead */
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .subtitle {
+            font-size: var(--font-size-large); /* Increased from 18px to 24px */
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .question-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .question-card fieldset {
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .question-card legend {
+            padding: 0;
+            margin: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-card:nth-child(1) { animation-delay: 0.1s; }
+        .question-card:nth-child(2) { animation-delay: 0.2s; }
+        .question-card:nth-child(3) { animation-delay: 0.3s; }
+        .question-card:nth-child(4) { animation-delay: 0.4s; }
+        .question-card:nth-child(5) { animation-delay: 0.5s; }
+
+        .question-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .question-label {
+            font-size: var(--font-size-xl); /* Increased from 16px to 28px */
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: block;
+            line-height: 1.5;
+        }
+
+        .question-number {
+            color: var(--accent);
+            margin-right: 8px;
+        }
+
+        .likert-scale {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .likert-option {
+            position: relative;
+        }
+
+        .likert-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .likert-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 12px; /* Increased padding */
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            min-height: 80px; /* Larger touch target */
+        }
+
+        .likert-option input[type="radio"]:checked + label {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(74, 158, 255, 0.4);
+            animation: bounce 0.4s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1.05);
+            }
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        .likert-option label:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .likert-number {
+            font-size: var(--font-size-2xl); /* Increased from 24px to 36px */
+            font-weight: 600;
+        }
+
+        .likert-text {
+            font-size: var(--font-size-base); /* Increased from 11px to 20px */
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .likert-option input[type="radio"]:checked + label .likert-text {
+            color: white;
+        }
+
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: var(--font-size-base); /* Increased from 13px to 20px */
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Modal Popup */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            width: 48px; /* Increased from 32px for larger touch target */
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 28px; /* Increased from 20px */
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .modal-close:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .result-section {
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 40px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .profile-name {
+            font-size: var(--font-size-3xl); /* Increased from 36px to 48px */
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 20px;
+            animation: fadeInScale 0.8s ease-out;
+        }
+
+        .profile-description {
+            font-size: var(--font-size-xl); /* Increased from 20px to 28px */
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .profile-detail {
+            margin-bottom: 24px;
+            padding: 20px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            animation: slideInLeft 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .profile-detail:nth-child(1) { animation-delay: 0.1s; }
+        .profile-detail:nth-child(2) { animation-delay: 0.2s; }
+        .profile-detail:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .profile-detail h3 {
+            font-size: var(--font-size-xl); /* Increased from 16px to 28px */
+            color: var(--accent);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .profile-detail p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: var(--font-size-base); /* Increased from default */
+        }
+
+        .commentary-section {
+            margin-top: 32px;
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+        }
+
+        .commentary-toggle {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: var(--font-size-base); /* Increased from 15px to 20px */
+            text-decoration: underline;
+            padding: 8px 0; /* Added padding for larger touch target */
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+
+        .commentary-toggle:hover {
+            color: var(--accent-hover);
+        }
+
+        .commentary-content {
+            margin-top: 20px;
+            padding: 24px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: var(--font-size-base); /* Increased from 14px to 20px */
+            animation: fadeIn 0.3s ease;
+            line-height: 1.7;
+        }
+
+        .commentary-content h4 {
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-size: var(--font-size-xl); /* Increased from 16px to 28px */
+            font-weight: 600;
+        }
+
+        .scale-score {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s;
+        }
+
+        .scale-score:hover {
+            background: var(--bg-secondary);
+        }
+
+        .scale-score:last-child {
+            border-bottom: none;
+        }
+
+        .scale-name {
+            color: var(--text-secondary);
+            font-size: var(--font-size-base); /* Increased */
+        }
+
+        .scale-value {
+            color: var(--success);
+            font-weight: 600;
+            font-size: var(--font-size-base); /* Increased */
+        }
+
+        .rule-matched {
+            margin-top: 20px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            color: var(--warning);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 280px; /* Increased for larger header */
+                font-size: 18px; /* Slightly smaller on mobile but still accessible */
+            }
+
+            .logo-main {
+                font-size: var(--font-size-2xl); /* 36px on mobile */
+            }
+
+            .logo {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .logo-icon {
+                width: 64px;
+                height: 64px;
+            }
+
+            .logo-icon svg {
+                width: 40px;
+                height: 40px;
+            }
+
+            .logo-text {
+                align-items: center;
+                text-align: center;
+            }
+
+            .likert-scale {
+                grid-template-columns: 1fr;
+                gap: 12px; /* Increased gap */
+            }
+
+            .likert-option label {
+                flex-direction: row;
+                justify-content: flex-start;
+                padding: 16px 20px; /* Increased padding */
+                min-height: 64px; /* Larger touch target on mobile */
+            }
+
+            .scale-labels {
+                display: none;
+            }
+
+            .result-section {
+                padding: 32px 24px;
+            }
+
+            .profile-name {
+                font-size: var(--font-size-2xl); /* 36px on mobile */
+            }
+
+            .profile-description {
+                font-size: var(--font-size-large); /* 24px on mobile */
+            }
+
+            .modal-content {
+                padding: 32px 24px;
+            }
+
+            .btn {
+                font-size: 18px;
+                padding: 14px 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Header -->
+    <div class="sticky-header" role="banner">
+        <div class="sticky-header-content">
+            <div class="controls" role="toolbar" aria-label="Quiz controls">
+                <button class="btn" onclick="randomizeAnswers()" aria-label="Randomize all answers">Randomize Answers</button>
+                <button class="btn" onclick="clearAll()" aria-label="Clear all answers">Clear All</button>
+                <button class="btn btn-secondary" onclick="openScoringEditor()" aria-label="Open scoring system editor">Scoring Editor</button>
+            </div>
+            <div class="progress-info" role="status" aria-live="polite" aria-atomic="true">
+                <div id="progressText" aria-label="Progress">0 of 40 questions answered</div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Quiz progress">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo" role="img" aria-label="CAS Assessment Logo">
+                <div class="logo-icon" aria-hidden="true">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Modern CAS logo design -->
+                        <!-- C -->
+                        <path d="M 25 50 Q 25 30, 45 30 Q 55 30, 55 35" 
+                              stroke="white" stroke-width="6" stroke-linecap="round" fill="none"/>
+                        <path d="M 25 50 Q 25 70, 45 70 Q 55 70, 55 65" 
+                              stroke="white" stroke-width="6" stroke-linecap="round" fill="none"/>
+                        <!-- A -->
+                        <path d="M 60 65 L 70 35 L 80 65 M 65 55 L 75 55" 
+                              stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-main">CAS</div>
+                    <div class="logo-subtitle">Assessment</div>
+                </div>
+            </div>
+            <p class="subtitle">Discover your attachment style and relationship patterns</p>
+        </header>
+
+        <main id="main-content">
+            <form id="quizForm" role="form" aria-label="Attachment Profile Quiz">
+                <!-- Questions will be generated here -->
+            </form>
+        </main>
+
+        <!-- Results at bottom -->
+        <div id="resultSectionBottom" class="result-section hidden"></div>
+    </div>
+
+    <!-- Modal Popup -->
+    <div id="modalOverlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()" aria-label="Close results modal">×</button>
+            <div id="modalResultContent" role="document"></div>
+        </div>
+    </div>
+
+    <!-- Scoring Editor Modal -->
+    <div id="scoringEditorOverlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="editorTitle">
+        <div class="modal-content editor-modal" style="max-width: 900px; max-height: 95vh;">
+            <button class="modal-close" onclick="closeScoringEditor()" aria-label="Close scoring editor">×</button>
+            <h2 id="editorTitle" style="margin-bottom: 24px; font-size: var(--font-size-2xl);">Scoring System Editor</h2>
+            
+            <div class="editor-tabs">
+                <button class="tab-btn active" onclick="switchEditorTab('scales')">Scale Definitions</button>
+                <button class="tab-btn" onclick="switchEditorTab('rules')">Profile Rules</button>
+                <button class="tab-btn" onclick="switchEditorTab('presets')">Presets & Save</button>
+            </div>
+
+            <!-- Scales Tab -->
+            <div id="editorTabScales" class="editor-tab-content active">
+                <p style="margin-bottom: 20px; color: var(--text-secondary);">Define which questions contribute to each scale. Each scale is calculated by adding up the selected question values.</p>
+                <div id="scalesEditor"></div>
+            </div>
+
+            <!-- Rules Tab -->
+            <div id="editorTabRules" class="editor-tab-content hidden">
+                <p style="margin-bottom: 20px; color: var(--text-secondary);">Define the rules that determine which profile a person gets. Rules are checked in order, and the first matching rule wins.</p>
+                <div id="rulesEditor"></div>
+            </div>
+
+            <!-- Presets Tab -->
+            <div id="editorTabPresets" class="editor-tab-content hidden">
+                <div style="margin-bottom: 30px;">
+                    <h3 style="margin-bottom: 16px; font-size: var(--font-size-xl);">Quick Presets</h3>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px;">
+                        <button class="btn" onclick="loadPreset('default')">Load Default (Current System)</button>
+                        <button class="btn" onclick="loadPreset('normal')">Load Normal Distribution</button>
+                    </div>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <h3 style="margin-bottom: 16px; font-size: var(--font-size-xl);">Save & Load</h3>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;">
+                        <input type="text" id="configName" placeholder="Configuration name" style="flex: 1; min-width: 200px; padding: 12px; background: var(--bg-tertiary); border: 2px solid var(--border); border-radius: 6px; color: var(--text-primary); font-size: var(--font-size-base);">
+                        <button class="btn" onclick="saveConfiguration()">Save Configuration</button>
+                    </div>
+                    <div id="savedConfigs" style="margin-top: 16px;"></div>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 16px; font-size: var(--font-size-xl);">Test Current Configuration</h3>
+                    <button class="btn btn-primary" onclick="testCurrentConfiguration()">Test with Current Answers</button>
+                    <div id="testResults" style="margin-top: 20px; padding: 20px; background: var(--bg-tertiary); border-radius: 8px; display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Questions data - Validated against PDF
+        const questions = [
+            { id: "Q1", text: "My emotions feel intense and hard to manage" },
+            { id: "Q2", text: "I can stay calm even when upset" },
+            { id: "Q3", text: "I worry a lot about being abandoned or rejected" },
+            { id: "Q4", text: "I'm most comfortable keeping people at a distance" },
+            { id: "Q5", text: "I often feel like I'm fundamentally flawed or broken" },
+            { id: "Q6", text: "I hide parts of myself because I'm ashamed of them" },
+            { id: "Q7", text: "When I'm upset, I prefer to be alone" },
+            { id: "Q8", text: "I reach out to others when I'm distressed" },
+            { id: "Q9", text: "I need a lot of reassurance in relationships" },
+            { id: "Q10", text: "The idea of needing someone bothers me" },
+            { id: "Q11", text: "I think about my relationships constantly" },
+            { id: "Q12", text: "My emotions seem unpredictable, even to me" },
+            { id: "Q13", text: "I can describe my emotional states clearly" },
+            { id: "Q14", text: "I intellectualize emotions rather than feel them" },
+            { id: "Q15", text: "I feel things more intensely than most people" },
+            { id: "Q16", text: "I feel shame about having needs" },
+            { id: "Q17", text: "I pursue partners who seem distant or unavailable" },
+            { id: "Q18", text: "I withdraw when my partner wants more closeness" },
+            { id: "Q19", text: "Sometimes I desperately want closeness, other times I push it away" },
+            { id: "Q20", text: "I generally like myself and feel comfortable being me" },
+            { id: "Q21", text: "I feel like I have to perform or achieve to be acceptable" },
+            { id: "Q22", text: "Deep down, I believe I'm worthless" },
+            { id: "Q23", text: "I test my partner to see if they'll stay" },
+            { id: "Q24", text: "I keep emotional walls up even in committed relationships" },
+            { id: "Q25", text: "When things get intense, I become quieter or try to disappear" },
+            { id: "Q26", text: "I'm good at showing people the version of myself they expect" },
+            { id: "Q27", text: "My mood is relatively stable from day to day" },
+            { id: "Q28", text: "I can tolerate emotional discomfort without shutting down" },
+            { id: "Q29", text: "I avoid feelings by staying busy or being intellectual" },
+            { id: "Q30", text: "I crave more closeness than I usually get" },
+            { id: "Q31", text: "I'm comfortable being authentic with others" },
+            { id: "Q32", text: "When overwhelmed, I completely shut down or go blank" },
+            { id: "Q33", text: "I can set boundaries without excessive guilt" },
+            { id: "Q34", text: "I worry constantly that people will see the real me and leave" },
+            { id: "Q35", text: "I prefer being self-sufficient to being emotionally close" },
+            { id: "Q36", text: "My relationships often feel chaotic or unpredictable" },
+            { id: "Q37", text: "I can be vulnerable without it feeling threatening" },
+            { id: "Q38", text: "I become very self-conscious when I think I'm being watched or judged" },
+            { id: "Q39", text: "My real feelings often stay hidden, even when I want to share them" },
+            { id: "Q40", text: "I can maintain stable, satisfying relationships" }
+        ];
+
+        // Profile metadata - Validated against PDF
+        const profiles = {
+            GN: {
+                name: "Grounded Navigator",
+                description: "You're secure in yourself and your relationships. You can be close without losing yourself, and independent without pushing others away.",
+                pattern: "Secure attachment. Comfortable with intimacy and autonomy.",
+                strengths: "Emotionally balanced, adaptable, authentic, steady",
+                growth: "Keep choosing growth even when comfortable.",
+                theme: "GN"
+            },
+            EE: {
+                name: "Emotional Enthusiast",
+                description: "You feel everything intensely and wear your heart on your sleeve. You want deep connection and aren't afraid to show how much you care.",
+                pattern: "Anxious attachment. High emotional intensity, seeks closeness.",
+                strengths: "Passionate, expressive, emotionally attuned, loyal",
+                growth: "Develop your capacity to soothe yourself when anxious, rather than always seeking external reassurance.",
+                theme: "EE"
+            },
+            LW: {
+                name: "Lone Wolf",
+                description: "You value independence and self-sufficiency. You protect yourself by maintaining distance and staying in control.",
+                pattern: "Avoidant attachment. Withdraws to maintain boundaries.",
+                strengths: "Self-reliant, calm under pressure, respectful of boundaries",
+                growth: "Allow safe vulnerability; connection doesn't mean engulfment.",
+                theme: "LW"
+            },
+            MM: {
+                name: "Mystery Mosaic",
+                description: "Your early experiences were confusing. You may swing between wanting closeness and needing distance.",
+                pattern: "Disorganized attachment. Variable, unpredictable patterns.",
+                strengths: "Resilient, adaptable, deep capacity for growth",
+                growth: "With support, develop more stable patterns and learn to trust both yourself and others.",
+                theme: "MM"
+            },
+            HD: {
+                name: "Heartfelt Defender",
+                description: "You show the world a polished version of yourself while hiding the messy parts. You achieve to feel worthy.",
+                pattern: "Anxious attachment + high shame + performance defense.",
+                strengths: "Competent, giving, socially skilled, dependable",
+                growth: "Let the mask crack; you're lovable without performing. Reveal small truths and discover that people stay.",
+                theme: "HD"
+            },
+            CC: {
+                name: "Chill Conductor",
+                description: "You live in your head and observe life from a slight distance. You're brilliant at understanding but struggle to feel.",
+                pattern: "Avoidant attachment + intellectual defense.",
+                strengths: "Analytical, objective, calm, insightful",
+                growth: "Practice dropping from head to body—noticing sensations, feelings, aliveness.",
+                theme: "CC"
+            },
+            PP: {
+                name: "Passionate Pilgrim",
+                description: "You long to belong completely to someone. You'll do almost anything to prove your devotion and avoid abandonment.",
+                pattern: "Anxious attachment + devotional intensity.",
+                strengths: "Devoted, loyal, passionate, willing to grow",
+                growth: "Build a steadier inner foundation so your worth doesn't depend on others' reassurance.",
+                theme: "PP"
+            },
+            II: {
+                name: "Independent Icon",
+                description: "You pride yourself on needing no one. You're powerful, self-contained, and possibly lonely without knowing it.",
+                pattern: "Avoidant attachment + dismissive of needs.",
+                strengths: "Strong, capable, self-sufficient, high-achieving",
+                growth: "Allow yourself to need someone. It doesn't destroy you—it makes you human.",
+                theme: "II"
+            },
+            SHRINKER: {
+                name: "The Shrinker",
+                description: "You tend to withdraw and become smaller when things get intense.",
+                pattern: "Disorganized attachment + shrinking response.",
+                strengths: "Observant, sensitive, careful",
+                growth: "Practice taking up space and letting yourself be seen, even when it feels risky.",
+                theme: "MM" // Uses MM theme
+            },
+            PERFORMER: {
+                name: "The Performer",
+                description: "You use achievement and competence to mask your insecurities.",
+                pattern: "Anxious attachment + performance defense.",
+                strengths: "High-achieving, capable, reliable",
+                growth: "Separate your worth from your work. Practice 'being' rather than 'doing'.",
+                theme: "HD" // Uses HD theme
+            }
+        };
+
+        // State
+        let answers = {};
+        let currentProfile = null;
+        let scoringConfig = null; // Current scoring configuration
+
+        // Default scoring configuration
+        const defaultScoringConfig = {
+            scales: {
+                AA: { name: "Attachment Anxiety", questions: [3, 9, 11, 15, 17, 23, 30] },
+                AV: { name: "Attachment Avoidance", questions: [4, 7, 10, 14, 18, 24, 29, 35] },
+                DIS: { name: "Disorganization", questions: [12, 19, 32, 36] },
+                SEC: { name: "Security", questions: [2, 8, 13, 20, 27, 28, 31, 33, 37, 40] },
+                SH: { name: "Shame", questions: [5, 6, 16, 22, 34] },
+                PD: { name: "Performance Defense", questions: [21, 26, 39] },
+                IA: { name: "Intellectual Avoidance", questions: [14, 29] },
+                SR: { name: "Shrinking Response", questions: [25, 38] }
+            },
+            rules: [
+                { order: 1, profile: "SHRINKER", conditions: [{ scale: "DIS", operator: ">=", value: 15 }, { connector: "AND" }, { scale: "SR", operator: ">=", value: 8 }] },
+                { order: 2, profile: "MM", conditions: [{ scale: "DIS", operator: ">=", value: 15 }] },
+                { order: 3, profile: "GN", conditions: [{ scale: "SEC", operator: ">=", value: 36 }, { connector: "AND" }, { scale: "AA", operator: "<", value: 15 }, { connector: "AND" }, { scale: "AV", operator: "<", value: 17 }] },
+                { order: 4, profile: "HD", conditions: [{ scale: "AA", operator: ">=", value: 25 }, { connector: "AND" }, { scale: "SH", operator: ">=", value: 18 }, { connector: "AND" }, { scale: "PD", operator: ">=", value: 11 }] },
+                { order: 5, profile: "PERFORMER", conditions: [{ scale: "AA", operator: ">=", value: 25 }, { connector: "AND" }, { scale: "PD", operator: ">=", value: 11 }, { connector: "AND" }, { scale: "SH", operator: ">=", value: 11 }, { connector: "AND" }, { scale: "SH", operator: "<=", value: 17 }] },
+                { order: 6, profile: "PP", conditions: [{ scale: "AA", operator: ">=", value: 25 }, { connector: "AND" }, { question: 11, operator: ">=", value: 4 }, { connector: "AND" }, { question: 23, operator: ">=", value: 4 }] },
+                { order: 7, profile: "EE", conditions: [{ scale: "AA", operator: ">=", value: 25 }] },
+                { order: 8, profile: "CC", conditions: [{ scale: "AV", operator: ">=", value: 29 }, { connector: "AND" }, { scale: "IA", operator: ">=", value: 8 }] },
+                { order: 9, profile: "II", conditions: [{ scale: "AV", operator: ">=", value: 29 }, { connector: "AND" }, { question: 10, operator: ">=", value: 4 }, { connector: "AND" }, { question: 35, operator: ">=", value: 4 }] },
+                { order: 10, profile: "LW", conditions: [{ scale: "AV", operator: ">=", value: 29 }] },
+                { order: 11, profile: "GN", conditions: [] } // Default
+            ]
+        };
+
+        // Initialize with default config
+        scoringConfig = JSON.parse(JSON.stringify(defaultScoringConfig));
+
+        // Initialize form
+        function initForm() {
+            const form = document.getElementById('quizForm');
+            questions.forEach((q, index) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.style.animationDelay = `${index * 0.05}s`;
+                
+                card.innerHTML = `
+                    <fieldset>
+                        <legend class="question-label">
+                            <span class="question-number" aria-hidden="true">Q${index + 1}.</span>
+                            ${q.text}
+                        </legend>
+                        <div class="scale-labels" aria-hidden="true">
+                            <span>Not at all like me</span>
+                            <span>Very much like me</span>
+                        </div>
+                        <div class="likert-scale" role="radiogroup" aria-labelledby="q${index + 1}-label">
+                            ${[1, 2, 3, 4, 5].map(value => `
+                                <div class="likert-option">
+                                    <input type="radio" 
+                                           id="${q.id}_${value}" 
+                                           name="${q.id}" 
+                                           value="${value}"
+                                           aria-label="${getLikertLabel(value)} - ${q.text}"
+                                           onchange="handleAnswer('${q.id}', ${value})">
+                                    <label for="${q.id}_${value}">
+                                        <div class="likert-number" aria-hidden="true">${value}</div>
+                                        <div class="likert-text">${getLikertLabel(value)}</div>
+                                    </label>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </fieldset>
+                `;
+                
+                form.appendChild(card);
+            });
+        }
+
+        function getLikertLabel(value) {
+            const labels = {
+                1: "Not at all",
+                2: "A little",
+                3: "Somewhat",
+                4: "Quite a bit",
+                5: "Very much"
+            };
+            return labels[value];
+        }
+
+        function handleAnswer(questionId, value) {
+            answers[questionId] = value;
+            updateProgress();
+            
+            // Check if all answered and show modal
+            const answered = Object.keys(answers).length;
+            if (answered === questions.length) {
+                setTimeout(() => {
+                    calculateProfile(true); // true = show modal
+                }, 300);
+            }
+        }
+
+        function updateProgress() {
+            const answered = Object.keys(answers).length;
+            const total = questions.length;
+            const percentage = (answered / total) * 100;
+            
+            const progressText = document.getElementById('progressText');
+            const progressBar = document.querySelector('.progress-bar');
+            const progressFill = document.getElementById('progressFill');
+            
+            progressText.textContent = `${answered} of ${total} questions answered`;
+            progressFill.style.width = `${percentage}%`;
+            progressBar.setAttribute('aria-valuenow', percentage);
+            progressBar.setAttribute('aria-label', `${answered} of ${total} questions answered`);
+        }
+
+        function randomizeAnswers() {
+            answers = {};
+            questions.forEach(q => {
+                const value = Math.floor(Math.random() * 5) + 1;
+                answers[q.id] = value;
+                document.querySelector(`input[name="${q.id}"][value="${value}"]`).checked = true;
+            });
+            updateProgress();
+            setTimeout(() => {
+                calculateProfile(true); // true = show modal
+            }, 300);
+        }
+
+        function clearAll() {
+            answers = {};
+            document.getElementById('quizForm').reset();
+            updateProgress();
+            document.getElementById('resultSectionBottom').classList.add('hidden');
+            document.getElementById('resultSectionBottom').innerHTML = '';
+            document.getElementById('modalOverlay').classList.add('hidden');
+            document.body.className = '';
+            currentProfile = null;
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.add('hidden');
+        }
+
+        // Keyboard navigation for modal
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('modalOverlay');
+            const editor = document.getElementById('scoringEditorOverlay');
+            if (!modal.classList.contains('hidden')) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            }
+            if (editor && !editor.classList.contains('hidden')) {
+                if (e.key === 'Escape') {
+                    closeScoringEditor();
+                }
+            }
+        });
+
+        // Scoring Editor Functions
+        function openScoringEditor() {
+            document.getElementById('scoringEditorOverlay').classList.remove('hidden');
+            renderScalesEditor();
+            renderRulesEditor();
+            loadSavedConfigs();
+            switchEditorTab('scales');
+        }
+
+        function closeScoringEditor() {
+            document.getElementById('scoringEditorOverlay').classList.add('hidden');
+        }
+
+        function switchEditorTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.editor-tab-content').forEach(content => content.classList.add('hidden'));
+            
+            document.querySelector(`.tab-btn[onclick="switchEditorTab('${tab}')"]`).classList.add('active');
+            document.getElementById(`editorTab${tab.charAt(0).toUpperCase() + tab.slice(1)}`).classList.remove('hidden');
+        }
+
+        function renderScalesEditor() {
+            const container = document.getElementById('scalesEditor');
+            container.innerHTML = '';
+            
+            Object.keys(scoringConfig.scales).forEach(scaleKey => {
+                const scale = scoringConfig.scales[scaleKey];
+                const item = document.createElement('div');
+                item.className = 'scale-editor-item';
+                
+                const scaleName = scale.name || scaleKey;
+                const scaleQuestions = scale.questions || [];
+                
+                item.innerHTML = `
+                    <div class="scale-editor-header">
+                        <div class="scale-editor-name">${scaleName}</div>
+                    </div>
+                    <div class="scale-editor-description">Select which questions contribute to this scale:</div>
+                    <div class="question-selector">
+                        ${questions.map((q, idx) => {
+                            const qNum = idx + 1;
+                            const checked = scaleQuestions.includes(qNum) ? 'checked' : '';
+                            return `
+                                <input type="checkbox" 
+                                       id="scale_${scaleKey}_q${qNum}" 
+                                       class="question-checkbox" 
+                                       ${checked}
+                                       onchange="updateScaleQuestion('${scaleKey}', ${qNum}, this.checked)">
+                                <label for="scale_${scaleKey}_q${qNum}" class="question-checkbox-label">Q${qNum}</label>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function updateScaleQuestion(scaleKey, questionNum, isIncluded) {
+            if (!scoringConfig.scales[scaleKey].questions) {
+                scoringConfig.scales[scaleKey].questions = [];
+            }
+            if (isIncluded) {
+                if (!scoringConfig.scales[scaleKey].questions.includes(questionNum)) {
+                    scoringConfig.scales[scaleKey].questions.push(questionNum);
+                }
+            } else {
+                scoringConfig.scales[scaleKey].questions = scoringConfig.scales[scaleKey].questions.filter(q => q !== questionNum);
+            }
+        }
+
+        function renderRulesEditor() {
+            const container = document.getElementById('rulesEditor');
+            container.innerHTML = '';
+            
+            // Sort rules by order
+            const sortedRules = [...scoringConfig.rules].sort((a, b) => a.order - b.order);
+            
+            sortedRules.forEach((rule, idx) => {
+                const item = document.createElement('div');
+                item.className = 'rule-editor-item';
+                
+                const profileName = profiles[rule.profile]?.name || rule.profile;
+                
+                let conditionsHTML = '';
+                if (rule.conditions && rule.conditions.length > 0) {
+                    rule.conditions.forEach((cond, condIdx) => {
+                        if (cond.connector) {
+                            conditionsHTML += `<span class="rule-connector">${cond.connector}</span>`;
+                        } else {
+                            const scaleOptions = Object.keys(scoringConfig.scales).map(k => 
+                                `<option value="scale_${k}" ${cond.scale === k ? 'selected' : ''}>${scoringConfig.scales[k].name}</option>`
+                            ).join('');
+                            const questionOptions = questions.map((q, i) => 
+                                `<option value="question_${i+1}" ${cond.question === i+1 ? 'selected' : ''}>Question ${i+1}</option>`
+                            ).join('');
+                            
+                            const currentType = cond.scale ? 'scale' : 'question';
+                            const currentValue = cond.scale || cond.question;
+                            
+                            conditionsHTML += `
+                                <div class="rule-condition-row">
+                                    <select class="rule-select" onchange="updateRuleConditionType(${rule.order}, ${condIdx}, this.value)">
+                                        <option value="scale" ${currentType === 'scale' ? 'selected' : ''}>Scale</option>
+                                        <option value="question" ${currentType === 'question' ? 'selected' : ''}>Question</option>
+                                    </select>
+                                    <select class="rule-select" id="rule_${rule.order}_cond_${condIdx}_target" onchange="updateRuleConditionTarget(${rule.order}, ${condIdx}, this.value)">
+                                        ${currentType === 'scale' ? scaleOptions : questionOptions}
+                                    </select>
+                                    <select class="rule-select" onchange="updateRuleConditionOperator(${rule.order}, ${condIdx}, this.value)">
+                                        <option value=">=" ${cond.operator === '>=' ? 'selected' : ''}>is at least</option>
+                                        <option value="<=" ${cond.operator === '<=' ? 'selected' : ''}>is at most</option>
+                                        <option value=">" ${cond.operator === '>' ? 'selected' : ''}>is greater than</option>
+                                        <option value="<" ${cond.operator === '<' ? 'selected' : ''}>is less than</option>
+                                        <option value="==" ${cond.operator === '==' ? 'selected' : ''}>equals</option>
+                                    </select>
+                                    <input type="number" class="rule-input" value="${cond.value || 0}" min="0" max="50" onchange="updateRuleConditionValue(${rule.order}, ${condIdx}, parseInt(this.value))">
+                                </div>
+                            `;
+                        }
+                    });
+                } else {
+                    conditionsHTML = '<div class="rule-condition-row" style="color: var(--text-secondary);">Default rule (always matches)</div>';
+                }
+                
+                item.innerHTML = `
+                    <div class="rule-editor-header">
+                        <div class="rule-editor-profile">${profileName}</div>
+                        <div class="rule-editor-order">Order: ${rule.order}</div>
+                    </div>
+                    <div class="rule-condition">
+                        ${conditionsHTML}
+                    </div>
+                    <div style="margin-top: 12px; display: flex; gap: 8px;">
+                        <button class="btn btn-small" onclick="addRuleCondition(${rule.order})">Add Condition</button>
+                        <button class="btn btn-small" onclick="removeRule(${rule.order})">Remove Rule</button>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+            
+            // Add button to add new rule
+            const addRuleBtn = document.createElement('button');
+            addRuleBtn.className = 'btn btn-primary';
+            addRuleBtn.textContent = 'Add New Rule';
+            addRuleBtn.onclick = addNewRule;
+            addRuleBtn.style.marginTop = '16px';
+            container.appendChild(addRuleBtn);
+        }
+
+        function updateRuleConditionType(ruleOrder, condIdx, type) {
+            const rule = scoringConfig.rules.find(r => r.order === ruleOrder);
+            if (!rule || !rule.conditions[condIdx]) return;
+            
+            const cond = rule.conditions[condIdx];
+            if (type === 'scale') {
+                delete cond.question;
+                cond.scale = Object.keys(scoringConfig.scales)[0];
+            } else {
+                delete cond.scale;
+                cond.question = 1;
+            }
+            renderRulesEditor();
+        }
+
+        function updateRuleConditionTarget(ruleOrder, condIdx, value) {
+            const rule = scoringConfig.rules.find(r => r.order === ruleOrder);
+            if (!rule || !rule.conditions[condIdx]) return;
+            
+            const cond = rule.conditions[condIdx];
+            if (value.startsWith('scale_')) {
+                cond.scale = value.replace('scale_', '');
+                delete cond.question;
+            } else if (value.startsWith('question_')) {
+                cond.question = parseInt(value.replace('question_', ''));
+                delete cond.scale;
+            }
+        }
+
+        function updateRuleConditionOperator(ruleOrder, condIdx, operator) {
+            const rule = scoringConfig.rules.find(r => r.order === ruleOrder);
+            if (rule && rule.conditions[condIdx]) {
+                rule.conditions[condIdx].operator = operator;
+            }
+        }
+
+        function updateRuleConditionValue(ruleOrder, condIdx, value) {
+            const rule = scoringConfig.rules.find(r => r.order === ruleOrder);
+            if (rule && rule.conditions[condIdx]) {
+                rule.conditions[condIdx].value = value;
+            }
+        }
+
+        function addRuleCondition(ruleOrder) {
+            const rule = scoringConfig.rules.find(r => r.order === ruleOrder);
+            if (!rule) return;
+            
+            if (rule.conditions.length > 0 && !rule.conditions[rule.conditions.length - 1].connector) {
+                rule.conditions.push({ connector: 'AND' });
+            }
+            
+            rule.conditions.push({
+                scale: Object.keys(scoringConfig.scales)[0],
+                operator: '>=',
+                value: 0
+            });
+            renderRulesEditor();
+        }
+
+        function removeRule(ruleOrder) {
+            scoringConfig.rules = scoringConfig.rules.filter(r => r.order !== ruleOrder);
+            renderRulesEditor();
+        }
+
+        function addNewRule() {
+            const maxOrder = Math.max(...scoringConfig.rules.map(r => r.order), 0);
+            scoringConfig.rules.push({
+                order: maxOrder + 1,
+                profile: 'GN',
+                conditions: []
+            });
+            renderRulesEditor();
+        }
+
+        function loadPreset(presetName) {
+            if (presetName === 'default') {
+                scoringConfig = JSON.parse(JSON.stringify(defaultScoringConfig));
+            } else if (presetName === 'normal') {
+                // Normal distribution: distribute questions evenly across scales
+                scoringConfig = JSON.parse(JSON.stringify(defaultScoringConfig));
+                const allQuestions = Array.from({length: 40}, (_, i) => i + 1);
+                const scaleKeys = Object.keys(scoringConfig.scales);
+                const questionsPerScale = Math.floor(allQuestions.length / scaleKeys.length);
+                
+                scaleKeys.forEach((key, idx) => {
+                    const start = idx * questionsPerScale;
+                    const end = idx === scaleKeys.length - 1 ? allQuestions.length : (idx + 1) * questionsPerScale;
+                    scoringConfig.scales[key].questions = allQuestions.slice(start, end);
+                });
+                
+                // Create rules that distribute profiles more evenly
+                scoringConfig.rules = [
+                    { order: 1, profile: "GN", conditions: [{ scale: "SEC", operator: ">=", value: 20 }] },
+                    { order: 2, profile: "EE", conditions: [{ scale: "AA", operator: ">=", value: 15 }] },
+                    { order: 3, profile: "LW", conditions: [{ scale: "AV", operator: ">=", value: 15 }] },
+                    { order: 4, profile: "MM", conditions: [{ scale: "DIS", operator: ">=", value: 8 }] },
+                    { order: 5, profile: "HD", conditions: [{ scale: "SH", operator: ">=", value: 10 }] },
+                    { order: 6, profile: "CC", conditions: [{ scale: "IA", operator: ">=", value: 4 }] },
+                    { order: 7, profile: "PP", conditions: [{ scale: "AA", operator: ">=", value: 12 }] },
+                    { order: 8, profile: "II", conditions: [{ scale: "AV", operator: ">=", value: 12 }] },
+                    { order: 9, profile: "GN", conditions: [] } // Default
+                ];
+            }
+            renderScalesEditor();
+            renderRulesEditor();
+        }
+
+        function saveConfiguration() {
+            const name = document.getElementById('configName').value.trim();
+            if (!name) {
+                alert('Please enter a configuration name');
+                return;
+            }
+            
+            const saved = JSON.parse(localStorage.getItem('scoringConfigs') || '{}');
+            saved[name] = JSON.parse(JSON.stringify(scoringConfig));
+            localStorage.setItem('scoringConfigs', JSON.stringify(saved));
+            
+            document.getElementById('configName').value = '';
+            loadSavedConfigs();
+        }
+
+        function loadConfiguration(name) {
+            const saved = JSON.parse(localStorage.getItem('scoringConfigs') || '{}');
+            if (saved[name]) {
+                scoringConfig = JSON.parse(JSON.stringify(saved[name]));
+                renderScalesEditor();
+                renderRulesEditor();
+            }
+        }
+
+        function deleteConfiguration(name) {
+            if (confirm(`Delete configuration "${name}"?`)) {
+                const saved = JSON.parse(localStorage.getItem('scoringConfigs') || '{}');
+                delete saved[name];
+                localStorage.setItem('scoringConfigs', JSON.stringify(saved));
+                loadSavedConfigs();
+            }
+        }
+
+        function loadSavedConfigs() {
+            const container = document.getElementById('savedConfigs');
+            const saved = JSON.parse(localStorage.getItem('scoringConfigs') || '{}');
+            const names = Object.keys(saved);
+            
+            if (names.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary);">No saved configurations</p>';
+                return;
+            }
+            
+            container.innerHTML = names.map(name => `
+                <div class="saved-config-item">
+                    <div class="saved-config-name">${name}</div>
+                    <div class="saved-config-actions">
+                        <button class="btn btn-small" onclick="loadConfiguration('${name}')">Load</button>
+                        <button class="btn btn-small" onclick="deleteConfiguration('${name}')">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function testCurrentConfiguration() {
+            const testResults = document.getElementById('testResults');
+            testResults.style.display = 'block';
+            testResults.innerHTML = '<p>Testing with current answers...</p>';
+            
+            // Use the custom scoring config to calculate
+            const result = calculateProfileWithConfig(scoringConfig, false);
+            
+            if (result && Object.keys(answers).length > 0) {
+                testResults.innerHTML = `
+                    <h4 style="margin-bottom: 12px;">Test Results:</h4>
+                    <p><strong>Profile:</strong> ${result.profile.name}</p>
+                    <p><strong>Rule Matched:</strong> ${result.ruleMatched}</p>
+                    <p style="margin-top: 12px;"><strong>Scale Scores:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 8px;">
+                        ${Object.keys(result.scales).map(k => 
+                            `<li>${scoringConfig.scales[k]?.name || k}: ${result.scales[k]}</li>`
+                        ).join('')}
+                    </ul>
+                `;
+            } else {
+                testResults.innerHTML = '<p style="color: var(--warning);">No answers provided. Please answer some questions first.</p>';
+            }
+        }
+
+        function calculateProfile(showModal = false) {
+            const result = calculateProfileWithConfig(scoringConfig, showModal);
+            return result;
+        }
+
+        function calculateProfileWithConfig(config, showModal = false) {
+            // Helper to get numeric question ID from Q1, Q2, etc.
+            const getQ = (qNum) => answers[`Q${qNum}`] || 0;
+            
+            // Calculate scales using custom configuration
+            const calculatedScales = {};
+            Object.keys(config.scales).forEach(scaleKey => {
+                const scale = config.scales[scaleKey];
+                calculatedScales[scaleKey] = (scale.questions || []).reduce((sum, qNum) => sum + getQ(qNum), 0);
+            });
+
+            // Evaluate rules in order
+            const sortedRules = [...config.rules].sort((a, b) => a.order - b.order);
+            let matchedRule = null;
+            let profileCode = 'GN';
+            
+            for (const rule of sortedRules) {
+                if (evaluateRule(rule, calculatedScales, getQ)) {
+                    matchedRule = rule;
+                    profileCode = rule.profile;
+                    break;
+                }
+            }
+
+            // Generate rule description
+            let ruleMatched = 'Default: Grounded Navigator';
+            if (matchedRule) {
+                const conditions = matchedRule.conditions.filter(c => !c.connector);
+                if (conditions.length > 0) {
+                    ruleMatched = conditions.map(cond => {
+                        if (cond.scale) {
+                            const value = calculatedScales[cond.scale];
+                            return `${config.scales[cond.scale]?.name || cond.scale} (${value}) ${getOperatorText(cond.operator)} ${cond.value}`;
+                        } else if (cond.question) {
+                            const value = getQ(cond.question);
+                            return `Q${cond.question} (${value}) ${getOperatorText(cond.operator)} ${cond.value}`;
+                        }
+                        return '';
+                    }).filter(s => s).join(' AND ') + ` → ${profiles[profileCode]?.name || profileCode}`;
+                } else {
+                    ruleMatched = `Default rule → ${profiles[profileCode]?.name || profileCode}`;
+                }
+            }
+
+            // Display results
+            const profile = profiles[profileCode];
+            if (!profile) {
+                console.error('Profile not found:', profileCode);
+                return null;
+            }
+
+            currentProfile = profile;
+            
+            // Apply theme
+            document.body.className = `theme-${profile.theme}`;
+
+            // Generate result HTML
+            const resultHTML = generateResultHTML(
+                profile, 
+                calculatedScales.AA || 0, 
+                calculatedScales.AV || 0, 
+                calculatedScales.DIS || 0, 
+                calculatedScales.SEC || 0, 
+                calculatedScales.SH || 0, 
+                calculatedScales.PD || 0, 
+                calculatedScales.IA || 0, 
+                calculatedScales.SR || 0, 
+                ruleMatched
+            );
+
+            // Show in modal if requested
+            if (showModal) {
+                document.getElementById('modalResultContent').innerHTML = resultHTML;
+                document.getElementById('modalOverlay').classList.remove('hidden');
+                // Focus management for accessibility
+                const modalTitle = document.getElementById('modalTitle');
+                if (modalTitle) {
+                    setTimeout(() => modalTitle.focus(), 100);
+                }
+            }
+
+            // Always show at bottom if all answered
+            const answered = Object.keys(answers).length;
+            if (answered === questions.length) {
+                document.getElementById('resultSectionBottom').innerHTML = resultHTML;
+                document.getElementById('resultSectionBottom').classList.remove('hidden');
+            }
+
+            return {
+                profile,
+                scales: calculatedScales,
+                ruleMatched
+            };
+        }
+
+        function evaluateRule(rule, calculatedScales, getQ) {
+            if (!rule.conditions || rule.conditions.length === 0) {
+                return true; // Default rule
+            }
+
+            const conditions = rule.conditions.filter(c => !c.connector);
+            if (conditions.length === 0) return true;
+
+            let result = null;
+            let currentConnector = 'AND';
+
+            for (let i = 0; i < rule.conditions.length; i++) {
+                const item = rule.conditions[i];
+                
+                if (item.connector) {
+                    currentConnector = item.connector;
+                    continue;
+                }
+
+                let conditionResult = false;
+                if (item.scale) {
+                    const value = calculatedScales[item.scale] || 0;
+                    conditionResult = evaluateCondition(value, item.operator, item.value);
+                } else if (item.question) {
+                    const value = getQ(item.question);
+                    conditionResult = evaluateCondition(value, item.operator, item.value);
+                }
+
+                if (result === null) {
+                    result = conditionResult;
+                } else {
+                    if (currentConnector === 'AND') {
+                        result = result && conditionResult;
+                    } else if (currentConnector === 'OR') {
+                        result = result || conditionResult;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        function evaluateCondition(value, operator, target) {
+            switch (operator) {
+                case '>=': return value >= target;
+                case '<=': return value <= target;
+                case '>': return value > target;
+                case '<': return value < target;
+                case '==': return value === target;
+                default: return false;
+            }
+        }
+
+        function getOperatorText(operator) {
+            switch (operator) {
+                case '>=': return '≥';
+                case '<=': return '≤';
+                case '>': return '>';
+                case '<': return '<';
+                case '==': return '=';
+                default: return operator;
+            }
+        }
+
+        function generateResultHTML(profile, AA, AV, DIS, SEC, SH, PD, IA, SR, ruleMatched) {
+            return `
+                <h2 class="profile-name" id="modalTitle">${profile.name}</h2>
+                <p class="profile-description" id="modalDescription">${profile.description}</p>
+                
+                <div class="profile-detail">
+                    <h3>Core Pattern</h3>
+                    <p>${profile.pattern}</p>
+                </div>
+                
+                <div class="profile-detail">
+                    <h3>Strengths</h3>
+                    <p>${profile.strengths}</p>
+                </div>
+                
+                <div class="profile-detail">
+                    <h3>Growth Edge</h3>
+                    <p>${profile.growth}</p>
+                </div>
+
+                <div class="commentary-section">
+                    <button class="commentary-toggle" onclick="toggleCommentary(this)">
+                        <span>Show how this was calculated</span>
+                    </button>
+                    <div class="commentary-content hidden">
+                        <h4>Scale Scores</h4>
+                        <div class="scale-score">
+                            <span class="scale-name">Attachment Anxiety</span>
+                            <span class="scale-value">${AA} / 35</span>
+                        </div>
+                        <div class="scale-score">
+                            <span class="scale-name">Attachment Avoidance</span>
+                            <span class="scale-value">${AV} / 40</span>
+                        </div>
+                        <div class="scale-score">
+                            <span class="scale-name">Disorganization</span>
+                            <span class="scale-value">${DIS} / 20</span>
+                        </div>
+                        <div class="scale-score">
+                            <span class="scale-name">Secure Foundation</span>
+                            <span class="scale-value">${SEC} / 50</span>
+                        </div>
+                        <div class="scale-score">
+                            <span class="scale-name">Shame Intensity</span>
+                            <span class="scale-value">${SH} / 25</span>
+                        </div>
+                        <div class="scale-score">
+                            <span class="scale-name">Performance Defense</span>
+                            <span class="scale-value">${PD} / 15</span>
+                        </div>
+                        <div class="scale-score">
+                            <span class="scale-name">Intellectual Avoidance</span>
+                            <span class="scale-value">${IA} / 10</span>
+                        </div>
+                        <div class="scale-score">
+                            <span class="scale-name">Shrinking Response</span>
+                            <span class="scale-value">${SR} / 10</span>
+                        </div>
+                        <div style="margin-top: 20px; padding: 20px; background: var(--bg-primary); border-radius: 6px; color: var(--text-secondary); font-size: var(--font-size-base); line-height: 1.7;">
+                            <strong>Scale Ranges:</strong><br>
+                            Attachment Anxiety: 7-35 (Low: 7-14, Moderate: 15-24, High: 25-35)<br>
+                            Attachment Avoidance: 8-40 (Low: 8-16, Moderate: 17-28, High: 29-40)<br>
+                            Disorganization: 4-20 (Low: 4-8, Moderate: 9-14, High: 15-20)<br>
+                            Secure Foundation: 10-50 (Low: 10-20, Moderate: 21-35, High: 36-50)<br>
+                            Shame Intensity: 5-25 (Low: 5-10, Moderate: 11-17, High: 18-25)<br>
+                            Performance Defense: 3-15 (Low: 3-6, Moderate: 7-10, High: 11-15)<br>
+                            Intellectual Avoidance: 2-10 (Low: 2-4, Moderate: 5-7, High: 8-10)<br>
+                            Shrinking Response: 2-10 (Low: 2-4, Moderate: 5-7, High: 8-10)
+                        </div>
+                        <div class="rule-matched">
+                            <strong>Rule Matched:</strong><br>
+                            ${ruleMatched}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleCommentary(button) {
+            const content = button.nextElementSibling;
+            const span = button.querySelector('span');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                span.textContent = 'Hide calculation details';
+            } else {
+                content.classList.add('hidden');
+                span.textContent = 'Show how this was calculated';
+            }
+        }
+
+        // Close modal on overlay click
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'modalOverlay') {
+                closeModal();
+            }
+        });
+
+        // Initialize on load
+        initForm();
+    </script>
+</body>
+</html>
+

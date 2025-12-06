@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Feel it, Don't Think It</title>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <!-- Chart.js for graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-900: #0A0A0A;
+            --gray-800: #1A1A1A;
+            --gray-700: #2A2A2A;
+            --gray-600: #3A3A3A;
+            --gray-500: #666666;
+            --gray-400: #999999;
+            --gray-300: #CCCCCC;
+            --spacing: 8px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.5;
+        }
+
+        /* Auth Screen */
+        .auth-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: calc(var(--spacing) * 3);
+        }
+
+        .auth-card {
+            background: var(--gray-900);
+            padding: calc(var(--spacing) * 6);
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid var(--gray-800);
+        }
+
+        .auth-card h1 {
+            font-size: 24px;
+            margin-bottom: calc(var(--spacing) * 2);
+        }
+
+        .auth-card p {
+            color: var(--gray-400);
+            margin-bottom: calc(var(--spacing) * 4);
+        }
+
+        button {
+            background: var(--white);
+            color: var(--black);
+            border: none;
+            padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 3);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            background: var(--gray-300);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            display: none;
+        }
+
+        .admin-header {
+            position: sticky;
+            top: 0;
+            background: var(--black);
+            border-bottom: 1px solid var(--gray-800);
+            padding: calc(var(--spacing) * 3);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing) * 2);
+            color: var(--gray-400);
+            font-size: 14px;
+        }
+
+        .logout-btn {
+            background: var(--gray-800);
+            color: var(--white);
+            padding: calc(var(--spacing) * 1) calc(var(--spacing) * 2);
+            font-size: 12px;
+            width: auto;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: calc(var(--spacing) * 2);
+            padding: calc(var(--spacing) * 3);
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .tab {
+            background: transparent;
+            color: var(--gray-400);
+            padding: calc(var(--spacing) * 1) calc(var(--spacing) * 2);
+            border-bottom: 2px solid transparent;
+            width: auto;
+        }
+
+        .tab.active {
+            color: var(--white);
+            border-bottom-color: var(--white);
+        }
+
+        /* Content Area */
+        .content {
+            padding: calc(var(--spacing) * 3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: calc(var(--spacing) * 2);
+            margin-bottom: calc(var(--spacing) * 3);
+            flex-wrap: wrap;
+        }
+
+        input[type="text"],
+        select {
+            background: var(--gray-900);
+            color: var(--white);
+            border: 1px solid var(--gray-800);
+            padding: calc(var(--spacing) * 1.5);
+            font-family: inherit;
+            font-size: 14px;
+            min-width: 200px;
+        }
+
+        /* Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: calc(var(--spacing) * 2);
+        }
+
+        .data-table th,
+        .data-table td {
+            text-align: left;
+            padding: calc(var(--spacing) * 2);
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .data-table th {
+            color: var(--gray-400);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+
+        .data-table td {
+            font-size: 14px;
+        }
+
+        .data-table tr:hover {
+            background: var(--gray-900);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: calc(var(--spacing) * 3);
+            margin-bottom: calc(var(--spacing) * 4);
+        }
+
+        .stat-card {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            padding: calc(var(--spacing) * 3);
+        }
+
+        .stat-card h3 {
+            color: var(--gray-400);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: calc(var(--spacing) * 1);
+        }
+
+        .stat-card .value {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: calc(var(--spacing) * 1);
+        }
+
+        .stat-card .label {
+            color: var(--gray-500);
+            font-size: 14px;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            padding: calc(var(--spacing) * 3);
+            margin-bottom: calc(var(--spacing) * 4);
+        }
+
+        .chart-container h2 {
+            font-size: 16px;
+            margin-bottom: calc(var(--spacing) * 3);
+        }
+
+        /* Actions */
+        .actions {
+            display: flex;
+            gap: calc(var(--spacing) * 2);
+            margin-bottom: calc(var(--spacing) * 3);
+        }
+
+        .actions button {
+            width: auto;
+        }
+
+        /* Edit Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: var(--gray-900);
+            max-width: 800px;
+            margin: calc(var(--spacing) * 6) auto;
+            padding: calc(var(--spacing) * 4);
+            border: 1px solid var(--gray-800);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: calc(var(--spacing) * 3);
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+        }
+
+        .close-modal {
+            background: transparent;
+            color: var(--gray-400);
+            padding: calc(var(--spacing) * 1);
+            width: auto;
+        }
+
+        .form-group {
+            margin-bottom: calc(var(--spacing) * 3);
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--gray-400);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: calc(var(--spacing) * 1);
+        }
+
+        textarea {
+            background: var(--gray-800);
+            color: var(--white);
+            border: 1px solid var(--gray-700);
+            padding: calc(var(--spacing) * 2);
+            font-family: inherit;
+            font-size: 14px;
+            width: 100%;
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 14px;
+            margin-top: calc(var(--spacing) * 2);
+        }
+
+        .success-message {
+            color: #44ff44;
+            font-size: 14px;
+            margin-top: calc(var(--spacing) * 2);
+        }
+
+        .loading {
+            text-align: center;
+            padding: calc(var(--spacing) * 6);
+            color: var(--gray-400);
+        }
+    </style>
+</head>
+<body>
+    <!-- Auth Screen -->
+    <div id="authScreen" class="auth-screen">
+        <div class="auth-card">
+            <h1>Admin Access</h1>
+            <p>Sign in with your authorized Google account to access the admin panel.</p>
+            <button onclick="signInWithGoogle()">Sign in with Google</button>
+            <div id="authError" class="error-message" style="display:none;"></div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel">
+        <div class="admin-header">
+            <h1>Admin Panel</h1>
+            <div class="user-info">
+                <span id="userEmail"></span>
+                <span id="userRole" style="color: var(--gray-500);"></span>
+                <button class="logout-btn" onclick="signOut()">Sign Out</button>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('submissions')">Submissions</button>
+            <button class="tab" onclick="switchTab('combinations')">Affect Combinations</button>
+        </div>
+
+        <div class="content">
+            <!-- Submissions Tab -->
+            <div id="submissionsTab" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Submissions</h3>
+                        <div class="value" id="totalSubmissions">0</div>
+                        <div class="label">All time</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Today</h3>
+                        <div class="value" id="todaySubmissions">0</div>
+                        <div class="label">Last 24 hours</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>This Week</h3>
+                        <div class="value" id="weekSubmissions">0</div>
+                        <div class="label">Last 7 days</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h2>Submissions Over Time</h2>
+                    <canvas id="submissionsChart"></canvas>
+                </div>
+
+                <div class="actions">
+                    <button onclick="downloadSubmissions()">Download All Data (CSV)</button>
+                    <button onclick="loadSubmissions()">Refresh</button>
+                </div>
+
+                <div id="submissionsLoading" class="loading">Loading submissions...</div>
+                <table id="submissionsTable" class="data-table" style="display:none;">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Subject</th>
+                            <th>CAS Element</th>
+                            <th>Top 3 Affects</th>
+                            <th>Valence</th>
+                        </tr>
+                    </thead>
+                    <tbody id="submissionsBody"></tbody>
+                </table>
+            </div>
+
+            <!-- Combinations Tab -->
+            <div id="combinationsTab" class="tab-content">
+                <div class="filters">
+                    <input type="text" id="filterAffect1" placeholder="Filter Affect 1" onkeyup="filterCombinations()">
+                    <input type="text" id="filterAffect2" placeholder="Filter Affect 2" onkeyup="filterCombinations()">
+                    <input type="text" id="filterAffect3" placeholder="Filter Affect 3" onkeyup="filterCombinations()">
+                    <select id="filterValence" onchange="filterCombinations()">
+                        <option value="">All Valence</option>
+                        <option value="Strongly Positive">Strongly Positive</option>
+                        <option value="Positive">Positive</option>
+                        <option value="Negative">Negative</option>
+                        <option value="Strongly Negative">Strongly Negative</option>
+                    </select>
+                </div>
+
+                <div class="actions">
+                    <button onclick="loadCombinations()">Refresh</button>
+                    <button onclick="exportCombinationsJSON()">Export JSON</button>
+                    <button onclick="document.getElementById('importFile').click()">Import JSON</button>
+                    <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importCombinationsJSON(event)">
+                    <div style="color: var(--gray-400); font-size: 14px; display: flex; align-items: center; margin-left: auto;">
+                        <span id="combinationsCount">0 combinations</span>
+                    </div>
+                </div>
+                <div id="importStatus" style="margin-top: 16px; display: none;"></div>
+
+                <div id="combinationsLoading" class="loading">Loading combinations...</div>
+                <table id="combinationsTable" class="data-table" style="display:none;">
+                    <thead>
+                        <tr>
+                            <th>Affect 1</th>
+                            <th>Affect 2</th>
+                            <th>Affect 3</th>
+                            <th>Valence</th>
+                            <th>Feeling</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="combinationsBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Affect Combination</h2>
+                <button class="close-modal" onclick="closeEditModal()">✕</button>
+            </div>
+            <form id="editForm" onsubmit="saveEdit(event)">
+                <div class="form-group">
+                    <label>CAS Element</label>
+                    <input type="text" id="editCasElement" disabled style="background: var(--gray-700);">
+                </div>
+                <div class="form-group">
+                    <label>Feeling</label>
+                    <input type="text" id="editFeeling" required>
+                </div>
+                <div class="form-group">
+                    <label>Approach</label>
+                    <textarea id="editApproach" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Weather</label>
+                    <textarea id="editWeather" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Music Genre</label>
+                    <input type="text" id="editMusicGenre" required>
+                </div>
+                <button type="submit">Save Changes</button>
+                <div id="editError" class="error-message" style="display:none;"></div>
+                <div id="editSuccess" class="success-message" style="display:none;"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        console.log('=== ADMIN PANEL SCRIPT LOADING ===');
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB29fRL5UdQodkzCDaKM8Ro7dtXpAf-Uro",
+            authDomain: "realness-score.firebaseapp.com",
+            projectId: "realness-score",
+            storageBucket: "realness-score.firebasestorage.app",
+            messagingSenderId: "433844819847",
+            appId: "1:433844819847:web:0dffeed8056eac7e4f8990"
+        };
+
+        console.log('=== INITIALIZING FIREBASE ===');
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        console.log('=== FIREBASE INITIALIZED ===');
+
+        // Set auth persistence to LOCAL (persists even when browser is closed)
+        auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+            .then(() => {
+                console.log('Auth persistence set to LOCAL');
+            })
+            .catch((error) => {
+                console.error('Error setting persistence:', error);
+            });
+
+        // Admin users
+        const ADMINS = {
+            'daniel@monumental-i.com': 'super_admin',
+            'scottconkrightdcatlanta@gmail.com': 'admin'
+        };
+
+        let currentUser = null;
+        let currentRole = null;
+        let allCombinations = [];
+        let submissionsChart = null;
+
+        // Handle redirect result FIRST, then set up auth observer
+        console.log('=== CHECKING REDIRECT RESULT ===');
+        auth.getRedirectResult()
+            .then((result) => {
+                console.log('Redirect result:', result);
+                if (result.user) {
+                    console.log('Sign-in successful via redirect, user:', result.user.email);
+                } else {
+                    console.log('No redirect result (normal if direct page load)');
+                }
+
+                // NOW set up the auth state observer after redirect is handled
+                console.log('=== SETTING UP AUTH STATE OBSERVER ===');
+                auth.onAuthStateChanged(async (user) => {
+                    console.log('=== AUTH STATE CHANGED ===');
+                    if (user) {
+                        console.log('User signed in:', user.email);
+                        console.log('Available admins:', Object.keys(ADMINS));
+
+                        const role = ADMINS[user.email];
+                        console.log('Role found:', role);
+
+                        if (role) {
+                            console.log('Access granted! Showing admin panel...');
+                            currentUser = user;
+                            currentRole = role;
+                            showAdminPanel();
+                        } else {
+                            console.log('Access DENIED - email not in admin list');
+                            showError(`You do not have admin access. Your email: ${user.email}`);
+                            auth.signOut();
+                        }
+                    } else {
+                        console.log('No user - showing auth screen');
+                        showAuthScreen();
+                    }
+                });
+            })
+            .catch((error) => {
+                console.error('Redirect sign-in error:', error);
+                showError('Sign in failed: ' + error.message);
+            });
+
+        // Sign In - Try popup first, fallback to redirect
+        async function signInWithGoogle() {
+            try {
+                console.log('=== SIGN IN BUTTON CLICKED ===');
+                const provider = new firebase.auth.GoogleAuthProvider();
+
+                // Force account selection every time
+                provider.setCustomParameters({
+                    prompt: 'select_account'
+                });
+
+                console.log('Attempting popup sign-in...');
+                try {
+                    const result = await auth.signInWithPopup(provider);
+                    console.log('Popup sign-in successful!', result.user.email);
+                } catch (popupError) {
+                    console.error('Popup failed, trying redirect...', popupError);
+                    await auth.signInWithRedirect(provider);
+                }
+            } catch (error) {
+                console.error('Sign in error:', error);
+                showError('Sign in failed: ' + error.message);
+            }
+        }
+
+        // Sign Out
+        function signOut() {
+            auth.signOut();
+        }
+
+        // Show Screens
+        function showAuthScreen() {
+            document.getElementById('authScreen').style.display = 'flex';
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+
+        function showAdminPanel() {
+            document.getElementById('authScreen').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+            document.getElementById('userEmail').textContent = currentUser.email;
+            document.getElementById('userRole').textContent = currentRole === 'super_admin' ? '(Super Admin)' : '(Admin)';
+
+            loadSubmissions();
+            loadCombinations();
+        }
+
+        function showError(message) {
+            const errorEl = document.getElementById('authError');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+        }
+
+        // Tab Switching
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
+        // Load Submissions
+        async function loadSubmissions() {
+            try {
+                document.getElementById('submissionsLoading').style.display = 'block';
+                document.getElementById('submissionsTable').style.display = 'none';
+
+                const snapshot = await db.collection('submissions').orderBy('timestamp', 'desc').get();
+                const submissions = [];
+
+                snapshot.forEach(doc => {
+                    submissions.push({ id: doc.id, ...doc.data() });
+                });
+
+                // Calculate stats
+                const now = Date.now();
+                const dayAgo = now - (24 * 60 * 60 * 1000);
+                const weekAgo = now - (7 * 24 * 60 * 60 * 1000);
+
+                const todayCount = submissions.filter(s => s.timestamp?.toMillis() > dayAgo).length;
+                const weekCount = submissions.filter(s => s.timestamp?.toMillis() > weekAgo).length;
+
+                document.getElementById('totalSubmissions').textContent = submissions.length;
+                document.getElementById('todaySubmissions').textContent = todayCount;
+                document.getElementById('weekSubmissions').textContent = weekCount;
+
+                // Render table
+                const tbody = document.getElementById('submissionsBody');
+                tbody.innerHTML = '';
+
+                submissions.forEach(sub => {
+                    const row = tbody.insertRow();
+                    const timestamp = sub.timestamp ? new Date(sub.timestamp.toMillis()) : new Date();
+
+                    row.innerHTML = `
+                        <td>${timestamp.toLocaleDateString()} ${timestamp.toLocaleTimeString()}</td>
+                        <td>${sub.subject || 'N/A'}</td>
+                        <td>${sub.casElement || 'N/A'}</td>
+                        <td>${sub.top3Affects?.join(', ') || 'N/A'}</td>
+                        <td>${sub.valenceScore || 'N/A'}</td>
+                    `;
+                });
+
+                // Create chart
+                createSubmissionsChart(submissions);
+
+                document.getElementById('submissionsLoading').style.display = 'none';
+                document.getElementById('submissionsTable').style.display = 'table';
+            } catch (error) {
+                console.error('Error loading submissions:', error);
+                document.getElementById('submissionsLoading').innerHTML = 'Error loading submissions: ' + error.message;
+            }
+        }
+
+        // Create Chart
+        function createSubmissionsChart(submissions) {
+            const ctx = document.getElementById('submissionsChart');
+
+            // Group by date
+            const dateGroups = {};
+            submissions.forEach(sub => {
+                if (sub.timestamp) {
+                    const date = new Date(sub.timestamp.toMillis()).toLocaleDateString();
+                    dateGroups[date] = (dateGroups[date] || 0) + 1;
+                }
+            });
+
+            const dates = Object.keys(dateGroups).sort();
+            const counts = dates.map(date => dateGroups[date]);
+
+            if (submissionsChart) {
+                submissionsChart.destroy();
+            }
+
+            submissionsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Submissions',
+                        data: counts,
+                        borderColor: '#FFFFFF',
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#FFFFFF' }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: '#999999' },
+                            grid: { color: '#2A2A2A' }
+                        },
+                        y: {
+                            ticks: { color: '#999999' },
+                            grid: { color: '#2A2A2A' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Download Submissions
+        function downloadSubmissions() {
+            db.collection('submissions').orderBy('timestamp', 'desc').get()
+                .then(snapshot => {
+                    const rows = [['Date', 'Time', 'Subject', 'CAS Element', 'Affect 1', 'Affect 2', 'Affect 3', 'Valence Score']];
+
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        const timestamp = data.timestamp ? new Date(data.timestamp.toMillis()) : new Date();
+                        rows.push([
+                            timestamp.toLocaleDateString(),
+                            timestamp.toLocaleTimeString(),
+                            data.subject || '',
+                            data.casElement || '',
+                            data.top3Affects?.[0] || '',
+                            data.top3Affects?.[1] || '',
+                            data.top3Affects?.[2] || '',
+                            data.valenceScore || ''
+                        ]);
+                    });
+
+                    const csv = rows.map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+                    const blob = new Blob([csv], { type: 'text/csv' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `submissions-${Date.now()}.csv`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                })
+                .catch(error => alert('Error downloading data: ' + error.message));
+        }
+
+        // Load Combinations
+        async function loadCombinations() {
+            try {
+                document.getElementById('combinationsLoading').style.display = 'block';
+                document.getElementById('combinationsTable').style.display = 'none';
+
+                const snapshot = await db.collection('affectCombinations').get();
+                allCombinations = [];
+
+                snapshot.forEach(doc => {
+                    allCombinations.push({ id: doc.id, ...doc.data() });
+                });
+
+                document.getElementById('combinationsCount').textContent = `${allCombinations.length} combinations`;
+                filterCombinations();
+
+                document.getElementById('combinationsLoading').style.display = 'none';
+                document.getElementById('combinationsTable').style.display = 'table';
+            } catch (error) {
+                console.error('Error loading combinations:', error);
+                document.getElementById('combinationsLoading').innerHTML = 'Error loading combinations: ' + error.message;
+            }
+        }
+
+        // Filter Combinations
+        function filterCombinations() {
+            const affect1Filter = document.getElementById('filterAffect1').value.toLowerCase();
+            const affect2Filter = document.getElementById('filterAffect2').value.toLowerCase();
+            const affect3Filter = document.getElementById('filterAffect3').value.toLowerCase();
+            const valenceFilter = document.getElementById('filterValence').value;
+
+            const filtered = allCombinations.filter(combo => {
+                const matchesAffect1 = !affect1Filter || (combo.affect1 && combo.affect1.toLowerCase().includes(affect1Filter));
+                const matchesAffect2 = !affect2Filter || (combo.affect2 && combo.affect2.toLowerCase().includes(affect2Filter));
+                const matchesAffect3 = !affect3Filter || (combo.affect3 && combo.affect3.toLowerCase().includes(affect3Filter));
+                const matchesValence = !valenceFilter || combo.valence === valenceFilter;
+
+                return matchesAffect1 && matchesAffect2 && matchesAffect3 && matchesValence;
+            });
+
+            renderCombinations(filtered);
+        }
+
+        // Render Combinations
+        function renderCombinations(combinations) {
+            const tbody = document.getElementById('combinationsBody');
+            tbody.innerHTML = '';
+
+            combinations.forEach(combo => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${combo.affect1 || 'N/A'}</td>
+                    <td>${combo.affect2 || 'N/A'}</td>
+                    <td>${combo.affect3 || 'N/A'}</td>
+                    <td>${combo.valence || 'N/A'}</td>
+                    <td>${combo.feeling ? combo.feeling.substring(0, 50) + '...' : 'N/A'}</td>
+                    <td><button onclick="editCombination('${combo.id}')" style="width: auto; padding: 8px 16px;">Edit</button></td>
+                `;
+            });
+
+            document.getElementById('combinationsCount').textContent = `${combinations.length} of ${allCombinations.length} combinations`;
+        }
+
+        // Edit Combination
+        let currentEditId = null;
+
+        function editCombination(id) {
+            const combo = allCombinations.find(c => c.id === id);
+            if (!combo) return;
+
+            currentEditId = id;
+            document.getElementById('editCasElement').value = id;
+            document.getElementById('editFeeling').value = combo.feeling || '';
+            document.getElementById('editApproach').value = combo.approach || '';
+            document.getElementById('editWeather').value = combo.weather || '';
+            document.getElementById('editMusicGenre').value = combo.musicGenre || '';
+
+            document.getElementById('editModal').style.display = 'block';
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+            currentEditId = null;
+        }
+
+        async function saveEdit(event) {
+            event.preventDefault();
+
+            try {
+                const updates = {
+                    feeling: document.getElementById('editFeeling').value,
+                    approach: document.getElementById('editApproach').value,
+                    weather: document.getElementById('editWeather').value,
+                    musicGenre: document.getElementById('editMusicGenre').value
+                };
+
+                await db.collection('affectCombinations').doc(currentEditId).update(updates);
+
+                document.getElementById('editSuccess').textContent = 'Saved successfully!';
+                document.getElementById('editSuccess').style.display = 'block';
+                document.getElementById('editError').style.display = 'none';
+
+                // Reload combinations
+                await loadCombinations();
+
+                setTimeout(() => {
+                    closeEditModal();
+                    document.getElementById('editSuccess').style.display = 'none';
+                }, 1500);
+            } catch (error) {
+                document.getElementById('editError').textContent = 'Error saving: ' + error.message;
+                document.getElementById('editError').style.display = 'block';
+                document.getElementById('editSuccess').style.display = 'none';
+            }
+        }
+
+        // Export Combinations as JSON
+        function exportCombinationsJSON() {
+            db.collection('affectCombinations').get()
+                .then(snapshot => {
+                    const combinations = [];
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        combinations.push({
+                            affect1: data.affect1 || '',
+                            affect2: data.affect2 || '',
+                            affect3: data.affect3 || '',
+                            valence: data.valence || '',
+                            feeling: data.feeling || '',
+                            approach: data.approach || '',
+                            weather: data.weather || '',
+                            musicGenre: data.musicGenre || '',
+                            imagePromptBase: data.imagePromptBase || ''
+                        });
+                    });
+
+                    const json = JSON.stringify(combinations, null, 2);
+                    const blob = new Blob([json], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `affect-combinations-${Date.now()}.json`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+
+                    showImportStatus(`Exported ${combinations.length} combinations`, 'success');
+                })
+                .catch(error => {
+                    showImportStatus('Error exporting: ' + error.message, 'error');
+                });
+        }
+
+        // Import Combinations from JSON
+        async function importCombinationsJSON(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            try {
+                const text = await file.text();
+                const combinations = JSON.parse(text);
+
+                if (!Array.isArray(combinations)) {
+                    throw new Error('Invalid JSON format. Expected an array of combinations.');
+                }
+
+                showImportStatus(`Importing ${combinations.length} combinations...`, 'info');
+
+                const batch = db.batch();
+                let updateCount = 0;
+                let createCount = 0;
+
+                for (const combo of combinations) {
+                    // Validate required fields
+                    if (!combo.affect1 || !combo.affect2 || !combo.affect3) {
+                        console.warn('Skipping invalid combination:', combo);
+                        continue;
+                    }
+
+                    // Generate CAS element code as document ID (unique key)
+                    const casElement = getCASCodeFromAffect(combo.affect1) +
+                                     getCASCodeFromAffect(combo.affect2) +
+                                     getCASCodeFromAffect(combo.affect3);
+
+                    const docRef = db.collection('affectCombinations').doc(casElement);
+
+                    // Check if document exists
+                    const doc = await docRef.get();
+                    if (doc.exists) {
+                        updateCount++;
+                    } else {
+                        createCount++;
+                    }
+
+                    // Update or create
+                    batch.set(docRef, {
+                        affect1: combo.affect1,
+                        affect2: combo.affect2,
+                        affect3: combo.affect3,
+                        valence: combo.valence || '',
+                        feeling: combo.feeling || '',
+                        approach: combo.approach || '',
+                        weather: combo.weather || '',
+                        musicGenre: combo.musicGenre || '',
+                        imagePromptBase: combo.imagePromptBase || ''
+                    }, { merge: true });
+                }
+
+                await batch.commit();
+
+                showImportStatus(
+                    `✓ Import complete! ${createCount} created, ${updateCount} updated`,
+                    'success'
+                );
+
+                // Reload combinations
+                await loadCombinations();
+
+            } catch (error) {
+                showImportStatus('Error importing: ' + error.message, 'error');
+                console.error('Import error:', error);
+            }
+
+            // Reset file input
+            event.target.value = '';
+        }
+
+        // Helper: Get CAS code from affect name
+        function getCASCodeFromAffect(affect) {
+            const codes = {
+                'Curiosity': 'Cu',
+                'Joy': 'Jo',
+                'Surprise': 'St',
+                'Fear': 'Fe',
+                'Anger': 'An',
+                'Sadness': 'Sa',
+                'Disgust': 'Di',
+                'Withdrawing': 'Pu',
+                'Dropping': 'Dr'
+            };
+            return codes[affect] || 'Xx';
+        }
+
+        // Show Import Status
+        function showImportStatus(message, type) {
+            const statusEl = document.getElementById('importStatus');
+            statusEl.textContent = message;
+            statusEl.style.display = 'block';
+
+            if (type === 'error') {
+                statusEl.style.color = '#ff4444';
+            } else if (type === 'success') {
+                statusEl.style.color = '#44ff44';
+            } else {
+                statusEl.style.color = '#ffaa00';
+            }
+
+            // Auto-hide after 5 seconds for success/info
+            if (type !== 'error') {
+                setTimeout(() => {
+                    statusEl.style.display = 'none';
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>

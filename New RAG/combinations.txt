@@ -1,0 +1,73 @@
+Affect 1,Affect 2
+Curiosity,Joy
+Curiosity,Surprise–Startle
+Curiosity,Fear
+Curiosity,Anger
+Curiosity,Sadness
+Curiosity,Disgust
+Curiosity,Pulling-Away
+Curiosity,The Drop
+Joy,Curiosity
+Joy,Surprise–Startle
+Joy,Fear
+Joy,Anger
+Joy,Sadness
+Joy,Disgust
+Joy,Pulling-Away
+Joy,The Drop
+Surprise–Startle,Curiosity
+Surprise–Startle,Joy
+Surprise–Startle,Fear
+Surprise–Startle,Anger
+Surprise–Startle,Sadness
+Surprise–Startle,Disgust
+Surprise–Startle,Pulling-Away
+Surprise–Startle,The Drop
+Fear,Curiosity
+Fear,Joy
+Fear,Surprise–Startle
+Fear,Anger
+Fear,Sadness
+Fear,Disgust
+Fear,Pulling-Away
+Fear,The Drop
+Anger,Curiosity
+Anger,Joy
+Anger,Surprise–Startle
+Anger,Fear
+Anger,Sadness
+Anger,Disgust
+Anger,Pulling-Away
+Anger,The Drop
+Sadness,Curiosity
+Sadness,Joy
+Sadness,Surprise–Startle
+Sadness,Fear
+Sadness,Anger
+Sadness,Disgust
+Sadness,Pulling-Away
+Sadness,The Drop
+Disgust,Curiosity
+Disgust,Joy
+Disgust,Surprise–Startle
+Disgust,Fear
+Disgust,Anger
+Disgust,Sadness
+Disgust,Pulling-Away
+Disgust,The Drop
+Pulling-Away,Curiosity
+Pulling-Away,Joy
+Pulling-Away,Surprise–Startle
+Pulling-Away,Fear
+Pulling-Away,Anger
+Pulling-Away,Sadness
+Pulling-Away,Disgust
+Pulling-Away,The Drop
+The Drop,Curiosity
+The Drop,Joy
+The Drop,Surprise–Startle
+The Drop,Fear
+The Drop,Anger
+The Drop,Sadness
+The Drop,Disgust
+The Drop,Pulling-Away

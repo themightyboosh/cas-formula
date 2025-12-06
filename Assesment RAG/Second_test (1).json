@@ -1,0 +1,29 @@
+{
+  "name": "Second test",
+  "description": "Lorem IPsum",
+  "chunks": [
+    {
+      "name": "se",
+      "descriptor": "seee",
+      "information": "seee",
+      "sequence_number": 0,
+      "children": [
+        {
+          "name": "ewew",
+          "descriptor": "wewe",
+          "information": "wewewe",
+          "sequence_number": 0,
+          "children": [
+            {
+              "name": "weee",
+              "descriptor": "weewe",
+              "information": "wewewewe",
+              "sequence_number": 0,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
