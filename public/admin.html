@@ -460,6 +460,7 @@
                             <th>Affect 3</th>
                             <th>Valence</th>
                             <th>Feeling</th>
+                            <th>Image Prompt</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -897,6 +898,7 @@
                 const affect3 = combo.Affect3 || combo.affect3 || 'N/A';
                 const valence = combo.valence_category || combo.valence || 'N/A';
                 const feeling = combo.feeling || 'N/A';
+                const imagePrompt = combo.imagePrompt || 'N/A'; // NEW: Image Prompt (renamed from Feeling 2)
 
                 const row = tbody.insertRow();
                 row.innerHTML = `
@@ -904,7 +906,8 @@
                     <td>${affect2}</td>
                     <td>${affect3}</td>
                     <td>${valence}</td>
-                    <td>${feeling.length > 50 ? feeling.substring(0, 50) + '...' : feeling}</td>
+                    <td>${feeling.length > 30 ? feeling.substring(0, 30) + '...' : feeling}</td>
+                    <td>${imagePrompt.length > 30 ? imagePrompt.substring(0, 30) + '...' : imagePrompt}</td>
                     <td><button onclick="editCombination('${combo.id}')" style="width: auto; padding: 8px 16px;">Edit</button></td>
                 `;
             });

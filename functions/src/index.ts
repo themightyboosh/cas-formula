@@ -247,14 +247,40 @@ export const personalizeApproach = functions.https.onRequest((req, res) => {
 
       // Support both CSV field names (Affect1) and legacy names (affect1)
       const feeling = matrixData.feeling;
-      const approach = matrixData.approach;
-      const weather = matrixData.weather;
+      let approach = matrixData.approach;
+      let weather = matrixData.weather;
       const spotifySeed = matrixData.spotify_seed;
+      const spotifyPrompt = matrixData.spotify_prompt; // NEW: priority for Spotify
+
+      // NEW: Replace {{subject}} and {{pronoun}} placeholders
+      // Enforce lowercase for subject as per requirements
+      const normalizedSubjectLower = subject.toLowerCase();
+
+      // Replace {{subject}} placeholder
+      approach = approach.replace(/\{\{subject\}\}/g, normalizedSubjectLower);
+      weather = weather.replace(/\{\{subject\}\}/g, normalizedSubjectLower);
+
+      // Replace {{pronoun}} placeholder based on detected pronouns
+      // When pronoun is "it", remove pronoun references entirely
+      if (pronouns === 'it') {
+        // Remove pronoun placeholders when subject is not a person
+        approach = approach.replace(/\{\{pronoun\}\}/g, '');
+        weather = weather.replace(/\{\{pronoun\}\}/g, '');
+      } else if (pronouns === 'she/her') {
+        approach = approach.replace(/\{\{pronoun\}\}/g, 'she');
+        weather = weather.replace(/\{\{pronoun\}\}/g, 'she');
+      } else if (pronouns === 'he/him') {
+        approach = approach.replace(/\{\{pronoun\}\}/g, 'he');
+        weather = weather.replace(/\{\{pronoun\}\}/g, 'he');
+      } else if (pronouns === 'they/them') {
+        approach = approach.replace(/\{\{pronoun\}\}/g, 'they');
+        weather = weather.replace(/\{\{pronoun\}\}/g, 'they');
+      }
 
       // Extract music genre from spotify_seed for display
       const musicGenre = extractMusicGenre(spotifySeed);
 
-    // Use Gemini to personalize the approach text
+    // Use Gemini to personalize the approach text further (if needed)
       const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     const systemPrompt = `You are a therapeutic copywriter crafting personalized affect guidance for users.
@@ -351,19 +377,20 @@ Personalize the approach text and generate the Spotify query. Return JSON only.`
       parsed.personalizedApproach = parsed.personalizedApproach.substring(0, 547) + '...';
     }
 
-      // Replace {subject} placeholder in weather text
-      const personalizedWeather = weather ? weather.replace(/\{subject\}/g, subject) : weather;
+      // Weather already has placeholders replaced above, no need to replace {subject} again
+      // (Already done at line 260-261 and 267-278)
 
       // Return complete results
       res.status(200).json({
         result: {
           casElement,
-          feeling: feeling, // Direct from Firestore
-          approach: parsed.personalizedApproach, // From Gemini
-          weather: personalizedWeather, // Personalized weather
+          feeling: feeling, // Direct from Firestore - NEW format: "The [adj] [adj] [noun]"
+          approach: parsed.personalizedApproach, // From Gemini, with placeholders replaced
+          weather: weather, // Already personalized with placeholders replaced
           musicGenre: musicGenre, // Extracted from spotify_seed
           spotifyQuery: parsed.spotifyQuery, // From Gemini (for backwards compatibility)
-          spotifySeed: spotifySeed // NEW: Spotify Recommendations API parameters
+          spotifySeed: spotifySeed, // Spotify Recommendations API parameters
+          spotifyPrompt: spotifyPrompt || '' // NEW: Priority prompt for Spotify (includes feeling phrase)
         }
       });
     } catch (error: any) {
@@ -375,16 +402,19 @@ Personalize the approach text and generate the Spotify query. Return JSON only.`
 
 /**
  * Cloud Function 3: Get Spotify Tracks
- * Supports both Recommendations API (with seed params) and Search API (with query)
+ * Priority order:
+ * 1. spotifyPrompt (uses feeling phrase from CSV)
+ * 2. spotifySeed (Recommendations API parameters)
+ * 3. query (fallback search)
  * Returns 3 track details including album art and preview URL
  */
 export const getSpotifyTrack = functions.https.onRequest((req, res) => {
   return corsHandler(req, res, async () => {
     try {
-      const { query, spotifySeed } = req.body;
+      const { query, spotifySeed, spotifyPrompt } = req.body;
 
-      if (!query && !spotifySeed) {
-        res.status(400).json({ error: 'Either query or spotifySeed is required' });
+      if (!query && !spotifySeed && !spotifyPrompt) {
+        res.status(400).json({ error: 'Either spotifyPrompt, spotifySeed, or query is required' });
         return;
       }
 
@@ -420,8 +450,53 @@ export const getSpotifyTrack = functions.https.onRequest((req, res) => {
 
       let tracks: any[] = [];
 
-      // Use Recommendations API if spotifySeed is provided (preferred method)
-      if (spotifySeed) {
+      // PRIORITY 1: Use spotifyPrompt if provided (contains feeling phrase)
+      if (spotifyPrompt && tracks.length === 0) {
+        console.log('Using Spotify Search with prompt:', spotifyPrompt);
+
+        // Extract the feeling phrase from spotifyPrompt (e.g., "The Harsh Severe Fire")
+        // Try progressively shorter versions if no match
+        let searchQuery = spotifyPrompt;
+        let attemptCount = 0;
+        const maxAttempts = 5;
+
+        while (tracks.length === 0 && attemptCount < maxAttempts && searchQuery) {
+          console.log(`Search attempt ${attemptCount + 1}: "${searchQuery}"`);
+
+          const searchResponse = await fetch(
+            `https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=track&limit=3`,
+            {
+              headers: {
+                'Authorization': `Bearer ${accessToken}`
+              }
+            }
+          );
+
+          if (searchResponse.ok) {
+            const searchData: any = await searchResponse.json();
+            tracks = searchData.tracks?.items || [];
+          }
+
+          // If no results, remove last word and try again
+          if (tracks.length === 0) {
+            const words = searchQuery.trim().split(' ');
+            if (words.length > 1) {
+              words.pop(); // Remove last word
+              searchQuery = words.join(' ');
+              attemptCount++;
+            } else {
+              break; // Can't shorten further
+            }
+          }
+        }
+
+        if (tracks.length > 0) {
+          console.log(`Found ${tracks.length} tracks with query: "${searchQuery}"`);
+        }
+      }
+
+      // PRIORITY 2: Use Recommendations API if spotifySeed is provided
+      if (spotifySeed && tracks.length === 0) {
         console.log('Using Spotify Recommendations API with params:', spotifySeed);
 
         const recommendationsResponse = await fetch(
@@ -436,22 +511,15 @@ export const getSpotifyTrack = functions.https.onRequest((req, res) => {
         if (!recommendationsResponse.ok) {
           const errorText = await recommendationsResponse.text();
           console.error('Failed to get Spotify recommendations:', errorText);
-          // Fallback to search if recommendations fail
-          if (query) {
-            console.log('Falling back to search API with query:', query);
-          } else {
-            res.status(500).json({ error: 'Failed to get Spotify recommendations' });
-            return;
-          }
         } else {
           const recommendationsData: any = await recommendationsResponse.json();
           tracks = recommendationsData.tracks || [];
         }
       }
 
-      // Fallback to Search API if no tracks from recommendations or only query provided
+      // PRIORITY 3: Fallback to Search API with query
       if (tracks.length === 0 && query) {
-        console.log('Using Spotify Search API with query:', query);
+        console.log('Using Spotify Search API with fallback query:', query);
 
         const searchResponse = await fetch(
           `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=3`,

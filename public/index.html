@@ -1349,11 +1349,12 @@
                     document.getElementById('weather').textContent = data.weather;
                     document.getElementById('musicGenre').textContent = data.musicGenre;
 
-                    // Store Spotify query, seed params, image prompt, and fetch song
+                    // Store Spotify query, seed params, prompt, image prompt, and fetch song
                     state.spotifyQuery = data.spotifyQuery;
                     state.spotifySeed = data.spotifySeed;
+                    state.spotifyPrompt = data.spotifyPrompt; // NEW: Priority prompt with feeling phrase
                     state.imagePrompt = data.imagePrompt;
-                    fetchSpotifySong(data.spotifySeed, data.spotifyQuery);
+                    fetchSpotifySong(data.spotifySeed, data.spotifyQuery, data.spotifyPrompt);
 
                     // IMAGE PROMPT PIPELINE - Debug logging
                     console.log('═══════════════════════════════════════════');
@@ -1437,9 +1438,10 @@
             console.log('Applied valence background color: state-' + animationState);
         }
 
-        // Fetch Spotify songs using spotifySeed (Recommendations API) or query (Search API)
-        async function fetchSpotifySong(spotifySeed, query) {
+        // Fetch Spotify songs - PRIORITY: spotifyPrompt > spotifySeed > query
+        async function fetchSpotifySong(spotifySeed, query, spotifyPrompt) {
             try {
+                console.log('Spotify prompt (priority):', spotifyPrompt);
                 console.log('Spotify seed params:', spotifySeed);
                 console.log('Spotify query (fallback):', query);
 
@@ -1447,7 +1449,7 @@
                 const response = await fetch('https://us-central1-realness-score.cloudfunctions.net/getSpotifyTrack', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ spotifySeed, query })
+                    body: JSON.stringify({ spotifyPrompt, spotifySeed, query })
                 });
 
                 if (!response.ok) {

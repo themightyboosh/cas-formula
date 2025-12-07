@@ -70,7 +70,8 @@ async function clearOldData() {
 async function importCSV() {
   console.log('📥 Starting CSV import...');
 
-  const csvPath = path.join(__dirname, '../import.csv');
+  // Use affect-combinations-final.csv (new format with 13 columns)
+  const csvPath = path.join(__dirname, '../affect-combinations-final.csv');
   const csvContent = fs.readFileSync(csvPath, 'utf-8');
 
   // Parse CSV with proper multi-line support
@@ -103,18 +104,21 @@ async function importCSV() {
                        getCASCode(combo.Affect2) +
                        getCASCode(combo.Affect3);
 
-      // Store in Firestore
+      // Store in Firestore with NEW fields from affect-combinations-final.csv
       await db.collection('affectCombinations').doc(casElement).set({
         Affect1: combo.Affect1,
         Affect2: combo.Affect2,
         Affect3: combo.Affect3,
+        subject: combo.subject || '{{subject}}', // NEW: placeholder field
+        pronoun: combo.pronoun || '{{pronoun}}', // NEW: placeholder field
         approach: combo.approach || '',
         valence_raw: combo.valence_raw || '',
         valence_category: combo.valence_category || '',
         spotify_seed: combo.spotify_seed || '',
         spotify_prompt: combo.spotify_prompt || '',
         weather: combo.weather || '',
-        feeling: combo.feeling || ''
+        feeling: combo.feeling || '', // NEW: "The [adj] [adj] [noun]" format
+        imagePrompt: combo['Feeling 2'] || '' // NEW: renamed from "Feeling 2"
       });
 
       createCount++;
