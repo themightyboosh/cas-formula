@@ -868,10 +868,16 @@
             const valenceFilter = document.getElementById('filterValence').value;
 
             const filtered = allCombinations.filter(combo => {
-                const matchesAffect1 = !affect1Filter || (combo.affect1 && combo.affect1.toLowerCase().includes(affect1Filter));
-                const matchesAffect2 = !affect2Filter || (combo.affect2 && combo.affect2.toLowerCase().includes(affect2Filter));
-                const matchesAffect3 = !affect3Filter || (combo.affect3 && combo.affect3.toLowerCase().includes(affect3Filter));
-                const matchesValence = !valenceFilter || combo.valence === valenceFilter;
+                // Support both capitalized (Affect1) and lowercase (affect1) field names
+                const affect1 = combo.Affect1 || combo.affect1 || '';
+                const affect2 = combo.Affect2 || combo.affect2 || '';
+                const affect3 = combo.Affect3 || combo.affect3 || '';
+                const valence = combo.valence_category || combo.valence || '';
+
+                const matchesAffect1 = !affect1Filter || affect1.toLowerCase().includes(affect1Filter);
+                const matchesAffect2 = !affect2Filter || affect2.toLowerCase().includes(affect2Filter);
+                const matchesAffect3 = !affect3Filter || affect3.toLowerCase().includes(affect3Filter);
+                const matchesValence = !valenceFilter || valence === valenceFilter;
 
                 return matchesAffect1 && matchesAffect2 && matchesAffect3 && matchesValence;
             });
@@ -885,13 +891,20 @@
             tbody.innerHTML = '';
 
             combinations.forEach(combo => {
+                // Support both capitalized and lowercase field names
+                const affect1 = combo.Affect1 || combo.affect1 || 'N/A';
+                const affect2 = combo.Affect2 || combo.affect2 || 'N/A';
+                const affect3 = combo.Affect3 || combo.affect3 || 'N/A';
+                const valence = combo.valence_category || combo.valence || 'N/A';
+                const feeling = combo.feeling || 'N/A';
+
                 const row = tbody.insertRow();
                 row.innerHTML = `
-                    <td>${combo.affect1 || 'N/A'}</td>
-                    <td>${combo.affect2 || 'N/A'}</td>
-                    <td>${combo.affect3 || 'N/A'}</td>
-                    <td>${combo.valence || 'N/A'}</td>
-                    <td>${combo.feeling ? combo.feeling.substring(0, 50) + '...' : 'N/A'}</td>
+                    <td>${affect1}</td>
+                    <td>${affect2}</td>
+                    <td>${affect3}</td>
+                    <td>${valence}</td>
+                    <td>${feeling.length > 50 ? feeling.substring(0, 50) + '...' : feeling}</td>
                     <td><button onclick="editCombination('${combo.id}')" style="width: auto; padding: 8px 16px;">Edit</button></td>
                 `;
             });
