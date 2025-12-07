@@ -375,6 +375,7 @@
         <div class="tabs">
             <button class="tab active" onclick="switchTab('submissions')">Submissions</button>
             <button class="tab" onclick="switchTab('combinations')">Affect Combinations</button>
+            <button class="tab" onclick="switchTab('prompts')">AI Prompts</button>
         </div>
 
         <div class="content">
@@ -464,6 +465,33 @@
                     </thead>
                     <tbody id="combinationsBody"></tbody>
                 </table>
+            </div>
+
+            <!-- AI Prompts Tab -->
+            <div id="promptsTab" class="tab-content">
+                <div style="padding: calc(var(--spacing) * 3);">
+                    <h2 style="font-size: 20px; margin-bottom: calc(var(--spacing) * 3);">AI Prompts Used in the App</h2>
+
+                    <div style="margin-bottom: calc(var(--spacing) * 6);">
+                        <h3 style="font-size: 16px; margin-bottom: calc(var(--spacing) * 2); color: var(--white);">Prompt 1: Icon Detection & Grammar Normalization</h3>
+                        <p style="color: var(--gray-400); margin-bottom: calc(var(--spacing) * 2); font-size: 14px;">
+                            Used on Screen 2 when user enters their subject. Detects appropriate icon, pronouns, and normalizes grammar.
+                        </p>
+                        <div id="iconPromptContent" style="background: var(--gray-900); padding: calc(var(--spacing) * 3); border: 1px solid var(--gray-800); font-family: monospace; font-size: 12px; line-height: 1.6; white-space: pre-wrap; overflow-x: auto; max-height: 400px; overflow-y: auto;">
+                            Loading...
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: calc(var(--spacing) * 6);">
+                        <h3 style="font-size: 16px; margin-bottom: calc(var(--spacing) * 2); color: var(--white);">Prompt 2: Approach Text Personalization</h3>
+                        <p style="color: var(--gray-400); margin-bottom: calc(var(--spacing) * 2); font-size: 14px;">
+                            Used on Results screen to personalize the default approach text with user's subject and pronouns.
+                        </p>
+                        <div id="approachPromptContent" style="background: var(--gray-900); padding: calc(var(--spacing) * 3); border: 1px solid var(--gray-800); font-family: monospace; font-size: 12px; line-height: 1.6; white-space: pre-wrap; overflow-x: auto; max-height: 400px; overflow-y: auto;">
+                            Loading...
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -649,6 +677,30 @@
             // Update tab content
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             document.getElementById(tabName + 'Tab').classList.add('active');
+
+            // Load data for specific tabs
+            if (tabName === 'prompts') {
+                loadPrompts();
+            }
+        }
+
+        // Load and display AI prompts
+        async function loadPrompts() {
+            try {
+                // Fetch the Cloud Function source to extract prompts
+                const response = await fetch('https://us-central1-realness-score.cloudfunctions.net/getPrompts');
+                const data = await response.json();
+
+                // Display Icon Detection Prompt
+                document.getElementById('iconPromptContent').textContent = data.iconPrompt || 'Unable to load prompt';
+
+                // Display Approach Personalization Prompt
+                document.getElementById('approachPromptContent').textContent = data.approachPrompt || 'Unable to load prompt';
+            } catch (error) {
+                console.error('Error loading prompts:', error);
+                document.getElementById('iconPromptContent').textContent = 'Error loading prompt: ' + error.message;
+                document.getElementById('approachPromptContent').textContent = 'Error loading prompt: ' + error.message;
+            }
         }
 
         // Load Submissions
