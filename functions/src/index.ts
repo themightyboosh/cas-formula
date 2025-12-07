@@ -1,8 +1,9 @@
-import * as functions from 'firebase-functions';
+import * as functions from 'firebase-functions/v1';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import * as admin from 'firebase-admin';
 import cors = require('cors');
 import { VertexAI } from '@google-cloud/vertexai';
+import { Request, Response } from 'firebase-functions/v1';
 
 admin.initializeApp();
 
@@ -505,7 +506,7 @@ export const getSpotifyTrack = functions.https.onRequest((req, res) => {
 export const generateImage = functions.runWith({
   timeoutSeconds: 300,
   memory: '512MB'
-}).https.onRequest((req, res) => {
+}).https.onRequest((req: Request, res: Response) => {
   return corsHandler(req, res, async () => {
     try {
       const { imagePrompt } = req.body;
