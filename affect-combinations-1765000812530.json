@@ -1,0 +1,3026 @@
+[
+  {
+    "affect1": "Curiosity",
+    "affect2": "Joy",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of interest and pleasure, colored by a touch of shock.\n\nStay with the interest and let it guide your exploration. Use the pleasure to connect with what's happening, while being aware of the shock as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Joy",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of interest and pleasure, colored by a touch of worry.\n\nStay with the interest and let it guide your exploration. Use the pleasure to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Joy",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of inquiry and delight, colored by a touch of irritation.\n\nStay with the inquiry and let it guide your exploration. Use the delight to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Joy",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of interest and delight, colored by a touch of grief.\n\nStay with the interest and let it guide your exploration. Use the delight to connect with what's happening, while being aware of the grief as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Joy",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of inquiry and pleasure, colored by a touch of aversion.\n\nStay with the inquiry and let it guide your exploration. Use the pleasure to connect with what's happening, while being aware of the aversion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Joy",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of inquiry and pleasure, colored by a touch of separation.\n\nStay with the inquiry and let it guide your exploration. Use the pleasure to connect with what's happening, while being aware of the separation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Joy",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of interest and happiness, colored by a touch of embarrassment.\n\nStay with the interest and let it guide your exploration. Use the happiness to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Surprise–Startle",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of wonder and alarm, colored by a touch of connection.\n\nStay with the wonder and let it guide your exploration. Use the alarm to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Surprise–Startle",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of wonder and startle, colored by a touch of anxiety.\n\nStay with the wonder and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Surprise–Startle",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of wonder and surprise, colored by a touch of irritation.\n\nStay with the wonder and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Surprise–Startle",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of interest and startle, colored by a touch of loss.\n\nStay with the interest and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the loss as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Surprise–Startle",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of interest and startle, colored by a touch of distaste.\n\nStay with the interest and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the distaste as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Surprise–Startle",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of wonder and shock, colored by a touch of distance.\n\nStay with the wonder and let it guide your exploration. Use the shock to connect with what's happening, while being aware of the distance as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Surprise–Startle",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of wonder and surprise, colored by a touch of humiliation.\n\nStay with the wonder and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Fear",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of wonder and worry, colored by a touch of connection.\n\nStay with the wonder and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Fear",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of interest and anxiety, colored by a touch of alarm.\n\nStay with the interest and let it guide your exploration. Use the anxiety to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Fear",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of wonder and worry, colored by a touch of indignation.\n\nStay with the wonder and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the indignation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Fear",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of interest and dread, colored by a touch of sorrow.\n\nStay with the interest and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Fear",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of wonder and dread, colored by a touch of repulsion.\n\nStay with the wonder and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Fear",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of exploration and dread, colored by a touch of withdrawal.\n\nStay with the exploration and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the withdrawal as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Fear",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of wonder and caution, colored by a touch of shame.\n\nStay with the wonder and let it guide your exploration. Use the caution to connect with what's happening, while being aware of the shame as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Anger",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of inquiry and irritation, colored by a touch of delight.\n\nStay with the inquiry and let it guide your exploration. Use the irritation to connect with what's happening, while being aware of the delight as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Anger",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of inquiry and frustration, colored by a touch of startle.\n\nStay with the inquiry and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the startle as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Anger",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of exploration and frustration, colored by a touch of dread.\n\nStay with the exploration and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the dread as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Anger",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of inquiry and frustration, colored by a touch of melancholy.\n\nStay with the inquiry and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the melancholy as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Anger",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of exploration and indignation, colored by a touch of revulsion.\n\nStay with the exploration and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the revulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Anger",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of wonder and irritation, colored by a touch of detachment.\n\nStay with the wonder and let it guide your exploration. Use the irritation to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Anger",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of inquiry and indignation, colored by a touch of shame.\n\nStay with the inquiry and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the shame as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Sadness",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of exploration and loss, colored by a touch of connection.\n\nStay with the exploration and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Sadness",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of interest and grief, colored by a touch of alarm.\n\nStay with the interest and let it guide your exploration. Use the grief to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Sadness",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of inquiry and melancholy, colored by a touch of worry.\n\nStay with the inquiry and let it guide your exploration. Use the melancholy to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Sadness",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of inquiry and melancholy, colored by a touch of frustration.\n\nStay with the inquiry and let it guide your exploration. Use the melancholy to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Sadness",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of interest and sorrow, colored by a touch of distaste.\n\nStay with the interest and let it guide your exploration. Use the sorrow to connect with what's happening, while being aware of the distaste as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Sadness",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of inquiry and loss, colored by a touch of detachment.\n\nStay with the inquiry and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Sadness",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of inquiry and sorrow, colored by a touch of humiliation.\n\nStay with the inquiry and let it guide your exploration. Use the sorrow to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Disgust",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of interest and distaste, colored by a touch of connection.\n\nStay with the interest and let it guide your exploration. Use the distaste to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Disgust",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of inquiry and aversion, colored by a touch of shock.\n\nStay with the inquiry and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the shock as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Disgust",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of wonder and repulsion, colored by a touch of dread.\n\nStay with the wonder and let it guide your exploration. Use the repulsion to connect with what's happening, while being aware of the dread as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Disgust",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of inquiry and distaste, colored by a touch of frustration.\n\nStay with the inquiry and let it guide your exploration. Use the distaste to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Disgust",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of interest and distaste, colored by a touch of loss.\n\nStay with the interest and let it guide your exploration. Use the distaste to connect with what's happening, while being aware of the loss as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Disgust",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of exploration and repulsion, colored by a touch of distance.\n\nStay with the exploration and let it guide your exploration. Use the repulsion to connect with what's happening, while being aware of the distance as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Disgust",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of inquiry and aversion, colored by a touch of humiliation.\n\nStay with the inquiry and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Pulling-Away",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of wonder and separation, colored by a touch of happiness.\n\nStay with the wonder and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Pulling-Away",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of exploration and separation, colored by a touch of surprise.\n\nStay with the exploration and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the surprise as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Pulling-Away",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of wonder and detachment, colored by a touch of anxiety.\n\nStay with the wonder and let it guide your exploration. Use the detachment to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Pulling-Away",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of wonder and withdrawal, colored by a touch of frustration.\n\nStay with the wonder and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Pulling-Away",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of inquiry and distance, colored by a touch of sorrow.\n\nStay with the inquiry and let it guide your exploration. Use the distance to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Pulling-Away",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of inquiry and separation, colored by a touch of aversion.\n\nStay with the inquiry and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the aversion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "Pulling-Away",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of interest and separation, colored by a touch of humiliation.\n\nStay with the interest and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "The Drop",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of exploration and embarrassment, colored by a touch of happiness.\n\nStay with the exploration and let it guide your exploration. Use the embarrassment to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "The Drop",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of inquiry and shame, colored by a touch of startle.\n\nStay with the inquiry and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the startle as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "The Drop",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of interest and shame, colored by a touch of caution.\n\nStay with the interest and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the caution as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "The Drop",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of exploration and diminishment, colored by a touch of rage.\n\nStay with the exploration and let it guide your exploration. Use the diminishment to connect with what's happening, while being aware of the rage as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "The Drop",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of inquiry and shame, colored by a touch of grief.\n\nStay with the inquiry and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the grief as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "The Drop",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of inquiry and shame, colored by a touch of aversion.\n\nStay with the inquiry and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the aversion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Curiosity",
+    "affect2": "The Drop",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of exploration and humiliation, colored by a touch of detachment.\n\nStay with the exploration and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Curiosity",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of delight and interest, colored by a touch of alarm.\n\nStay with the delight and let it guide your exploration. Use the interest to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Curiosity",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of pleasure and interest, colored by a touch of caution.\n\nStay with the pleasure and let it guide your exploration. Use the interest to connect with what's happening, while being aware of the caution as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Curiosity",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of delight and inquiry, colored by a touch of indignation.\n\nStay with the delight and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the indignation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Curiosity",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of pleasure and inquiry, colored by a touch of sorrow.\n\nStay with the pleasure and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Curiosity",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of pleasure and inquiry, colored by a touch of aversion.\n\nStay with the pleasure and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the aversion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Curiosity",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of connection and exploration, colored by a touch of separation.\n\nStay with the connection and let it guide your exploration. Use the exploration to connect with what's happening, while being aware of the separation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Curiosity",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of pleasure and interest, colored by a touch of humiliation.\n\nStay with the pleasure and let it guide your exploration. Use the interest to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Surprise–Startle",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of pleasure and startle, colored by a touch of interest.\n\nStay with the pleasure and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Surprise–Startle",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of happiness and surprise, colored by a touch of anxiety.\n\nStay with the happiness and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Surprise–Startle",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of connection and startle, colored by a touch of frustration.\n\nStay with the connection and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Surprise–Startle",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of happiness and surprise, colored by a touch of grief.\n\nStay with the happiness and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the grief as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Surprise–Startle",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of happiness and startle, colored by a touch of aversion.\n\nStay with the happiness and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the aversion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Surprise–Startle",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of pleasure and alarm, colored by a touch of detachment.\n\nStay with the pleasure and let it guide your exploration. Use the alarm to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Surprise–Startle",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of delight and surprise, colored by a touch of humiliation.\n\nStay with the delight and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Fear",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of connection and anxiety, colored by a touch of wonder.\n\nStay with the connection and let it guide your exploration. Use the anxiety to connect with what's happening, while being aware of the wonder as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Fear",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of delight and worry, colored by a touch of startle.\n\nStay with the delight and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the startle as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Fear",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of delight and dread, colored by a touch of irritation.\n\nStay with the delight and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Fear",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of delight and worry, colored by a touch of grief.\n\nStay with the delight and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the grief as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Fear",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of delight and worry, colored by a touch of distaste.\n\nStay with the delight and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the distaste as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Fear",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of delight and dread, colored by a touch of distance.\n\nStay with the delight and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the distance as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Fear",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of pleasure and caution, colored by a touch of shame.\n\nStay with the pleasure and let it guide your exploration. Use the caution to connect with what's happening, while being aware of the shame as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Anger",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of happiness and rage, colored by a touch of exploration.\n\nStay with the happiness and let it guide your exploration. Use the rage to connect with what's happening, while being aware of the exploration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Anger",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of happiness and indignation, colored by a touch of surprise.\n\nStay with the happiness and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the surprise as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Anger",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of pleasure and frustration, colored by a touch of dread.\n\nStay with the pleasure and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the dread as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Anger",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of connection and frustration, colored by a touch of loss.\n\nStay with the connection and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the loss as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Anger",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of connection and frustration, colored by a touch of repulsion.\n\nStay with the connection and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Anger",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of delight and rage, colored by a touch of withdrawal.\n\nStay with the delight and let it guide your exploration. Use the rage to connect with what's happening, while being aware of the withdrawal as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Anger",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of happiness and indignation, colored by a touch of humiliation.\n\nStay with the happiness and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Sadness",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of pleasure and melancholy, colored by a touch of wonder.\n\nStay with the pleasure and let it guide your exploration. Use the melancholy to connect with what's happening, while being aware of the wonder as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Sadness",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of delight and loss, colored by a touch of alarm.\n\nStay with the delight and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Sadness",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of pleasure and loss, colored by a touch of caution.\n\nStay with the pleasure and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the caution as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Sadness",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of happiness and grief, colored by a touch of indignation.\n\nStay with the happiness and let it guide your exploration. Use the grief to connect with what's happening, while being aware of the indignation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Sadness",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of connection and sorrow, colored by a touch of repulsion.\n\nStay with the connection and let it guide your exploration. Use the sorrow to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Sadness",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of happiness and grief, colored by a touch of separation.\n\nStay with the happiness and let it guide your exploration. Use the grief to connect with what's happening, while being aware of the separation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Sadness",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of pleasure and melancholy, colored by a touch of diminishment.\n\nStay with the pleasure and let it guide your exploration. Use the melancholy to connect with what's happening, while being aware of the diminishment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Disgust",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of happiness and aversion, colored by a touch of inquiry.\n\nStay with the happiness and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the inquiry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Disgust",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of delight and revulsion, colored by a touch of alarm.\n\nStay with the delight and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Disgust",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of pleasure and revulsion, colored by a touch of dread.\n\nStay with the pleasure and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the dread as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Disgust",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of connection and distaste, colored by a touch of irritation.\n\nStay with the connection and let it guide your exploration. Use the distaste to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Disgust",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of happiness and aversion, colored by a touch of grief.\n\nStay with the happiness and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the grief as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Disgust",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of happiness and revulsion, colored by a touch of withdrawal.\n\nStay with the happiness and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the withdrawal as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Disgust",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of connection and revulsion, colored by a touch of embarrassment.\n\nStay with the connection and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Pulling-Away",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of happiness and distance, colored by a touch of wonder.\n\nStay with the happiness and let it guide your exploration. Use the distance to connect with what's happening, while being aware of the wonder as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Pulling-Away",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of delight and distance, colored by a touch of startle.\n\nStay with the delight and let it guide your exploration. Use the distance to connect with what's happening, while being aware of the startle as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Pulling-Away",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of happiness and separation, colored by a touch of caution.\n\nStay with the happiness and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the caution as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Pulling-Away",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of happiness and withdrawal, colored by a touch of frustration.\n\nStay with the happiness and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Pulling-Away",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of connection and distance, colored by a touch of sorrow.\n\nStay with the connection and let it guide your exploration. Use the distance to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Pulling-Away",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of pleasure and separation, colored by a touch of aversion.\n\nStay with the pleasure and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the aversion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "Pulling-Away",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of connection and distance, colored by a touch of diminishment.\n\nStay with the connection and let it guide your exploration. Use the distance to connect with what's happening, while being aware of the diminishment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "The Drop",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of pleasure and diminishment, colored by a touch of exploration.\n\nStay with the pleasure and let it guide your exploration. Use the diminishment to connect with what's happening, while being aware of the exploration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "The Drop",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of pleasure and diminishment, colored by a touch of surprise.\n\nStay with the pleasure and let it guide your exploration. Use the diminishment to connect with what's happening, while being aware of the surprise as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "The Drop",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of connection and humiliation, colored by a touch of anxiety.\n\nStay with the connection and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "The Drop",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of delight and shame, colored by a touch of irritation.\n\nStay with the delight and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "The Drop",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of delight and shame, colored by a touch of sorrow.\n\nStay with the delight and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "The Drop",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of delight and diminishment, colored by a touch of distaste.\n\nStay with the delight and let it guide your exploration. Use the diminishment to connect with what's happening, while being aware of the distaste as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Joy",
+    "affect2": "The Drop",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of happiness and embarrassment, colored by a touch of detachment.\n\nStay with the happiness and let it guide your exploration. Use the embarrassment to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Curiosity",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of shock and inquiry, colored by a touch of happiness.\n\nStay with the shock and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Curiosity",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of surprise and inquiry, colored by a touch of caution.\n\nStay with the surprise and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the caution as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Curiosity",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of surprise and wonder, colored by a touch of frustration.\n\nStay with the surprise and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Curiosity",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of startle and inquiry, colored by a touch of grief.\n\nStay with the startle and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the grief as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Curiosity",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of surprise and exploration, colored by a touch of revulsion.\n\nStay with the surprise and let it guide your exploration. Use the exploration to connect with what's happening, while being aware of the revulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Curiosity",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of shock and interest, colored by a touch of detachment.\n\nStay with the shock and let it guide your exploration. Use the interest to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Curiosity",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of surprise and interest, colored by a touch of diminishment.\n\nStay with the surprise and let it guide your exploration. Use the interest to connect with what's happening, while being aware of the diminishment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Joy",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of startle and connection, colored by a touch of interest.\n\nStay with the startle and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Joy",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of startle and connection, colored by a touch of anxiety.\n\nStay with the startle and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Joy",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of alarm and connection, colored by a touch of rage.\n\nStay with the alarm and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the rage as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Joy",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of startle and happiness, colored by a touch of sorrow.\n\nStay with the startle and let it guide your exploration. Use the happiness to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Joy",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of shock and pleasure, colored by a touch of repulsion.\n\nStay with the shock and let it guide your exploration. Use the pleasure to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Joy",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of startle and pleasure, colored by a touch of distance.\n\nStay with the startle and let it guide your exploration. Use the pleasure to connect with what's happening, while being aware of the distance as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Joy",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of alarm and delight, colored by a touch of shame.\n\nStay with the alarm and let it guide your exploration. Use the delight to connect with what's happening, while being aware of the shame as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Fear",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of surprise and anxiety, colored by a touch of exploration.\n\nStay with the surprise and let it guide your exploration. Use the anxiety to connect with what's happening, while being aware of the exploration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Fear",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of startle and caution, colored by a touch of connection.\n\nStay with the startle and let it guide your exploration. Use the caution to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Fear",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of surprise and dread, colored by a touch of frustration.\n\nStay with the surprise and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Fear",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of startle and worry, colored by a touch of loss.\n\nStay with the startle and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the loss as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Fear",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of shock and caution, colored by a touch of revulsion.\n\nStay with the shock and let it guide your exploration. Use the caution to connect with what's happening, while being aware of the revulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Fear",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of surprise and worry, colored by a touch of separation.\n\nStay with the surprise and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the separation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Fear",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of startle and anxiety, colored by a touch of diminishment.\n\nStay with the startle and let it guide your exploration. Use the anxiety to connect with what's happening, while being aware of the diminishment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Anger",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of startle and frustration, colored by a touch of exploration.\n\nStay with the startle and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the exploration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Anger",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of surprise and indignation, colored by a touch of delight.\n\nStay with the surprise and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the delight as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Anger",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of startle and frustration, colored by a touch of worry.\n\nStay with the startle and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Anger",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of startle and irritation, colored by a touch of sorrow.\n\nStay with the startle and let it guide your exploration. Use the irritation to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Anger",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of surprise and indignation, colored by a touch of repulsion.\n\nStay with the surprise and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Anger",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of alarm and indignation, colored by a touch of distance.\n\nStay with the alarm and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the distance as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Anger",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of startle and frustration, colored by a touch of embarrassment.\n\nStay with the startle and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Sadness",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of surprise and loss, colored by a touch of inquiry.\n\nStay with the surprise and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the inquiry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Sadness",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of startle and loss, colored by a touch of pleasure.\n\nStay with the startle and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the pleasure as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Sadness",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of shock and loss, colored by a touch of anxiety.\n\nStay with the shock and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Sadness",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of surprise and grief, colored by a touch of frustration.\n\nStay with the surprise and let it guide your exploration. Use the grief to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Sadness",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of startle and loss, colored by a touch of distaste.\n\nStay with the startle and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the distaste as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Sadness",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of shock and loss, colored by a touch of distance.\n\nStay with the shock and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the distance as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Sadness",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of surprise and loss, colored by a touch of humiliation.\n\nStay with the surprise and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Disgust",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of shock and aversion, colored by a touch of inquiry.\n\nStay with the shock and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the inquiry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Disgust",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of shock and aversion, colored by a touch of happiness.\n\nStay with the shock and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Disgust",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of startle and revulsion, colored by a touch of anxiety.\n\nStay with the startle and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Disgust",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of shock and repulsion, colored by a touch of frustration.\n\nStay with the shock and let it guide your exploration. Use the repulsion to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Disgust",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of alarm and aversion, colored by a touch of melancholy.\n\nStay with the alarm and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the melancholy as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Disgust",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of startle and aversion, colored by a touch of distance.\n\nStay with the startle and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the distance as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Disgust",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of surprise and aversion, colored by a touch of humiliation.\n\nStay with the surprise and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Pulling-Away",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of shock and separation, colored by a touch of exploration.\n\nStay with the shock and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the exploration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Pulling-Away",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of shock and withdrawal, colored by a touch of happiness.\n\nStay with the shock and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Pulling-Away",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of surprise and withdrawal, colored by a touch of dread.\n\nStay with the surprise and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the dread as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Pulling-Away",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of startle and separation, colored by a touch of irritation.\n\nStay with the startle and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Pulling-Away",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of startle and detachment, colored by a touch of sorrow.\n\nStay with the startle and let it guide your exploration. Use the detachment to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Pulling-Away",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of shock and withdrawal, colored by a touch of aversion.\n\nStay with the shock and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the aversion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "Pulling-Away",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of alarm and withdrawal, colored by a touch of shame.\n\nStay with the alarm and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the shame as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "The Drop",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of alarm and embarrassment, colored by a touch of exploration.\n\nStay with the alarm and let it guide your exploration. Use the embarrassment to connect with what's happening, while being aware of the exploration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "The Drop",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of shock and humiliation, colored by a touch of connection.\n\nStay with the shock and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "The Drop",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of alarm and embarrassment, colored by a touch of worry.\n\nStay with the alarm and let it guide your exploration. Use the embarrassment to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "The Drop",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of alarm and diminishment, colored by a touch of frustration.\n\nStay with the alarm and let it guide your exploration. Use the diminishment to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "The Drop",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of shock and humiliation, colored by a touch of melancholy.\n\nStay with the shock and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the melancholy as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "The Drop",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of surprise and shame, colored by a touch of revulsion.\n\nStay with the surprise and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the revulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Surprise–Startle",
+    "affect2": "The Drop",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of startle and embarrassment, colored by a touch of distance.\n\nStay with the startle and let it guide your exploration. Use the embarrassment to connect with what's happening, while being aware of the distance as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Curiosity",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of dread and inquiry, colored by a touch of happiness.\n\nStay with the dread and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Curiosity",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of anxiety and inquiry, colored by a touch of shock.\n\nStay with the anxiety and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the shock as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Curiosity",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of dread and wonder, colored by a touch of indignation.\n\nStay with the dread and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the indignation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Curiosity",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of dread and wonder, colored by a touch of sorrow.\n\nStay with the dread and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Curiosity",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of anxiety and wonder, colored by a touch of repulsion.\n\nStay with the anxiety and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Curiosity",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of dread and wonder, colored by a touch of separation.\n\nStay with the dread and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the separation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Curiosity",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of worry and interest, colored by a touch of humiliation.\n\nStay with the worry and let it guide your exploration. Use the interest to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Joy",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of anxiety and pleasure, colored by a touch of interest.\n\nStay with the anxiety and let it guide your exploration. Use the pleasure to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Joy",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of dread and delight, colored by a touch of shock.\n\nStay with the dread and let it guide your exploration. Use the delight to connect with what's happening, while being aware of the shock as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Joy",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of anxiety and happiness, colored by a touch of frustration.\n\nStay with the anxiety and let it guide your exploration. Use the happiness to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Joy",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of anxiety and pleasure, colored by a touch of sorrow.\n\nStay with the anxiety and let it guide your exploration. Use the pleasure to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Joy",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of dread and connection, colored by a touch of revulsion.\n\nStay with the dread and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the revulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Joy",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of caution and delight, colored by a touch of withdrawal.\n\nStay with the caution and let it guide your exploration. Use the delight to connect with what's happening, while being aware of the withdrawal as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Joy",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of anxiety and connection, colored by a touch of humiliation.\n\nStay with the anxiety and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Surprise–Startle",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of worry and alarm, colored by a touch of interest.\n\nStay with the worry and let it guide your exploration. Use the alarm to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Surprise–Startle",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of caution and alarm, colored by a touch of pleasure.\n\nStay with the caution and let it guide your exploration. Use the alarm to connect with what's happening, while being aware of the pleasure as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Surprise–Startle",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of worry and startle, colored by a touch of irritation.\n\nStay with the worry and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Surprise–Startle",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of worry and surprise, colored by a touch of melancholy.\n\nStay with the worry and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the melancholy as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Surprise–Startle",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of dread and surprise, colored by a touch of distaste.\n\nStay with the dread and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the distaste as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Surprise–Startle",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of anxiety and surprise, colored by a touch of separation.\n\nStay with the anxiety and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the separation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Surprise–Startle",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of dread and alarm, colored by a touch of embarrassment.\n\nStay with the dread and let it guide your exploration. Use the alarm to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Anger",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of worry and frustration, colored by a touch of interest.\n\nStay with the worry and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Anger",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of anxiety and indignation, colored by a touch of happiness.\n\nStay with the anxiety and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Anger",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of dread and frustration, colored by a touch of alarm.\n\nStay with the dread and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Anger",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of dread and indignation, colored by a touch of sorrow.\n\nStay with the dread and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Anger",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of anxiety and rage, colored by a touch of repulsion.\n\nStay with the anxiety and let it guide your exploration. Use the rage to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Anger",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of caution and frustration, colored by a touch of detachment.\n\nStay with the caution and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Anger",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of caution and rage, colored by a touch of embarrassment.\n\nStay with the caution and let it guide your exploration. Use the rage to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Sadness",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of worry and loss, colored by a touch of wonder.\n\nStay with the worry and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the wonder as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Sadness",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of anxiety and sorrow, colored by a touch of delight.\n\nStay with the anxiety and let it guide your exploration. Use the sorrow to connect with what's happening, while being aware of the delight as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Sadness",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of caution and grief, colored by a touch of surprise.\n\nStay with the caution and let it guide your exploration. Use the grief to connect with what's happening, while being aware of the surprise as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Sadness",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of anxiety and loss, colored by a touch of frustration.\n\nStay with the anxiety and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Sadness",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of anxiety and melancholy, colored by a touch of distaste.\n\nStay with the anxiety and let it guide your exploration. Use the melancholy to connect with what's happening, while being aware of the distaste as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Sadness",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of dread and sorrow, colored by a touch of detachment.\n\nStay with the dread and let it guide your exploration. Use the sorrow to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Sadness",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of worry and grief, colored by a touch of embarrassment.\n\nStay with the worry and let it guide your exploration. Use the grief to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Disgust",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of anxiety and revulsion, colored by a touch of interest.\n\nStay with the anxiety and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Disgust",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of anxiety and aversion, colored by a touch of happiness.\n\nStay with the anxiety and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Disgust",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of caution and repulsion, colored by a touch of startle.\n\nStay with the caution and let it guide your exploration. Use the repulsion to connect with what's happening, while being aware of the startle as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Disgust",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of worry and revulsion, colored by a touch of frustration.\n\nStay with the worry and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Disgust",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of worry and revulsion, colored by a touch of loss.\n\nStay with the worry and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the loss as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Disgust",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of worry and aversion, colored by a touch of detachment.\n\nStay with the worry and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Disgust",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of dread and revulsion, colored by a touch of shame.\n\nStay with the dread and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the shame as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Pulling-Away",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of anxiety and detachment, colored by a touch of exploration.\n\nStay with the anxiety and let it guide your exploration. Use the detachment to connect with what's happening, while being aware of the exploration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Pulling-Away",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of anxiety and separation, colored by a touch of happiness.\n\nStay with the anxiety and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Pulling-Away",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of dread and separation, colored by a touch of surprise.\n\nStay with the dread and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the surprise as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Pulling-Away",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of caution and distance, colored by a touch of irritation.\n\nStay with the caution and let it guide your exploration. Use the distance to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Pulling-Away",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of dread and withdrawal, colored by a touch of loss.\n\nStay with the dread and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the loss as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Pulling-Away",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of anxiety and separation, colored by a touch of aversion.\n\nStay with the anxiety and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the aversion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "Pulling-Away",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of anxiety and detachment, colored by a touch of diminishment.\n\nStay with the anxiety and let it guide your exploration. Use the detachment to connect with what's happening, while being aware of the diminishment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "The Drop",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of worry and embarrassment, colored by a touch of wonder.\n\nStay with the worry and let it guide your exploration. Use the embarrassment to connect with what's happening, while being aware of the wonder as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "The Drop",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of dread and shame, colored by a touch of pleasure.\n\nStay with the dread and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the pleasure as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "The Drop",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of worry and diminishment, colored by a touch of shock.\n\nStay with the worry and let it guide your exploration. Use the diminishment to connect with what's happening, while being aware of the shock as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "The Drop",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of dread and shame, colored by a touch of frustration.\n\nStay with the dread and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "The Drop",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of caution and humiliation, colored by a touch of sorrow.\n\nStay with the caution and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "The Drop",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of caution and diminishment, colored by a touch of revulsion.\n\nStay with the caution and let it guide your exploration. Use the diminishment to connect with what's happening, while being aware of the revulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Fear",
+    "affect2": "The Drop",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of caution and humiliation, colored by a touch of separation.\n\nStay with the caution and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the separation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Curiosity",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of irritation and inquiry, colored by a touch of connection.\n\nStay with the irritation and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Curiosity",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of indignation and inquiry, colored by a touch of shock.\n\nStay with the indignation and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the shock as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Curiosity",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of frustration and inquiry, colored by a touch of anxiety.\n\nStay with the frustration and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Curiosity",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of rage and exploration, colored by a touch of melancholy.\n\nStay with the rage and let it guide your exploration. Use the exploration to connect with what's happening, while being aware of the melancholy as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Curiosity",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of frustration and exploration, colored by a touch of repulsion.\n\nStay with the frustration and let it guide your exploration. Use the exploration to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Curiosity",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of frustration and inquiry, colored by a touch of distance.\n\nStay with the frustration and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the distance as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Curiosity",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of irritation and interest, colored by a touch of diminishment.\n\nStay with the irritation and let it guide your exploration. Use the interest to connect with what's happening, while being aware of the diminishment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Joy",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of indignation and connection, colored by a touch of exploration.\n\nStay with the indignation and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the exploration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Joy",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of frustration and connection, colored by a touch of surprise.\n\nStay with the frustration and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the surprise as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Joy",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of indignation and connection, colored by a touch of anxiety.\n\nStay with the indignation and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Joy",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of irritation and connection, colored by a touch of sorrow.\n\nStay with the irritation and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Joy",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of irritation and connection, colored by a touch of repulsion.\n\nStay with the irritation and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Joy",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of indignation and happiness, colored by a touch of detachment.\n\nStay with the indignation and let it guide your exploration. Use the happiness to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Joy",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of rage and delight, colored by a touch of shame.\n\nStay with the rage and let it guide your exploration. Use the delight to connect with what's happening, while being aware of the shame as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Surprise–Startle",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of indignation and startle, colored by a touch of inquiry.\n\nStay with the indignation and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the inquiry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Surprise–Startle",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of indignation and startle, colored by a touch of connection.\n\nStay with the indignation and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Surprise–Startle",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of indignation and surprise, colored by a touch of worry.\n\nStay with the indignation and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Surprise–Startle",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of irritation and shock, colored by a touch of melancholy.\n\nStay with the irritation and let it guide your exploration. Use the shock to connect with what's happening, while being aware of the melancholy as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Surprise–Startle",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of frustration and surprise, colored by a touch of revulsion.\n\nStay with the frustration and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the revulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Surprise–Startle",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of irritation and surprise, colored by a touch of distance.\n\nStay with the irritation and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the distance as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Surprise–Startle",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of irritation and shock, colored by a touch of humiliation.\n\nStay with the irritation and let it guide your exploration. Use the shock to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Fear",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of indignation and worry, colored by a touch of inquiry.\n\nStay with the indignation and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the inquiry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Fear",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of irritation and worry, colored by a touch of connection.\n\nStay with the irritation and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Fear",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of frustration and dread, colored by a touch of startle.\n\nStay with the frustration and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the startle as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Fear",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of frustration and anxiety, colored by a touch of grief.\n\nStay with the frustration and let it guide your exploration. Use the anxiety to connect with what's happening, while being aware of the grief as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Fear",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of indignation and caution, colored by a touch of repulsion.\n\nStay with the indignation and let it guide your exploration. Use the caution to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Fear",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of irritation and worry, colored by a touch of separation.\n\nStay with the irritation and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the separation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Fear",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of frustration and worry, colored by a touch of embarrassment.\n\nStay with the frustration and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Sadness",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of rage and loss, colored by a touch of wonder.\n\nStay with the rage and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the wonder as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Sadness",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of rage and grief, colored by a touch of pleasure.\n\nStay with the rage and let it guide your exploration. Use the grief to connect with what's happening, while being aware of the pleasure as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Sadness",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of rage and melancholy, colored by a touch of shock.\n\nStay with the rage and let it guide your exploration. Use the melancholy to connect with what's happening, while being aware of the shock as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Sadness",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of rage and grief, colored by a touch of caution.\n\nStay with the rage and let it guide your exploration. Use the grief to connect with what's happening, while being aware of the caution as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Sadness",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of rage and loss, colored by a touch of aversion.\n\nStay with the rage and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the aversion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Sadness",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of rage and sorrow, colored by a touch of withdrawal.\n\nStay with the rage and let it guide your exploration. Use the sorrow to connect with what's happening, while being aware of the withdrawal as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Sadness",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of frustration and melancholy, colored by a touch of shame.\n\nStay with the frustration and let it guide your exploration. Use the melancholy to connect with what's happening, while being aware of the shame as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Disgust",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of rage and repulsion, colored by a touch of interest.\n\nStay with the rage and let it guide your exploration. Use the repulsion to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Disgust",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of irritation and distaste, colored by a touch of connection.\n\nStay with the irritation and let it guide your exploration. Use the distaste to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Disgust",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of indignation and revulsion, colored by a touch of startle.\n\nStay with the indignation and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the startle as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Disgust",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of irritation and aversion, colored by a touch of worry.\n\nStay with the irritation and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Disgust",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of irritation and aversion, colored by a touch of sorrow.\n\nStay with the irritation and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Disgust",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of indignation and repulsion, colored by a touch of detachment.\n\nStay with the indignation and let it guide your exploration. Use the repulsion to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Disgust",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of irritation and distaste, colored by a touch of diminishment.\n\nStay with the irritation and let it guide your exploration. Use the distaste to connect with what's happening, while being aware of the diminishment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Pulling-Away",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of irritation and separation, colored by a touch of interest.\n\nStay with the irritation and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Pulling-Away",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of irritation and detachment, colored by a touch of pleasure.\n\nStay with the irritation and let it guide your exploration. Use the detachment to connect with what's happening, while being aware of the pleasure as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Pulling-Away",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of rage and withdrawal, colored by a touch of alarm.\n\nStay with the rage and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Pulling-Away",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of indignation and separation, colored by a touch of worry.\n\nStay with the indignation and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Pulling-Away",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of frustration and distance, colored by a touch of loss.\n\nStay with the frustration and let it guide your exploration. Use the distance to connect with what's happening, while being aware of the loss as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Pulling-Away",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of frustration and distance, colored by a touch of repulsion.\n\nStay with the frustration and let it guide your exploration. Use the distance to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "Pulling-Away",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of rage and withdrawal, colored by a touch of embarrassment.\n\nStay with the rage and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "The Drop",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of indignation and embarrassment, colored by a touch of interest.\n\nStay with the indignation and let it guide your exploration. Use the embarrassment to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "The Drop",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of irritation and humiliation, colored by a touch of connection.\n\nStay with the irritation and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "The Drop",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of irritation and embarrassment, colored by a touch of alarm.\n\nStay with the irritation and let it guide your exploration. Use the embarrassment to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "The Drop",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of frustration and shame, colored by a touch of worry.\n\nStay with the frustration and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "The Drop",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of frustration and humiliation, colored by a touch of sorrow.\n\nStay with the frustration and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "The Drop",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of irritation and shame, colored by a touch of aversion.\n\nStay with the irritation and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the aversion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Anger",
+    "affect2": "The Drop",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of frustration and shame, colored by a touch of separation.\n\nStay with the frustration and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the separation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Curiosity",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of loss and wonder, colored by a touch of happiness.\n\nStay with the loss and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Curiosity",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of melancholy and exploration, colored by a touch of alarm.\n\nStay with the melancholy and let it guide your exploration. Use the exploration to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Curiosity",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of sorrow and inquiry, colored by a touch of caution.\n\nStay with the sorrow and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the caution as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Curiosity",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of loss and wonder, colored by a touch of indignation.\n\nStay with the loss and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the indignation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Curiosity",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of loss and exploration, colored by a touch of distaste.\n\nStay with the loss and let it guide your exploration. Use the exploration to connect with what's happening, while being aware of the distaste as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Curiosity",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of sorrow and interest, colored by a touch of withdrawal.\n\nStay with the sorrow and let it guide your exploration. Use the interest to connect with what's happening, while being aware of the withdrawal as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Curiosity",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of grief and wonder, colored by a touch of diminishment.\n\nStay with the grief and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the diminishment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Joy",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of sorrow and connection, colored by a touch of inquiry.\n\nStay with the sorrow and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the inquiry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Joy",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of loss and happiness, colored by a touch of surprise.\n\nStay with the loss and let it guide your exploration. Use the happiness to connect with what's happening, while being aware of the surprise as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Joy",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of sorrow and connection, colored by a touch of caution.\n\nStay with the sorrow and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the caution as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Joy",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of sorrow and connection, colored by a touch of frustration.\n\nStay with the sorrow and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Joy",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of melancholy and pleasure, colored by a touch of aversion.\n\nStay with the melancholy and let it guide your exploration. Use the pleasure to connect with what's happening, while being aware of the aversion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Joy",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of melancholy and connection, colored by a touch of separation.\n\nStay with the melancholy and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the separation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Joy",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of melancholy and delight, colored by a touch of diminishment.\n\nStay with the melancholy and let it guide your exploration. Use the delight to connect with what's happening, while being aware of the diminishment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Surprise–Startle",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of loss and shock, colored by a touch of wonder.\n\nStay with the loss and let it guide your exploration. Use the shock to connect with what's happening, while being aware of the wonder as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Surprise–Startle",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of sorrow and startle, colored by a touch of pleasure.\n\nStay with the sorrow and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the pleasure as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Surprise–Startle",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of melancholy and startle, colored by a touch of caution.\n\nStay with the melancholy and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the caution as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Surprise–Startle",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of loss and startle, colored by a touch of frustration.\n\nStay with the loss and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Surprise–Startle",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of sorrow and alarm, colored by a touch of aversion.\n\nStay with the sorrow and let it guide your exploration. Use the alarm to connect with what's happening, while being aware of the aversion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Surprise–Startle",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of melancholy and alarm, colored by a touch of withdrawal.\n\nStay with the melancholy and let it guide your exploration. Use the alarm to connect with what's happening, while being aware of the withdrawal as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Surprise–Startle",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of loss and shock, colored by a touch of embarrassment.\n\nStay with the loss and let it guide your exploration. Use the shock to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Fear",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of loss and anxiety, colored by a touch of interest.\n\nStay with the loss and let it guide your exploration. Use the anxiety to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Fear",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of melancholy and dread, colored by a touch of pleasure.\n\nStay with the melancholy and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the pleasure as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Fear",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of grief and worry, colored by a touch of shock.\n\nStay with the grief and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the shock as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Fear",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of sorrow and worry, colored by a touch of indignation.\n\nStay with the sorrow and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the indignation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Fear",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of sorrow and dread, colored by a touch of revulsion.\n\nStay with the sorrow and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the revulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Fear",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of grief and caution, colored by a touch of detachment.\n\nStay with the grief and let it guide your exploration. Use the caution to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Fear",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of grief and dread, colored by a touch of shame.\n\nStay with the grief and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the shame as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Anger",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of sorrow and indignation, colored by a touch of interest.\n\nStay with the sorrow and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Anger",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of sorrow and rage, colored by a touch of connection.\n\nStay with the sorrow and let it guide your exploration. Use the rage to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Anger",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of melancholy and indignation, colored by a touch of startle.\n\nStay with the melancholy and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the startle as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Anger",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of sorrow and irritation, colored by a touch of dread.\n\nStay with the sorrow and let it guide your exploration. Use the irritation to connect with what's happening, while being aware of the dread as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Anger",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of loss and rage, colored by a touch of repulsion.\n\nStay with the loss and let it guide your exploration. Use the rage to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Anger",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of melancholy and indignation, colored by a touch of distance.\n\nStay with the melancholy and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the distance as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Anger",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of grief and frustration, colored by a touch of humiliation.\n\nStay with the grief and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Disgust",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of sorrow and repulsion, colored by a touch of interest.\n\nStay with the sorrow and let it guide your exploration. Use the repulsion to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Disgust",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of melancholy and aversion, colored by a touch of delight.\n\nStay with the melancholy and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the delight as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Disgust",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of loss and repulsion, colored by a touch of shock.\n\nStay with the loss and let it guide your exploration. Use the repulsion to connect with what's happening, while being aware of the shock as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Disgust",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of loss and distaste, colored by a touch of dread.\n\nStay with the loss and let it guide your exploration. Use the distaste to connect with what's happening, while being aware of the dread as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Disgust",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of melancholy and aversion, colored by a touch of rage.\n\nStay with the melancholy and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the rage as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Disgust",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of loss and repulsion, colored by a touch of detachment.\n\nStay with the loss and let it guide your exploration. Use the repulsion to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Disgust",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of sorrow and revulsion, colored by a touch of shame.\n\nStay with the sorrow and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the shame as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Pulling-Away",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of sorrow and distance, colored by a touch of inquiry.\n\nStay with the sorrow and let it guide your exploration. Use the distance to connect with what's happening, while being aware of the inquiry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Pulling-Away",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of sorrow and detachment, colored by a touch of pleasure.\n\nStay with the sorrow and let it guide your exploration. Use the detachment to connect with what's happening, while being aware of the pleasure as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Pulling-Away",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of sorrow and withdrawal, colored by a touch of surprise.\n\nStay with the sorrow and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the surprise as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Pulling-Away",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of sorrow and separation, colored by a touch of worry.\n\nStay with the sorrow and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Pulling-Away",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of melancholy and distance, colored by a touch of irritation.\n\nStay with the melancholy and let it guide your exploration. Use the distance to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Pulling-Away",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of sorrow and withdrawal, colored by a touch of revulsion.\n\nStay with the sorrow and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the revulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "Pulling-Away",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of loss and withdrawal, colored by a touch of embarrassment.\n\nStay with the loss and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "The Drop",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of melancholy and embarrassment, colored by a touch of interest.\n\nStay with the melancholy and let it guide your exploration. Use the embarrassment to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "The Drop",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of sorrow and embarrassment, colored by a touch of happiness.\n\nStay with the sorrow and let it guide your exploration. Use the embarrassment to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "The Drop",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of sorrow and humiliation, colored by a touch of surprise.\n\nStay with the sorrow and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the surprise as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "The Drop",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of loss and humiliation, colored by a touch of worry.\n\nStay with the loss and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "The Drop",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of melancholy and diminishment, colored by a touch of indignation.\n\nStay with the melancholy and let it guide your exploration. Use the diminishment to connect with what's happening, while being aware of the indignation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "The Drop",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of melancholy and diminishment, colored by a touch of revulsion.\n\nStay with the melancholy and let it guide your exploration. Use the diminishment to connect with what's happening, while being aware of the revulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Sadness",
+    "affect2": "The Drop",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of sorrow and humiliation, colored by a touch of distance.\n\nStay with the sorrow and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the distance as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Curiosity",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of repulsion and wonder, colored by a touch of happiness.\n\nStay with the repulsion and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Curiosity",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of aversion and interest, colored by a touch of alarm.\n\nStay with the aversion and let it guide your exploration. Use the interest to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Curiosity",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of repulsion and inquiry, colored by a touch of dread.\n\nStay with the repulsion and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the dread as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Curiosity",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of revulsion and wonder, colored by a touch of irritation.\n\nStay with the revulsion and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Curiosity",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of aversion and interest, colored by a touch of melancholy.\n\nStay with the aversion and let it guide your exploration. Use the interest to connect with what's happening, while being aware of the melancholy as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Curiosity",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of distaste and interest, colored by a touch of withdrawal.\n\nStay with the distaste and let it guide your exploration. Use the interest to connect with what's happening, while being aware of the withdrawal as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Curiosity",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of repulsion and exploration, colored by a touch of humiliation.\n\nStay with the repulsion and let it guide your exploration. Use the exploration to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Joy",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of repulsion and delight, colored by a touch of interest.\n\nStay with the repulsion and let it guide your exploration. Use the delight to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Joy",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of distaste and pleasure, colored by a touch of surprise.\n\nStay with the distaste and let it guide your exploration. Use the pleasure to connect with what's happening, while being aware of the surprise as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Joy",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of revulsion and delight, colored by a touch of worry.\n\nStay with the revulsion and let it guide your exploration. Use the delight to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Joy",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of aversion and delight, colored by a touch of indignation.\n\nStay with the aversion and let it guide your exploration. Use the delight to connect with what's happening, while being aware of the indignation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Joy",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of aversion and happiness, colored by a touch of loss.\n\nStay with the aversion and let it guide your exploration. Use the happiness to connect with what's happening, while being aware of the loss as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Joy",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of repulsion and happiness, colored by a touch of distance.\n\nStay with the repulsion and let it guide your exploration. Use the happiness to connect with what's happening, while being aware of the distance as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Joy",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of aversion and happiness, colored by a touch of diminishment.\n\nStay with the aversion and let it guide your exploration. Use the happiness to connect with what's happening, while being aware of the diminishment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Surprise–Startle",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of distaste and alarm, colored by a touch of interest.\n\nStay with the distaste and let it guide your exploration. Use the alarm to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Surprise–Startle",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of repulsion and startle, colored by a touch of connection.\n\nStay with the repulsion and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Surprise–Startle",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of repulsion and startle, colored by a touch of dread.\n\nStay with the repulsion and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the dread as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Surprise–Startle",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of aversion and alarm, colored by a touch of rage.\n\nStay with the aversion and let it guide your exploration. Use the alarm to connect with what's happening, while being aware of the rage as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Surprise–Startle",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of repulsion and startle, colored by a touch of loss.\n\nStay with the repulsion and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the loss as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Surprise–Startle",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of revulsion and startle, colored by a touch of detachment.\n\nStay with the revulsion and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Surprise–Startle",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of aversion and startle, colored by a touch of humiliation.\n\nStay with the aversion and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Fear",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of repulsion and worry, colored by a touch of inquiry.\n\nStay with the repulsion and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the inquiry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Fear",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of repulsion and anxiety, colored by a touch of connection.\n\nStay with the repulsion and let it guide your exploration. Use the anxiety to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Fear",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of revulsion and dread, colored by a touch of startle.\n\nStay with the revulsion and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the startle as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Fear",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of distaste and anxiety, colored by a touch of irritation.\n\nStay with the distaste and let it guide your exploration. Use the anxiety to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Fear",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of aversion and caution, colored by a touch of sorrow.\n\nStay with the aversion and let it guide your exploration. Use the caution to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Fear",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of aversion and worry, colored by a touch of withdrawal.\n\nStay with the aversion and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the withdrawal as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Fear",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of revulsion and anxiety, colored by a touch of diminishment.\n\nStay with the revulsion and let it guide your exploration. Use the anxiety to connect with what's happening, while being aware of the diminishment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Anger",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of distaste and frustration, colored by a touch of wonder.\n\nStay with the distaste and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the wonder as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Anger",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of aversion and irritation, colored by a touch of happiness.\n\nStay with the aversion and let it guide your exploration. Use the irritation to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Anger",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of aversion and irritation, colored by a touch of startle.\n\nStay with the aversion and let it guide your exploration. Use the irritation to connect with what's happening, while being aware of the startle as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Anger",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of distaste and rage, colored by a touch of anxiety.\n\nStay with the distaste and let it guide your exploration. Use the rage to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Anger",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of distaste and rage, colored by a touch of grief.\n\nStay with the distaste and let it guide your exploration. Use the rage to connect with what's happening, while being aware of the grief as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Anger",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of distaste and frustration, colored by a touch of detachment.\n\nStay with the distaste and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Anger",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of repulsion and rage, colored by a touch of diminishment.\n\nStay with the repulsion and let it guide your exploration. Use the rage to connect with what's happening, while being aware of the diminishment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Sadness",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of repulsion and sorrow, colored by a touch of inquiry.\n\nStay with the repulsion and let it guide your exploration. Use the sorrow to connect with what's happening, while being aware of the inquiry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Sadness",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of repulsion and grief, colored by a touch of happiness.\n\nStay with the repulsion and let it guide your exploration. Use the grief to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Sadness",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of repulsion and loss, colored by a touch of alarm.\n\nStay with the repulsion and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Sadness",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of repulsion and melancholy, colored by a touch of worry.\n\nStay with the repulsion and let it guide your exploration. Use the melancholy to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Sadness",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of aversion and loss, colored by a touch of indignation.\n\nStay with the aversion and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the indignation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Sadness",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of revulsion and loss, colored by a touch of withdrawal.\n\nStay with the revulsion and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the withdrawal as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Sadness",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of aversion and grief, colored by a touch of embarrassment.\n\nStay with the aversion and let it guide your exploration. Use the grief to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Pulling-Away",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of distaste and detachment, colored by a touch of wonder.\n\nStay with the distaste and let it guide your exploration. Use the detachment to connect with what's happening, while being aware of the wonder as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Pulling-Away",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of revulsion and detachment, colored by a touch of delight.\n\nStay with the revulsion and let it guide your exploration. Use the detachment to connect with what's happening, while being aware of the delight as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Pulling-Away",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of distaste and withdrawal, colored by a touch of startle.\n\nStay with the distaste and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the startle as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Pulling-Away",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of distaste and separation, colored by a touch of anxiety.\n\nStay with the distaste and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Pulling-Away",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of aversion and distance, colored by a touch of irritation.\n\nStay with the aversion and let it guide your exploration. Use the distance to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Pulling-Away",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of repulsion and distance, colored by a touch of melancholy.\n\nStay with the repulsion and let it guide your exploration. Use the distance to connect with what's happening, while being aware of the melancholy as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "Pulling-Away",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of distaste and distance, colored by a touch of humiliation.\n\nStay with the distaste and let it guide your exploration. Use the distance to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "The Drop",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of repulsion and shame, colored by a touch of exploration.\n\nStay with the repulsion and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the exploration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "The Drop",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of repulsion and humiliation, colored by a touch of connection.\n\nStay with the repulsion and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "The Drop",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of repulsion and shame, colored by a touch of alarm.\n\nStay with the repulsion and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "The Drop",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of repulsion and humiliation, colored by a touch of dread.\n\nStay with the repulsion and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the dread as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "The Drop",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of aversion and diminishment, colored by a touch of rage.\n\nStay with the aversion and let it guide your exploration. Use the diminishment to connect with what's happening, while being aware of the rage as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "The Drop",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of distaste and humiliation, colored by a touch of melancholy.\n\nStay with the distaste and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the melancholy as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Disgust",
+    "affect2": "The Drop",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of revulsion and embarrassment, colored by a touch of separation.\n\nStay with the revulsion and let it guide your exploration. Use the embarrassment to connect with what's happening, while being aware of the separation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Curiosity",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of detachment and interest, colored by a touch of happiness.\n\nStay with the detachment and let it guide your exploration. Use the interest to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Curiosity",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of separation and inquiry, colored by a touch of alarm.\n\nStay with the separation and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Curiosity",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of distance and wonder, colored by a touch of worry.\n\nStay with the distance and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Curiosity",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of withdrawal and inquiry, colored by a touch of indignation.\n\nStay with the withdrawal and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the indignation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Curiosity",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of distance and exploration, colored by a touch of loss.\n\nStay with the distance and let it guide your exploration. Use the exploration to connect with what's happening, while being aware of the loss as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Curiosity",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of withdrawal and inquiry, colored by a touch of repulsion.\n\nStay with the withdrawal and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Curiosity",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of withdrawal and exploration, colored by a touch of embarrassment.\n\nStay with the withdrawal and let it guide your exploration. Use the exploration to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Joy",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of distance and delight, colored by a touch of inquiry.\n\nStay with the distance and let it guide your exploration. Use the delight to connect with what's happening, while being aware of the inquiry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Joy",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of separation and pleasure, colored by a touch of alarm.\n\nStay with the separation and let it guide your exploration. Use the pleasure to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Joy",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of separation and pleasure, colored by a touch of dread.\n\nStay with the separation and let it guide your exploration. Use the pleasure to connect with what's happening, while being aware of the dread as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Joy",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of separation and delight, colored by a touch of irritation.\n\nStay with the separation and let it guide your exploration. Use the delight to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Joy",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of withdrawal and happiness, colored by a touch of sorrow.\n\nStay with the withdrawal and let it guide your exploration. Use the happiness to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Joy",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of separation and happiness, colored by a touch of distaste.\n\nStay with the separation and let it guide your exploration. Use the happiness to connect with what's happening, while being aware of the distaste as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Joy",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of separation and delight, colored by a touch of embarrassment.\n\nStay with the separation and let it guide your exploration. Use the delight to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Surprise–Startle",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of withdrawal and shock, colored by a touch of interest.\n\nStay with the withdrawal and let it guide your exploration. Use the shock to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Surprise–Startle",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of withdrawal and surprise, colored by a touch of connection.\n\nStay with the withdrawal and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Surprise–Startle",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of distance and surprise, colored by a touch of caution.\n\nStay with the distance and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the caution as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Surprise–Startle",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of withdrawal and surprise, colored by a touch of indignation.\n\nStay with the withdrawal and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the indignation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Surprise–Startle",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of withdrawal and alarm, colored by a touch of sorrow.\n\nStay with the withdrawal and let it guide your exploration. Use the alarm to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Surprise–Startle",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of withdrawal and surprise, colored by a touch of repulsion.\n\nStay with the withdrawal and let it guide your exploration. Use the surprise to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Surprise–Startle",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of separation and shock, colored by a touch of humiliation.\n\nStay with the separation and let it guide your exploration. Use the shock to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Fear",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of withdrawal and caution, colored by a touch of exploration.\n\nStay with the withdrawal and let it guide your exploration. Use the caution to connect with what's happening, while being aware of the exploration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Fear",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of distance and worry, colored by a touch of connection.\n\nStay with the distance and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Fear",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of separation and dread, colored by a touch of surprise.\n\nStay with the separation and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the surprise as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Fear",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of withdrawal and dread, colored by a touch of irritation.\n\nStay with the withdrawal and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Fear",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of separation and caution, colored by a touch of melancholy.\n\nStay with the separation and let it guide your exploration. Use the caution to connect with what's happening, while being aware of the melancholy as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Fear",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of detachment and anxiety, colored by a touch of distaste.\n\nStay with the detachment and let it guide your exploration. Use the anxiety to connect with what's happening, while being aware of the distaste as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Fear",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of detachment and caution, colored by a touch of shame.\n\nStay with the detachment and let it guide your exploration. Use the caution to connect with what's happening, while being aware of the shame as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Anger",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of detachment and frustration, colored by a touch of inquiry.\n\nStay with the detachment and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the inquiry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Anger",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of detachment and indignation, colored by a touch of pleasure.\n\nStay with the detachment and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the pleasure as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Anger",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of separation and irritation, colored by a touch of surprise.\n\nStay with the separation and let it guide your exploration. Use the irritation to connect with what's happening, while being aware of the surprise as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Anger",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of withdrawal and rage, colored by a touch of anxiety.\n\nStay with the withdrawal and let it guide your exploration. Use the rage to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Anger",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of withdrawal and indignation, colored by a touch of melancholy.\n\nStay with the withdrawal and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the melancholy as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Anger",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of separation and indignation, colored by a touch of distaste.\n\nStay with the separation and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the distaste as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Anger",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of detachment and irritation, colored by a touch of embarrassment.\n\nStay with the detachment and let it guide your exploration. Use the irritation to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Sadness",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of detachment and sorrow, colored by a touch of wonder.\n\nStay with the detachment and let it guide your exploration. Use the sorrow to connect with what's happening, while being aware of the wonder as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Sadness",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of withdrawal and loss, colored by a touch of happiness.\n\nStay with the withdrawal and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Sadness",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of detachment and grief, colored by a touch of shock.\n\nStay with the detachment and let it guide your exploration. Use the grief to connect with what's happening, while being aware of the shock as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Sadness",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of separation and sorrow, colored by a touch of anxiety.\n\nStay with the separation and let it guide your exploration. Use the sorrow to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Sadness",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of detachment and melancholy, colored by a touch of rage.\n\nStay with the detachment and let it guide your exploration. Use the melancholy to connect with what's happening, while being aware of the rage as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Sadness",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of withdrawal and grief, colored by a touch of distaste.\n\nStay with the withdrawal and let it guide your exploration. Use the grief to connect with what's happening, while being aware of the distaste as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Sadness",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of withdrawal and grief, colored by a touch of embarrassment.\n\nStay with the withdrawal and let it guide your exploration. Use the grief to connect with what's happening, while being aware of the embarrassment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Disgust",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of separation and revulsion, colored by a touch of interest.\n\nStay with the separation and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Disgust",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of separation and revulsion, colored by a touch of happiness.\n\nStay with the separation and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Disgust",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of separation and aversion, colored by a touch of alarm.\n\nStay with the separation and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Disgust",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of withdrawal and revulsion, colored by a touch of caution.\n\nStay with the withdrawal and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the caution as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Disgust",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of distance and repulsion, colored by a touch of frustration.\n\nStay with the distance and let it guide your exploration. Use the repulsion to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Disgust",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of detachment and aversion, colored by a touch of sorrow.\n\nStay with the detachment and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "Disgust",
+    "affect3": "The Drop",
+    "approach": "This thing evokes feelings of withdrawal and aversion, colored by a touch of humiliation.\n\nStay with the withdrawal and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the humiliation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "The Drop",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of distance and humiliation, colored by a touch of exploration.\n\nStay with the distance and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the exploration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "The Drop",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of withdrawal and humiliation, colored by a touch of connection.\n\nStay with the withdrawal and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "The Drop",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of withdrawal and shame, colored by a touch of startle.\n\nStay with the withdrawal and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the startle as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "The Drop",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of separation and diminishment, colored by a touch of anxiety.\n\nStay with the separation and let it guide your exploration. Use the diminishment to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "The Drop",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of separation and humiliation, colored by a touch of irritation.\n\nStay with the separation and let it guide your exploration. Use the humiliation to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "The Drop",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of detachment and shame, colored by a touch of grief.\n\nStay with the detachment and let it guide your exploration. Use the shame to connect with what's happening, while being aware of the grief as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "Pulling-Away",
+    "affect2": "The Drop",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of distance and embarrassment, colored by a touch of distaste.\n\nStay with the distance and let it guide your exploration. Use the embarrassment to connect with what's happening, while being aware of the distaste as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Curiosity",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of embarrassment and inquiry, colored by a touch of happiness.\n\nStay with the embarrassment and let it guide your exploration. Use the inquiry to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Curiosity",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of diminishment and wonder, colored by a touch of surprise.\n\nStay with the diminishment and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the surprise as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Curiosity",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of shame and exploration, colored by a touch of worry.\n\nStay with the shame and let it guide your exploration. Use the exploration to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Curiosity",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of embarrassment and wonder, colored by a touch of indignation.\n\nStay with the embarrassment and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the indignation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Curiosity",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of embarrassment and wonder, colored by a touch of grief.\n\nStay with the embarrassment and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the grief as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Curiosity",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of shame and wonder, colored by a touch of repulsion.\n\nStay with the shame and let it guide your exploration. Use the wonder to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Curiosity",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of humiliation and interest, colored by a touch of separation.\n\nStay with the humiliation and let it guide your exploration. Use the interest to connect with what's happening, while being aware of the separation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Joy",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of humiliation and happiness, colored by a touch of wonder.\n\nStay with the humiliation and let it guide your exploration. Use the happiness to connect with what's happening, while being aware of the wonder as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Joy",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of shame and happiness, colored by a touch of surprise.\n\nStay with the shame and let it guide your exploration. Use the happiness to connect with what's happening, while being aware of the surprise as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Joy",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of embarrassment and connection, colored by a touch of worry.\n\nStay with the embarrassment and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Joy",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of humiliation and delight, colored by a touch of frustration.\n\nStay with the humiliation and let it guide your exploration. Use the delight to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Joy",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of embarrassment and connection, colored by a touch of grief.\n\nStay with the embarrassment and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the grief as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Joy",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of humiliation and connection, colored by a touch of aversion.\n\nStay with the humiliation and let it guide your exploration. Use the connection to connect with what's happening, while being aware of the aversion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Joy",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of embarrassment and pleasure, colored by a touch of detachment.\n\nStay with the embarrassment and let it guide your exploration. Use the pleasure to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Surprise–Startle",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of humiliation and startle, colored by a touch of inquiry.\n\nStay with the humiliation and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the inquiry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Surprise–Startle",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of shame and shock, colored by a touch of pleasure.\n\nStay with the shame and let it guide your exploration. Use the shock to connect with what's happening, while being aware of the pleasure as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Surprise–Startle",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of embarrassment and alarm, colored by a touch of worry.\n\nStay with the embarrassment and let it guide your exploration. Use the alarm to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Surprise–Startle",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of diminishment and startle, colored by a touch of irritation.\n\nStay with the diminishment and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Surprise–Startle",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of diminishment and alarm, colored by a touch of loss.\n\nStay with the diminishment and let it guide your exploration. Use the alarm to connect with what's happening, while being aware of the loss as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Surprise–Startle",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of humiliation and startle, colored by a touch of repulsion.\n\nStay with the humiliation and let it guide your exploration. Use the startle to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Surprise–Startle",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of shame and shock, colored by a touch of detachment.\n\nStay with the shame and let it guide your exploration. Use the shock to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Fear",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of humiliation and worry, colored by a touch of exploration.\n\nStay with the humiliation and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the exploration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Fear",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of embarrassment and worry, colored by a touch of happiness.\n\nStay with the embarrassment and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the happiness as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Fear",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of humiliation and dread, colored by a touch of alarm.\n\nStay with the humiliation and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Fear",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of diminishment and worry, colored by a touch of frustration.\n\nStay with the diminishment and let it guide your exploration. Use the worry to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Fear",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of diminishment and dread, colored by a touch of grief.\n\nStay with the diminishment and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the grief as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Fear",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of shame and dread, colored by a touch of revulsion.\n\nStay with the shame and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the revulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Fear",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of embarrassment and dread, colored by a touch of distance.\n\nStay with the embarrassment and let it guide your exploration. Use the dread to connect with what's happening, while being aware of the distance as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Anger",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of diminishment and indignation, colored by a touch of interest.\n\nStay with the diminishment and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Anger",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of humiliation and frustration, colored by a touch of delight.\n\nStay with the humiliation and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the delight as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Anger",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of shame and rage, colored by a touch of startle.\n\nStay with the shame and let it guide your exploration. Use the rage to connect with what's happening, while being aware of the startle as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Anger",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of diminishment and indignation, colored by a touch of anxiety.\n\nStay with the diminishment and let it guide your exploration. Use the indignation to connect with what's happening, while being aware of the anxiety as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Anger",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of embarrassment and frustration, colored by a touch of melancholy.\n\nStay with the embarrassment and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the melancholy as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Anger",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of shame and frustration, colored by a touch of aversion.\n\nStay with the shame and let it guide your exploration. Use the frustration to connect with what's happening, while being aware of the aversion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Anger",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of embarrassment and rage, colored by a touch of withdrawal.\n\nStay with the embarrassment and let it guide your exploration. Use the rage to connect with what's happening, while being aware of the withdrawal as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Sadness",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of humiliation and grief, colored by a touch of interest.\n\nStay with the humiliation and let it guide your exploration. Use the grief to connect with what's happening, while being aware of the interest as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Sadness",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of humiliation and loss, colored by a touch of pleasure.\n\nStay with the humiliation and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the pleasure as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Sadness",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of shame and melancholy, colored by a touch of alarm.\n\nStay with the shame and let it guide your exploration. Use the melancholy to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Sadness",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of diminishment and loss, colored by a touch of caution.\n\nStay with the diminishment and let it guide your exploration. Use the loss to connect with what's happening, while being aware of the caution as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Sadness",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of embarrassment and sorrow, colored by a touch of indignation.\n\nStay with the embarrassment and let it guide your exploration. Use the sorrow to connect with what's happening, while being aware of the indignation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Sadness",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of diminishment and sorrow, colored by a touch of revulsion.\n\nStay with the diminishment and let it guide your exploration. Use the sorrow to connect with what's happening, while being aware of the revulsion as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Sadness",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of humiliation and melancholy, colored by a touch of separation.\n\nStay with the humiliation and let it guide your exploration. Use the melancholy to connect with what's happening, while being aware of the separation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Disgust",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of shame and aversion, colored by a touch of wonder.\n\nStay with the shame and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the wonder as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Disgust",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of diminishment and distaste, colored by a touch of delight.\n\nStay with the diminishment and let it guide your exploration. Use the distaste to connect with what's happening, while being aware of the delight as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Disgust",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of diminishment and revulsion, colored by a touch of alarm.\n\nStay with the diminishment and let it guide your exploration. Use the revulsion to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Disgust",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of humiliation and repulsion, colored by a touch of worry.\n\nStay with the humiliation and let it guide your exploration. Use the repulsion to connect with what's happening, while being aware of the worry as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Disgust",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of embarrassment and repulsion, colored by a touch of frustration.\n\nStay with the embarrassment and let it guide your exploration. Use the repulsion to connect with what's happening, while being aware of the frustration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Disgust",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of shame and aversion, colored by a touch of sorrow.\n\nStay with the shame and let it guide your exploration. Use the aversion to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Disgust",
+    "affect3": "Pulling-Away",
+    "approach": "This thing evokes feelings of humiliation and distaste, colored by a touch of detachment.\n\nStay with the humiliation and let it guide your exploration. Use the distaste to connect with what's happening, while being aware of the detachment as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Pulling-Away",
+    "affect3": "Curiosity",
+    "approach": "This thing evokes feelings of humiliation and withdrawal, colored by a touch of exploration.\n\nStay with the humiliation and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the exploration as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Pulling-Away",
+    "affect3": "Joy",
+    "approach": "This thing evokes feelings of diminishment and separation, colored by a touch of connection.\n\nStay with the diminishment and let it guide your exploration. Use the separation to connect with what's happening, while being aware of the connection as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Pulling-Away",
+    "affect3": "Surprise–Startle",
+    "approach": "This thing evokes feelings of embarrassment and detachment, colored by a touch of alarm.\n\nStay with the embarrassment and let it guide your exploration. Use the detachment to connect with what's happening, while being aware of the alarm as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Pulling-Away",
+    "affect3": "Fear",
+    "approach": "This thing evokes feelings of embarrassment and distance, colored by a touch of dread.\n\nStay with the embarrassment and let it guide your exploration. Use the distance to connect with what's happening, while being aware of the dread as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Pulling-Away",
+    "affect3": "Anger",
+    "approach": "This thing evokes feelings of embarrassment and withdrawal, colored by a touch of irritation.\n\nStay with the embarrassment and let it guide your exploration. Use the withdrawal to connect with what's happening, while being aware of the irritation as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Pulling-Away",
+    "affect3": "Sadness",
+    "approach": "This thing evokes feelings of shame and detachment, colored by a touch of sorrow.\n\nStay with the shame and let it guide your exploration. Use the detachment to connect with what's happening, while being aware of the sorrow as a natural signal that helps you stay grounded."
+  },
+  {
+    "affect1": "The Drop",
+    "affect2": "Pulling-Away",
+    "affect3": "Disgust",
+    "approach": "This thing evokes feelings of shame and detachment, colored by a touch of repulsion.\n\nStay with the shame and let it guide your exploration. Use the detachment to connect with what's happening, while being aware of the repulsion as a natural signal that helps you stay grounded."
+  }
+]

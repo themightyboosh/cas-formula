@@ -58,14 +58,16 @@ You MUST respond with ONLY a valid JSON object (no markdown, no explanations):
 **BE CREATIVE AND FLEXIBLE** - Choose icons that capture the emotional essence, not just the literal meaning. Use metaphorical and symbolic associations. Don't be afraid to make unexpected connections.
 
 **Examples of loose/creative matching:**
-- "anxiety" → "storm-warning" (turbulent energy)
-- "depression" → "cloud-drizzle" (heavy, persistent)
+- "anxiety" → "cloud" (turbulent energy)
+- "depression" → "droplet" (heavy, persistent)
 - "excitement" → "zap" (electric energy)
 - "my future" → "compass" (direction, navigation)
 - "change" → "wind" (invisible force)
 - "therapy" → "flower" (growth, healing)
 - "grief" → "droplet" (tears, heaviness)
-- "hope" → "sunrise" (new light)
+- "hope" → "sun" (new light)
+- "nature" → "leaf" (organic, natural)
+- "animals" → "waves" (flowing, living energy)
 
 **Available Icons (STRICT LIST - use ONLY these):**
 
@@ -76,30 +78,30 @@ heart, users, user, baby, smile, frown
 briefcase, building, laptop, coffee, pencil
 
 **Places:**
-home, map-pin, plane, landmark, map, globe, mountain
+home, map-pin, plane, map, globe, mountain
 
 **Objects & Possessions:**
 car, book, music, phone, camera, gift, package
 
 **Nature & Elements:**
-sun, moon, cloud, wind, droplet, flame, leaf, tree, flower, waves
+sun, moon, cloud, wind, droplet, flame, leaf, flower, waves
 
 **Emotions & States:**
-heart, sparkles, brain, shield, smile, frown, meh, zap, alert-triangle
+heart, sparkles, brain, shield, smile, frown, zap
 
 **Movement & Change:**
-trending-up, trending-down, arrow-right, compass, navigation, move
+trending-up, trending-down, arrow-right, compass, move
 
 **Time & Process:**
-calendar, clock, hourglass, timer
+calendar, clock, hourglass
 
 **Communication:**
-message-circle, mail, phone, megaphone
+message-circle, mail, phone
 
 **Abstract Concepts:**
-lightbulb, key, lock, puzzle, target, flag
+lightbulb, key, lock, target, flag
 
-**CRITICAL: You MUST use one of these exact icon names. NO VARIATIONS or compound names allowed (e.g., no "user-heart", "briefcase-medical", "cloud-drizzle"). Keep it simple and use only the base icons listed above.**
+**CRITICAL: You MUST use one of these exact icon names. NO VARIATIONS or compound names allowed. These are the ONLY valid icons - do not use tree, landmark, navigation, timer, megaphone, puzzle, alert-triangle, or meh as they may not be supported. Keep it simple and use only the base icons listed above.**
 
 ## Pronoun Detection Guidelines
 
