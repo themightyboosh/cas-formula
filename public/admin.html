@@ -616,7 +616,7 @@
                 showError('Sign in failed: ' + error.message);
             });
 
-        // Sign In - Try popup first, fallback to redirect
+        // Sign In - Use redirect for better compatibility with COOP headers
         async function signInWithGoogle() {
             try {
                 console.log('=== SIGN IN BUTTON CLICKED ===');
@@ -627,14 +627,8 @@
                     prompt: 'select_account'
                 });
 
-                console.log('Attempting popup sign-in...');
-                try {
-                    const result = await auth.signInWithPopup(provider);
-                    console.log('Popup sign-in successful!', result.user.email);
-                } catch (popupError) {
-                    console.error('Popup failed, trying redirect...', popupError);
-                    await auth.signInWithRedirect(provider);
-                }
+                console.log('Redirecting to Google sign-in...');
+                await auth.signInWithRedirect(provider);
             } catch (error) {
                 console.error('Sign in error:', error);
                 showError('Sign in failed: ' + error.message);
