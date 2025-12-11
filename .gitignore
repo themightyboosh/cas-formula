@@ -41,3 +41,8 @@ logs/
 firebase-debug.log
 firestore-debug.log
 ui-debug.log
+
+# Service Account Keys (sensitive credentials)
+*serviceAccountKey*.json
+*adminsdk*.json
+linen-sunbeam-*.json
