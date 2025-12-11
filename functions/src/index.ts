@@ -884,7 +884,8 @@ Generate a 3-paragraph therapeutic response (~150 words total) using this struct
 - Start: "Your body is signaling [AFFECT NAME]."
 - Describe somatic experience (use Tomkins language)
 - Explain biological function
-- Connect trigger type to user's context
+- **CRITICAL**: Deeply analyze their specific context - don't just quote it. Example: if context is "my mother", explore what aspect of that relationship is triggering this affect RIGHT NOW. Make it specific to their exact words.
+- Connect trigger type to user's context with specificity
 - Use Tomkins vocabulary: "triggered by [gradient/density description]"
 
 **Paragraph 2: Pattern Recognition with CAS Terrain (45-55 words)**
@@ -893,17 +894,18 @@ Generate a 3-paragraph therapeutic response (~150 words total) using this struct
   - Reveal CAS-specific pattern (e.g., Heartfelt Defender hides fear and performs competence)
   - Connect intensity to terrain-specific struggle
 - **IF NO CAS:** Interpret how direction + intensity shapes their experience
-- Direction-specific interpretation:
-  - Self: about identity, worth, capability
-  - Other: about what they're doing, threat FROM them
-  - Past: processing what already happened
-  - Future: anticipating what might happen
-- Intensity-specific language:
-  - 1: "noticeable but manageable," "background signal"
-  - 2: "persistent," "can't ignore," "steady presence"
-  - 3: "demanding attention," "hard to focus on anything else"
-  - 4: "flooding," "overwhelming," "taking over"
-- Create "how do you know me?" moment
+- **CRITICAL**: Direction and intensity MUST meaningfully shape this paragraph. Same affect + same context but different direction/intensity = different response.
+- Direction-specific interpretation (integrate this deeply):
+  - Self: about identity, worth, capability ("turned inward on yourself")
+  - Other: about what they're doing, threat FROM them ("aimed at them, about what they're bringing")
+  - Past: processing what already happened ("looking backward, still holding it")
+  - Future: anticipating what might happen ("scanning ahead, bracing for what's coming")
+- Intensity-specific language (show what this level DOES to them):
+  - 1: "noticeable but manageable," "background signal," "you can still function"
+  - 2: "persistent," "can't ignore," "steady presence," "follows you through the day"
+  - 3: "demanding attention," "hard to focus on anything else," "drowning out other signals"
+  - 4: "flooding," "overwhelming," "taking over," "nothing else can get through"
+- Create "how do you know me?" moment by combining ALL inputs uniquely
 
 **Paragraph 3: The Opening (45-55 words)**
 - Start: "The opening is here:"
@@ -940,7 +942,13 @@ Use \\n\\n between paragraphs for proper formatting.`;
 - Intensity: ${intensity}
 ${casArchetype ? `- CAS Terrain: ${casArchetype}` : ''}
 
-Generate the 3-paragraph therapeutic response following the structure and rules above.${casArchetype ? ' Integrate the CAS terrain into Paragraph 2 as specified.' : ''}`;
+**CRITICAL REQUIREMENT**: Every single input above MUST meaningfully shape your response. Changing ANY of these variables should produce a DIFFERENT response:
+- Different context → completely different analysis of what's triggering this
+- Different direction (self vs other vs past vs future) → changes where the affect is aimed
+- Different intensity (1 vs 4) → dramatically changes how it's experienced
+- Different CAS terrain → changes the pattern of how they handle it
+
+Generate the 3-paragraph therapeutic response following the structure and rules above.${casArchetype ? ' Integrate the CAS terrain into Paragraph 2 as specified.' : ''} Make each response unique to THIS specific combination of inputs.`;
 
       const fullPrompt = `${systemPrompt}\n\n${userPrompt}`;
 
@@ -963,9 +971,53 @@ Generate the 3-paragraph therapeutic response following the structure and rules 
         return;
       }
 
+      // Second AI Pass: Copywriting & Story Enhancement
+      const copywritingPrompt = `You are a skilled copywriter specializing in therapeutic content. Your task is to rewrite the following therapeutic response to make it more engaging, readable, and impactful.
+
+**Original Response:**
+${parsed.response}
+
+**Your Task:**
+Rewrite this response with these goals:
+1. **Reading Level**: 9th grade maximum (use simpler words, shorter sentences)
+2. **Story & Flow**: Make it flow like a story someone is telling you, not a clinical assessment
+3. **Emotional Connection**: Keep the poetic, embodied language but make it more accessible
+4. **Maintain Structure**: Keep the 3-paragraph structure intact
+5. **Keep Key Elements**: Don't lose the Tomkins theory, the specific context ("${context}"), or the CAS terrain insights
+6. **More Conversational**: Write like you're talking to a friend who trusts you, not like you're writing a textbook
+
+**Guidelines:**
+- Replace complex words with simpler ones (e.g., "mobilizes" → "gets you ready", "sustained" → "keeps going")
+- Break long sentences into shorter ones
+- Use "you" and "your" frequently to make it personal
+- Keep metaphors but make them clearer
+- Maintain the exact same meaning and insights, just more readable
+
+**Return Format:**
+Return ONLY valid JSON (no markdown):
+{
+  "response": "Paragraph 1\\n\\nParagraph 2\\n\\nParagraph 3"
+}
+
+Use \\n\\n between paragraphs for proper formatting.`;
+
+      const copywritingResult = await model.generateContent(copywritingPrompt);
+      const copywritingResponse = copywritingResult.response.text();
+
+      // Parse copywriting response
+      let finalParsed;
+      try {
+        const cleanedCopyResponse = copywritingResponse.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+        finalParsed = JSON.parse(cleanedCopyResponse);
+      } catch (parseError) {
+        console.error('Failed to parse copywriting response, using original:', copywritingResponse);
+        // Fall back to original if copywriting fails
+        finalParsed = parsed;
+      }
+
       res.status(200).json({
         result: {
-          response: parsed.response,
+          response: finalParsed.response || parsed.response,
           affectName,
           context,
           direction,
