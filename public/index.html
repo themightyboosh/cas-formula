@@ -574,6 +574,10 @@
 
             <div id="casQuestions"></div>
 
+            <div id="casProgress" style="text-align: center; margin: calc(var(--spacing-unit) * 3) 0; color: var(--gray-500); font-size: 14px;">
+                <span id="casProgressText">Answer all 8 questions to continue</span>
+            </div>
+
             <button class="btn" id="getResultsBtn" onclick="getResults()" style="display: none;">Get Results</button>
         </div>
     </div>
@@ -956,10 +960,28 @@
             questionBtns.forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
 
+            // Update progress
+            const answeredCount = Object.keys(state.casAnswers).length;
+            const totalCount = casQuestions.length;
+            const progressText = document.getElementById('casProgressText');
+
+            if (answeredCount < totalCount) {
+                progressText.textContent = `${answeredCount}/${totalCount} answered — ${totalCount - answeredCount} more to go`;
+                progressText.style.color = 'var(--gray-500)';
+            } else {
+                progressText.textContent = '✓ All questions answered';
+                progressText.style.color = 'var(--green)';
+            }
+
             // Check if all answered
-            if (Object.keys(state.casAnswers).length === casQuestions.length) {
+            if (answeredCount === totalCount) {
                 document.getElementById('getResultsBtn').style.display = 'block';
+                document.getElementById('casProgress').style.display = 'none';
                 calculateCASArchetype();
+                // Scroll to button
+                setTimeout(() => {
+                    document.getElementById('getResultsBtn').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
             }
         }
 
