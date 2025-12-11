@@ -109,7 +109,7 @@ const archetypes = [
 ];
 
 // Master style to append
-const MASTER_STYLE = "Pen and Ink with Gauche in Vorticism style";
+const MASTER_STYLE = "Cubist style, geometric fragmented planes, multiple perspectives, angular forms, muted earth tones with bold accents";
 
 function getFullPrompt(archetype) {
   return `${archetype.imagePrompt}, ${MASTER_STYLE}`;
