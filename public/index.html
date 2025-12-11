@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Feel it, Don't Think It</title>
-    <meta name="description" content="Understand what your body is telling you through affect theory. Discover your core feelings and get personalized therapeutic guidance.">
+    <meta name="description" content="Your body already knows. Understand what's happening inside you through embodied recognition and affect theory.">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://realness-score.web.app/">
     <meta property="og:title" content="Feel it, Don't Think It">
-    <meta property="og:description" content="Understand what your body is telling you through affect theory. Discover your core feelings and get personalized therapeutic guidance.">
+    <meta property="og:description" content="Your body already knows. Understand what's happening inside you through embodied recognition and affect theory.">
     <meta property="og:image" content="https://realness-score.web.app/og-image.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -19,7 +19,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://realness-score.web.app/">
     <meta property="twitter:title" content="Feel it, Don't Think It">
-    <meta property="twitter:description" content="Understand what your body is telling you through affect theory. Discover your core feelings and get personalized therapeutic guidance.">
+    <meta property="twitter:description" content="Your body already knows. Understand what's happening inside you through embodied recognition and affect theory.">
     <meta property="twitter:image" content="https://realness-score.web.app/og-image.svg">
 
     <!-- Mobile App -->
@@ -29,8 +29,6 @@
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- Firebase SDK - removed duplicate, only loaded at bottom of page -->
 
     <style>
         :root {
@@ -99,10 +97,10 @@
         }
 
         .body-large {
-            font-size: 28px; /* Bigger subheads: was 18px, now 28px */
+            font-size: 28px;
             line-height: 1.5;
-            font-weight: 500; /* Slightly bolder */
-            color: var(--gray-200); /* Lighter for more prominence */
+            font-weight: 500;
+            color: var(--gray-200);
         }
 
         .body {
@@ -116,22 +114,6 @@
             line-height: 1.4;
             color: var(--gray-500);
             letter-spacing: 0.01em;
-        }
-
-        .eyebrow {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--gray-600);
-            margin-bottom: calc(var(--spacing-unit) * 1);
-        }
-
-        .mono {
-            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 500;
         }
 
         /* Layout */
@@ -157,7 +139,7 @@
             flex-direction: column;
             justify-content: flex-start;
             flex: 1;
-            text-align: center; /* Center text on all screens */
+            text-align: center;
         }
 
         /* Buttons */
@@ -186,6 +168,11 @@
             transform: translateY(0);
         }
 
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         .btn-ghost {
             background: transparent;
             color: var(--white);
@@ -201,7 +188,7 @@
         input[type="text"] {
             width: 100%;
             padding: calc(var(--spacing-unit) * 2);
-            font-size: 34px; /* 30% smaller: was 48px, now ~34px */
+            font-size: 34px;
             border: none;
             border-bottom: 1px solid var(--gray-700);
             background: transparent;
@@ -209,7 +196,7 @@
             outline: none;
             transition: border-color 0.3s;
             font-family: inherit;
-            text-align: center; /* Center the input text */
+            text-align: center;
         }
 
         input[type="text"]:focus {
@@ -220,396 +207,201 @@
             color: var(--gray-600);
         }
 
-        /* Screen 2: Icon inline */
-        .title-with-icon {
-            display: flex;
-            align-items: center;
-            gap: calc(var(--spacing-unit) * 2);
-            margin-bottom: calc(var(--spacing-unit) * 3);
+        /* Textarea for context input */
+        textarea {
+            width: 100%;
+            padding: calc(var(--spacing-unit) * 2);
+            font-size: 16px;
+            line-height: 1.5;
+            border: 1px solid var(--gray-700);
+            border-radius: 8px;
+            background: var(--black);
+            color: var(--white);
+            outline: none;
+            transition: border-color 0.3s;
+            font-family: inherit;
+            text-align: left;
+            resize: vertical;
+            min-height: 120px;
         }
 
-        .icon-inline {
-            width: 24px;
-            height: 24px;
-            stroke: var(--gray-600);
-            stroke-width: 1.5;
-            fill: none;
-            flex-shrink: 0;
+        textarea:focus {
+            border-color: var(--white);
         }
 
-        /* Screen 3: Sorting */
-        .sort-header {
-            margin-bottom: 0;
-            display: flex;
-            align-items: center;
-            gap: calc(var(--spacing-unit) * 2);
-            flex-direction: row; /* Icon on right */
+        textarea::placeholder {
+            color: var(--gray-600);
         }
 
-        .sort-header h2 {
-            font-weight: 700;
-            flex: 1;
-            order: 1; /* Text first */
-        }
-
-        .sort-header-icon {
-            width: 48px;
-            height: 48px;
-            stroke: var(--white);
-            stroke-width: 1.5;
-            fill: none;
-            flex-shrink: 0;
-            transition: stroke 0.3s ease;
-            order: 2; /* Icon second (on right) */
-        }
-
-        /* Valence color states for sort header icon */
-        .sort-header-icon.state-1 { stroke: #cc0000; }
-        .sort-header-icon.state-2 { stroke: #dd3300; }
-        .sort-header-icon.state-3 { stroke: #ee5500; }
-        .sort-header-icon.state-4 { stroke: #ff7700; }
-        .sort-header-icon.state-5 { stroke: #ffaa00; }
-        .sort-header-icon.state-6 { stroke: #ddbb00; }
-        .sort-header-icon.state-7 { stroke: #bbcc00; }
-        .sort-header-icon.state-8 { stroke: #88dd00; }
-        .sort-header-icon.state-9 { stroke: #44ee00; }
-
-        .sort-subject {
-            font-size: 14px;
-            color: var(--gray-400);
-            margin-bottom: calc(var(--spacing-unit) * 3);
-        }
-
-        .sort-instruction {
-            font-size: 12px;
-            color: var(--black);
-            font-weight: 700;
-            text-align: center;
-            margin: 0 calc(var(--spacing-unit) * -3) calc(var(--spacing-unit) * 2);
-            padding: calc(var(--spacing-unit) * 0.5) calc(var(--spacing-unit) * 3);
-            background: var(--gray-800);
-            transition: background-color 0.3s ease;
-        }
-
-        /* Valence color states for instruction bar */
-        .sort-instruction.state-1 { background-color: #cc0000; }
-        .sort-instruction.state-2 { background-color: #dd3300; }
-        .sort-instruction.state-3 { background-color: #ee5500; }
-        .sort-instruction.state-4 { background-color: #ff7700; }
-        .sort-instruction.state-5 { background-color: #ffaa00; }
-        .sort-instruction.state-6 { background-color: #ddbb00; }
-        .sort-instruction.state-7 { background-color: #bbcc00; }
-        .sort-instruction.state-8 { background-color: #88dd00; }
-        .sort-instruction.state-9 { background-color: #44ee00; }
-
-        /* Affect Cards */
-        .sort-container {
-            display: flex;
-            flex-direction: column;
+        /* Affect Selection Grid */
+        .affects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 1px;
             background: var(--gray-900);
-            position: relative;
-            overflow: hidden;
+            margin: calc(var(--spacing-unit) * 3) 0;
         }
 
         .affect-card {
             background: var(--black);
-            padding: calc(var(--spacing-unit) * 1);
-            cursor: grab;
-            user-select: none;
-            touch-action: none;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left: 2px solid transparent;
+            padding: calc(var(--spacing-unit) * 3);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
             display: flex;
+            flex-direction: column;
             align-items: center;
+            text-align: center;
             gap: calc(var(--spacing-unit) * 1);
-            position: relative;
-            z-index: 2;
         }
 
-        @keyframes cardSwap {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        .affect-card:hover {
+            background: var(--gray-900);
+            border-color: var(--gray-700);
         }
 
-        .affect-card.swap-animation {
-            animation: cardSwap 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .affect-card.top-three .affect-name {
-            color: var(--white);
-        }
-
-        .affect-card:not(.top-three) .affect-name {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .affect-card:active {
-            cursor: grabbing;
-        }
-
-        .affect-card.dragging {
-            opacity: 0.5;
-            transform: scale(0.98);
-        }
-
-        .affect-card.drag-over {
-            border-left-color: var(--white);
+        .affect-card.selected {
+            border-color: var(--white);
             background: var(--gray-900);
         }
 
-        .affect-rank {
-            font-size: 11px;
-            font-family: 'SF Mono', monospace;
-            color: var(--gray-600);
-            min-width: 20px;
-            text-align: center;
-            letter-spacing: 0.05em;
-        }
-
-        .affect-content {
-            flex: 1;
+        .affect-icon {
+            width: 32px;
+            height: 32px;
+            stroke: var(--white);
+            stroke-width: 1.5;
+            fill: none;
+            margin-bottom: calc(var(--spacing-unit) * 1);
         }
 
         .affect-name {
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 2px;
-            letter-spacing: -0.01em;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 4px;
         }
 
         .affect-description {
             font-size: 12px;
-            color: var(--gray-600);
+            color: var(--gray-500);
             line-height: 1.3;
         }
 
-        /* iOS-style drag handle */
-        .drag-handle {
-            width: 20px;
-            height: 20px;
-            display: grid;
-            grid-template-columns: repeat(2, 3px);
-            grid-template-rows: repeat(3, 3px);
-            gap: 3px;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        .drag-handle-dot {
-            width: 3px;
-            height: 3px;
-            background: var(--gray-600);
-            border-radius: 50%;
-        }
-
-        /* Valence Divider - 5px bar that changes color */
-        .valence-divider {
-            width: 100%;
-            height: 5px;
-            margin-top: calc(var(--spacing-unit) * 2);
-            margin-bottom: calc(var(--spacing-unit) * 2);
-            transition: background-color 0.6s ease;
-            border-radius: 2.5px;
-        }
-
-        /* Valence States - Red (negative) to Yellow (neutral) to Green (positive) */
-        .valence-divider.state-1 { background-color: #cc0000; } /* Dark red - most negative */
-        .valence-divider.state-2 { background-color: #dd3300; }
-        .valence-divider.state-3 { background-color: #ee5500; }
-        .valence-divider.state-4 { background-color: #ff7700; }
-        .valence-divider.state-5 { background-color: #ffaa00; } /* Yellow - neutral */
-        .valence-divider.state-6 { background-color: #ddbb00; }
-        .valence-divider.state-7 { background-color: #bbcc00; }
-        .valence-divider.state-8 { background-color: #88dd00; }
-        .valence-divider.state-9 { background-color: #44ee00; } /* Bright green - most positive */
-
-        /* Results */
-        .results-header {
-            margin-bottom: calc(var(--spacing-unit) * 2); /* Tightened from 4 to 2 */
-            padding-bottom: 0; /* Removed padding */
-            border-bottom: none; /* Removed border */
-            position: relative;
-        }
-
-        .result-image-container {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto calc(var(--spacing-unit) * 2) auto; /* Tightened bottom margin */
-            position: relative;
+        /* Context Input Buttons */
+        .button-group {
             display: flex;
             flex-direction: column;
-            align-items: center;
             gap: calc(var(--spacing-unit) * 2);
-        }
-
-        .result-image-placeholder {
-            display: none; /* Remove color square completely */
-        }
-
-        /* CAS element badge - huge gray background under icon */
-        .cas-element {
-            font-family: 'SF Mono', monospace;
-            font-size: 32px; /* Huge size */
-            font-weight: 700; /* Bold */
-            letter-spacing: 0.15em;
-            color: var(--white); /* White text */
-            background: rgba(255, 255, 255, 0.2); /* 20% white/gray background */
-            padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4);
-            text-align: center;
-            display: inline-block;
-            border-radius: 8px;
-            margin-top: calc(var(--spacing-unit) * 3);
-            backdrop-filter: blur(10px); /* Subtle blur effect */
-        }
-
-        /* Icon and title with valence color */
-        .result-title-overlay {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: calc(var(--spacing-unit) * 2);
-        }
-
-        .selected-icon {
-            width: 240px; /* 2x bigger: was 120px, now 240px */
-            height: 240px;
-            stroke: var(--white); /* Will be overridden by valence color */
-            stroke-width: 1.5;
-            fill: none;
-            transition: stroke 0.6s ease;
-        }
-
-        /* Valence color states for result icon */
-        .selected-icon.state-1 { stroke: #cc0000; }
-        .selected-icon.state-2 { stroke: #dd3300; }
-        .selected-icon.state-3 { stroke: #ee5500; }
-        .selected-icon.state-4 { stroke: #ff7700; }
-        .selected-icon.state-5 { stroke: #ffaa00; }
-        .selected-icon.state-6 { stroke: #ddbb00; }
-        .selected-icon.state-7 { stroke: #bbcc00; }
-        .selected-icon.state-8 { stroke: #88dd00; }
-        .selected-icon.state-9 { stroke: #44ee00; }
-
-        .result-title-overlay h2 {
-            color: var(--white); /* Will be overridden by valence color */
-            margin: 0;
-            transition: color 0.6s ease;
-            font-size: 96px; /* 2x bigger: was ~48px from heading-1, now 96px */
-            text-transform: uppercase; /* All caps */
-            font-weight: 800; /* Extra bold */
-            letter-spacing: 0.02em;
-        }
-
-        /* Valence color states for result title */
-        .result-title-overlay h2.state-1 { color: #cc0000; }
-        .result-title-overlay h2.state-2 { color: #dd3300; }
-        .result-title-overlay h2.state-3 { color: #ee5500; }
-        .result-title-overlay h2.state-4 { color: #ff7700; }
-        .result-title-overlay h2.state-5 { color: #ffaa00; }
-        .result-title-overlay h2.state-6 { color: #ddbb00; }
-        .result-title-overlay h2.state-7 { color: #bbcc00; }
-        .result-title-overlay h2.state-8 { color: #88dd00; }
-        .result-title-overlay h2.state-9 { color: #44ee00; }
-
-        .feeling-section {
-            margin: calc(var(--spacing-unit) * 2) 0; /* Tightened from 4 to 2 */
-            text-align: left; /* Align left */
-        }
-
-        .feeling {
-            font-size: 24px; /* Larger, title-like */
-            font-weight: 600; /* Bolder */
-            letter-spacing: -0.01em; /* Tighter tracking */
-            color: var(--white); /* White instead of gray */
-            margin-bottom: calc(var(--spacing-unit) * 2);
-            text-transform: none; /* Remove uppercase */
-            text-align: left; /* Align left */
-        }
-
-        .approach {
-            font-size: 18px; /* Slightly smaller */
-            line-height: 1.3; /* Tight line height */
-            color: var(--gray-300); /* Lighter gray for better contrast */
-            text-align: left; /* Align left */
-        }
-
-        .approach p {
-            margin: 0 0 calc(var(--spacing-unit) * 3) 0; /* Space between discrete paragraphs */
-        }
-
-        .approach p:last-child {
-            margin-bottom: 0; /* Remove margin from last paragraph */
-        }
-
-        .expandable {
             margin: calc(var(--spacing-unit) * 3) 0;
         }
 
-        .expandable-trigger {
-            width: 100%;
-            background: transparent;
-            border: none;
-            border-top: 1px solid var(--gray-800);
-            border-bottom: 1px solid var(--gray-800);
-            padding: calc(var(--spacing-unit) * 2) 0;
+        .option-btn {
+            background: var(--black);
             color: var(--white);
-            font-size: 13px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s;
-            font-family: inherit;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            border: 1px solid var(--gray-700);
+            padding: calc(var(--spacing-unit) * 2);
+            font-size: 14px;
             font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            font-family: inherit;
         }
 
-        .expandable-trigger:hover {
-            color: var(--gray-400);
+        .option-btn:hover {
+            background: var(--gray-900);
+            border-color: var(--gray-600);
         }
 
-        .expandable-icon {
-            transition: transform 0.3s;
-            font-size: 10px;
+        .option-btn.selected {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
         }
 
-        .expandable-trigger.open .expandable-icon {
-            transform: rotate(180deg);
+        /* Direction Buttons in 2x2 Grid */
+        .direction-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--gray-900);
+            margin: calc(var(--spacing-unit) * 3) 0;
         }
 
-        .expandable-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 0;
+        /* Intensity Scale */
+        .intensity-scale {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: var(--gray-900);
+            margin: calc(var(--spacing-unit) * 3) 0;
         }
 
-        .expandable-content.open {
-            max-height: 600px;
-            padding: calc(var(--spacing-unit) * 2.5) 0;
-        }
-
-        .spotify-embed {
-            margin-top: calc(var(--spacing-unit) * 2);
-        }
-
-        .spotify-link {
-            display: inline-block;
-            color: var(--gray-400);
-            text-decoration: none;
-            font-size: 13px;
-            padding: calc(var(--spacing-unit) * 1) 0;
-            border-bottom: 1px solid var(--gray-700);
-            transition: all 0.3s;
-        }
-
-        .spotify-link:hover {
+        .intensity-btn {
+            background: var(--black);
             color: var(--white);
-            border-bottom-color: var(--white);
+            border: none;
+            padding: calc(var(--spacing-unit) * 2);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: left;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .intensity-btn:hover {
+            background: var(--gray-900);
+        }
+
+        .intensity-btn.selected {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .intensity-number {
+            font-size: 18px;
+            font-weight: 700;
+            min-width: 24px;
+        }
+
+        /* Results */
+        .results-header {
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            padding-bottom: calc(var(--spacing-unit) * 2);
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .result-affect {
+            font-size: clamp(32px, 8vw, 48px);
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            color: var(--white);
+        }
+
+        .result-context {
+            font-size: 16px;
+            color: var(--gray-500);
+            margin-bottom: calc(var(--spacing-unit) * 1);
+        }
+
+        .result-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--gray-300);
+            text-align: left;
+            margin: calc(var(--spacing-unit) * 3) 0;
+        }
+
+        .result-content p {
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .result-content p:last-child {
+            margin-bottom: 0;
         }
 
         .share-grid {
@@ -655,61 +447,11 @@
             display: flex;
         }
 
-        .loading-icon-background {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: calc(var(--spacing-unit) * 4);
-            opacity: 0.25;
-        }
-
-        .loading-icon-background i {
-            width: 600px;
-            height: 600px;
-            display: block;
-        }
-
-        .loading-icon-background svg {
-            width: 100%;
-            height: 100%;
-            stroke: var(--white);
-            stroke-width: 1;
-            fill: none;
-        }
-
-        .loading-quote {
-            font-size: clamp(45px, 11vw, 77px); /* 20% smaller: was 56-96px, now ~45-77px */
-            font-weight: 500; /* Lighter weight */
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            color: rgba(255, 255, 255, 0.7); /* Slightly transparent */
-            margin-top: calc(var(--spacing-unit) * 4); /* Move to bottom with top margin */
-            text-align: center;
-            max-width: 800px;
-            order: 3; /* Place last in flex order */
-        }
-
-        .loading-processing {
-            font-size: clamp(56px, 14vw, 96px); /* Same size as affect name */
+        .loading-text {
+            font-size: clamp(24px, 6vw, 36px);
             font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            color: var(--white);
-            margin-bottom: calc(var(--spacing-unit) * 2);
-            text-align: center;
-            order: 1; /* Place first */
-        }
-
-        .loading-affect-name {
-            font-size: clamp(56px, 14vw, 96px);
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
             color: var(--white);
             text-align: center;
-            order: 2; /* Place second */
         }
 
         /* Spacing utilities */
@@ -719,23 +461,26 @@
         .mb-3 { margin-bottom: calc(var(--spacing-unit) * 3); }
         .mb-4 { margin-bottom: calc(var(--spacing-unit) * 4); }
         .text-center { text-align: center; }
+        .text-left { text-align: left; }
 
         /* Responsive */
+        @media (min-width: 640px) {
+            .affects-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
         @media (max-width: 640px) {
             .screen {
                 padding: calc(var(--spacing-unit) * 2);
             }
 
             .display-1 {
-                font-size: 72px; /* 3x larger: was 24px, now 72px */
+                font-size: 28px;
             }
 
-            .affect-card {
-                padding: calc(var(--spacing-unit) * 1.25);
-            }
-
-            .result-title-overlay h2 {
-                font-size: 48px; /* Smaller on mobile: 96px desktop, 48px mobile */
+            input[type="text"] {
+                font-size: 24px;
             }
         }
     </style>
@@ -743,10 +488,7 @@
 <body>
     <!-- Full-screen Loading Overlay -->
     <div id="loadingOverlay" class="loading-overlay">
-        <div class="loading-icon-background" id="loadingIconBackground"></div>
-        <div class="loading-processing" style="position: relative; z-index: 1;">Processing</div>
-        <div id="loadingAffectName" class="loading-affect-name" style="position: relative; z-index: 1;"></div>
-        <div class="loading-quote" style="position: relative; z-index: 1;">(Your body already knows the truth.)</div>
+        <div class="loading-text">Generating your response...</div>
     </div>
 
     <!-- Persistent Header -->
@@ -757,93 +499,104 @@
     <!-- Screen 1: Intro -->
     <div id="screen1" class="screen active">
         <div class="screen-container">
-            <h2 class="display-1 mb-3">What are you <u>really</u> feeling?</h2>
-            <p class="body-large mb-3">Understand how your body reveals true feeling.</p>
+            <h2 class="display-1 mb-3">What's happening inside you right now?</h2>
+            <p class="body-large mb-3">Your body already knows. We'll help you see it.</p>
             <p class="body mb-3">We use <em>affect</em> - the fast, automatic signals your body sends before thoughts or explanations show up.</p>
-            <p class="body mb-3">These signals can tell you a lot about how you truly feel about a person, place, idea, or situation.</p>
-            <p class="body mb-3">To begin, tell us the thing you want to understand better.</p>
+            <p class="body mb-3">These signals can tell you a lot about what's really happening with a person, place, idea, or situation.</p>
+            <p class="body mb-3">Drop from your head into your body. What's here?</p>
             <button class="btn" onclick="goToScreen(2)">Begin</button>
         </div>
     </div>
 
-    <!-- Screen 2: The What -->
+    <!-- Screen 2: Select Affect -->
     <div id="screen2" class="screen">
         <div class="screen-container">
-            <h2 class="display-1">What do you want to understand?</h2>
-            <p class="body mb-4">Enter a person, place, or situation.</p>
-            <input type="text" id="subjectInput" placeholder="my mother" autocomplete="off">
-            <button class="btn" id="continueBtn" onclick="validateAndContinue()">Continue</button>
+            <h2 class="display-1 mb-3">What sits in your body right now?</h2>
+            <p class="body mb-2">Your body already knows. Just recognize what's true.</p>
+
+            <div class="affects-grid" id="affectsGrid"></div>
+
+            <button class="btn" id="continueToContext" onclick="goToContext()" style="display: none;">Continue</button>
         </div>
     </div>
 
-    <!-- Screen 3: The Sort -->
+    <!-- Screen 3: Context Gathering -->
     <div id="screen3" class="screen">
         <div class="screen-container">
-            <div class="sort-header">
-                <h2 class="heading-1 mb-2">When I think about <span id="sortSubjectInline"></span> my body feels like it's...</h2>
-                <svg class="sort-header-icon" viewBox="0 0 24 24" id="sortHeaderIcon">
-                    <circle cx="12" cy="12" r="10"/>
-                </svg>
-            </div>
-            <p class="sort-instruction">Drag from strongest (top) to weakest (bottom)</p>
+            <h2 class="heading-1 mb-4">What's this connecting to?</h2>
 
-            <div style="position: relative; margin-bottom: calc(var(--spacing-unit) * 3);">
-                <div id="sortContainer" class="sort-container"></div>
+            <div class="mb-4">
+                <label class="caption mb-2" style="display: block;">What or who is this about?</label>
+                <textarea id="contextInput" placeholder="my mother" autocomplete="off" rows="4"></textarea>
             </div>
 
-            <button class="btn" onclick="goToResults()">See Results</button>
+            <div class="mb-4">
+                <label class="caption mb-2" style="display: block;">Direction</label>
+                <div class="direction-grid">
+                    <button class="option-btn" onclick="selectDirection('self')">Pointed at myself</button>
+                    <button class="option-btn" onclick="selectDirection('other')">Pointed at someone else</button>
+                    <button class="option-btn" onclick="selectDirection('past')">About the past</button>
+                    <button class="option-btn" onclick="selectDirection('future')">About the future</button>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="caption mb-2" style="display: block;">Intensity</label>
+                <div class="intensity-scale">
+                    <button class="intensity-btn" onclick="selectIntensity(1)">
+                        <span class="intensity-number">1</span>
+                        <span>Quiet hum</span>
+                    </button>
+                    <button class="intensity-btn" onclick="selectIntensity(2)">
+                        <span class="intensity-number">2</span>
+                        <span>Steady presence</span>
+                    </button>
+                    <button class="intensity-btn" onclick="selectIntensity(3)">
+                        <span class="intensity-number">3</span>
+                        <span>Loud and insistent</span>
+                    </button>
+                    <button class="intensity-btn" onclick="selectIntensity(4)">
+                        <span class="intensity-number">4</span>
+                        <span>Overwhelming</span>
+                    </button>
+                </div>
+            </div>
+
+            <button class="btn" id="getCASBtn" onclick="goToCAS()">Continue</button>
+        </div>
+    </div>
+
+    <!-- Screen 3b: CAS Assessment -->
+    <div id="screen3b" class="screen">
+        <div class="screen-container">
+            <h2 class="heading-1 mb-3">Now let's see why you handle it the way you do</h2>
+            <p class="body mb-4" style="color: var(--gray-400);">These aren't right or wrong—just patterns. Answer what feels most true.</p>
+
+            <div id="casQuestions"></div>
+
+            <button class="btn" id="getResultsBtn" onclick="getResults()" style="display: none;">Get Results</button>
         </div>
     </div>
 
     <!-- Screen 4: Results -->
     <div id="screen4" class="screen">
         <div class="screen-container">
-
             <div class="results-header">
-                <div class="result-image-container">
-                    <div class="result-title-overlay">
-                        <svg class="selected-icon" viewBox="0 0 24 24" id="resultIcon">
-                            <circle cx="12" cy="12" r="10"/>
-                            <line x1="12" y1="8" x2="12" y2="12"/>
-                            <line x1="12" y1="16" x2="12.01" y2="16"/>
-                        </svg>
-                        <h2 class="heading-1" id="resultsSubject">your mother</h2>
-                    </div>
+                <div class="result-affect" id="resultAffect"></div>
+                <div class="result-context">
+                    <span id="resultContext"></span> •
+                    <span id="resultDirection"></span> •
+                    Intensity: <span id="resultIntensity"></span>
                 </div>
             </div>
 
-            <div class="feeling-section">
-                <div class="feeling" id="feeling">exploratory radiant layered with startled depth</div>
-                <div class="approach" id="approach">
-                    Mirror your Curiosity about your relationship with your mother. Let Joy help you celebrate what you discover about her. But stay grounded—Surprise is there as a reminder of the real. Don't push it away, just let it sit.
-                </div>
+            <div id="terrainSection" style="margin: calc(var(--spacing-unit) * 4) 0; padding: calc(var(--spacing-unit) * 3); background: var(--gray-900); border-radius: 8px;">
+                <p class="caption" style="color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: calc(var(--spacing-unit) * 1);">Your Terrain</p>
+                <h3 style="font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: calc(var(--spacing-unit) * 2);" id="terrainArchetype"></h3>
+                <p class="body" style="color: var(--gray-300);" id="terrainDescription"></p>
             </div>
 
-            <div class="expandable">
-                <button class="expandable-trigger open" onclick="toggleWeather()" id="weatherTrigger">
-                    <span>Emotional Weather</span>
-                    <span class="expandable-icon">↓</span>
-                </button>
-                <div class="expandable-content open" id="weatherContent">
-                    <p class="body" id="weather">Bright, shifting skies with variable winds, interrupted by warm, golden sunshine, with a lingering trace of sudden flashes of lightning in a clear sky.</p>
-                </div>
-            </div>
-
-            <div class="expandable">
-                <button class="expandable-trigger open" onclick="toggleMusic()" id="musicTrigger">
-                    <span>Music Suggestion</span>
-                    <span class="expandable-icon">↓</span>
-                </button>
-                <div class="expandable-content open" id="musicContent">
-                    <p class="body" style="margin-bottom: calc(var(--spacing-unit) * 1.5);"><span id="musicGenre">Synth Pop / Indie Pop</span></p>
-                    <a href="#" class="spotify-link" onclick="openSpotifySearch(); return false;">
-                        Open in Spotify →
-                    </a>
-                    <div style="display: none;" id="spotifyQuery">indie pop joyful discovery</div>
-                </div>
-            </div>
-
-            <div class="cas-element" id="casElement">CuJoSt</div>
+            <div class="result-content" id="resultContent"></div>
 
             <div class="share-grid">
                 <button class="share-btn" onclick="shareToTwitter()">Twitter</button>
@@ -851,21 +604,7 @@
                 <button class="share-btn" onclick="copyLink()">Copy</button>
             </div>
 
-            <button class="btn btn-ghost" onclick="window.scrollTo(0, 0); goToScreen(1); resetApp();">Start Over</button>
-            <button class="btn mt-3" onclick="goToScreen(5)">Learn More</button>
-        </div>
-    </div>
-
-    <!-- Screen 5: Learn More -->
-    <div id="screen5" class="screen">
-        <div class="screen-container">
-            <h2 class="display-1 mb-3">You just saw how your body responds to one thing.</h2>
-            <p class="body-large mb-3">Affect Theory can help you understand how you respond to <em>everything</em>.</p>
-            <p class="body mb-4">Visit our site to explore how these signals can improve your clarity, connection, and well-being.</p>
-            <a href="https://example.com" style="color: var(--white); text-decoration: none; font-weight: 500; margin: calc(var(--spacing-unit) * 3) 0; display: inline-block;">
-                Discover more →
-            </a>
-            <button class="btn btn-ghost mt-4" onclick="window.scrollTo(0, 0); goToScreen(1); resetApp();">Take Another Assessment</button>
+            <button class="btn btn-ghost" onclick="resetApp()">Start Over</button>
         </div>
     </div>
 
@@ -875,7 +614,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 
     <script>
-        // Initialize Firebase (only if not already initialized)
+        // Initialize Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyB29fRL5UdQodkzCDaKM8Ro7dtXpAf-Uro",
             authDomain: "realness-score.firebaseapp.com",
@@ -885,94 +624,96 @@
             appId: "1:433844819847:web:0dffeed8056eac7e4f8990"
         };
 
-        // Check if Firebase is already initialized
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
         const db = firebase.firestore();
 
+        // State object
         const state = {
-            subject: '',
-            normalizedSubject: '',
-            affectRanking: [],
-            top3: [],
-            valenceScore: 0,
-            animationState: 5,
-            detectedIcon: null,
-            detectedPronouns: null,
-            detectedSubjectType: null,
-            spotifyQuery: null,
-            spotifySeed: null
+            selectedAffect: null,
+            selectedAffectName: '',
+            context: '',
+            direction: null,
+            intensity: null,
+            casAnswers: {},
+            casArchetype: null
         };
 
-        // Icons for each affect (Lucide-inspired)
-        const affectIcons = {
-            'Curiosity': '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>',
-            'Joy': '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/>',
-            'Surprise': '<circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/>',
-            'Fear': '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>',
-            'Anger': '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
-            'Sadness': '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>',
-            'Disgust': '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
-            'Withdrawing': '<line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>',
-            'Dropping': '<line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>'
-        };
-
+        // The 9 affects with embodied metaphor clusters
         const affects = [
-            { name: 'Curiosity', description: 'leaning in, focused, drawn toward it', element: 'Cu', valence: 1 },
-            { name: 'Joy', description: 'soft, open, warm, relaxed', element: 'Jo', valence: 1 },
-            { name: 'Surprise', description: 'jolted, paused, suddenly interrupted', element: 'St', valence: 0 },
-            { name: 'Fear', description: 'tight, alert, braced, scanning for danger', element: 'Fe', valence: -1 },
-            { name: 'Anger', description: 'hot, pressured, ready to push back', element: 'An', valence: -1 },
-            { name: 'Sadness', description: 'heavy, sinking, aching inward', element: 'Sa', valence: -1 },
-            { name: 'Disgust', description: 'recoiling, pulling back fast, wanting to reject', element: 'Di', valence: -1 },
-            { name: 'Withdrawing', description: 'stepping back, taking distance, lowering intake', element: 'Pu', valence: 0 },
-            { name: 'Dropping', description: 'shrinking, collapsing inward, eyes down', element: 'Dr', valence: -1 }
+            {
+                name: 'Curiosity',
+                metaphors: ['leaning in toward something', 'pulled forward', 'tracking movement', 'eyes focused and bright'],
+                icon: 'search'
+            },
+            {
+                name: 'Joy',
+                metaphors: ['chest expanding', 'warmth spreading', 'softening', 'opening up'],
+                icon: 'smile'
+            },
+            {
+                name: 'Surprise',
+                metaphors: ['breath catching', 'suddenly jolted', 'paused mid-step', 'interrupted'],
+                icon: 'zap'
+            },
+            {
+                name: 'Fear',
+                metaphors: ['heart racing', 'blood running cold', 'frozen in place', 'braced for impact'],
+                icon: 'alert-triangle'
+            },
+            {
+                name: 'Anger',
+                metaphors: ['blood boiling', 'pressure building', 'heat rising', 'ready to explode'],
+                icon: 'flame'
+            },
+            {
+                name: 'Sadness',
+                metaphors: ['weight pressing down', 'sinking', 'drowning', 'can\'t catch breath'],
+                icon: 'cloud-rain'
+            },
+            {
+                name: 'Disgust',
+                metaphors: ['recoiling', 'pulling back fast', 'wanting to spit it out', 'nausea rising'],
+                icon: 'x-circle'
+            },
+            {
+                name: 'Withdrawing',
+                metaphors: ['stepping back', 'creating distance', 'turning away', 'closing the door'],
+                icon: 'move-left'
+            },
+            {
+                name: 'Dropping',
+                metaphors: ['want to disappear', 'feeling small', 'can\'t face anyone', 'shrinking'],
+                icon: 'arrow-down'
+            }
         ];
 
-        const matrixExamples = {
-            'CuJoSt': {
-                feeling: 'exploratory radiant layered with startled depth',
-                approach: 'Mirror your Curiosity about {subject}. Let Joy help you celebrate what you discover. But stay grounded—Surprise is there as a reminder of the real. Don\'t push it away, just let it sit.',
-                weather: 'Bright, shifting skies with variable winds, interrupted by warm, golden sunshine, with a lingering trace of sudden flashes of lightning in a clear sky.',
-                musicGenre: 'Synth Pop / Indie Pop',
-                spotifyQuery: 'indie pop joyful discovery'
-            },
-            'FeSaAn': {
-                feeling: 'protective darkness holding defensive weight',
-                approach: 'Notice how Fear is trying to protect you around {subject}. Let Sadness show you what matters. Stay present with Anger—it\'s guarding something important.',
-                weather: 'Heavy, dark clouds with steady rain, occasional thunder rolling in the distance, air thick with tension.',
-                musicGenre: 'Dark Ambient / Post-Rock',
-                spotifyQuery: 'dark ambient melancholic tension'
-            },
-            'JoCuSa': {
-                feeling: 'warm curiosity tinged with tender loss',
-                approach: 'Let the Joy you feel about {subject} lead the way. Follow your Curiosity where it wants to go. And when Sadness appears, honor it—it\'s pointing to what matters most.',
-                weather: 'Soft golden light filtering through gentle clouds, with a bittersweet breeze carrying memories.',
-                musicGenre: 'Indie Folk / Ambient',
-                spotifyQuery: 'indie folk bittersweet warmth'
-            }
-        };
+        // Initialize app - render affect cards
+        function initApp() {
+            renderAffectCards();
+        }
 
-        // Render Lucide icon by name
-        function renderLucideIcon(elementId, iconName) {
-            const element = document.getElementById(elementId);
-            if (!element) return;
+        // Render affect selection cards
+        function renderAffectCards() {
+            const grid = document.getElementById('affectsGrid');
+            grid.innerHTML = '';
 
-            // Convert icon name from kebab-case to PascalCase for Lucide
-            // e.g., "user-heart" -> "UserHeart"
-            const pascalCase = iconName
-                .split('-')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                .join('');
+            affects.forEach((affect, index) => {
+                const card = document.createElement('div');
+                card.className = 'affect-card';
+                card.onclick = () => selectAffect(index);
 
-            // Clear existing content
-            element.innerHTML = '';
+                // Display first 2 metaphors
+                const metaphorText = affect.metaphors.slice(0, 2).join(' • ');
 
-            // Create Lucide icon element
-            const iconElement = document.createElement('i');
-            iconElement.setAttribute('data-lucide', iconName);
-            element.appendChild(iconElement);
+                card.innerHTML = `
+                    <i data-lucide="${affect.icon}" class="affect-icon"></i>
+                    <div class="affect-name">${affect.name}</div>
+                    <div class="affect-description">${metaphorText}</div>
+                `;
+                grid.appendChild(card);
+            });
 
             // Initialize Lucide icons
             if (window.lucide) {
@@ -980,579 +721,430 @@
             }
         }
 
-        function initApp() {
-            // Randomize the initial affect order using Fisher-Yates shuffle
-            const shuffled = [...affects];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            state.affectRanking = shuffled;
-            renderAffectCards();
+        // Select affect
+        function selectAffect(index) {
+            // Remove previous selection
+            document.querySelectorAll('.affect-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+
+            // Add selection to clicked card
+            const cards = document.querySelectorAll('.affect-card');
+            cards[index].classList.add('selected');
+
+            // Update state
+            state.selectedAffect = index;
+            state.selectedAffectName = affects[index].name;
+
+            // Show continue button
+            document.getElementById('continueToContext').style.display = 'block';
         }
 
+        // Select direction
+        function selectDirection(direction) {
+            // Remove previous selection
+            document.querySelectorAll('.direction-grid .option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            // Add selection to clicked button
+            event.target.classList.add('selected');
+
+            // Update state
+            state.direction = direction;
+
+            // Check if all fields are filled
+            checkContextComplete();
+        }
+
+        // Select intensity
+        function selectIntensity(intensity) {
+            // Remove previous selection
+            document.querySelectorAll('.intensity-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            // Add selection to clicked button
+            event.target.classList.add('selected');
+
+            // Update state
+            state.intensity = intensity;
+
+            // Check if all fields are filled
+            checkContextComplete();
+        }
+
+        // Check if context is complete
+        function checkContextComplete() {
+            const contextInput = document.getElementById('contextInput').value.trim();
+            const btn = document.getElementById('getCASBtn');
+
+            if (contextInput && state.direction && state.intensity) {
+                btn.disabled = false;
+            } else {
+                btn.disabled = true;
+            }
+        }
+
+        // Listen to context input changes
+        document.addEventListener('DOMContentLoaded', () => {
+            const contextInput = document.getElementById('contextInput');
+            if (contextInput) {
+                contextInput.addEventListener('input', checkContextComplete);
+            }
+        });
+
+        // Navigation
         function goToScreen(screenNumber) {
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
             });
             setTimeout(() => {
                 document.getElementById('screen' + screenNumber).classList.add('active');
+                window.scrollTo(0, 0);
             }, 50);
         }
 
-        async function validateAndContinue() {
-            const input = document.getElementById('subjectInput').value.trim();
-            if (input.length < 2) {
-                alert('Please enter what you want to understand.');
+        function goToContext() {
+            if (state.selectedAffect === null) {
+                alert('Please select an affect first.');
+                return;
+            }
+            goToScreen(3);
+        }
+
+        function goToCAS() {
+            const contextInput = document.getElementById('contextInput').value.trim();
+
+            if (!contextInput || !state.direction || !state.intensity) {
+                alert('Please fill in all fields.');
                 return;
             }
 
-            // Show loading state
-            const btn = event.target;
-            const originalText = btn.textContent;
-            btn.textContent = 'Analyzing...';
-            btn.disabled = true;
-
-            try {
-                // Call Cloud Function to detect icon and pronouns
-                const response = await fetch('https://us-central1-realness-score.cloudfunctions.net/detectIconAndPronouns', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ subject: input })
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to detect icon');
-                }
-
-                const result = await response.json();
-
-                // Store results in state
-                state.subject = input;
-                state.detectedIcon = result.result.icon;
-                state.detectedPronouns = result.result.pronouns;
-                state.detectedSubjectType = result.result.subjectType;
-                state.normalizedSubject = result.result.normalizedSubject || input;
-
-                // Use normalized subject for display
-                document.getElementById('sortSubjectInline').textContent = state.normalizedSubject;
-
-                // Set the icon in the sort header
-                renderLucideIcon('sortHeaderIcon', state.detectedIcon || 'circle');
-
-                goToScreen(3);
-
-                // Trigger demo card swap animation after a brief delay
-                // Start animation from top and sequence down quickly
-                setTimeout(() => {
-                    const cards = document.querySelectorAll('.affect-card');
-                    cards.forEach((card, index) => {
-                        // Stagger animation: start at top, sequence down with 100ms delay each
-                        setTimeout(() => {
-                            card.classList.add('swap-animation');
-                            setTimeout(() => {
-                                card.classList.remove('swap-animation');
-                            }, 600);
-                        }, index * 100); // 100ms delay between each card
-                    });
-                }, 300); // Start sooner (was 500ms)
-            } catch (error) {
-                console.error('Error detecting icon:', error);
-                alert('Failed to analyze. Please try again.');
-                btn.textContent = originalText;
-                btn.disabled = false;
-            }
+            state.context = contextInput;
+            renderCASQuestions();
+            goToScreen('3b');
         }
 
-        function renderAffectCards() {
-            const container = document.getElementById('sortContainer');
+        // CAS Questions (8 questions to determine attachment archetype)
+        const casQuestions = [
+            {
+                id: 'intensity',
+                question: 'When things get intense, I tend to:',
+                options: [
+                    { text: 'Pull away and need space', scores: { avoidant: 2 } },
+                    { text: 'Move closer and seek connection', scores: { anxious: 2 } },
+                    { text: 'Stay present and work through it', scores: { secure: 2 } },
+                    { text: 'Freeze—both pull away and move closer at once', scores: { disorganized: 2 } }
+                ]
+            },
+            {
+                id: 'relationships',
+                question: 'In relationships, I usually:',
+                options: [
+                    { text: 'Show the polished version of myself', scores: { anxious_perfectionist: 2 } },
+                    { text: 'Show everything—I wear my heart on my sleeve', scores: { anxious_preoccupied: 2 } },
+                    { text: 'Keep emotional distance', scores: { avoidant: 2 } },
+                    { text: 'Share openly when it feels right', scores: { secure: 2 } }
+                ]
+            },
+            {
+                id: 'stress',
+                question: 'My instinct under stress is:',
+                options: [
+                    { text: 'Figure it out alone', scores: { avoidant_dismissive: 2 } },
+                    { text: 'Seek support from others', scores: { anxious: 1, secure: 1 } },
+                    { text: 'Analyze it intellectually', scores: { avoidant_intellectual: 2 } },
+                    { text: 'Varies—sometimes withdraw, sometimes reach out', scores: { disorganized: 2 } }
+                ]
+            },
+            {
+                id: 'fear',
+                question: 'I'm most afraid of:',
+                options: [
+                    { text: 'Being abandoned or alone', scores: { anxious: 2 } },
+                    { text: 'Being trapped or controlled', scores: { avoidant: 2 } },
+                    { text: 'Being exposed as inadequate', scores: { anxious_perfectionist: 2 } },
+                    { text: 'Neither strongly resonates', scores: { secure: 2 } }
+                ]
+            },
+            {
+                id: 'vulnerability',
+                question: 'When I feel vulnerable, I:',
+                options: [
+                    { text: 'Hide it and perform confidence', scores: { anxious_perfectionist: 2 } },
+                    { text: 'Share it openly', scores: { anxious_preoccupied: 1, secure: 1 } },
+                    { text: 'Intellectualize or analyze it', scores: { avoidant_intellectual: 2 } },
+                    { text: 'Withdraw and process alone', scores: { avoidant_dismissive: 2 } }
+                ]
+            },
+            {
+                id: 'needs',
+                question: 'I think needing people is:',
+                options: [
+                    { text: 'Normal and healthy', scores: { secure: 2, anxious: 1 } },
+                    { text: 'A weakness I try to minimize', scores: { avoidant_counterphobic: 2 } },
+                    { text: 'Risky—people might leave', scores: { anxious: 2 } },
+                    { text: 'Confusing—I want it and fear it', scores: { disorganized: 2 } }
+                ]
+            },
+            {
+                id: 'emotions',
+                question: 'Strong emotions make me want to:',
+                options: [
+                    { text: 'Express them fully', scores: { anxious_preoccupied: 2 } },
+                    { text: 'Control or contain them', scores: { avoidant: 2 } },
+                    { text: 'Escape or distract myself', scores: { avoidant_dismissive: 1, disorganized: 1 } },
+                    { text: 'Feel them without being overwhelmed', scores: { secure: 2 } }
+                ]
+            },
+            {
+                id: 'conflict',
+                question: 'I handle conflict by:',
+                options: [
+                    { text: 'Withdrawing until it blows over', scores: { avoidant_dismissive: 2 } },
+                    { text: 'Engaging directly to resolve it', scores: { secure: 1, anxious: 1 } },
+                    { text: 'Performing calm while anxious inside', scores: { anxious_perfectionist: 2 } },
+                    { text: 'Analyzing what went wrong', scores: { avoidant_intellectual: 2 } }
+                ]
+            }
+        ];
+
+        // Render CAS questions
+        function renderCASQuestions() {
+            const container = document.getElementById('casQuestions');
             container.innerHTML = '';
 
-            state.affectRanking.forEach((affect, index) => {
-                const card = document.createElement('div');
-                card.className = 'affect-card';
-                // Add top-three class to first 3 cards
-                if (index < 3) {
-                    card.classList.add('top-three');
-                }
-                card.draggable = true;
-                card.dataset.index = index;
-                card.innerHTML = `
-                    <span class="affect-rank">${String(index + 1).padStart(2, '0')}</span>
-                    <div class="affect-content">
-                        <div class="affect-name">${affect.description}</div>
-                    </div>
-                    <div class="drag-handle">
-                        <span class="drag-handle-dot"></span>
-                        <span class="drag-handle-dot"></span>
-                        <span class="drag-handle-dot"></span>
-                        <span class="drag-handle-dot"></span>
-                        <span class="drag-handle-dot"></span>
-                        <span class="drag-handle-dot"></span>
+            casQuestions.forEach((q, qIndex) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'mb-4';
+                questionDiv.innerHTML = `
+                    <label class="caption mb-2" style="display: block;">${q.question}</label>
+                    <div class="button-group">
+                        ${q.options.map((opt, oIndex) => `
+                            <button class="option-btn" data-question="${q.id}" data-option="${oIndex}">
+                                ${opt.text}
+                            </button>
+                        `).join('')}
                     </div>
                 `;
+                container.appendChild(questionDiv);
+            });
 
-                card.addEventListener('dragstart', handleDragStart);
-                card.addEventListener('dragover', handleDragOver);
-                card.addEventListener('drop', handleDrop);
-                card.addEventListener('dragend', handleDragEnd);
+            // Add click listeners
+            document.querySelectorAll('[data-question]').forEach(btn => {
+                btn.addEventListener('click', selectCASAnswer);
+            });
+        }
 
-                card.addEventListener('touchstart', handleTouchStart);
-                card.addEventListener('touchmove', handleTouchMove);
-                card.addEventListener('touchend', handleTouchEnd);
+        // Select CAS answer
+        function selectCASAnswer(e) {
+            const btn = e.target;
+            const questionId = btn.dataset.question;
+            const optionIndex = parseInt(btn.dataset.option);
 
-                container.appendChild(card);
+            // Store answer
+            state.casAnswers[questionId] = optionIndex;
 
-                // Add valence divider after the 3rd card
-                if (index === 2) {
-                    const divider = document.createElement('div');
-                    divider.id = 'valenceDivider';
-                    divider.className = 'valence-divider state-' + (state.animationState || 5);
-                    container.appendChild(divider);
+            // Visual feedback
+            const questionBtns = document.querySelectorAll(`[data-question="${questionId}"]`);
+            questionBtns.forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+
+            // Check if all answered
+            if (Object.keys(state.casAnswers).length === casQuestions.length) {
+                document.getElementById('getResultsBtn').style.display = 'block';
+                calculateCASArchetype();
+            }
+        }
+
+        // Calculate CAS Archetype based on answers
+        function calculateCASArchetype() {
+            const scores = {
+                secure: 0,
+                anxious: 0,
+                anxious_preoccupied: 0,
+                anxious_perfectionist: 0,
+                anxious_merging: 0,
+                avoidant: 0,
+                avoidant_dismissive: 0,
+                avoidant_intellectual: 0,
+                avoidant_counterphobic: 0,
+                disorganized: 0
+            };
+
+            // Tally scores
+            casQuestions.forEach(q => {
+                const answerIndex = state.casAnswers[q.id];
+                if (answerIndex !== undefined) {
+                    const option = q.options[answerIndex];
+                    Object.keys(option.scores).forEach(key => {
+                        scores[key] = (scores[key] || 0) + option.scores[key];
+                    });
                 }
             });
 
-            calculateValence();
-        }
+            // Determine primary archetype
+            let maxScore = 0;
+            let archetype = 'secure';
 
-        let draggedElement = null;
-        let draggedIndex = null;
-
-        function handleDragStart(e) {
-            draggedElement = e.target.closest('.affect-card');
-            draggedIndex = parseInt(draggedElement.dataset.index);
-            draggedElement.classList.add('dragging');
-            e.dataTransfer.effectAllowed = 'move';
-        }
-
-        function handleDragOver(e) {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
-            const target = e.target.closest('.affect-card');
-            if (target && target !== draggedElement) {
-                target.classList.add('drag-over');
+            // Check disorganized first (special case)
+            if (scores.disorganized >= 6) {
+                archetype = 'Mystery Mosaic';
             }
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            const target = e.target.closest('.affect-card');
-            if (target && target !== draggedElement) {
-                const targetIndex = parseInt(target.dataset.index);
-                swapAffects(draggedIndex, targetIndex);
+            // Check secure
+            else if (scores.secure >= 8) {
+                archetype = 'Grounded Navigator';
             }
-            document.querySelectorAll('.affect-card').forEach(card => {
-                card.classList.remove('drag-over');
-            });
-        }
-
-        function handleDragEnd(e) {
-            if (draggedElement) {
-                draggedElement.classList.remove('dragging');
+            // Check anxious variants
+            else if (scores.anxious_perfectionist > maxScore) {
+                archetype = 'Heartfelt Defender';
+                maxScore = scores.anxious_perfectionist;
             }
-        }
-
-        let touchStartY = 0;
-        let touchElement = null;
-
-        function handleTouchStart(e) {
-            touchStartY = e.touches[0].clientY;
-            touchElement = e.target.closest('.affect-card');
-            if (touchElement) {
-                draggedIndex = parseInt(touchElement.dataset.index);
-                touchElement.style.opacity = '0.5';
+            else if (scores.anxious_preoccupied > maxScore) {
+                archetype = 'Emotional Enthusiast';
+                maxScore = scores.anxious_preoccupied;
             }
-        }
-
-        function handleTouchMove(e) {
-            e.preventDefault();
-            if (!touchElement) return;
-            const touchY = e.touches[0].clientY;
-            const elementUnderTouch = document.elementFromPoint(e.touches[0].clientX, touchY);
-            const targetCard = elementUnderTouch?.closest('.affect-card');
-
-            document.querySelectorAll('.affect-card').forEach(card => {
-                card.classList.remove('drag-over');
-            });
-
-            if (targetCard && targetCard !== touchElement) {
-                targetCard.classList.add('drag-over');
+            else if (scores.anxious > maxScore && scores.anxious >= 6) {
+                archetype = 'Passionate Pilgrim';
+                maxScore = scores.anxious;
             }
-        }
-
-        function handleTouchEnd(e) {
-            if (!touchElement) return;
-            const touchY = e.changedTouches[0].clientY;
-            const elementUnderTouch = document.elementFromPoint(e.changedTouches[0].clientX, touchY);
-            const targetCard = elementUnderTouch?.closest('.affect-card');
-
-            if (targetCard && targetCard !== touchElement) {
-                const targetIndex = parseInt(targetCard.dataset.index);
-                swapAffects(draggedIndex, targetIndex);
+            // Check avoidant variants
+            else if (scores.avoidant_dismissive > maxScore) {
+                archetype = 'Lone Wolf';
+                maxScore = scores.avoidant_dismissive;
+            }
+            else if (scores.avoidant_intellectual > maxScore) {
+                archetype = 'Chill Conductor';
+                maxScore = scores.avoidant_intellectual;
+            }
+            else if (scores.avoidant_counterphobic > maxScore) {
+                archetype = 'Independent Icon';
+                maxScore = scores.avoidant_counterphobic;
+            }
+            else if (scores.avoidant > maxScore && scores.avoidant >= 6) {
+                archetype = 'Lone Wolf';
+            }
+            // Default to most secure if unclear
+            else {
+                archetype = 'Grounded Navigator';
             }
 
-            touchElement.style.opacity = '1';
-            document.querySelectorAll('.affect-card').forEach(card => {
-                card.classList.remove('drag-over');
-            });
-            touchElement = null;
+            state.casArchetype = archetype;
         }
 
-        function swapAffects(fromIndex, toIndex) {
-            const temp = state.affectRanking[fromIndex];
-            state.affectRanking[fromIndex] = state.affectRanking[toIndex];
-            state.affectRanking[toIndex] = temp;
-            renderAffectCards();
-        }
+        // Get results - call Firebase function
+        async function getResults() {
+            const contextInput = document.getElementById('contextInput').value.trim();
 
-        function calculateValence() {
-            let totalScore = 0;
-            state.affectRanking.forEach((affect, index) => {
-                const rank = index + 1;
-                const weight = 10 - rank;
-                const valenceDirection = affect.valence;
-                const score = weight * valenceDirection;
-                totalScore += score;
-            });
-
-            state.valenceScore = totalScore;
-            updateAnimationState(totalScore);
-        }
-
-        function updateAnimationState(score) {
-            let newState;
-            if (score <= -29) newState = 1;
-            else if (score <= -25) newState = 2;
-            else if (score <= -21) newState = 3;
-            else if (score <= -17) newState = 4;
-            else if (score <= -13) newState = 5;
-            else if (score <= -9) newState = 6;
-            else if (score <= -5) newState = 7;
-            else if (score <= -1) newState = 8;
-            else newState = 9;
-
-            state.animationState = newState;
-
-            const divider = document.getElementById('valenceDivider');
-            if (divider) {
-                divider.className = 'valence-divider state-' + newState;
+            if (!contextInput || !state.direction || !state.intensity) {
+                alert('Please fill in all fields.');
+                return;
             }
 
-            // Update sort header icon color
-            const sortIcon = document.querySelector('.sort-header-icon');
-            if (sortIcon) {
-                sortIcon.className = 'sort-header-icon state-' + newState;
-            }
+            state.context = contextInput;
 
-            // Update instruction bar color
-            const instruction = document.querySelector('.sort-instruction');
-            if (instruction) {
-                instruction.className = 'sort-instruction state-' + newState;
-            }
-        }
-
-        // Loading animation - cycle through affect names
-        let loadingInterval;
-
-        function startLoadingAnimation() {
-            let currentIndex = 0;
-            const overlay = document.getElementById('loadingOverlay');
-            const affectNameEl = document.getElementById('loadingAffectName');
-            const iconBackground = document.getElementById('loadingIconBackground');
-
-            // Set the background icon using Lucide
-            if (iconBackground && state.detectedIcon) {
-                const iconElement = document.createElement('i');
-                iconElement.setAttribute('data-lucide', state.detectedIcon);
-                iconBackground.innerHTML = '';
-                iconBackground.appendChild(iconElement);
-
-                // Initialize the Lucide icon
-                if (window.lucide) {
-                    lucide.createIcons();
-                }
-            }
-
-            overlay.classList.add('active');
-
-            // Immediately show first affect
-            affectNameEl.textContent = affects[0].name;
-
-            // Cycle through affects
-            loadingInterval = setInterval(() => {
-                currentIndex = (currentIndex + 1) % affects.length;
-                affectNameEl.textContent = affects[currentIndex].name;
-            }, 800);
-        }
-
-        function stopLoadingAnimation() {
-            const overlay = document.getElementById('loadingOverlay');
-            overlay.classList.remove('active');
-
-            // Clear the interval
-            if (loadingInterval) {
-                clearInterval(loadingInterval);
-                loadingInterval = null;
-            }
-        }
-
-        async function goToResults() {
-            // Start full-screen loading animation FIRST
-            startLoadingAnimation();
+            // Show loading overlay
+            document.getElementById('loadingOverlay').classList.add('active');
 
             try {
-                // Get top 3 affects
-                state.top3 = state.affectRanking.slice(0, 3);
-                const top3Names = state.top3.map(a => a.name);
-
-                // Call Cloud Function to personalize approach
-                const response = await fetch('https://us-central1-realness-score.cloudfunctions.net/personalizeApproach', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        affects: top3Names,
-                        subject: state.subject,
-                        pronouns: state.detectedPronouns || 'it',
-                        subjectType: state.detectedSubjectType || 'thing'
-                    })
+                // Call Firebase function
+                const generateResponse = firebase.functions().httpsCallable('generateTherapeuticResponse');
+                const result = await generateResponse({
+                    affectName: state.selectedAffectName,
+                    context: state.context,
+                    direction: state.direction,
+                    intensity: state.intensity,
+                    casArchetype: state.casArchetype
                 });
 
-                if (!response.ok) {
-                    throw new Error('Failed to generate results');
-                }
+                // Hide loading overlay
+                document.getElementById('loadingOverlay').classList.remove('active');
 
-                const result = await response.json();
+                // Display results
+                displayResults(result.data);
 
-                // Stop loading animation and show results
-                stopLoadingAnimation();
-
-                // NOW show the results screen
+                // Go to results screen
                 goToScreen(4);
 
-                // Wait for screen transition, then update UI
-                setTimeout(() => {
-                    const data = result.result;
-
-                    document.getElementById('resultsSubject').textContent = state.subject;
-                    document.getElementById('casElement').textContent = data.casElement;
-                    document.getElementById('feeling').textContent = data.feeling;
-
-                    // Parse markdown in approach (bold text and wrap each sentence in paragraph)
-                    let approachHTML = data.approach
-                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Handle bold
-
-                    // Split by double line breaks (sentences) and wrap each in <p> tags with additional spacing
-                    const sentences = approachHTML.split(/\n\n/).filter(s => s.trim());
-                    approachHTML = sentences.map(sentence => `<p>${sentence.trim()}</p>`).join('<br>');
-
-                    document.getElementById('approach').innerHTML = approachHTML;
-                    document.getElementById('weather').textContent = data.weather;
-                    document.getElementById('musicGenre').textContent = data.musicGenre;
-
-                    // Store Spotify query, seed params, prompt, image prompt, and fetch song
-                    state.spotifyQuery = data.spotifyQuery;
-                    state.spotifySeed = data.spotifySeed;
-                    state.spotifyPrompt = data.spotifyPrompt; // NEW: Priority prompt with feeling phrase
-                    state.imagePrompt = data.imagePrompt;
-                    fetchSpotifySong(data.spotifySeed, data.spotifyQuery, data.spotifyPrompt);
-
-                    // IMAGE PROMPT PIPELINE - Debug logging
-                    console.log('═══════════════════════════════════════════');
-                    console.log('IMAGE PROMPT GENERATION PIPELINE');
-                    console.log('═══════════════════════════════════════════');
-                    console.log('1. CAS Element Code:', data.casElement);
-                    console.log('2. User\'s Subject:', state.subject);
-                    console.log('3. Top 3 Affects:', top3Names.join(', '));
-                    console.log('4. SYNTHESIZED IMAGE PROMPT (use this for generation):');
-                    console.log('   ', data.imagePrompt);
-                    console.log('═══════════════════════════════════════════');
-
-                    // Set result icon to AI-detected Lucide icon
-                    renderLucideIcon('resultIcon', state.detectedIcon || 'circle');
-
-                    // Apply valence color to icon and title
-                    const resultIcon = document.getElementById('resultIcon');
-                    const resultsSubjectTitle = document.getElementById('resultsSubject');
-                    const animationState = state.animationState || 5;
-
-                    if (resultIcon) {
-                        // Remove any existing state classes
-                        for (let i = 1; i <= 9; i++) {
-                            resultIcon.classList.remove('state-' + i);
-                        }
-                        // Add current state class
-                        resultIcon.classList.add('state-' + animationState);
-                    }
-
-                    if (resultsSubjectTitle) {
-                        // Remove any existing state classes
-                        for (let i = 1; i <= 9; i++) {
-                            resultsSubjectTitle.classList.remove('state-' + i);
-                        }
-                        // Add current state class
-                        resultsSubjectTitle.classList.add('state-' + animationState);
-                    }
-
-                    // Log submission to Firestore
-                    logSubmission(data.casElement, top3Names);
-                }, 100);
             } catch (error) {
-                stopLoadingAnimation();
-                console.error('Error generating results:', error);
-                document.getElementById('approach').innerHTML = 'Failed to generate results. Please try again.';
+                console.error('Error generating response:', error);
+                document.getElementById('loadingOverlay').classList.remove('active');
+                alert('Failed to generate response. Please try again.');
             }
         }
 
-        // Log submission to Firestore
-        async function logSubmission(casElement, top3Affects) {
-            try {
-                await db.collection('submissions').add({
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                    subject: state.subject,
-                    casElement: casElement,
-                    top3Affects: top3Affects,
-                    valenceScore: state.valenceScore,
-                    animationState: state.animationState,
-                    detectedIcon: state.detectedIcon,
-                    detectedPronouns: state.detectedPronouns
-                });
-                console.log('Submission logged successfully');
-            } catch (error) {
-                console.error('Error logging submission:', error);
+        // Display results
+        function displayResults(data) {
+            document.getElementById('resultAffect').textContent = state.selectedAffectName;
+            document.getElementById('resultContext').textContent = state.context;
+
+            // Map direction to readable text
+            const directionMap = {
+                'self': 'Pointed at myself',
+                'other': 'Pointed at someone else',
+                'past': 'About the past',
+                'future': 'About the future'
+            };
+            document.getElementById('resultDirection').textContent = directionMap[state.direction] || state.direction;
+            document.getElementById('resultIntensity').textContent = state.intensity;
+
+            // Display terrain (CAS archetype)
+            if (state.casArchetype) {
+                document.getElementById('terrainArchetype').textContent = state.casArchetype;
+
+                // Terrain descriptions
+                const terrainDescriptions = {
+                    'Grounded Navigator': 'You can sit with difficult feelings without being overwhelmed or shutting down. You have good boundaries and emotional flexibility.',
+                    'Emotional Enthusiast': 'You feel everything deeply and worry about being "too much." You amplify signals to make sure they\'re not missed, and fear abandonment.',
+                    'Heartfelt Defender': 'You show the polished version and hide the messy parts. You perform competence to stay lovable, fearing exposure of inadequacy.',
+                    'Passionate Pilgrim': 'You want to belong completely and go all-in. You merge with others to feel whole, sometimes losing yourself in the process.',
+                    'Lone Wolf': 'You value space and freedom above all. You\'re self-reliant and withdraw under stress to stay safe and maintain autonomy.',
+                    'Chill Conductor': 'You live in your head and intellectualize to stay in control. You understand emotions but keep them at arm\'s length.',
+                    'Independent Icon': 'You pride yourself on not needing anyone. You dismiss vulnerability as weakness and maintain fierce independence.',
+                    'Mystery Mosaic': 'You sometimes crave closeness, sometimes push away. Your attachment system itself is conflicted—wanting and fearing connection at once.'
+                };
+
+                document.getElementById('terrainDescription').textContent = terrainDescriptions[state.casArchetype] || 'Your unique pattern of handling connection and emotion.';
             }
+
+            // Display the 3-paragraph response
+            // Split by double newlines to get paragraphs
+            const paragraphs = data.response.split('\n\n').filter(p => p.trim());
+            const contentHTML = paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
+            document.getElementById('resultContent').innerHTML = contentHTML;
         }
 
-        function loadResultImage(casElement) {
-            // Apply valence background color from the sort screen
-            const placeholder = document.querySelector('.result-image-placeholder');
-            const animationState = state.animationState || 5; // Default to neutral
-
-            // Remove any existing state classes
-            for (let i = 1; i <= 9; i++) {
-                placeholder.classList.remove('state-' + i);
-            }
-
-            // Add the current valence state class
-            placeholder.classList.add('state-' + animationState);
-
-            console.log('Applied valence background color: state-' + animationState);
-        }
-
-        // Fetch Spotify songs - PRIORITY: spotifyPrompt > spotifySeed > query
-        async function fetchSpotifySong(spotifySeed, query, spotifyPrompt) {
-            try {
-                console.log('Spotify prompt (priority):', spotifyPrompt);
-                console.log('Spotify seed params:', spotifySeed);
-                console.log('Spotify query (fallback):', query);
-
-                // Call our Cloud Function to get Spotify tracks
-                const response = await fetch('https://us-central1-realness-score.cloudfunctions.net/getSpotifyTrack', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ spotifyPrompt, spotifySeed, query })
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch Spotify tracks');
-                }
-
-                const result = await response.json();
-                const tracks = result.result; // Array of up to 3 tracks
-
-                // Update music section with list of 3 Spotify tracks
-                const musicContent = document.getElementById('musicContent');
-                if (musicContent && tracks && tracks.length > 0) {
-                    // Build HTML for 3 tracks in a list
-                    const tracksHTML = tracks.map(track => `
-                        <div style="margin-bottom: calc(var(--spacing-unit) * 2);">
-                            <iframe
-                                style="border-radius: 12px; width: 100%;"
-                                src="https://open.spotify.com/embed/track/${track.id}?utm_source=generator"
-                                width="100%"
-                                height="152"
-                                frameBorder="0"
-                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                                loading="lazy">
-                            </iframe>
-                        </div>
-                    `).join('');
-
-                    musicContent.innerHTML = tracksHTML;
-                }
-            } catch (error) {
-                console.error('Error fetching Spotify songs:', error);
-                // Fallback to search link if embed fails
-                const musicContent = document.getElementById('musicContent');
-                if (musicContent && query) {
-                    musicContent.innerHTML = `<a href="https://open.spotify.com/search/${encodeURIComponent(query)}" target="_blank" style="color: var(--white);">Open Spotify Search →</a>`;
-                }
-            }
-        }
-
-        function toggleWeather() {
-            const content = document.getElementById('weatherContent');
-            const trigger = document.getElementById('weatherTrigger');
-            content.classList.toggle('open');
-            trigger.classList.toggle('open');
-        }
-
-        function toggleMusic() {
-            const content = document.getElementById('musicContent');
-            const trigger = document.getElementById('musicTrigger');
-            content.classList.toggle('open');
-            trigger.classList.toggle('open');
-        }
-
-        function openSpotifySearch() {
-            const query = state.spotifyQuery || 'ambient relaxing';
-            const spotifyUrl = `https://open.spotify.com/search/${encodeURIComponent(query)}`;
-            window.open(spotifyUrl, '_blank');
-        }
-
+        // Reset app
         function resetApp() {
-            state.subject = '';
-            state.spotifyQuery = '';
-            state.spotifySeed = '';
+            state.selectedAffect = null;
+            state.selectedAffectName = '';
+            state.context = '';
+            state.direction = null;
+            state.intensity = null;
 
-            // Randomize affects on reset
-            const shuffled = [...affects];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            state.affectRanking = shuffled;
-            state.top3 = [];
-            state.valenceScore = 0;
-            state.animationState = 5;
-            document.getElementById('subjectInput').value = '';
+            document.getElementById('contextInput').value = '';
+            document.getElementById('continueToContext').style.display = 'none';
+            document.getElementById('getResultsBtn').disabled = true;
 
-            // Reset the continue button
-            const continueBtn = document.getElementById('continueBtn');
-            if (continueBtn) {
-                continueBtn.textContent = 'Continue';
-                continueBtn.disabled = false;
-            }
+            // Clear all selections
+            document.querySelectorAll('.affect-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.querySelectorAll('.intensity-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
 
-            // Reset music content to default (no embed until results load)
-            const musicContent = document.getElementById('musicContent');
-            if (musicContent) {
-                musicContent.innerHTML = `
-                    <p class="body" style="margin-bottom: calc(var(--spacing-unit) * 1.5);"><span id="musicGenre">Loading...</span></p>
-                `;
-            }
-
-            // Keep weather and music sections open by default
-            document.getElementById('weatherContent').classList.add('open');
-            document.getElementById('weatherTrigger').classList.add('open');
-            document.getElementById('musicContent').classList.add('open');
-            document.getElementById('musicTrigger').classList.add('open');
-            renderAffectCards();
+            goToScreen(1);
         }
 
         // Share functions
         function shareToTwitter() {
             const url = window.location.href;
-            const text = `I just discovered how my body responds to ${state.subject}. Feel it, Don't Think It.`;
+            const text = `I just explored my ${state.selectedAffectName.toLowerCase()} about ${state.context}. Feel it, Don't Think It.`;
             const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
             window.open(twitterUrl, '_blank', 'width=550,height=420');
         }
@@ -1567,8 +1159,6 @@
             const url = window.location.href;
             try {
                 await navigator.clipboard.writeText(url);
-
-                // Show success feedback
                 const btn = event.target;
                 const originalText = btn.textContent;
                 btn.textContent = 'Copied!';
@@ -1586,6 +1176,7 @@
             }
         }
 
+        // Initialize app on load
         initApp();
     </script>
 </body>
