@@ -592,8 +592,13 @@
 
             <div id="terrainSection" style="margin: calc(var(--spacing-unit) * 4) 0; padding: calc(var(--spacing-unit) * 3); background: var(--gray-900); border-radius: 8px;">
                 <p class="caption" style="color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: calc(var(--spacing-unit) * 1);">Your Terrain</p>
-                <h3 style="font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: calc(var(--spacing-unit) * 2);" id="terrainArchetype"></h3>
-                <p class="body" style="color: var(--gray-300);" id="terrainDescription"></p>
+                <div style="display: flex; align-items: flex-start; gap: calc(var(--spacing-unit) * 3);">
+                    <img id="terrainImage" src="" alt="Archetype visualization" style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px; flex-shrink: 0;" />
+                    <div style="flex: 1;">
+                        <h3 style="font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: calc(var(--spacing-unit) * 2);" id="terrainArchetype"></h3>
+                        <p class="body" style="color: var(--gray-300);" id="terrainDescription"></p>
+                    </div>
+                </div>
             </div>
 
             <div class="result-content" id="resultContent"></div>
@@ -1092,6 +1097,27 @@
             // Display terrain (CAS archetype)
             if (state.casArchetype) {
                 document.getElementById('terrainArchetype').textContent = state.casArchetype;
+
+                // Archetype image mapping
+                const archetypeImages = {
+                    'Grounded Navigator': 'src/assets/images/archetype-1-grounded-navigator.png',
+                    'Emotional Enthusiast': 'src/assets/images/archetype-2-emotional-enthusiast.png',
+                    'Lone Wolf': 'src/assets/images/archetype-3-lone-wolf.png',
+                    'Mystery Mosaic': 'src/assets/images/archetype-4-mystery-mosaic.png',
+                    'Heartfelt Defender': 'src/assets/images/archetype-5-heartfelt-defender.png',
+                    'Chill Conductor': 'src/assets/images/archetype-6-chill-conductor.png',
+                    'Passionate Pilgrim': 'src/assets/images/archetype-7-passionate-pilgrim.png',
+                    'Independent Icon': 'src/assets/images/archetype-8-independent-icon.png'
+                };
+
+                // Set archetype image
+                const imagePath = archetypeImages[state.casArchetype];
+                if (imagePath) {
+                    document.getElementById('terrainImage').src = imagePath;
+                    document.getElementById('terrainImage').style.display = 'block';
+                } else {
+                    document.getElementById('terrainImage').style.display = 'none';
+                }
 
                 // Terrain descriptions
                 const terrainDescriptions = {
