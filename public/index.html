@@ -441,81 +441,6 @@
         .text-center { text-align: center; }
         .text-left { text-align: left; }
 
-        /* Info Modal */
-        .info-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: calc(var(--spacing-unit) * 3);
-        }
-
-        .info-modal-overlay.active {
-            display: flex;
-        }
-
-        .info-modal {
-            background: var(--gray-900);
-            border: 1px solid var(--gray-700);
-            border-radius: 12px;
-            max-width: 500px;
-            width: 100%;
-            padding: calc(var(--spacing-unit) * 4);
-            position: relative;
-        }
-
-        .info-modal-close {
-            position: absolute;
-            top: calc(var(--spacing-unit) * 2);
-            right: calc(var(--spacing-unit) * 2);
-            background: none;
-            border: none;
-            color: var(--gray-400);
-            font-size: 24px;
-            cursor: pointer;
-            padding: 0;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .info-modal-close:hover {
-            color: var(--white);
-        }
-
-        .info-icon-btn {
-            background: none;
-            border: none;
-            color: var(--gray-500);
-            cursor: pointer;
-            padding: 0;
-            margin-left: calc(var(--spacing-unit) * 1);
-            width: 24px;
-            height: 24px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            border: 1px solid var(--gray-600);
-            font-size: 14px;
-            font-weight: 600;
-            vertical-align: middle;
-        }
-
-        .info-icon-btn:hover {
-            color: var(--white);
-            border-color: var(--gray-500);
-        }
-
         /* Responsive */
         @media (min-width: 640px) {
             .affects-grid {
@@ -553,29 +478,6 @@
         <div class="loading-text" style="position: relative; z-index: 2;">Generating your response...</div>
     </div>
 
-    <!-- Info Modal -->
-    <div id="infoModal" class="info-modal-overlay" onclick="if(event.target === this) closeInfoModal()">
-        <div class="info-modal">
-            <button class="info-modal-close" onclick="closeInfoModal()">×</button>
-            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: calc(var(--spacing-unit) * 2); color: var(--white);">Why This Works</h3>
-            <p style="color: var(--gray-300); line-height: 1.6; margin-bottom: calc(var(--spacing-unit) * 2);">
-                Current tools ask you to do the very thing you can't do: <em>name</em> what you're feeling.
-            </p>
-            <p style="color: var(--gray-300); line-height: 1.6; margin-bottom: calc(var(--spacing-unit) * 2);">
-                If you had the words, you wouldn't need the tool.
-            </p>
-            <p style="color: var(--gray-300); line-height: 1.6; margin-bottom: calc(var(--spacing-unit) * 2);">
-                <strong style="color: var(--white);">We don't ask you to name what you feel.</strong> We let your body recognize itself.
-            </p>
-            <p style="color: var(--gray-300); line-height: 1.6; margin-bottom: calc(var(--spacing-unit) * 2);">
-                Instead of "Rate how angry you feel," we present: <em>"Blood boiling, pressure building, heat rising, ready to explode."</em>
-            </p>
-            <p style="color: var(--gray-300); line-height: 1.6;">
-                You don't translate. You recognize. Your body says "yes, that's me" before your mind can interfere.
-            </p>
-        </div>
-    </div>
-
     <!-- Persistent Header -->
     <header class="app-header">
         <h1 class="app-title">Feel it, Don't Think It</h1>
@@ -593,10 +495,7 @@
     <!-- Screen 2: Select Affect -->
     <div id="screen2" class="screen">
         <div class="screen-container">
-            <h2 class="display-1 mb-3">
-                What sits in your body right now?
-                <button class="info-icon-btn" onclick="openInfoModal()" aria-label="Learn more">?</button>
-            </h2>
+            <h2 class="display-1 mb-3">What sits in your body right now?</h2>
             <p class="body mb-2" style="color: var(--gray-300);">Your body already knows. We're not teaching you what to feel—we're revealing what's already moving through you, asking to be seen.</p>
             <p class="body mb-3" style="color: var(--gray-400); font-size: 15px;">We don't ask you to name what you feel. We let your body recognize itself.</p>
 
@@ -942,14 +841,6 @@
                 document.getElementById('screen' + screenNumber).classList.add('active');
                 window.scrollTo(0, 0);
             }, 50);
-        }
-
-        function openInfoModal() {
-            document.getElementById('infoModal').classList.add('active');
-        }
-
-        function closeInfoModal() {
-            document.getElementById('infoModal').classList.remove('active');
         }
 
         function goToContext() {
