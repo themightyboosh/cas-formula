@@ -265,8 +265,8 @@
         }
 
         .affect-icon {
-            width: 32px;
-            height: 32px;
+            width: 64px;
+            height: 64px;
             object-fit: contain;
             margin-bottom: calc(var(--spacing-unit) * 1);
         }
@@ -460,6 +460,81 @@
         .text-center { text-align: center; }
         .text-left { text-align: left; }
 
+        /* Info Modal */
+        .info-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: calc(var(--spacing-unit) * 3);
+        }
+
+        .info-modal-overlay.active {
+            display: flex;
+        }
+
+        .info-modal {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-700);
+            border-radius: 12px;
+            max-width: 500px;
+            width: 100%;
+            padding: calc(var(--spacing-unit) * 4);
+            position: relative;
+        }
+
+        .info-modal-close {
+            position: absolute;
+            top: calc(var(--spacing-unit) * 2);
+            right: calc(var(--spacing-unit) * 2);
+            background: none;
+            border: none;
+            color: var(--gray-400);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-modal-close:hover {
+            color: var(--white);
+        }
+
+        .info-icon-btn {
+            background: none;
+            border: none;
+            color: var(--gray-500);
+            cursor: pointer;
+            padding: 0;
+            margin-left: calc(var(--spacing-unit) * 1);
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid var(--gray-600);
+            font-size: 14px;
+            font-weight: 600;
+            vertical-align: middle;
+        }
+
+        .info-icon-btn:hover {
+            color: var(--white);
+            border-color: var(--gray-500);
+        }
+
         /* Responsive */
         @media (min-width: 640px) {
             .affects-grid {
@@ -485,7 +560,39 @@
 <body>
     <!-- Full-screen Loading Overlay -->
     <div id="loadingOverlay" class="loading-overlay">
-        <div class="loading-text">Generating your response...</div>
+        <img id="loadingIcon" src="" alt="" style="
+            position: absolute;
+            width: 80%;
+            max-width: 600px;
+            height: auto;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 1;
+        " />
+        <div class="loading-text" style="position: relative; z-index: 2;">Generating your response...</div>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="info-modal-overlay" onclick="if(event.target === this) closeInfoModal()">
+        <div class="info-modal">
+            <button class="info-modal-close" onclick="closeInfoModal()">×</button>
+            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: calc(var(--spacing-unit) * 2); color: var(--white);">Why This Works</h3>
+            <p style="color: var(--gray-300); line-height: 1.6; margin-bottom: calc(var(--spacing-unit) * 2);">
+                Current tools ask you to do the very thing you can't do: <em>name</em> what you're feeling.
+            </p>
+            <p style="color: var(--gray-300); line-height: 1.6; margin-bottom: calc(var(--spacing-unit) * 2);">
+                If you had the words, you wouldn't need the tool.
+            </p>
+            <p style="color: var(--gray-300); line-height: 1.6; margin-bottom: calc(var(--spacing-unit) * 2);">
+                <strong style="color: var(--white);">We don't ask you to name what you feel.</strong> We let your body recognize itself.
+            </p>
+            <p style="color: var(--gray-300); line-height: 1.6; margin-bottom: calc(var(--spacing-unit) * 2);">
+                Instead of "Rate how angry you feel," we present: <em>"Blood boiling, pressure building, heat rising, ready to explode."</em>
+            </p>
+            <p style="color: var(--gray-300); line-height: 1.6;">
+                You don't translate. You recognize. Your body says "yes, that's me" before your mind can interfere.
+            </p>
+        </div>
     </div>
 
     <!-- Persistent Header -->
@@ -508,8 +615,12 @@
     <!-- Screen 2: Select Affect -->
     <div id="screen2" class="screen">
         <div class="screen-container">
-            <h2 class="display-1 mb-3">What sits in your body right now?</h2>
-            <p class="body mb-2">Your body already knows. Just recognize what's true.</p>
+            <h2 class="display-1 mb-3">
+                What sits in your body right now?
+                <button class="info-icon-btn" onclick="openInfoModal()" aria-label="Learn more">?</button>
+            </h2>
+            <p class="body mb-2" style="color: var(--gray-300);">Your body already knows. We're not teaching you what to feel—we're revealing what's already moving through you, asking to be seen.</p>
+            <p class="body mb-3" style="color: var(--gray-400); font-size: 15px;">We don't ask you to name what you feel. We let your body recognize itself.</p>
 
             <div class="affects-grid" id="affectsGrid"></div>
 
@@ -566,8 +677,9 @@
     <!-- Screen 3b: CAS Assessment -->
     <div id="screen3b" class="screen">
         <div class="screen-container">
-            <h2 class="heading-1 mb-3">Now let's see why you handle it the way you do</h2>
-            <p class="body mb-4" style="color: var(--gray-400);">These aren't right or wrong—just patterns. Answer what feels most true.</p>
+            <p class="caption" style="color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: calc(var(--spacing-unit) * 1); font-size: 11px; font-weight: 600;">The Terrain</p>
+            <h2 class="heading-1 mb-3">Why you handle it the way you do</h2>
+            <p class="body mb-4" style="color: var(--gray-400);">Two people with the same emotions can have completely different experiences. These questions reveal your terrain—the automatic survival strategy you've been running since childhood.</p>
 
             <div id="casQuestions"></div>
 
@@ -582,6 +694,9 @@
     <!-- Screen 4: Results -->
     <div id="screen4" class="screen">
         <div class="screen-container">
+            <p class="caption" style="color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: calc(var(--spacing-unit) * 1); font-size: 11px; font-weight: 600;">From Confusion → To Clarity</p>
+            <h2 class="heading-1 mb-3" style="color: var(--white); font-size: 28px;">Now you can see it.</h2>
+
             <div class="results-header">
                 <div class="result-affect" id="resultAffect"></div>
                 <div class="result-context">
@@ -860,6 +975,14 @@
             }, 50);
         }
 
+        function openInfoModal() {
+            document.getElementById('infoModal').classList.add('active');
+        }
+
+        function closeInfoModal() {
+            document.getElementById('infoModal').classList.remove('active');
+        }
+
         function goToContext() {
             if (state.selectedAffect === null) {
                 alert('Please select an affect first.');
@@ -1117,7 +1240,9 @@
 
             state.context = contextInput;
 
-            // Show loading overlay
+            // Show loading overlay with selected affect icon as background
+            const selectedAffectIcon = affects[state.selectedAffect].icon;
+            document.getElementById('loadingIcon').src = selectedAffectIcon;
             document.getElementById('loadingOverlay').classList.add('active');
 
             try {
@@ -1187,14 +1312,14 @@
 
                 // Terrain descriptions
                 const terrainDescriptions = {
-                    'Grounded Navigator': 'You can sit with difficult feelings without being overwhelmed or shutting down. You have good boundaries and emotional flexibility.',
-                    'Emotional Enthusiast': 'You feel everything deeply and worry about being "too much." You amplify signals to make sure they\'re not missed, and fear abandonment.',
-                    'Heartfelt Defender': 'You show the polished version and hide the messy parts. You perform competence to stay lovable, fearing exposure of inadequacy.',
-                    'Passionate Pilgrim': 'You want to belong completely and go all-in. You merge with others to feel whole, sometimes losing yourself in the process.',
-                    'Lone Wolf': 'You value space and freedom above all. You\'re self-reliant and withdraw under stress to stay safe and maintain autonomy.',
-                    'Chill Conductor': 'You live in your head and intellectualize to stay in control. You understand emotions but keep them at arm\'s length.',
-                    'Independent Icon': 'You pride yourself on not needing anyone. You dismiss vulnerability as weakness and maintain fierce independence.',
-                    'Mystery Mosaic': 'You sometimes crave closeness, sometimes push away. Your attachment system itself is conflicted—wanting and fearing connection at once.'
+                    'Grounded Navigator': 'Can sit with difficult feelings without being overwhelmed or shutting down. Good boundaries. Emotional flexibility.',
+                    'Emotional Enthusiast': 'Feels everything deeply. Worries about being "too much." Amplifies signals to make sure they\'re not missed. Fears abandonment.',
+                    'Heartfelt Defender': 'Shows the polished version. Hides the messy parts. Performs competence to stay lovable.',
+                    'Passionate Pilgrim': 'Wants to belong completely. Goes all-in. Merges with others to feel whole.',
+                    'Lone Wolf': 'Values space and freedom. Self-reliant. Withdraws under stress to stay safe.',
+                    'Chill Conductor': 'Lives in the head. Understands but doesn\'t feel. Intellectualizes to stay in control.',
+                    'Independent Icon': 'Prides on not needing anyone. Dismisses vulnerability as weakness. Maintains fierce independence.',
+                    'Mystery Mosaic': 'Sometimes craves closeness, sometimes pushes away. The attachment system itself is conflicted—wanting and fearing connection at once.'
                 };
 
                 document.getElementById('terrainDescription').textContent = terrainDescriptions[state.casArchetype] || 'Your unique pattern of handling connection and emotion.';
