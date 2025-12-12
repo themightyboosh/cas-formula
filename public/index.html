@@ -269,6 +269,12 @@
             height: 64px;
             object-fit: contain;
             margin-bottom: calc(var(--spacing-unit) * 1);
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .affect-card:hover .affect-icon {
+            transform: scale(1.15);
+            filter: drop-shadow(0 0 12px rgba(255, 140, 0, 0.8)) drop-shadow(0 0 24px rgba(255, 140, 0, 0.4));
         }
 
         .affect-name {
@@ -751,7 +757,7 @@
 
                 card.innerHTML = `
                     <img src="${affect.icon}" alt="${affect.name}" class="affect-icon" />
-                    <div class="affect-name">${affect.name}</div>
+                    <!-- <div class="affect-name">${affect.name}</div> -->
                     <div class="affect-description">${metaphorText}</div>
                 `;
                 grid.appendChild(card);
