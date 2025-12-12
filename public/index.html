@@ -366,25 +366,6 @@
         }
 
         /* Results */
-        .results-header {
-            margin-bottom: calc(var(--spacing-unit) * 4);
-            padding-bottom: calc(var(--spacing-unit) * 2);
-            border-bottom: 1px solid var(--gray-800);
-        }
-
-        .result-affect {
-            font-size: clamp(32px, 8vw, 48px);
-            font-weight: 700;
-            margin-bottom: calc(var(--spacing-unit) * 2);
-            color: var(--white);
-        }
-
-        .result-context {
-            font-size: 16px;
-            color: var(--gray-500);
-            margin-bottom: calc(var(--spacing-unit) * 1);
-        }
-
         .result-content {
             font-size: 16px;
             line-height: 1.8;
@@ -696,15 +677,6 @@
         <div class="screen-container">
             <p class="caption" style="color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: calc(var(--spacing-unit) * 1); font-size: 11px; font-weight: 600;">From Confusion → To Clarity</p>
             <h2 class="heading-1 mb-3" style="color: var(--white); font-size: 28px;">Now you can see it.</h2>
-
-            <div class="results-header">
-                <div class="result-affect" id="resultAffect"></div>
-                <div class="result-context">
-                    <span id="resultContext"></span> •
-                    <span id="resultDirection"></span> •
-                    Intensity: <span id="resultIntensity"></span>
-                </div>
-            </div>
 
             <div id="terrainSection" style="
                 margin: calc(var(--spacing-unit) * 4) 0;
@@ -1274,19 +1246,6 @@
 
         // Display results
         function displayResults(data) {
-            document.getElementById('resultAffect').textContent = state.selectedAffectName;
-            document.getElementById('resultContext').textContent = state.context;
-
-            // Map direction to readable text
-            const directionMap = {
-                'self': 'Pointed at myself',
-                'other': 'Pointed at someone else',
-                'past': 'About the past',
-                'future': 'About the future'
-            };
-            document.getElementById('resultDirection').textContent = directionMap[state.direction] || state.direction;
-            document.getElementById('resultIntensity').textContent = state.intensity;
-
             // Display terrain (CAS archetype)
             if (state.casArchetype) {
                 document.getElementById('terrainSection').style.display = 'block';
