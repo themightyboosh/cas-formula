@@ -8,108 +8,60 @@
 const fs = require('fs');
 const path = require('path');
 
-// Archetype data
+// Archetype data - Core Attachment Style (CAS) archetypes
 const archetypes = [
   {
     id: 1,
-    name: "The Resonant Sage",
-    shortTag: "Wise Regulator",
-    imagePrompt: "A calm guardian carved from shadowed stone, soft light glowing inside their chest, standing alone in a field at dusk, realistic, dark muted palette, subtle inner glow, highly detailed."
+    name: "grounded-navigator",
+    displayName: "Grounded Navigator",
+    imagePrompt: "A centered figure standing on solid ground, roots extending downward, arms open and balanced, surrounded by calm waters and gentle light"
   },
   {
     id: 2,
-    name: "The Soft Anchor",
-    shortTag: "Warm Stabilizer",
-    imagePrompt: "A figure sitting on a weathered pier over dark water at sunset, soft light around them, posture relaxed and inviting, semi-realistic, moody but warm atmosphere."
+    name: "emotional-enthusiast",
+    displayName: "Emotional Enthusiast",
+    imagePrompt: "A figure reaching out with open arms, heart radiating outward in waves, expressive face tilted upward, surrounded by flowing patterns of connection"
   },
   {
     id: 3,
-    name: "The Stormbound",
-    shortTag: "Hidden Storm",
-    imagePrompt: "A person made of swirling storm clouds, faint lightning under the skin, seated in a dim room, shafts of light from a single window, cinematic realism, dramatic shadows."
+    name: "lone-wolf",
+    displayName: "Lone Wolf",
+    imagePrompt: "A solitary figure standing apart on a mountain peak, looking into the distance, self-contained and alert, protective space around them"
   },
   {
     id: 4,
-    name: "The Truth Teller",
-    shortTag: "Blunt Realist",
-    imagePrompt: "A figure speaking into the dark, words forming visible glowing lines in the air, sharp edges of light, high contrast, realistic style with a slightly surreal twist."
+    name: "mystery-mosaic",
+    displayName: "Mystery Mosaic",
+    imagePrompt: "A figure with dual expressions, one half reaching forward and one half pulling back, fragmented but whole, standing at a threshold between light and shadow"
   },
   {
     id: 5,
-    name: "The Open Flame",
-    shortTag: "Impulsive Feeler",
-    imagePrompt: "A person surrounded by small floating sparks in a dark room, eyes bright, mid-motion as if laughing or talking, warm highlights against deep shadow, expressive realism."
+    name: "heartfelt-defender",
+    displayName: "Heartfelt Defender",
+    imagePrompt: "A figure with polished armor and a shield, but cracks showing vulnerability beneath, standing guard while protecting their inner self"
   },
   {
     id: 6,
-    name: "The Magnetic Poet",
-    shortTag: "Soul Storyteller",
-    imagePrompt: "A lone figure writing at a desk lit by a single lamp, pages drifting into faint glowing symbols, dark room, rich shadows, painterly realistic style."
+    name: "chill-conductor",
+    displayName: "Chill Conductor",
+    imagePrompt: "A composed figure with head filled with stars and constellations, observing from above, hands conducting invisible patterns, detached but aware"
   },
   {
     id: 7,
-    name: "The Mirror Mask",
-    shortTag: "Social Chameleon",
-    imagePrompt: "A person holding a half-mirror mask, one eye visible and observant, reflections of other faces in the mask surface, cool tones, realistic with subtle surreal reflections."
+    name: "passionate-pilgrim",
+    displayName: "Passionate Pilgrim",
+    imagePrompt: "A figure in motion, walking toward another with arms outstretched, boundaries dissolving, merging energy between two forms"
   },
   {
     id: 8,
-    name: "The Boundary Breaker",
-    shortTag: "Radical Sharer",
-    imagePrompt: "Two figures facing each other in a dark space, one pouring glowing light from their chest toward the other, bold and intimate, realistic style, strong contrast."
-  },
-  {
-    id: 9,
-    name: "The Iron Mask",
-    shortTag: "Locked Down",
-    imagePrompt: "A figure in a smooth dark metal mask, eyes hidden, standing against a black background, faint cracks with tiny light leaking through, hyperreal texture."
-  },
-  {
-    id: 10,
-    name: "The Strategist",
-    shortTag: "Controlled Planner",
-    imagePrompt: "A person at a table covered in maps and diagrams lit from above, expression calm and focused, everything else fading into darkness, realistic, clean lines."
-  },
-  {
-    id: 11,
-    name: "The Gentle Ghost",
-    shortTag: "Quiet Withdrawer",
-    imagePrompt: "A faint, semi-transparent figure walking down a dim hallway, edges blurred into the shadows, soft cool tones, melancholic but peaceful realism."
-  },
-  {
-    id: 12,
-    name: "The Fortress-Keeper",
-    shortTag: "Guarded Loyalist",
-    imagePrompt: "A tall stone gate in the night with a single warm light deep inside, heavy doors slightly open, realistic stone texture, moody sky above."
-  },
-  {
-    id: 13,
-    name: "The Quiet Depth",
-    shortTag: "Selective Intimate",
-    imagePrompt: "A person sitting by a dark lake at night, stars reflected in the water, posture relaxed and turned slightly away, subtle glow on the shoreline, serene realism."
-  },
-  {
-    id: 14,
-    name: "The Open Seeker",
-    shortTag: "Connection Explorer",
-    imagePrompt: "A traveler standing at a crossroads under a twilight sky, paths lit with soft lanterns, figure looking ahead with curiosity, detailed and atmospheric."
-  },
-  {
-    id: 15,
-    name: "The Tethered Caretaker",
-    shortTag: "Self-Losing Helper",
-    imagePrompt: "A person helping another person, one figure glowing brightly while tending to the other, their own form slightly faded, warm and compassionate atmosphere, realistic style."
-  },
-  {
-    id: 16,
-    name: "The Inner Compass",
-    shortTag: "Centered Guide",
-    imagePrompt: "A figure standing in a dark space with a softly glowing compass in their hands, light illuminating their face, calm expression, grounded, hyperreal detail."
+    name: "independent-icon",
+    displayName: "Independent Icon",
+    imagePrompt: "A strong solitary figure standing tall and self-sufficient, barriers around them like walls, looking straight ahead with fierce determination"
   }
 ];
 
 // Master style to append
-const MASTER_STYLE = "Cubist style, geometric fragmented planes, multiple perspectives, angular forms, muted earth tones with bold accents";
+const MASTER_STYLE = "Woodcut and scratchboard style, bold black and white contrast, uniform parallel line hatching, no gray tones, high contrast, intricate crosshatching for shadows, clean carved lines, traditional printmaking aesthetic";
 
 function getFullPrompt(archetype) {
   return `${archetype.imagePrompt}, ${MASTER_STYLE}`;
@@ -164,7 +116,7 @@ async function generateImageVertexAI(archetypeId, projectId, location = 'us-cent
         fs.mkdirSync(assetsDir, { recursive: true });
       }
 
-      const filename = `archetype-${archetypeId}-${archetype.name.toLowerCase().replace(/\s+/g, '-')}.png`;
+      const filename = `archetype-${archetypeId}-${archetype.name}.png`;
       const filepath = path.join(assetsDir, filename);
       
       fs.writeFileSync(filepath, imageBuffer);
@@ -234,7 +186,7 @@ async function generateImageGoogleGemini(archetypeId, apiKey) {
           fs.mkdirSync(assetsDir, { recursive: true });
         }
 
-        const filename = `archetype-${archetypeId}-${archetype.name.toLowerCase().replace(/\s+/g, '-')}.png`;
+        const filename = `archetype-${archetypeId}-${archetype.name}.png`;
         const filepath = path.join(assetsDir, filename);
         
         fs.writeFileSync(filepath, imageBuffer);
@@ -252,7 +204,7 @@ async function generateImageGoogleGemini(archetypeId, apiKey) {
           fs.mkdirSync(assetsDir, { recursive: true });
         }
 
-        const filename = `archetype-${archetypeId}-${archetype.name.toLowerCase().replace(/\s+/g, '-')}.png`;
+        const filename = `archetype-${archetypeId}-${archetype.name}.png`;
         const filepath = path.join(assetsDir, filename);
         
         fs.writeFileSync(filepath, Buffer.from(imageBuffer));
