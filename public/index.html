@@ -28,7 +28,6 @@
     <meta name="apple-mobile-web-app-title" content="Feel it, Don't Think It">
 
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         :root {
@@ -268,9 +267,7 @@
         .affect-icon {
             width: 32px;
             height: 32px;
-            stroke: var(--white);
-            stroke-width: 1.5;
-            fill: none;
+            object-fit: contain;
             margin-bottom: calc(var(--spacing-unit) * 1);
         }
 
@@ -654,47 +651,47 @@
             {
                 name: 'Curiosity',
                 metaphors: ['leaning in toward something', 'pulled forward', 'tracking movement', 'eyes focused and bright'],
-                icon: 'search'
+                icon: 'icons/lahzo_0003_interest.png'
             },
             {
                 name: 'Joy',
                 metaphors: ['chest expanding', 'warmth spreading', 'softening', 'opening up'],
-                icon: 'smile'
+                icon: 'icons/lahzo_0006_joy.png'
             },
             {
                 name: 'Surprise',
                 metaphors: ['breath catching', 'suddenly jolted', 'paused mid-step', 'interrupted'],
-                icon: 'zap'
+                icon: 'icons/lahzo_0004_surprise.png'
             },
             {
                 name: 'Fear',
                 metaphors: ['heart racing', 'blood running cold', 'frozen in place', 'braced for impact'],
-                icon: 'alert-triangle'
+                icon: 'icons/lahzo_0008_fear.png'
             },
             {
                 name: 'Anger',
                 metaphors: ['blood boiling', 'pressure building', 'heat rising', 'ready to explode'],
-                icon: 'flame'
+                icon: 'icons/lahzo_0000_anger.png'
             },
             {
                 name: 'Sadness',
                 metaphors: ['weight pressing down', 'sinking', 'drowning', 'can\'t catch breath'],
-                icon: 'cloud-rain'
+                icon: 'icons/lahzo_0007_sadness.png'
             },
             {
                 name: 'Disgust',
                 metaphors: ['recoiling', 'pulling back fast', 'wanting to spit it out', 'nausea rising'],
-                icon: 'x-circle'
+                icon: 'icons/lahzo_0001_disgust.png'
             },
             {
                 name: 'Withdrawing',
                 metaphors: ['stepping back', 'creating distance', 'turning away', 'closing the door'],
-                icon: 'move-left'
+                icon: 'icons/lahzo_0005_withdrawing.png'
             },
             {
                 name: 'Dropping',
                 metaphors: ['want to disappear', 'feeling small', 'can\'t face anyone', 'shrinking'],
-                icon: 'arrow-down'
+                icon: 'icons/lahzo_0002_dropping.png'
             }
         ];
 
@@ -717,17 +714,12 @@
                 const metaphorText = affect.metaphors.slice(0, 2).join(' • ');
 
                 card.innerHTML = `
-                    <i data-lucide="${affect.icon}" class="affect-icon"></i>
+                    <img src="${affect.icon}" alt="${affect.name}" class="affect-icon" />
                     <div class="affect-name">${affect.name}</div>
                     <div class="affect-description">${metaphorText}</div>
                 `;
                 grid.appendChild(card);
             });
-
-            // Initialize Lucide icons
-            if (window.lucide) {
-                lucide.createIcons();
-            }
         }
 
         // Select affect
