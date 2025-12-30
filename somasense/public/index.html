@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>SomaSense</title>
+    <meta name="description" content="Somatic literacy tool. We help you see. You decide what to do.">
+
+    <!-- Mobile App -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SomaSense">
+
+    <style>
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-900: #171717;
+            --gray-800: #262626;
+            --gray-700: #404040;
+            --gray-600: #525252;
+            --gray-500: #737373;
+            --gray-400: #A3A3A3;
+            --gray-300: #D4D4D4;
+            --gray-200: #E5E5E5;
+            --gray-100: #F5F5F5;
+            --green: #22c55e;
+            --red: #ef4444;
+            --spacing-unit: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: radial-gradient(ellipse at center, var(--gray-900) 0%, var(--black) 100%);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* Link Reset - Remove browser blue */
+        a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 200ms ease;
+        }
+
+        a:hover {
+            color: var(--gray-300);
+        }
+
+        a:visited {
+            color: var(--white);
+        }
+
+        /* Static radial gradient background (replaces WebGL) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(38, 38, 38, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(64, 64, 64, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(23, 23, 23, 0.5) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Typography */
+        .display-1 {
+            font-size: clamp(32px, 8vw, 56px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .heading-1 {
+            font-size: clamp(20px, 4vw, 28px);
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+
+        .body-large {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .body {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .caption {
+            font-size: 11px;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+        }
+
+        .stage-prompt {
+            font-size: 14px;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        .question-text {
+            font-size: clamp(20px, 3.5vw, 26px);
+            line-height: 1.45;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--white);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Layout */
+        .screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 300ms ease;
+            overflow-y: auto; /* Allow scrolling on mobile */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
+
+        .screen.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .screen-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 80px 24px 24px;
+            max-width: 720px;
+            margin: 0 auto;
+            width: 100%;
+            min-height: 100vh; /* Ensure it fills viewport but can expand */
+        }
+
+        .screen-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Top-aligned instead of centered */
+            padding-top: 24px; /* Consistent top padding */
+        }
+
+        /* Progress Bar - Modern Design */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gray-800);
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--white) 0%, var(--gray-300) 100%);
+            transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6));
+        }
+
+        /* Buttons - Modern High-Contrast Design */
+        .btn {
+            padding: 18px 36px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: 3px solid var(--white);
+            background: var(--white);
+            color: var(--black);
+            cursor: pointer;
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 0;
+            width: 100%;
+            touch-action: manipulation;
+            position: relative;
+            box-shadow: 0 4px 0px 0px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--white);
+            transform: translateY(2px);
+            box-shadow: 0 2px 0px 0px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--gray-600);
+            box-shadow: none;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--white);
+            transform: none;
+        }
+
+        .btn-large {
+            padding: 22px 40px;
+            font-size: 15px;
+            letter-spacing: 0.1em;
+        }
+
+        .fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px;
+            background: linear-gradient(to top, var(--black) 70%, transparent);
+            z-index: 50;
+        }
+
+        /* Option Cards - Modern High-Contrast Design */
+        .option-card {
+            background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
+            border: 2px solid var(--gray-700);
+            padding: 24px 28px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: left;
+            width: 100%;
+            border-radius: 0;
+            touch-action: manipulation;
+            color: var(--white);
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 250ms ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .option-card:hover {
+            background: linear-gradient(135deg, var(--gray-700) 0%, var(--gray-800) 100%);
+            border-color: var(--gray-600);
+            transform: translateX(4px);
+            box-shadow: -4px 4px 0px 0px rgba(255, 255, 255, 0.1);
+        }
+
+        .option-card:hover::before {
+            opacity: 1;
+        }
+
+        .option-card:active {
+            transform: translateX(2px);
+            box-shadow: -2px 2px 0px 0px rgba(255, 255, 255, 0.1);
+        }
+
+        .option-card.selected {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+            transform: translateX(4px);
+            box-shadow: -4px 4px 0px 0px rgba(255, 255, 255, 0.3);
+        }
+
+        .option-card.selected::before {
+            opacity: 0;
+        }
+
+        .option-text {
+            font-size: 17px;
+            line-height: 1.6;
+            letter-spacing: 0.01em;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Affect Grid */
+        .affect-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 640px) {
+            .affect-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .affect-card {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            padding: 24px;
+            cursor: pointer;
+            transition: all 200ms ease;
+            text-align: center;
+            border-radius: 0;
+            touch-action: manipulation;
+            color: var(--white); /* Fix dark-on-dark text */
+        }
+
+        .affect-card:hover {
+            background: var(--gray-800);
+            transform: scale(1.02);
+        }
+
+        .affect-card.selected {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+        }
+
+        .affect-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .affect-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .affect-description {
+            font-size: 13px;
+            color: var(--gray-500);
+        }
+
+        .affect-card.selected .affect-description {
+            color: var(--gray-700);
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--black);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 300ms ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .loading-icon {
+            font-size: 72px;
+            opacity: 0.1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.3; }
+        }
+
+        .loading-text {
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 24px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 300ms ease;
+            overflow-y: auto; /* Allow scrolling if modal is taller than viewport */
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-700);
+            padding: 32px;
+            max-width: 480px;
+            width: 100%;
+            border-radius: 0;
+            color: var(--white); /* Fix dark-on-dark text */
+            max-height: 90vh; /* Prevent modal from exceeding viewport */
+            overflow-y: auto; /* Allow modal content to scroll */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
+
+        .modal-header {
+            margin-bottom: 16px;
+        }
+
+        .modal-body {
+            margin-bottom: 24px;
+        }
+
+        .modal-footer button {
+            width: 100%;
+        }
+
+        /* Archetype Sections */
+        .archetype-section {
+            margin-bottom: 24px;
+            border: 1px solid var(--gray-800);
+            background: var(--gray-900);
+            color: var(--white); /* Fix dark-on-dark text */
+        }
+
+        .archetype-section summary {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            list-style: none;
+            user-select: none;
+        }
+
+        .archetype-section summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .section-content {
+            padding: 0 20px 20px;
+            line-height: 1.6;
+            color: var(--gray-300);
+        }
+
+        /* Utility Classes */
+        .mb-2 { margin-bottom: calc(var(--spacing-unit) * 2); }
+        .mb-3 { margin-bottom: calc(var(--spacing-unit) * 3); }
+        .mb-4 { margin-bottom: calc(var(--spacing-unit) * 4); }
+        .mt-2 { margin-top: calc(var(--spacing-unit) * 2); }
+        .mt-3 { margin-top: calc(var(--spacing-unit) * 3); }
+        .mt-4 { margin-top: calc(var(--spacing-unit) * 4); }
+        .text-center { text-align: center; }
+
+        #welcome .screen-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Text Block 3: Color Blur Effect */
+        .welcome-text-3-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .welcome-text-3-blur {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 150%;
+            background: radial-gradient(
+                ellipse at center,
+                rgba(22, 163, 240, 0.15) 0%,
+                rgba(16, 52, 96, 0.08) 50%,
+                transparent 70%
+            );
+            filter: blur(40px);
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.6;
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+        }
+
+        .welcome-text-3-wrapper p {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Responsive: Reduce blur effect on mobile */
+        @media (max-width: 640px) {
+            .welcome-text-3-blur {
+                filter: blur(30px);
+                opacity: 0.4;
+            }
+        }
+
+        /* Daily Welcome Header Strip */
+        .daily-welcome-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background: var(--gray-900);
+            border-bottom: 1px solid var(--gray-800);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        .user-name-tiny {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--gray-500);
+            font-weight: 600;
+        }
+
+        .checkin-count-badge {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+            padding: 6px 12px;
+            background: var(--gray-800);
+            border-radius: 12px;
+            border: 1px solid var(--gray-700);
+        }
+
+        /* Hamburger Menu Icon */
+        .hamburger-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            cursor: pointer;
+            padding: 4px;
+            margin-left: 12px;
+        }
+
+        .hamburger-icon span {
+            width: 100%;
+            height: 2px;
+            background: var(--white);
+            transition: all 200ms ease;
+        }
+
+        .hamburger-icon:hover span {
+            background: var(--gray-300);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Menu Modal */
+        .menu-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 80px 24px 24px;
+        }
+
+        .menu-modal.active {
+            display: block;
+        }
+
+        .menu-container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .menu-header {
+            margin-bottom: 32px;
+        }
+
+        .menu-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            color: var(--white);
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-close-btn:hover {
+            color: var(--gray-400);
+        }
+
+        .menu-item-card {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            padding: 20px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 200ms ease;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--white); /* Fix dark-on-dark text */
+        }
+
+        .menu-item-card:hover {
+            background: var(--gray-800);
+            border-color: var(--gray-700);
+        }
+
+        .menu-item-card.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .menu-item-icon {
+            font-size: 24px;
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-800);
+            border-radius: 50%;
+        }
+
+        .menu-item-content {
+            flex: 1;
+        }
+
+        .menu-item-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .menu-item-description {
+            font-size: 13px;
+            color: var(--gray-500);
+        }
+
+        .menu-item-warning {
+            color: var(--red);
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        /* Check-In Diary */
+        .diary-entry {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .diary-entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .diary-entry-affect {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .diary-entry-time {
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        .diary-entry-meta {
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        /* Adjust daily-welcome screen-container to account for header */
+        #daily-welcome .screen-container {
+            padding-top: 80px;
+        }
+
+        /* Twemoji Icon Styling */
+        .affect-icon-img {
+            width: 64px;
+            height: 64px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 640px) {
+            .affect-icon-img {
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        /* Affect Screen Subtitle */
+        .affect-subtitle {
+            font-size: 16px;
+            color: var(--gray-400);
+            line-height: 1.5;
+        }
+
+        /* Action Impulse Two-Column Layout */
+        .impulse-card {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            padding: 20px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 200ms ease;
+            text-align: left;
+            width: 100%;
+            border-radius: 0;
+            touch-action: manipulation;
+            color: var(--white);
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .impulse-card:hover {
+            background: var(--gray-800);
+            border-color: var(--gray-700);
+        }
+
+        .impulse-card.selected {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+        }
+
+        .impulse-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80px;
+        }
+
+        .impulse-icon svg {
+            width: 56px;
+            height: 56px;
+            stroke: currentColor;
+        }
+
+        .impulse-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .impulse-label {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .impulse-description {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        .impulse-card.selected .impulse-icon svg {
+            stroke: var(--black);
+        }
+    </style>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="terrain-progress-bar" style="width: 0%"></div>
+    </div>
+
+    <!-- Global Header (shown on most screens) -->
+    <div class="daily-welcome-header" id="global-header" style="display: none;">
+        <div class="header-left">
+            <span class="user-name-tiny" id="welcome-user-name">friend</span>
+            <div class="hamburger-icon" id="hamburger-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <span class="checkin-count-badge">CHECK-IN <span id="checkin-count-header">001</span></span>
+    </div>
+
+    <!-- Screen: Welcome -->
+    <div class="screen active" id="welcome">
+        <div class="screen-container">
+            <div class="screen-content">
+                <!-- Text Block 1: Headline -->
+                <h1 class="display-1 mb-3" id="welcome-text-1">Welcome to SomaSense</h1>
+
+                <!-- Text Block 2: Value Proposition -->
+                <p class="body-large mb-4" id="welcome-text-2">
+                    We help you see. You decide what to do. Awareness is the precursor to agency.
+                </p>
+
+                <!-- Text Block 3: Description (with color blur effect) -->
+                <div class="welcome-text-3-wrapper">
+                    <div class="welcome-text-3-blur"></div>
+                    <p class="body" id="welcome-text-3">
+                        A somatic literacy tool for understanding your emotional and nervous system patterns.
+                    </p>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-large" id="btn-sign-in">Sign in with Google</button>
+                <button class="btn btn-ghost mt-2" id="btn-continue-guest">Continue as guest</button>
+                <p class="caption mt-3 text-center">
+                    <a href="#" style="color: var(--gray-500);">Privacy Policy</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen: Terrain Gate (24h reconfirmation) -->
+    <div class="screen" id="terrain-gate">
+        <div class="screen-container">
+            <div class="screen-content">
+                <h2 class="heading-1 mb-4 gate-text">
+                    We last saw you as a [Archetype]. Still feeling like a [Archetype]?
+                </h2>
+            </div>
+            <div>
+                <button class="btn btn-large mb-2" id="btn-confirm-terrain">Yes, that's still me</button>
+                <button class="btn btn-ghost" id="btn-retake-terrain">Let me retake</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen: Onboarding Intro -->
+    <div class="screen" id="onboarding-intro">
+        <div class="screen-container">
+            <div class="screen-content">
+                <h1 class="heading-1 mb-3">Let's find your map</h1>
+                <p class="body mb-3">
+                    Your Terrain is your foundational attachment style and nervous system defaults.
+                    It's the landscape through which emotions move.
+                </p>
+                <p class="body mb-3">
+                    You'll answer 8 questions about specific moments from your life.
+                    This takes about 5 minutes.
+                </p>
+                <p class="caption">
+                    Think of real memories, not ideal responses.
+                </p>
+            </div>
+            <button class="btn btn-large" id="btn-begin-onboarding">Begin Assessment</button>
+        </div>
+    </div>
+
+    <!-- Screen: Terrain Questions -->
+    <div class="screen" id="terrain-questions">
+        <div class="screen-container">
+            <div class="screen-content">
+                <p class="caption mb-3" id="terrain-progress-text">Question 1 of 8</p>
+                <div id="terrain-question-text" class="mb-4">
+                    <!-- Dynamically populated -->
+                </div>
+                <div id="terrain-options-grid">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+            <div class="fixed-bottom">
+                <button class="btn btn-large" id="terrain-continue-btn" disabled>Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen: Terrain Reveal -->
+    <div class="screen" id="terrain-reveal">
+        <div class="screen-container">
+            <div class="screen-content">
+                <div class="mb-4 text-center">
+                    <!-- Archetype image will go here -->
+                    <img id="archetype-image" src="" alt="" style="max-width: 100%; height: auto; margin-bottom: 24px;">
+                    <h1 class="display-1 mb-2" id="archetype-name">Archetype Name</h1>
+                    <p class="body" id="archetype-intro">Introductory text...</p>
+                </div>
+                <div class="archetype-content">
+                    <!-- Expandable sections populated dynamically -->
+                </div>
+            </div>
+            <div class="fixed-bottom">
+                <button class="btn btn-large" id="btn-continue-from-reveal">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen: Daily Welcome (Compact Header + Affect Selection) -->
+    <div class="screen" id="daily-welcome">
+        <!-- Affect Selection (integrated) -->
+        <div class="screen-container">
+            <div class="screen-content">
+                <h2 class="heading-1 mb-2 text-center">What's your body telling you?</h2>
+                <p class="affect-subtitle mb-4 text-center">Tap what you're sensing right now</p>
+
+                <div class="affect-grid" id="daily-affect-grid">
+                    <!-- Will be populated dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen: Affect Selection (for legacy flow if needed) -->
+    <div class="screen" id="affect-selection">
+        <div class="screen-container">
+            <div class="screen-content">
+                <h2 class="heading-1 mb-4 text-center">What's here?</h2>
+
+                <div class="affect-grid" id="affect-grid">
+                    <!-- Will be populated dynamically, but here's the structure for now -->
+                    <div class="affect-card">
+                        <div class="affect-icon">🔥</div>
+                        <div class="affect-name">Anger</div>
+                        <div class="affect-description">Hot, mobilizing</div>
+                    </div>
+                    <div class="affect-card">
+                        <div class="affect-icon">😰</div>
+                        <div class="affect-name">Fear</div>
+                        <div class="affect-description">Alert, scanning</div>
+                    </div>
+                    <div class="affect-card">
+                        <div class="affect-icon">😔</div>
+                        <div class="affect-name">Distress</div>
+                        <div class="affect-description">Aching, heavy</div>
+                    </div>
+                    <div class="affect-card">
+                        <div class="affect-icon">😊</div>
+                        <div class="affect-name">Joy</div>
+                        <div class="affect-description">Warm, connected</div>
+                    </div>
+                    <div class="affect-card">
+                        <div class="affect-icon">😳</div>
+                        <div class="affect-name">Shame</div>
+                        <div class="affect-description">Exposure, hiding</div>
+                    </div>
+                    <div class="affect-card">
+                        <div class="affect-icon">🤔</div>
+                        <div class="affect-name">Interest</div>
+                        <div class="affect-description">Engaged, curious</div>
+                    </div>
+                    <div class="affect-card">
+                        <div class="affect-icon">😲</div>
+                        <div class="affect-name">Surprise</div>
+                        <div class="affect-description">Sudden, alert</div>
+                    </div>
+                    <div class="affect-card">
+                        <div class="affect-icon">🤢</div>
+                        <div class="affect-name">Disgust</div>
+                        <div class="affect-description">Repulsion</div>
+                    </div>
+                    <div class="affect-card">
+                        <div class="affect-icon">👃</div>
+                        <div class="affect-name">Dissmell</div>
+                        <div class="affect-description">This stinks</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen: Relational Direction -->
+    <div class="screen" id="relational-direction">
+        <div class="screen-container">
+            <div class="screen-content">
+                <h2 class="heading-1 mb-4 text-center">Who or what is this about?</h2>
+                <div id="direction-options">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen: Chronicity (Duration) -->
+    <div class="screen" id="chronicity-selection">
+        <div class="screen-container">
+            <div class="screen-content">
+                <h2 class="heading-1 mb-4 text-center">How long has this been here?</h2>
+                <div id="chronicity-options">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen: Intensity -->
+    <div class="screen" id="intensity-selection">
+        <div class="screen-container">
+            <div class="screen-content">
+                <h2 class="heading-1 mb-4 text-center">How strong is it?</h2>
+                <div id="intensity-options">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen: Action Impulse -->
+    <div class="screen" id="action-impulse">
+        <div class="screen-container">
+            <div class="screen-content">
+                <h2 class="heading-1 mb-4 text-center">What does your body want to do?</h2>
+                <div id="impulse-options">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen: Crisis Resources (Hard Crisis - Tier 1) -->
+    <div class="screen" id="crisis-resources">
+        <div class="screen-container">
+            <div class="screen-content">
+                <div class="mb-4 text-center">
+                    <div style="font-size: 48px; margin-bottom: 16px;">🆘</div>
+                    <h1 class="heading-1 mb-3" id="crisis-title">You Are Not Alone</h1>
+                    <p class="body" id="crisis-message"></p>
+                </div>
+
+                <div id="crisis-contacts" style="margin-bottom: 32px;">
+                    <!-- Crisis contacts dynamically populated -->
+                </div>
+
+                <p class="caption text-center" style="color: var(--gray-400);">
+                    SomaSense is not a replacement for professional help. These resources connect you with trained crisis counselors.
+                </p>
+            </div>
+
+            <div>
+                <button class="btn btn-large" id="btn-crisis-continue">I'm Safe for Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen: Results -->
+    <div class="screen" id="results">
+        <div class="screen-container">
+            <div class="screen-content">
+                <!-- Header -->
+                <div class="mb-4">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                        <div id="results-affect-icon" style="font-size: 32px;"></div>
+                        <div>
+                            <div id="results-affect-name" style="font-size: 18px; font-weight: 600;"></div>
+                            <div id="results-meta" style="font-size: 14px; color: var(--gray-500);"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Readout Card -->
+                <div style="background: var(--gray-900); border: 1px solid var(--gray-800); padding: 32px; margin-bottom: 24px; color: var(--white);">
+                    <div id="results-mirror" style="font-size: 20px; font-weight: 600; margin-bottom: 24px; color: var(--white);"></div>
+                    <div id="results-reframe" style="line-height: 1.6; margin-bottom: 24px; white-space: pre-line; color: var(--white);"></div>
+                    <div id="results-opening" style="font-style: italic; color: var(--gray-300); margin-bottom: 16px;"></div>
+                    <div id="results-closure" style="font-size: 14px; color: var(--gray-500);"></div>
+                </div>
+
+                <!-- Terrain Context Card -->
+                <div style="background: var(--gray-900); border: 1px solid var(--gray-800); padding: 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 16px; color: var(--white);">
+                    <div id="results-terrain-icon" style="font-size: 40px; opacity: 0.5;"></div>
+                    <div>
+                        <div id="results-terrain-name" style="font-size: 16px; font-weight: 600; margin-bottom: 4px; color: var(--white);"></div>
+                        <div id="results-terrain-desc" style="font-size: 14px; color: var(--gray-400);"></div>
+                    </div>
+                </div>
+
+                <!-- Persistent Sign-In Banner (if guest) -->
+                <div id="results-signin-banner" style="display: none; background: var(--gray-900); border: 1px solid var(--gray-700); padding: 16px; margin-bottom: 24px; text-align: center; cursor: pointer; color: var(--white);">
+                    <div style="font-size: 14px; color: var(--white);">📊 Sign in to save your history and see patterns over time</div>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-large mb-2" id="btn-checkin-again">Check In Again</button>
+                <button class="btn btn-ghost" id="btn-view-terrain">View My Terrain</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Save Journey Prompt (Post-Terrain Signup) -->
+    <div class="modal-overlay" id="save-terrain-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="heading-1" id="signup-modal-headline">Keep Exploring, or Save Your Journey?</h2>
+            </div>
+            <div class="modal-body">
+                <p class="body" id="signup-modal-body" style="color: var(--gray-300); margin-bottom: 24px;">
+                    Sign in to track patterns and see how you're changing. Private and secure.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-large mb-2" id="btn-modal-sign-in">Sign in with Google</button>
+                <button class="btn btn-ghost" id="btn-modal-skip">Skip</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: First Check-In Welcome -->
+    <div class="modal-overlay" id="first-checkin-welcome-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="heading-1" id="first-checkin-headline">Welcome to your check-ins</h2>
+            </div>
+            <div class="modal-body">
+                <p class="body" id="first-checkin-message" style="color: var(--gray-300); margin-bottom: 24px; line-height: 1.6;">
+                    <!-- Archetype-specific welcome message will be populated here -->
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-large" id="btn-first-checkin-gotit">Got it</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-icon">🌿</div>
+        <div class="loading-text">Generating your readout...</div>
+    </div>
+
+    <!-- Hamburger Menu Modal -->
+    <div class="menu-modal" id="menu-modal">
+        <button class="menu-close-btn" id="menu-close-btn">&times;</button>
+        <div class="menu-container">
+            <div class="menu-header">
+                <h2 class="heading-1">Menu</h2>
+            </div>
+
+            <!-- Check-In Diary -->
+            <div class="menu-item-card" id="menu-diary-btn">
+                <div class="menu-item-icon">📖</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-title">Check-In Diary</div>
+                    <div class="menu-item-description">View your recent check-ins</div>
+                </div>
+            </div>
+
+            <!-- Re-take Terrain -->
+            <div class="menu-item-card" id="menu-retake-terrain-btn">
+                <div class="menu-item-icon">🗺️</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-title">Re-take Terrain</div>
+                    <div class="menu-item-description">Retake the assessment</div>
+                    <div class="menu-item-warning">⚠️ This will change your archetype</div>
+                </div>
+            </div>
+
+            <!-- Reset Check-in Counts -->
+            <div class="menu-item-card" id="menu-reset-counts-btn">
+                <div class="menu-item-icon">🔄</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-title">Reset Check-in Counts</div>
+                    <div class="menu-item-description">Start count from 001</div>
+                </div>
+            </div>
+
+            <!-- Logout (hidden for guests) -->
+            <div class="menu-item-card" id="menu-logout-btn" style="display: none;">
+                <div class="menu-item-icon">🚪</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-title">Logout</div>
+                    <div class="menu-item-description">Sign out of your account</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Check-In Diary Modal -->
+    <div class="menu-modal" id="diary-modal">
+        <button class="menu-close-btn" id="diary-close-btn">&times;</button>
+        <div class="menu-container">
+            <div class="menu-header">
+                <h2 class="heading-1">Check-In Diary</h2>
+                <p class="body" style="color: var(--gray-400); margin-top: 8px;">Your recent check-ins</p>
+            </div>
+            <div id="diary-entries-container">
+                <!-- Diary entries will be populated by JavaScript -->
+            </div>
+            <button class="btn btn-ghost" id="diary-show-more-btn" style="display: none; margin-top: 16px;">Show More</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { firebaseConfig } from './firebase-config.js';
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Make available globally
+        window.firebaseApp = app;
+        window.firebaseAuth = auth;
+        window.firebaseDb = db;
+
+        console.log('✅ Firebase initialized');
+    </script>
+
+    <!-- Load app as ES module -->
+    <script type="module" src="/src/js/app.js"></script>
+</body>
+</html>
