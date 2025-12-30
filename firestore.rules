@@ -9,24 +9,47 @@ service cloud.firestore {
       allow write: if request.auth != null;
     }
 
-    // Sessions are write-only for users (analytics)
-    // Admin-only read access
+    // Sessions - public read, write only for creation
     match /sessions/{sessionId} {
-      allow create: if true;
-      allow read, update, delete: if request.auth != null;
-    }
-
-    // Submissions are write-only for users (analytics)
-    // Admin-only read access
-    match /submissions/{submissionId} {
-      allow create: if true;
-      allow read, update, delete: if request.auth != null;
-    }
-
-    // Image cache is public read, admin write
-    match /generatedImages/{imageId} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow create: if true;
+      allow update, delete: if false;
+    }
+
+    // Submissions - public read and write
+    match /submissions/{submissionId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if true;
+    }
+
+    // Image cache - public read and write
+    match /generatedImages/{imageId} {
+      allow read, write: if true;
+    }
+
+    // User terrains - public read and write
+    match /userTerrains/{userId} {
+      allow read, write: if true;
+    }
+
+    // Daily submissions - public read and write
+    match /dailySubmissions/{submissionId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if true;
+    }
+
+    // NPS feedback - public read and write
+    match /npsFeedback/{feedbackId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if true;
+    }
+
+    // System prompts - public read and write (for admin panel)
+    match /systemPrompts/{promptId} {
+      allow read, write: if true;
     }
   }
 }

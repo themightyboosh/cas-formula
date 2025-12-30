@@ -7,7 +7,6 @@
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 
     <style>
@@ -332,13 +331,13 @@
             <h1>Admin Panel</h1>
             <div class="user-info">
                 <span id="userEmail"></span>
-                <button onclick="signOut()" style="width: auto; padding: 8px 16px;">Sign Out</button>
             </div>
         </div>
 
         <div class="tabs">
             <button class="tab active" onclick="switchTab('prompts')">System Prompts</button>
             <button class="tab" onclick="switchTab('inputs')">User Inputs</button>
+            <button class="tab" onclick="switchTab('nps')">NPS Feedback</button>
         </div>
 
         <!-- Prompts Tab -->
@@ -371,6 +370,8 @@
                             <option value="500">Last 500</option>
                             <option value="all">All</option>
                         </select>
+                        <button onclick="downloadSubmissionsCSV()" style="width: auto; padding: 8px 16px; background: var(--blue);">Download CSV</button>
+                        <button onclick="clearSubmissionsData()" style="width: auto; padding: 8px 16px; background: var(--red);">Clear All Data</button>
                         <button onclick="loadUserInputs()" style="width: auto; padding: 8px 16px;">Refresh</button>
                     </div>
                 </div>
@@ -399,6 +400,66 @@
                 </div>
             </div>
         </div>
+
+        <!-- NPS Tab -->
+        <div id="npsTab" class="tab-content">
+            <div class="inputs-section">
+                <div class="inputs-header">
+                    <h2>NPS Feedback</h2>
+                    <div class="filter-controls">
+                        <select id="npsTerrainFilter" onchange="filterNPS()">
+                            <option value="">All Terrains</option>
+                        </select>
+                        <select id="npsScoreFilter" onchange="filterNPS()">
+                            <option value="">All Scores</option>
+                            <option value="promoters">Promoters (9-10)</option>
+                            <option value="passives">Passives (7-8)</option>
+                            <option value="detractors">Detractors (0-6)</option>
+                        </select>
+                        <button onclick="downloadNPSCSV()" style="width: auto; padding: 8px 16px; background: var(--blue);">Download CSV</button>
+                        <button onclick="clearNPSData()" style="width: auto; padding: 8px 16px; background: var(--red);">Clear All Data</button>
+                        <button onclick="loadNPSFeedback()" style="width: auto; padding: 8px 16px;">Refresh</button>
+                    </div>
+                </div>
+
+                <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-bottom: 32px;">
+                    <div class="stat-card">
+                        <h3>Net Promoter Score</h3>
+                        <div class="value" id="netPromoterScore" style="font-size: 36px;">0</div>
+                        <p style="font-size: 12px; color: var(--gray-400); margin-top: 8px;">
+                            % Promoters - % Detractors
+                        </p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Average Score</h3>
+                        <div class="value" id="avgNPSScore">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Responses</h3>
+                        <div class="value" id="totalNPS">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Promoters (9-10)</h3>
+                        <div class="value" id="promotersCount">0</div>
+                        <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;" id="promotersPercent">0%</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Passives (7-8)</h3>
+                        <div class="value" id="passivesCount">0</div>
+                        <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;" id="passivesPercent">0%</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Detractors (0-6)</h3>
+                        <div class="value" id="detractorsCount">0</div>
+                        <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;" id="detractorsPercent">0%</p>
+                    </div>
+                </div>
+
+                <div id="npsTableContainer">
+                    <div class="loading">Loading NPS feedback...</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -413,51 +474,27 @@
         };
 
         firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
         const db = firebase.firestore();
-
-        // Authorized admin emails
-        const AUTHORIZED_EMAILS = [
-            'daniel.crowder@icloud.com',
-            'hello@danielcrowder.com'
-        ];
 
         let allInputs = [];
         let filteredInputs = [];
 
-        // Auth State Management
-        auth.onAuthStateChanged((user) => {
-            if (user && AUTHORIZED_EMAILS.includes(user.email)) {
-                document.getElementById('authScreen').style.display = 'none';
-                document.getElementById('adminPanel').style.display = 'block';
-                document.getElementById('userEmail').textContent = user.email;
-                loadPrompt();
-                loadUserInputs();
-            } else {
-                document.getElementById('authScreen').style.display = 'flex';
-                document.getElementById('adminPanel').style.display = 'none';
-                if (user) {
-                    alert('Unauthorized email. Please sign in with an authorized account.');
-                    auth.signOut();
-                }
-            }
-        });
+        // Initialize admin panel - no auth required
+        function initAdmin() {
+            console.log('Admin panel initializing...');
 
-        // Sign In with Google
-        async function signInWithGoogle() {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            try {
-                await auth.signInWithPopup(provider);
-            } catch (error) {
-                console.error('Sign in error:', error);
-                alert('Failed to sign in: ' + error.message);
-            }
+            // Hide auth screen, show admin panel directly
+            document.getElementById('authScreen').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+            document.getElementById('userEmail').textContent = 'Admin';
+
+            // Load data
+            loadPrompt();
+            loadUserInputs();
         }
 
-        // Sign Out
-        function signOut() {
-            auth.signOut();
-        }
+        // Initialize on page load
+        initAdmin();
 
         // Tab Switching
         function switchTab(tabName) {
@@ -469,43 +506,85 @@
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             document.getElementById(tabName + 'Tab').classList.add('active');
 
-            // Load data if switching to inputs tab
+            // Load data if switching to tabs
             if (tabName === 'inputs' && allInputs.length === 0) {
                 loadUserInputs();
+            }
+            if (tabName === 'nps') {
+                loadNPSFeedback();
             }
         }
 
         // Load System Prompt
         async function loadPrompt() {
             try {
-                // Note: This would typically call a Cloud Function to get the current prompt
-                // For now, we'll display a placeholder
-                document.getElementById('systemPromptInput').value =
-                    '// System prompt loading from Cloud Function...\n\n' +
-                    '// To implement:\n' +
-                    '// 1. Create a Cloud Function endpoint that returns the current system prompt\n' +
-                    '// 2. Create another endpoint that saves the updated prompt\n' +
-                    '// 3. The prompt is currently hardcoded in functions/src/index.ts\n\n' +
-                    '// Current prompt location: functions/src/index.ts line 754';
+                // Load the therapeutic response prompt from Firestore
+                const doc = await db.collection('systemPrompts').doc('therapeuticResponse').get();
+
+                if (doc.exists) {
+                    const data = doc.data();
+                    document.getElementById('systemPromptInput').value = data.prompt || '';
+
+                    // Show last updated info
+                    if (data.updatedAt) {
+                        const updated = data.updatedAt.toDate();
+                        console.log('Prompt last updated:', updated.toLocaleString());
+                    }
+                } else {
+                    // Create default prompt document
+                    const defaultPrompt = `You are an expert therapeutic guide helping someone understand their emotional experience through the lens of Silvan Tomkins' affect theory.
+
+The user is experiencing: {affectName}
+Domain: {domain}
+Context: {contextNotes}
+Intensity: {intensity}
+Their attachment terrain: {terrain}
+
+Provide a therapeutic response that:
+1. Validates their experience
+2. Explains what's happening through affect theory
+3. Offers practical guidance for working with this feeling
+4. Considers their attachment style/terrain
+
+Keep the tone warm, professional, and supportive. Write in 2-3 paragraphs.`;
+
+                    await db.collection('systemPrompts').doc('therapeuticResponse').set({
+                        prompt: defaultPrompt,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+
+                    document.getElementById('systemPromptInput').value = defaultPrompt;
+                }
             } catch (error) {
                 console.error('Error loading prompt:', error);
-                alert('Failed to load prompt');
+                alert('Failed to load prompt: ' + error.message);
             }
         }
 
         // Save System Prompt
         async function savePrompt() {
             const prompt = document.getElementById('systemPromptInput').value;
-            if (!confirm('Save this system prompt? This will update the Cloud Function.')) {
+
+            if (!prompt.trim()) {
+                alert('Prompt cannot be empty');
+                return;
+            }
+
+            if (!confirm('Save this system prompt? This will affect all future AI responses.')) {
                 return;
             }
 
             try {
-                // Note: This would call a Cloud Function to update the prompt
-                alert('Prompt saving functionality needs to be implemented in Cloud Functions.\n\nCurrent implementation: Prompt is in functions/src/index.ts');
+                await db.collection('systemPrompts').doc('therapeuticResponse').set({
+                    prompt: prompt,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+
+                alert('System prompt saved successfully!\n\nNote: The Cloud Function will use this prompt for all new responses.');
             } catch (error) {
                 console.error('Error saving prompt:', error);
-                alert('Failed to save prompt');
+                alert('Failed to save prompt: ' + error.message);
             }
         }
 
@@ -598,24 +677,29 @@
                     <thead>
                         <tr>
                             <th>Timestamp</th>
+                            <th>User ID</th>
                             <th>Affect</th>
-                            <th>Context</th>
-                            <th>Direction</th>
+                            <th>Domain</th>
+                            <th>Context Notes</th>
                             <th>Intensity</th>
-                            <th>CAS Terrain</th>
+                            <th>Terrain</th>
+                            <th>AI Response</th>
                         </tr>
                     </thead>
                     <tbody>
                         ${filteredInputs.map(input => {
                             const timestamp = input.timestamp?.toDate ? input.timestamp.toDate() : new Date(input.timestamp);
+                            const responsePreview = input.aiResponse ? (input.aiResponse.substring(0, 100) + '...') : '-';
                             return `
-                                <tr>
+                                <tr onclick="viewSubmissionDetail('${input.id}')" style="cursor: pointer;">
                                     <td>${timestamp.toLocaleString()}</td>
-                                    <td><span class="badge badge-affect">${input.affectName}</span></td>
-                                    <td class="context-cell" title="${input.context}">${input.context}</td>
-                                    <td><span class="badge badge-direction">${input.direction}</span></td>
-                                    <td><span class="badge badge-intensity">${input.intensity}</span></td>
-                                    <td>${input.casArchetype || '-'}</td>
+                                    <td style="font-size: 11px; color: #888;">${input.userId?.substring(0, 12) || '-'}</td>
+                                    <td><span class="badge badge-affect">${input.affectName || '-'}</span></td>
+                                    <td>${input.domain || '-'}</td>
+                                    <td class="context-cell" title="${input.contextNotes || ''}">${input.contextNotes || '-'}</td>
+                                    <td><span class="badge badge-intensity">${input.intensity || '-'}</span></td>
+                                    <td>${input.terrain || '-'}</td>
+                                    <td class="context-cell" title="${input.aiResponse || ''}">${responsePreview}</td>
                                 </tr>
                             `;
                         }).join('')}
@@ -625,6 +709,402 @@
 
             container.innerHTML = table;
         }
+
+        // View Submission Detail
+        function viewSubmissionDetail(id) {
+            const input = allInputs.find(i => i.id === id);
+            if (!input) return;
+
+            const timestamp = input.timestamp?.toDate ? input.timestamp.toDate() : new Date(input.timestamp);
+            const modalContent = `
+                <div style="background: white; padding: 32px; border-radius: 8px; max-width: 800px; max-height: 80vh; overflow-y: auto; color: black;">
+                    <h2 style="margin-bottom: 24px;">Submission Details</h2>
+
+                    <div style="margin-bottom: 16px;">
+                        <strong>Timestamp:</strong> ${timestamp.toLocaleString()}
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <strong>User ID:</strong> ${input.userId || '-'}
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <strong>Affect:</strong> ${input.affectName || '-'}
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <strong>Domain:</strong> ${input.domain || '-'}
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <strong>Context Notes:</strong> ${input.contextNotes || '-'}
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <strong>Intensity:</strong> ${input.intensity || '-'}
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <strong>Terrain:</strong> ${input.terrain || '-'}
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <strong>App Version:</strong> ${input.appVersion || '-'}
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <strong>AI Response:</strong>
+                        <div style="background: #f5f5f5; padding: 16px; margin-top: 8px; border-radius: 4px; white-space: pre-wrap; line-height: 1.6;">
+${input.aiResponse || 'No response recorded'}
+                        </div>
+                    </div>
+
+                    <button onclick="closeModal()" style="margin-top: 24px; padding: 12px 24px; background: black; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        Close
+                    </button>
+                </div>
+            `;
+
+            const modal = document.createElement('div');
+            modal.id = 'detailModal';
+            modal.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 20px;';
+            modal.innerHTML = modalContent;
+            document.body.appendChild(modal);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('detailModal');
+            if (modal) modal.remove();
+        }
+
+        // ====== NPS FEEDBACK FUNCTIONS ======
+
+        let allNPS = [];
+        let filteredNPS = [];
+
+        // Load NPS Feedback
+        async function loadNPSFeedback() {
+            const container = document.getElementById('npsTableContainer');
+            container.innerHTML = '<div class="loading">Loading NPS feedback...</div>';
+
+            try {
+                const snapshot = await db.collection('npsFeedback')
+                    .orderBy('timestamp', 'desc')
+                    .limit(500)
+                    .get();
+
+                allNPS = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+
+                // Populate terrain filter
+                const terrainFilter = document.getElementById('npsTerrainFilter');
+                const terrains = [...new Set(allNPS.map(nps => nps.terrain))].sort();
+                terrainFilter.innerHTML = '<option value="">All Terrains</option>' +
+                    terrains.map(t => `<option value="${t}">${t}</option>`).join('');
+
+                updateNPSStats();
+                filterNPS();
+            } catch (error) {
+                console.error('Error loading NPS:', error);
+                container.innerHTML = '<div class="empty-state">Failed to load NPS feedback</div>';
+            }
+        }
+
+        // Update NPS Statistics
+        function updateNPSStats() {
+            const total = allNPS.length;
+            document.getElementById('totalNPS').textContent = total;
+
+            if (total === 0) {
+                document.getElementById('netPromoterScore').textContent = 'N/A';
+                document.getElementById('avgNPSScore').textContent = 'N/A';
+                return;
+            }
+
+            // Count categories
+            const promoters = allNPS.filter(nps => nps.npsScore >= 9).length;
+            const passives = allNPS.filter(nps => nps.npsScore >= 7 && nps.npsScore <= 8).length;
+            const detractors = allNPS.filter(nps => nps.npsScore <= 6).length;
+
+            // Calculate percentages
+            const promotersPercent = ((promoters / total) * 100).toFixed(1);
+            const passivesPercent = ((passives / total) * 100).toFixed(1);
+            const detractorsPercent = ((detractors / total) * 100).toFixed(1);
+
+            // Net Promoter Score = % Promoters - % Detractors
+            const nps = (parseFloat(promotersPercent) - parseFloat(detractorsPercent)).toFixed(1);
+
+            // Average score
+            const avgScore = (allNPS.reduce((sum, nps) => sum + nps.npsScore, 0) / total).toFixed(1);
+
+            // Update DOM
+            document.getElementById('netPromoterScore').textContent = nps;
+            document.getElementById('avgNPSScore').textContent = avgScore;
+            document.getElementById('promotersCount').textContent = promoters;
+            document.getElementById('promotersPercent').textContent = `${promotersPercent}%`;
+            document.getElementById('passivesCount').textContent = passives;
+            document.getElementById('passivesPercent').textContent = `${passivesPercent}%`;
+            document.getElementById('detractorsCount').textContent = detractors;
+            document.getElementById('detractorsPercent').textContent = `${detractorsPercent}%`;
+
+            // Color code NPS
+            const npsElement = document.getElementById('netPromoterScore');
+            if (parseFloat(nps) >= 50) {
+                npsElement.style.color = 'var(--green)';
+            } else if (parseFloat(nps) >= 0) {
+                npsElement.style.color = 'var(--white)';
+            } else {
+                npsElement.style.color = 'var(--red)';
+            }
+        }
+
+        // Filter NPS
+        function filterNPS() {
+            const terrainFilter = document.getElementById('npsTerrainFilter').value;
+            const scoreFilter = document.getElementById('npsScoreFilter').value;
+
+            filteredNPS = allNPS.filter(nps => {
+                if (terrainFilter && nps.terrain !== terrainFilter) return false;
+
+                if (scoreFilter === 'promoters' && nps.npsScore < 9) return false;
+                if (scoreFilter === 'passives' && (nps.npsScore < 7 || nps.npsScore > 8)) return false;
+                if (scoreFilter === 'detractors' && nps.npsScore > 6) return false;
+
+                return true;
+            });
+
+            renderNPSTable();
+        }
+
+        // Render NPS Table
+        function renderNPSTable() {
+            const container = document.getElementById('npsTableContainer');
+
+            if (filteredNPS.length === 0) {
+                container.innerHTML = '<div class="empty-state">No NPS feedback found</div>';
+                return;
+            }
+
+            const table = `
+                <table class="inputs-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Score</th>
+                            <th>Category</th>
+                            <th>Affect</th>
+                            <th>Domain</th>
+                            <th>Intensity</th>
+                            <th>Terrain</th>
+                            <th>Feedback</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${filteredNPS.map(nps => {
+                            const timestamp = nps.timestamp?.toDate ? nps.timestamp.toDate() : new Date(nps.timestamp);
+
+                            // Color code score
+                            let scoreClass = '';
+                            if (nps.npsScore >= 9) scoreClass = 'promoter';
+                            else if (nps.npsScore >= 7) scoreClass = 'passive';
+                            else scoreClass = 'detractor';
+
+                            return `
+                                <tr>
+                                    <td>${timestamp.toLocaleString()}</td>
+                                    <td>
+                                        <span class="badge badge-${scoreClass}" style="font-size: 14px; font-weight: 700;">
+                                            ${nps.npsScore}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-${scoreClass}">
+                                            ${nps.category}
+                                        </span>
+                                    </td>
+                                    <td>${nps.affectName}</td>
+                                    <td>${nps.domain}</td>
+                                    <td>${nps.intensity}</td>
+                                    <td style="font-size: 12px;">${nps.terrain}</td>
+                                    <td style="max-width: 300px; word-wrap: break-word;">
+                                        ${nps.feedbackText || '<em style="color: var(--gray-400);">No comment</em>'}
+                                    </td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            `;
+
+            container.innerHTML = table;
+        }
+
+        // ====== CSV DOWNLOAD FUNCTIONS ======
+
+        // Download Submissions as CSV
+        function downloadSubmissionsCSV() {
+            if (allInputs.length === 0) {
+                alert('No submissions data to download');
+                return;
+            }
+
+            // CSV headers
+            const headers = ['Timestamp', 'User ID', 'Affect Name', 'Domain', 'Context Notes', 'Intensity', 'Terrain', 'App Version', 'AI Response'];
+
+            // Convert data to CSV rows
+            const rows = allInputs.map(input => {
+                const timestamp = input.timestamp?.toDate ? input.timestamp.toDate().toISOString() : new Date(input.timestamp).toISOString();
+                return [
+                    timestamp,
+                    input.userId || '',
+                    input.affectName || '',
+                    input.domain || '',
+                    (input.contextNotes || '').replace(/"/g, '""'), // Escape quotes
+                    input.intensity || '',
+                    input.terrain || '',
+                    input.appVersion || '',
+                    (input.aiResponse || '').replace(/"/g, '""') // Escape quotes
+                ];
+            });
+
+            // Build CSV content
+            const csvContent = [
+                headers.map(h => `"${h}"`).join(','),
+                ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+            ].join('\n');
+
+            // Create download
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `submissions_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Download NPS Feedback as CSV
+        function downloadNPSCSV() {
+            if (allNPS.length === 0) {
+                alert('No NPS feedback data to download');
+                return;
+            }
+
+            // CSV headers
+            const headers = ['Timestamp', 'NPS Score', 'Category', 'Affect Name', 'Domain', 'Intensity', 'Terrain', 'Feedback Text'];
+
+            // Convert data to CSV rows
+            const rows = allNPS.map(nps => {
+                const timestamp = nps.timestamp?.toDate ? nps.timestamp.toDate().toISOString() : new Date(nps.timestamp).toISOString();
+                return [
+                    timestamp,
+                    nps.npsScore || '',
+                    nps.category || '',
+                    nps.affectName || '',
+                    nps.domain || '',
+                    nps.intensity || '',
+                    nps.terrain || '',
+                    (nps.feedbackText || '').replace(/"/g, '""') // Escape quotes
+                ];
+            });
+
+            // Build CSV content
+            const csvContent = [
+                headers.map(h => `"${h}"`).join(','),
+                ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+            ].join('\n');
+
+            // Create download
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `nps_feedback_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // ====== CLEAR DATA FUNCTIONS ======
+
+        // Clear Submissions Data
+        async function clearSubmissionsData() {
+            if (!confirm('Are you sure you want to delete ALL submissions data? This cannot be undone!')) {
+                return;
+            }
+
+            if (!confirm('FINAL WARNING: This will permanently delete all ' + allInputs.length + ' submissions. Are you absolutely sure?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch('https://us-central1-realness-score.cloudfunctions.net/clearSubmissions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to clear submissions');
+                }
+
+                const data = await response.json();
+                alert(data.result.message + '\nDeleted: ' + data.result.deletedCount + ' submissions');
+
+                // Reload data
+                loadUserInputs();
+            } catch (error) {
+                console.error('Error clearing submissions:', error);
+                alert('Failed to clear submissions: ' + error.message);
+            }
+        }
+
+        // Clear NPS Feedback Data
+        async function clearNPSData() {
+            if (!confirm('Are you sure you want to delete ALL NPS feedback data? This cannot be undone!')) {
+                return;
+            }
+
+            if (!confirm('FINAL WARNING: This will permanently delete all ' + allNPS.length + ' NPS feedback entries. Are you absolutely sure?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch('https://us-central1-realness-score.cloudfunctions.net/clearNPSFeedback', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to clear NPS feedback');
+                }
+
+                const data = await response.json();
+                alert(data.result.message + '\nDeleted: ' + data.result.deletedCount + ' feedback entries');
+
+                // Reload data
+                loadNPSFeedback();
+            } catch (error) {
+                console.error('Error clearing NPS feedback:', error);
+                alert('Failed to clear NPS feedback: ' + error.message);
+            }
+        }
     </script>
+
+    <style>
+        /* NPS Badge Colors */
+        .badge-promoter {
+            background: var(--green) !important;
+            color: var(--white) !important;
+        }
+        .badge-passive {
+            background: var(--gray-600) !important;
+            color: var(--white) !important;
+        }
+        .badge-detractor {
+            background: var(--red) !important;
+            color: var(--white) !important;
+        }
+    </style>
 </body>
 </html>

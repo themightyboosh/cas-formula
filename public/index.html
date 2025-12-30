@@ -2,32 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Feel it, Don't Think It</title>
+    <meta name="viewport" content="width=device-width, initial-scale=no, user-scalable=no">
+    <title>Feel First</title>
     <meta name="description" content="Your body already knows. Understand what's happening inside you through embodied recognition and affect theory.">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://realness-score.web.app/">
-    <meta property="og:title" content="Feel it, Don't Think It">
-    <meta property="og:description" content="Your body already knows. Understand what's happening inside you through embodied recognition and affect theory.">
+    <meta property="og:title" content="Feel First">
+    <meta property="og:description" content="Your body already knows.">
     <meta property="og:image" content="https://realness-score.web.app/og-image.svg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://realness-score.web.app/">
-    <meta property="twitter:title" content="Feel it, Don't Think It">
-    <meta property="twitter:description" content="Your body already knows. Understand what's happening inside you through embodied recognition and affect theory.">
+    <meta property="twitter:title" content="Feel First">
+    <meta property="twitter:description" content="Your body already knows.">
     <meta property="twitter:image" content="https://realness-score.web.app/og-image.svg">
 
     <!-- Mobile App -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Feel it, Don't Think It">
-
-    <!-- Lucide Icons -->
+    <meta name="apple-mobile-web-app-title" content="Feel First">
 
     <style>
         :root {
@@ -42,6 +38,8 @@
             --gray-700: #404040;
             --gray-800: #262626;
             --gray-900: #171717;
+            --green: #22c55e;
+            --red: #ef4444;
             --spacing-unit: 8px;
         }
 
@@ -63,7 +61,7 @@
             line-height: 1.5;
         }
 
-        /* Header - scrolls with page */
+        /* Header */
         .app-header {
             height: 60px;
             background: var(--black);
@@ -80,7 +78,7 @@
             text-transform: uppercase;
         }
 
-        /* Typography System */
+        /* Typography */
         .display-1 {
             font-size: clamp(32px, 8vw, 56px);
             font-weight: 700;
@@ -96,7 +94,7 @@
         }
 
         .body-large {
-            font-size: 28px;
+            font-size: 24px;
             line-height: 1.5;
             font-weight: 500;
             color: var(--gray-200);
@@ -131,7 +129,7 @@
         }
 
         .screen-container {
-            max-width: 480px;
+            max-width: 540px;
             margin: 0 auto;
             width: 100%;
             display: flex;
@@ -183,30 +181,7 @@
             border-color: var(--white);
         }
 
-        /* Input */
-        input[type="text"] {
-            width: 100%;
-            padding: calc(var(--spacing-unit) * 2);
-            font-size: 34px;
-            border: none;
-            border-bottom: 1px solid var(--gray-700);
-            background: transparent;
-            color: var(--white);
-            outline: none;
-            transition: border-color 0.3s;
-            font-family: inherit;
-            text-align: center;
-        }
-
-        input[type="text"]:focus {
-            border-bottom-color: var(--white);
-        }
-
-        input[type="text"]::placeholder {
-            color: var(--gray-600);
-        }
-
-        /* Textarea for context input */
+        /* Textarea */
         textarea {
             width: 100%;
             padding: calc(var(--spacing-unit) * 2);
@@ -221,7 +196,7 @@
             font-family: inherit;
             text-align: left;
             resize: vertical;
-            min-height: 120px;
+            min-height: 100px;
         }
 
         textarea:focus {
@@ -232,10 +207,10 @@
             color: var(--gray-600);
         }
 
-        /* Affect Selection Grid */
+        /* Affect Grid */
         .affects-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 1px;
             background: var(--gray-900);
             margin: calc(var(--spacing-unit) * 3) 0;
@@ -272,63 +247,22 @@
             transition: transform 0.3s ease, filter 0.3s ease;
         }
 
+        @media (max-width: 640px) {
+            .affect-icon {
+                width: 128px;
+                height: 128px;
+            }
+        }
+
         .affect-card:hover .affect-icon {
             transform: scale(1.15);
             filter: drop-shadow(0 0 12px rgba(255, 140, 0, 0.8)) drop-shadow(0 0 24px rgba(255, 140, 0, 0.4));
         }
 
-        .affect-name {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--white);
-            margin-bottom: 4px;
-        }
-
-        .affect-description {
-            font-size: 12px;
-            color: var(--gray-500);
-            line-height: 1.3;
-        }
-
-        /* Context Input Buttons */
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: calc(var(--spacing-unit) * 2);
-            margin: calc(var(--spacing-unit) * 3) 0;
-        }
-
-        .option-btn {
-            background: var(--black);
-            color: var(--white);
-            border: 1px solid var(--gray-700);
-            padding: calc(var(--spacing-unit) * 2);
+        .affect-label {
             font-size: 14px;
             font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-align: center;
-            font-family: inherit;
-        }
-
-        .option-btn:hover {
-            background: var(--gray-900);
-            border-color: var(--gray-600);
-        }
-
-        .option-btn.selected {
-            background: var(--white);
-            color: var(--black);
-            border-color: var(--white);
-        }
-
-        /* Direction Buttons in 2x2 Grid */
-        .direction-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1px;
-            background: var(--gray-900);
-            margin: calc(var(--spacing-unit) * 3) 0;
+            color: var(--gray-400);
         }
 
         /* Intensity Scale */
@@ -344,7 +278,7 @@
             background: var(--black);
             color: var(--white);
             border: none;
-            padding: calc(var(--spacing-unit) * 2);
+            padding: calc(var(--spacing-unit) * 3);
             font-size: 14px;
             font-weight: 500;
             cursor: pointer;
@@ -352,7 +286,7 @@
             text-align: left;
             font-family: inherit;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: calc(var(--spacing-unit) * 2);
         }
 
@@ -366,9 +300,178 @@
         }
 
         .intensity-number {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: 700;
-            min-width: 24px;
+            min-width: 32px;
+            line-height: 1;
+        }
+
+        .intensity-label {
+            flex: 1;
+        }
+
+        .intensity-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .intensity-desc {
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+        /* Domain Grid */
+        .domain-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--gray-900);
+            margin: calc(var(--spacing-unit) * 3) 0;
+        }
+
+        .domain-btn {
+            background: var(--black);
+            color: var(--white);
+            border: 2px solid transparent;
+            padding: calc(var(--spacing-unit) * 3);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            font-family: inherit;
+        }
+
+        .domain-btn:hover {
+            background: var(--gray-900);
+            border-color: var(--gray-700);
+        }
+
+        .domain-btn.selected {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+        }
+
+        /* Onboarding Questions */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 2);
+            margin: calc(var(--spacing-unit) * 2) 0;
+        }
+
+        .option-btn {
+            background: var(--black);
+            color: var(--white);
+            border: 1px solid var(--gray-700);
+            padding: calc(var(--spacing-unit) * 2);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .option-btn:hover {
+            background: var(--gray-900);
+            border-color: var(--gray-600);
+        }
+
+        .option-btn.selected {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+        }
+
+        /* NPS Slider */
+        .nps-slider-container {
+            margin: 32px 0;
+        }
+
+        .nps-slider-wrapper {
+            position: relative;
+            padding: 24px 0;
+        }
+
+        .nps-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: var(--gray-800);
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .nps-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 32px;
+            height: 32px;
+            background: var(--white);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .nps-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        .nps-slider::-moz-range-thumb {
+            width: 32px;
+            height: 32px;
+            background: var(--white);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .nps-slider::-moz-range-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        .nps-value-display {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .nps-score-number {
+            font-size: 72px;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .nps-score-label {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .nps-score-description {
+            font-size: 14px;
+            color: var(--gray-400);
+            line-height: 1.5;
+        }
+
+        .nps-labels {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray-500);
+            font-size: 12px;
+            margin-top: 8px;
         }
 
         /* Results */
@@ -388,33 +491,7 @@
             margin-bottom: 0;
         }
 
-        .share-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: var(--gray-800);
-            margin: calc(var(--spacing-unit) * 4) 0;
-        }
-
-        .share-btn {
-            background: var(--black);
-            border: none;
-            padding: calc(var(--spacing-unit) * 2);
-            color: var(--gray-500);
-            font-size: 11px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-family: inherit;
-        }
-
-        .share-btn:hover {
-            background: var(--gray-900);
-            color: var(--white);
-        }
-
-        /* Full-screen loading overlay */
+        /* Loading Overlay */
         .loading-overlay {
             position: fixed;
             inset: 0;
@@ -438,7 +515,7 @@
             text-align: center;
         }
 
-        /* Spacing utilities */
+        /* Utilities */
         .mt-3 { margin-top: calc(var(--spacing-unit) * 3); }
         .mt-4 { margin-top: calc(var(--spacing-unit) * 4); }
         .mb-2 { margin-bottom: calc(var(--spacing-unit) * 2); }
@@ -448,29 +525,31 @@
         .text-left { text-align: left; }
 
         /* Responsive */
-        @media (min-width: 640px) {
-            .affects-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
         @media (max-width: 640px) {
-            .screen {
-                padding: calc(var(--spacing-unit) * 2);
+            .affects-grid {
+                grid-template-columns: 1fr;
             }
 
-            .display-1 {
-                font-size: 28px;
+            .domain-grid {
+                grid-template-columns: 1fr;
             }
 
-            input[type="text"] {
-                font-size: 24px;
+            .nps-score-number {
+                font-size: 56px;
+            }
+
+            .nps-score-label {
+                font-size: 16px;
+            }
+
+            .nps-score-description {
+                font-size: 13px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Full-screen Loading Overlay -->
+    <!-- Loading Overlay -->
     <div id="loadingOverlay" class="loading-overlay">
         <img id="loadingIcon" src="" alt="" style="
             position: absolute;
@@ -484,108 +563,71 @@
         <div class="loading-text" style="position: relative; z-index: 2;">Generating your response...</div>
     </div>
 
-    <!-- Persistent Header -->
+    <!-- Header -->
     <header class="app-header">
-        <h1 class="app-title">Feel it, Don't Think It</h1>
+        <h1 class="app-title">Feel First</h1>
     </header>
 
-    <!-- Screen 1: Intro -->
-    <div id="screen1" class="screen active">
+    <!-- Screen 0: Welcome (First-time users) -->
+    <div id="screenWelcome" class="screen">
         <div class="screen-container">
-            <h2 class="display-1 mb-3">What's happening inside you right now?</h2>
-            <p class="body-large mb-3">Your body can sometime tell you a lot more about what's going on than your thoughts.</p>
-            <button class="btn" onclick="goToScreen(2)">Begin</button>
+            <h1 class="display-1 mb-3">Feel First</h1>
+            <p class="body-large mb-3">Your body already knows.</p>
+            <p class="body mb-3">
+                We don't teach you what to feel. We reveal what's already moving through you, asking to be seen.
+            </p>
+            <button class="btn" onclick="startOnboarding()">Get Started</button>
         </div>
     </div>
 
-    <!-- Screen 2: Select Affect -->
-    <div id="screen2" class="screen">
+    <!-- Screen 1: Onboarding Intro -->
+    <div id="screenOnboardingIntro" class="screen">
         <div class="screen-container">
-            <h2 class="display-1 mb-3">What sits in your body right now?</h2>
-            <p class="body mb-3" style="color: var(--gray-300);">Your body already knows. Just recognize what's there—no need to name it.</p>
-
-            <div class="affects-grid" id="affectsGrid"></div>
-
-            <button class="btn" id="continueToContext" onclick="goToContext()" style="display: none;">Continue</button>
+            <p class="caption" style="text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px; font-weight: 600;">
+                First, We Map Your Terrain
+            </p>
+            <h2 class="heading-1 mb-3">Let's learn your terrain</h2>
+            <p class="body mb-3">
+                How you connect—and protect yourself from connection—shapes everything. These patterns started early. Understanding yours helps us read your results more accurately.
+            </p>
+            <p class="body mb-4" style="color: var(--gray-500);">
+                This takes about 2 minutes.
+            </p>
+            <button class="btn" onclick="goToScreen('onboarding')">Begin Mapping</button>
         </div>
     </div>
 
-    <!-- Screen 3: Context Gathering -->
-    <div id="screen3" class="screen">
+    <!-- Screen 2: Onboarding Questions -->
+    <div id="screenOnboarding" class="screen">
         <div class="screen-container">
-            <h2 class="heading-1 mb-4">What's this connecting to?</h2>
+            <p class="caption" style="text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px; font-weight: 600;">
+                Mapping Your Terrain
+            </p>
 
-            <div class="mb-4">
-                <label class="caption mb-2" style="display: block;">What or who is this about?</label>
-                <textarea id="contextInput" placeholder="my mother" autocomplete="off" rows="4"></textarea>
+            <div id="onboardingQuestions"></div>
+
+            <div id="onboardingProgress" style="text-align: center; margin: 32px 0; color: var(--gray-500); font-size: 14px;">
+                <span id="onboardingProgressText">Answer all 5 questions to continue</span>
             </div>
 
-            <div class="mb-4">
-                <label class="caption mb-2" style="display: block;">Direction</label>
-                <div class="direction-grid">
-                    <button class="option-btn" onclick="selectDirection('self')">Pointed at myself</button>
-                    <button class="option-btn" onclick="selectDirection('other')">Pointed at someone else</button>
-                    <button class="option-btn" onclick="selectDirection('past')">About the past</button>
-                    <button class="option-btn" onclick="selectDirection('future')">About the future</button>
-                </div>
-            </div>
-
-            <div class="mb-4">
-                <label class="caption mb-2" style="display: block;">Intensity</label>
-                <div class="intensity-scale">
-                    <button class="intensity-btn" onclick="selectIntensity(1)">
-                        <span class="intensity-number">1</span>
-                        <span>Quiet hum</span>
-                    </button>
-                    <button class="intensity-btn" onclick="selectIntensity(2)">
-                        <span class="intensity-number">2</span>
-                        <span>Steady presence</span>
-                    </button>
-                    <button class="intensity-btn" onclick="selectIntensity(3)">
-                        <span class="intensity-number">3</span>
-                        <span>Loud and insistent</span>
-                    </button>
-                    <button class="intensity-btn" onclick="selectIntensity(4)">
-                        <span class="intensity-number">4</span>
-                        <span>Overwhelming</span>
-                    </button>
-                </div>
-            </div>
-
-            <button class="btn" id="getCASBtn" onclick="goToCAS()">Continue</button>
+            <button class="btn" id="completeOnboardingBtn" onclick="completeOnboarding()" style="display: none;">
+                Reveal My Terrain
+            </button>
         </div>
     </div>
 
-    <!-- Screen 3b: CAS Assessment -->
-    <div id="screen3b" class="screen">
+    <!-- Screen 3: Terrain Reveal -->
+    <div id="screenTerrainReveal" class="screen">
         <div class="screen-container">
-            <p class="caption" style="color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: calc(var(--spacing-unit) * 1); font-size: 11px; font-weight: 600;">The Terrain</p>
-            <h2 class="heading-1 mb-3">Why you handle it the way you do</h2>
-            <p class="body mb-4" style="color: var(--gray-400);">Two people with the same emotions can have completely different experiences. These questions reveal your terrain—the automatic survival strategy you've been running since childhood.</p>
-
-            <div id="casQuestions"></div>
-
-            <div id="casProgress" style="text-align: center; margin: calc(var(--spacing-unit) * 3) 0; color: var(--gray-500); font-size: 14px;">
-                <span id="casProgressText">Answer all 8 questions to continue</span>
-            </div>
-
-            <button class="btn" id="getResultsBtn" onclick="getResults()" style="display: none;">Get Results</button>
-        </div>
-    </div>
-
-    <!-- Screen 4: Results -->
-    <div id="screen4" class="screen">
-        <div class="screen-container">
-            <div id="terrainSection" style="
-                margin: calc(var(--spacing-unit) * 4) 0;
+            <div id="terrainRevealSection" style="
+                margin: 48px 0;
                 position: relative;
                 min-height: 400px;
                 border-radius: 12px;
                 overflow: hidden;
                 background: var(--gray-900);
             ">
-                <!-- Background image -->
-                <img id="terrainImage" src="" alt="Archetype visualization" style="
+                <img id="terrainRevealImage" src="" alt="" style="
                     position: absolute;
                     top: 0;
                     left: 0;
@@ -595,7 +637,6 @@
                     opacity: 0.85;
                 " />
 
-                <!-- Dark gradient overlay for text readability -->
                 <div style="
                     position: absolute;
                     top: 0;
@@ -605,11 +646,10 @@
                     background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.85) 100%);
                 "></div>
 
-                <!-- Content layer -->
                 <div style="
                     position: relative;
                     z-index: 2;
-                    padding: calc(var(--spacing-unit) * 4);
+                    padding: 48px;
                     display: flex;
                     flex-direction: column;
                     justify-content: flex-end;
@@ -619,37 +659,266 @@
                         color: rgba(255,255,255,0.6);
                         text-transform: uppercase;
                         letter-spacing: 0.15em;
-                        margin-bottom: calc(var(--spacing-unit) * 1.5);
-                        font-size: 11px;
+                        margin-bottom: 12px;
                         font-weight: 600;
                     ">Your Terrain</p>
-                    <h3 id="terrainArchetype" style="
-                        font-size: 36px;
+                    <h3 id="terrainRevealName" style="
+                        font-size: 48px;
                         font-weight: 800;
                         color: var(--white);
-                        margin-bottom: calc(var(--spacing-unit) * 2);
+                        margin-bottom: 16px;
                         line-height: 1.2;
-                        text-shadow: 0 2px 8px rgba(0,0,0,0.3);
                     "></h3>
-                    <p id="terrainDescription" style="
+                    <p id="terrainRevealDescription" style="
                         color: rgba(255,255,255,0.95);
                         font-size: 18px;
                         line-height: 1.6;
                         max-width: 600px;
-                        text-shadow: 0 1px 4px rgba(0,0,0,0.4);
                     "></p>
                 </div>
             </div>
 
-            <div class="result-content" id="resultContent"></div>
+            <p class="body text-center mb-4">
+                This terrain shapes how you experience emotions—but it doesn't define you.
+                You'll see how it colors your daily check-ins.
+            </p>
 
-            <div class="share-grid">
-                <button class="share-btn" onclick="shareToTwitter()">Twitter</button>
-                <button class="share-btn" onclick="shareToFacebook()">Facebook</button>
-                <button class="share-btn" onclick="copyLink()">Copy</button>
+            <button class="btn" onclick="startDailyFlow()">Continue to Daily Check-In</button>
+        </div>
+    </div>
+
+    <!-- Screen 4: Daily Welcome -->
+    <div id="screenDailyWelcome" class="screen">
+        <div class="screen-container">
+            <h2 class="display-1 mb-3">What's happening inside you right now?</h2>
+            <p class="body-large mb-3">Your body often knows before your mind does.</p>
+            <button class="btn" onclick="goToScreen('affectSelection')">Begin</button>
+        </div>
+    </div>
+
+    <!-- Screen 5: Affect Selection -->
+    <div id="screenAffectSelection" class="screen">
+        <div class="screen-container">
+            <h2 class="display-1 mb-3">What sits in your body right now?</h2>
+            <p class="body mb-3" style="color: var(--gray-300);">Don't think. Just recognize.</p>
+
+            <div class="affects-grid" id="affectsGrid"></div>
+        </div>
+    </div>
+
+    <!-- Screen 6: Domain Selection -->
+    <div id="screenDomain" class="screen">
+        <div class="screen-container">
+            <h2 class="heading-1 mb-4">Where does this live?</h2>
+
+            <div class="domain-grid">
+                <button class="domain-btn" onclick="selectDomain('Work/School')">
+                    Work / School
+                </button>
+                <button class="domain-btn" onclick="selectDomain('Relationship/Family')">
+                    Relationship / Family
+                </button>
+                <button class="domain-btn" onclick="selectDomain('Myself')">
+                    Myself
+                </button>
+                <button class="domain-btn" onclick="selectDomain('The future')">
+                    The future
+                </button>
+                <button class="domain-btn" onclick="selectDomain('The past')">
+                    The past
+                </button>
+                <button class="domain-btn" onclick="selectDomain('Not sure')">
+                    Not sure
+                </button>
             </div>
 
-            <button class="btn btn-ghost" onclick="resetApp()">Start Over</button>
+            <div class="mb-4" style="margin-top: 32px;">
+                <label class="caption mb-2" style="display: block;">
+                    Add context (optional)
+                </label>
+                <textarea
+                    id="contextNotes"
+                    placeholder="e.g., 'my presentation tomorrow' or 'conversation with my mom'"
+                    rows="3"
+                ></textarea>
+            </div>
+
+            <button class="btn" id="continueToIntensity" onclick="goToIntensity()" style="display: none;">
+                Continue
+            </button>
+        </div>
+    </div>
+
+    <!-- Screen 7: Intensity -->
+    <div id="screenIntensity" class="screen">
+        <div class="screen-container">
+            <h2 class="heading-1 mb-4">How loud is it?</h2>
+
+            <div class="intensity-scale">
+                <button class="intensity-btn" onclick="selectIntensity(1)">
+                    <span class="intensity-number">1</span>
+                    <div class="intensity-label">
+                        <div class="intensity-title">Quiet hum</div>
+                        <div class="intensity-desc">Background signal, you can still function</div>
+                    </div>
+                </button>
+                <button class="intensity-btn" onclick="selectIntensity(2)">
+                    <span class="intensity-number">2</span>
+                    <div class="intensity-label">
+                        <div class="intensity-title">Steady presence</div>
+                        <div class="intensity-desc">Can't ignore it, follows you through the day</div>
+                    </div>
+                </button>
+                <button class="intensity-btn" onclick="selectIntensity(3)">
+                    <span class="intensity-number">3</span>
+                    <div class="intensity-label">
+                        <div class="intensity-title">Hard to ignore</div>
+                        <div class="intensity-desc">Demanding attention, hard to focus on anything else</div>
+                    </div>
+                </button>
+                <button class="intensity-btn" onclick="selectIntensity(4)">
+                    <span class="intensity-number">4</span>
+                    <div class="intensity-label">
+                        <div class="intensity-title">Overwhelming</div>
+                        <div class="intensity-desc">Flooding, taking over, nothing else can get through</div>
+                    </div>
+                </button>
+            </div>
+
+            <button class="btn" id="getResults" onclick="getResults()" style="display: none;">
+                Get Results
+            </button>
+        </div>
+    </div>
+
+    <!-- Screen 8: Results -->
+    <div id="screenResults" class="screen">
+        <div class="screen-container">
+            <!-- What You're Feeling -->
+            <div style="text-align: center; margin-bottom: 32px;">
+                <p class="caption" style="color: var(--gray-500); margin-bottom: 8px;">What you're feeling</p>
+                <h2 class="display-1" id="selectedAffectDisplay" style="margin-bottom: 16px;"></h2>
+                <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
+                    <div>
+                        <p class="caption" style="color: var(--gray-500); margin-bottom: 4px;">Where</p>
+                        <p class="body" id="selectedDomainDisplay" style="color: var(--white); font-weight: 500;"></p>
+                    </div>
+                    <div>
+                        <p class="caption" style="color: var(--gray-500); margin-bottom: 4px;">Intensity</p>
+                        <p class="body" id="selectedIntensityDisplay" style="color: var(--white); font-weight: 500;"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Synthesized Response -->
+            <div style="
+                background: var(--gray-900);
+                border: 1px solid var(--gray-800);
+                border-radius: 12px;
+                padding: 32px;
+                margin-bottom: 32px;
+            ">
+                <div class="result-content" id="resultContent"></div>
+            </div>
+
+            <!-- Your Terrain (Compact) -->
+            <div style="
+                background: var(--gray-900);
+                border: 1px solid var(--gray-800);
+                border-radius: 12px;
+                padding: 24px;
+                margin-bottom: 32px;
+                display: flex;
+                align-items: center;
+                gap: 24px;
+            ">
+                <img id="terrainImageSmall" src="" alt="" style="
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 8px;
+                    object-fit: cover;
+                    flex-shrink: 0;
+                " />
+                <div style="flex: 1;">
+                    <p class="caption" style="color: var(--gray-500); margin-bottom: 4px;">Your Terrain</p>
+                    <h3 id="terrainArchetype" style="
+                        font-size: 20px;
+                        font-weight: 700;
+                        color: var(--white);
+                        margin-bottom: 8px;
+                    "></h3>
+                    <p id="terrainDescription" style="
+                        color: var(--gray-400);
+                        font-size: 14px;
+                        line-height: 1.5;
+                    "></p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="text-align: center; margin-top: 48px; display: flex; flex-direction: column; gap: 16px; align-items: center;">
+                <button class="btn" id="giveFeedbackBtn" onclick="goToFeedback()">Give us feedback</button>
+                <div style="display: flex; gap: 16px;">
+                    <button class="btn btn-ghost" onclick="resetApp()">Start Over</button>
+                    <button class="btn btn-ghost" onclick="resetTerrain()">Reset Terrain</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 9: Feedback (NPS) -->
+    <div id="screenFeedback" class="screen">
+        <div class="screen-container">
+            <h2 class="display-1 mb-3 text-center">How did we do?</h2>
+            <p class="body mb-4 text-center" style="color: var(--gray-300);">
+                How likely are you to recommend Feel First to a friend?
+            </p>
+
+            <div class="nps-slider-container">
+                <div class="nps-value-display">
+                    <div class="nps-score-number" id="npsScoreNumber">5</div>
+                    <div class="nps-score-label" id="npsScoreLabel">Neutral</div>
+                    <div class="nps-score-description" id="npsScoreDescription">You're on the fence about recommending us.</div>
+                </div>
+
+                <div class="nps-slider-wrapper">
+                    <input
+                        type="range"
+                        min="0"
+                        max="10"
+                        value="5"
+                        class="nps-slider"
+                        id="npsSlider"
+                    />
+                </div>
+
+                <div class="nps-labels">
+                    <span>Not at all likely (0)</span>
+                    <span>Extremely likely (10)</span>
+                </div>
+            </div>
+
+            <div id="npsFeedbackInput" style="margin-top: 24px;">
+                <label class="caption mb-2" style="display: block;">
+                    Tell us more (optional)
+                </label>
+                <textarea
+                    id="npsFeedbackText"
+                    placeholder="What did you think of this experience?"
+                    rows="3"
+                ></textarea>
+
+                <button class="btn" onclick="submitNPS()" style="margin-top: 16px;">
+                    Submit Feedback
+                </button>
+            </div>
+
+            <div id="npsConfirmation" style="display: none; text-align: center; padding: 24px;">
+                <p style="color: var(--gray-300); font-size: 18px; margin-bottom: 24px;">
+                    Thank you for your feedback!
+                </p>
+                <button class="btn btn-ghost" onclick="goToScreen('Results')">Back to Results</button>
+            </div>
         </div>
     </div>
 
@@ -658,595 +927,6 @@
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-functions-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 
-    <script>
-        // Initialize Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyB29fRL5UdQodkzCDaKM8Ro7dtXpAf-Uro",
-            authDomain: "realness-score.firebaseapp.com",
-            projectId: "realness-score",
-            storageBucket: "realness-score.firebasestorage.app",
-            messagingSenderId: "433844819847",
-            appId: "1:433844819847:web:0dffeed8056eac7e4f8990"
-        };
-
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-        const db = firebase.firestore();
-
-        // State object
-        const state = {
-            selectedAffect: null,
-            selectedAffectName: '',
-            context: '',
-            direction: null,
-            intensity: null,
-            casAnswers: {},
-            casArchetype: null
-        };
-
-        // The 9 affects with embodied metaphor clusters
-        const affects = [
-            {
-                name: 'Curiosity',
-                metaphors: ['leaning in toward something', 'pulled forward', 'tracking movement', 'eyes focused and bright'],
-                icon: 'icons/lahzo_0003_interest.png'
-            },
-            {
-                name: 'Joy',
-                metaphors: ['chest expanding', 'warmth spreading', 'softening', 'opening up'],
-                icon: 'icons/lahzo_0006_joy.png'
-            },
-            {
-                name: 'Surprise',
-                metaphors: ['breath catching', 'suddenly jolted', 'paused mid-step', 'interrupted'],
-                icon: 'icons/lahzo_0004_surprise.png'
-            },
-            {
-                name: 'Fear',
-                metaphors: ['heart racing', 'blood running cold', 'frozen in place', 'braced for impact'],
-                icon: 'icons/lahzo_0008_fear.png'
-            },
-            {
-                name: 'Anger',
-                metaphors: ['blood boiling', 'pressure building', 'heat rising', 'ready to explode'],
-                icon: 'icons/lahzo_0000_anger.png'
-            },
-            {
-                name: 'Sadness',
-                metaphors: ['weight pressing down', 'sinking', 'drowning', 'can\'t catch breath'],
-                icon: 'icons/lahzo_0007_sadness.png'
-            },
-            {
-                name: 'Disgust',
-                metaphors: ['recoiling', 'pulling back fast', 'wanting to spit it out', 'nausea rising'],
-                icon: 'icons/lahzo_0001_disgust.png'
-            },
-            {
-                name: 'Withdrawing',
-                metaphors: ['stepping back', 'creating distance', 'turning away', 'closing the door'],
-                icon: 'icons/lahzo_0005_withdrawing.png'
-            },
-            {
-                name: 'Dropping',
-                metaphors: ['want to disappear', 'feeling small', 'can\'t face anyone', 'shrinking'],
-                icon: 'icons/lahzo_0002_dropping.png'
-            }
-        ];
-
-        // Initialize app - render affect cards
-        function initApp() {
-            renderAffectCards();
-        }
-
-        // Render affect selection cards
-        function renderAffectCards() {
-            const grid = document.getElementById('affectsGrid');
-            grid.innerHTML = '';
-
-            affects.forEach((affect, index) => {
-                const card = document.createElement('div');
-                card.className = 'affect-card';
-                card.onclick = () => selectAffect(index);
-
-                // Display first 2 metaphors
-                const metaphorText = affect.metaphors.slice(0, 2).join(' • ');
-
-                card.innerHTML = `
-                    <img src="${affect.icon}" alt="${affect.name}" class="affect-icon" />
-                    <!-- <div class="affect-name">${affect.name}</div> -->
-                    <div class="affect-description">${metaphorText}</div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // Select affect
-        function selectAffect(index) {
-            // Remove previous selection
-            document.querySelectorAll('.affect-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-
-            // Add selection to clicked card
-            const cards = document.querySelectorAll('.affect-card');
-            cards[index].classList.add('selected');
-
-            // Update state
-            state.selectedAffect = index;
-            state.selectedAffectName = affects[index].name;
-
-            // Show continue button
-            document.getElementById('continueToContext').style.display = 'block';
-        }
-
-        // Select direction
-        function selectDirection(direction) {
-            // Remove previous selection
-            document.querySelectorAll('.direction-grid .option-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-
-            // Add selection to clicked button
-            window.event.target.classList.add('selected');
-
-            // Update state
-            state.direction = direction;
-
-            // Check if all fields are filled
-            checkContextComplete();
-        }
-
-        // Select intensity
-        function selectIntensity(intensity) {
-            // Remove previous selection
-            document.querySelectorAll('.intensity-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-
-            // Add selection to clicked button
-            window.event.target.classList.add('selected');
-
-            // Update state
-            state.intensity = intensity;
-
-            // Check if all fields are filled
-            checkContextComplete();
-        }
-
-        // Check if context is complete
-        function checkContextComplete() {
-            const contextInput = document.getElementById('contextInput').value.trim();
-            const btn = document.getElementById('getCASBtn');
-
-            if (contextInput && state.direction && state.intensity) {
-                btn.disabled = false;
-            } else {
-                btn.disabled = true;
-            }
-        }
-
-        // Listen to context input changes
-        document.addEventListener('DOMContentLoaded', () => {
-            const contextInput = document.getElementById('contextInput');
-            if (contextInput) {
-                contextInput.addEventListener('input', checkContextComplete);
-            }
-        });
-
-        // Navigation
-        function goToScreen(screenNumber) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            setTimeout(() => {
-                document.getElementById('screen' + screenNumber).classList.add('active');
-                window.scrollTo(0, 0);
-            }, 50);
-        }
-
-        function goToContext() {
-            if (state.selectedAffect === null) {
-                alert('Please select an affect first.');
-                return;
-            }
-            goToScreen(3);
-        }
-
-        function goToCAS() {
-            const contextInput = document.getElementById('contextInput').value.trim();
-
-            if (!contextInput || !state.direction || !state.intensity) {
-                alert('Please fill in all fields.');
-                return;
-            }
-
-            state.context = contextInput;
-            renderCASQuestions();
-            goToScreen('3b');
-        }
-
-        // CAS Questions (8 questions to determine attachment archetype)
-        const casQuestions = [
-            {
-                id: 'intensity',
-                question: 'When things get intense, I tend to:',
-                options: [
-                    { text: 'Pull away and need space', scores: { avoidant: 2 } },
-                    { text: 'Move closer and seek connection', scores: { anxious: 2 } },
-                    { text: 'Stay present and work through it', scores: { secure: 2 } },
-                    { text: 'Freeze—both pull away and move closer at once', scores: { disorganized: 2 } }
-                ]
-            },
-            {
-                id: 'relationships',
-                question: 'In relationships, I usually:',
-                options: [
-                    { text: 'Show the polished version of myself', scores: { anxious_perfectionist: 2 } },
-                    { text: 'Show everything—I wear my heart on my sleeve', scores: { anxious_preoccupied: 2 } },
-                    { text: 'Keep emotional distance', scores: { avoidant: 2 } },
-                    { text: 'Share openly when it feels right', scores: { secure: 2 } }
-                ]
-            },
-            {
-                id: 'stress',
-                question: 'My instinct under stress is:',
-                options: [
-                    { text: 'Figure it out alone', scores: { avoidant_dismissive: 2 } },
-                    { text: 'Seek support from others', scores: { anxious: 1, secure: 1 } },
-                    { text: 'Analyze it intellectually', scores: { avoidant_intellectual: 2 } },
-                    { text: 'Varies—sometimes withdraw, sometimes reach out', scores: { disorganized: 2 } }
-                ]
-            },
-            {
-                id: 'fear',
-                question: "I'm most afraid of:",
-                options: [
-                    { text: 'Being abandoned or alone', scores: { anxious: 2 } },
-                    { text: 'Being trapped or controlled', scores: { avoidant: 2 } },
-                    { text: 'Being exposed as inadequate', scores: { anxious_perfectionist: 2 } },
-                    { text: 'Neither strongly resonates', scores: { secure: 2 } }
-                ]
-            },
-            {
-                id: 'vulnerability',
-                question: "When I feel vulnerable, I:",
-                options: [
-                    { text: 'Hide it and perform confidence', scores: { anxious_perfectionist: 2 } },
-                    { text: 'Share it openly', scores: { anxious_preoccupied: 1, secure: 1 } },
-                    { text: 'Intellectualize or analyze it', scores: { avoidant_intellectual: 2 } },
-                    { text: 'Withdraw and process alone', scores: { avoidant_dismissive: 2 } }
-                ]
-            },
-            {
-                id: 'needs',
-                question: "I think needing people is:",
-                options: [
-                    { text: 'Normal and healthy', scores: { secure: 2, anxious: 1 } },
-                    { text: 'A weakness I try to minimize', scores: { avoidant_counterphobic: 2 } },
-                    { text: 'Risky—people might leave', scores: { anxious: 2 } },
-                    { text: 'Confusing—I want it and fear it', scores: { disorganized: 2 } }
-                ]
-            },
-            {
-                id: 'emotions',
-                question: "Strong emotions make me want to:",
-                options: [
-                    { text: 'Express them fully', scores: { anxious_preoccupied: 2 } },
-                    { text: 'Control or contain them', scores: { avoidant: 2 } },
-                    { text: 'Escape or distract myself', scores: { avoidant_dismissive: 1, disorganized: 1 } },
-                    { text: 'Feel them without being overwhelmed', scores: { secure: 2 } }
-                ]
-            },
-            {
-                id: 'conflict',
-                question: "I handle conflict by:",
-                options: [
-                    { text: 'Withdrawing until it blows over', scores: { avoidant_dismissive: 2 } },
-                    { text: 'Engaging directly to resolve it', scores: { secure: 1, anxious: 1 } },
-                    { text: 'Performing calm while anxious inside', scores: { anxious_perfectionist: 2 } },
-                    { text: 'Analyzing what went wrong', scores: { avoidant_intellectual: 2 } }
-                ]
-            }
-        ];
-
-        // Render CAS questions
-        function renderCASQuestions() {
-            const container = document.getElementById('casQuestions');
-            container.innerHTML = '';
-
-            casQuestions.forEach((q, qIndex) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'mb-4';
-                questionDiv.innerHTML = `
-                    <label class="caption mb-2" style="display: block;">${q.question}</label>
-                    <div class="button-group">
-                        ${q.options.map((opt, oIndex) => `
-                            <button class="option-btn" data-question="${q.id}" data-option="${oIndex}">
-                                ${opt.text}
-                            </button>
-                        `).join('')}
-                    </div>
-                `;
-                container.appendChild(questionDiv);
-            });
-
-            // Add click listeners
-            document.querySelectorAll('[data-question]').forEach(btn => {
-                btn.addEventListener('click', selectCASAnswer);
-            });
-        }
-
-        // Select CAS answer
-        function selectCASAnswer(e) {
-            const btn = e.target;
-            const questionId = btn.dataset.question;
-            const optionIndex = parseInt(btn.dataset.option);
-
-            // Store answer
-            state.casAnswers[questionId] = optionIndex;
-
-            // Visual feedback
-            const questionBtns = document.querySelectorAll(`[data-question="${questionId}"]`);
-            questionBtns.forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-
-            // Update progress
-            const answeredCount = Object.keys(state.casAnswers).length;
-            const totalCount = casQuestions.length;
-            const progressText = document.getElementById('casProgressText');
-
-            if (answeredCount < totalCount) {
-                progressText.textContent = `${answeredCount}/${totalCount} answered — ${totalCount - answeredCount} more to go`;
-                progressText.style.color = 'var(--gray-500)';
-            } else {
-                progressText.textContent = '✓ All questions answered';
-                progressText.style.color = 'var(--green)';
-            }
-
-            // Check if all answered
-            if (answeredCount === totalCount) {
-                document.getElementById('getResultsBtn').style.display = 'block';
-                document.getElementById('casProgress').style.display = 'none';
-                calculateCASArchetype();
-                // Scroll to button
-                setTimeout(() => {
-                    document.getElementById('getResultsBtn').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 100);
-            }
-        }
-
-        // Calculate CAS Archetype based on answers
-        function calculateCASArchetype() {
-            const scores = {
-                secure: 0,
-                anxious: 0,
-                anxious_preoccupied: 0,
-                anxious_perfectionist: 0,
-                anxious_merging: 0,
-                avoidant: 0,
-                avoidant_dismissive: 0,
-                avoidant_intellectual: 0,
-                avoidant_counterphobic: 0,
-                disorganized: 0
-            };
-
-            // Tally scores
-            casQuestions.forEach(q => {
-                const answerIndex = state.casAnswers[q.id];
-                if (answerIndex !== undefined) {
-                    const option = q.options[answerIndex];
-                    Object.keys(option.scores).forEach(key => {
-                        scores[key] = (scores[key] || 0) + option.scores[key];
-                    });
-                }
-            });
-
-            // Determine primary archetype
-            let maxScore = 0;
-            let archetype = 'secure';
-
-            // Check disorganized first (special case)
-            if (scores.disorganized >= 6) {
-                archetype = 'Mystery Mosaic';
-            }
-            // Check secure
-            else if (scores.secure >= 8) {
-                archetype = 'Grounded Navigator';
-            }
-            // Check anxious variants
-            else if (scores.anxious_perfectionist > maxScore) {
-                archetype = 'Heartfelt Defender';
-                maxScore = scores.anxious_perfectionist;
-            }
-            else if (scores.anxious_preoccupied > maxScore) {
-                archetype = 'Emotional Enthusiast';
-                maxScore = scores.anxious_preoccupied;
-            }
-            else if (scores.anxious > maxScore && scores.anxious >= 6) {
-                archetype = 'Passionate Pilgrim';
-                maxScore = scores.anxious;
-            }
-            // Check avoidant variants
-            else if (scores.avoidant_dismissive > maxScore) {
-                archetype = 'Lone Wolf';
-                maxScore = scores.avoidant_dismissive;
-            }
-            else if (scores.avoidant_intellectual > maxScore) {
-                archetype = 'Chill Conductor';
-                maxScore = scores.avoidant_intellectual;
-            }
-            else if (scores.avoidant_counterphobic > maxScore) {
-                archetype = 'Independent Icon';
-                maxScore = scores.avoidant_counterphobic;
-            }
-            else if (scores.avoidant > maxScore && scores.avoidant >= 6) {
-                archetype = 'Lone Wolf';
-            }
-            // Default to most secure if unclear
-            else {
-                archetype = 'Grounded Navigator';
-            }
-
-            state.casArchetype = archetype;
-        }
-
-        // Get results - call Firebase function
-        async function getResults() {
-            const contextInput = document.getElementById('contextInput').value.trim();
-
-            if (!contextInput || !state.direction || !state.intensity) {
-                alert('Please fill in all fields.');
-                return;
-            }
-
-            state.context = contextInput;
-
-            // Show loading overlay with selected affect icon as background
-            const selectedAffectIcon = affects[state.selectedAffect].icon;
-            document.getElementById('loadingIcon').src = selectedAffectIcon;
-            document.getElementById('loadingOverlay').classList.add('active');
-
-            try {
-                // Call Firebase function
-                const generateResponse = firebase.functions().httpsCallable('generateTherapeuticResponse');
-                const result = await generateResponse({
-                    affectName: state.selectedAffectName,
-                    context: state.context,
-                    direction: state.direction,
-                    intensity: state.intensity,
-                    casArchetype: state.casArchetype
-                });
-
-                // Hide loading overlay
-                document.getElementById('loadingOverlay').classList.remove('active');
-
-                // Display results
-                displayResults(result.data);
-
-                // Go to results screen
-                goToScreen(4);
-
-            } catch (error) {
-                console.error('Error generating response:', error);
-                document.getElementById('loadingOverlay').classList.remove('active');
-                alert('Failed to generate response. Please try again.');
-            }
-        }
-
-        // Display results
-        function displayResults(data) {
-            // Display terrain (CAS archetype)
-            if (state.casArchetype) {
-                document.getElementById('terrainSection').style.display = 'block';
-                document.getElementById('terrainArchetype').textContent = state.casArchetype;
-
-                // Archetype image mapping
-                const archetypeImages = {
-                    'Grounded Navigator': 'src/assets/images/archetype-1-grounded-navigator.png',
-                    'Emotional Enthusiast': 'src/assets/images/archetype-2-emotional-enthusiast.png',
-                    'Lone Wolf': 'src/assets/images/archetype-3-lone-wolf.png',
-                    'Mystery Mosaic': 'src/assets/images/archetype-4-mystery-mosaic.png',
-                    'Heartfelt Defender': 'src/assets/images/archetype-5-heartfelt-defender.png',
-                    'Chill Conductor': 'src/assets/images/archetype-6-chill-conductor.png',
-                    'Passionate Pilgrim': 'src/assets/images/archetype-7-passionate-pilgrim.png',
-                    'Independent Icon': 'src/assets/images/archetype-8-independent-icon.png'
-                };
-
-                // Set archetype image as background
-                const imagePath = archetypeImages[state.casArchetype];
-                if (imagePath) {
-                    document.getElementById('terrainImage').src = imagePath;
-                }
-
-                // Terrain descriptions
-                const terrainDescriptions = {
-                    'Grounded Navigator': 'Can sit with difficult feelings without being overwhelmed or shutting down. Good boundaries. Emotional flexibility.',
-                    'Emotional Enthusiast': 'Feels everything deeply. Worries about being "too much." Amplifies signals to make sure they\'re not missed. Fears abandonment.',
-                    'Heartfelt Defender': 'Shows the polished version. Hides the messy parts. Performs competence to stay lovable.',
-                    'Passionate Pilgrim': 'Wants to belong completely. Goes all-in. Merges with others to feel whole.',
-                    'Lone Wolf': 'Values space and freedom. Self-reliant. Withdraws under stress to stay safe.',
-                    'Chill Conductor': 'Lives in the head. Understands but doesn\'t feel. Intellectualizes to stay in control.',
-                    'Independent Icon': 'Prides on not needing anyone. Dismisses vulnerability as weakness. Maintains fierce independence.',
-                    'Mystery Mosaic': 'Sometimes craves closeness, sometimes pushes away. The attachment system itself is conflicted—wanting and fearing connection at once.'
-                };
-
-                document.getElementById('terrainDescription').textContent = terrainDescriptions[state.casArchetype] || 'Your unique pattern of handling connection and emotion.';
-            } else {
-                // Hide terrain section if no archetype
-                document.getElementById('terrainSection').style.display = 'none';
-            }
-
-            // Display the 3-paragraph response
-            // Split by double newlines to get paragraphs
-            const paragraphs = data.response.split('\n\n').filter(p => p.trim());
-            const contentHTML = paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
-            document.getElementById('resultContent').innerHTML = contentHTML;
-        }
-
-        // Reset app
-        function resetApp() {
-            state.selectedAffect = null;
-            state.selectedAffectName = '';
-            state.context = '';
-            state.direction = null;
-            state.intensity = null;
-
-            document.getElementById('contextInput').value = '';
-            document.getElementById('continueToContext').style.display = 'none';
-            document.getElementById('getResultsBtn').disabled = true;
-
-            // Clear all selections
-            document.querySelectorAll('.affect-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-            document.querySelectorAll('.option-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            document.querySelectorAll('.intensity-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-
-            goToScreen(1);
-        }
-
-        // Share functions
-        function shareToTwitter() {
-            const url = window.location.href;
-            const text = `I just explored my ${state.selectedAffectName.toLowerCase()} about ${state.context}. Feel it, Don't Think It.`;
-            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
-            window.open(twitterUrl, '_blank', 'width=550,height=420');
-        }
-
-        function shareToFacebook() {
-            const url = window.location.href;
-            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-            window.open(facebookUrl, '_blank', 'width=550,height=420');
-        }
-
-        async function copyLink() {
-            const url = window.location.href;
-            try {
-                await navigator.clipboard.writeText(url);
-                const btn = event.target;
-                const originalText = btn.textContent;
-                btn.textContent = 'Copied!';
-                btn.style.background = 'var(--white)';
-                btn.style.color = 'var(--black)';
-
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                    btn.style.background = '';
-                    btn.style.color = '';
-                }, 2000);
-            } catch (error) {
-                console.error('Failed to copy link:', error);
-                alert('Failed to copy link. Please copy manually: ' + url);
-            }
-        }
-
-        // Initialize app on load
-        initApp();
-    </script>
+    <script src="src/app.js"></script>
 </body>
 </html>

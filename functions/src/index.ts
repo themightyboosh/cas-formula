@@ -720,33 +720,28 @@ function extractMusicGenre(spotifySeed: string | undefined): string {
  * Uses Tomkins-grounded system prompt from SYSTEM_PROMPT_V2.md
  * Called after user selects ONE affect and provides context
  */
-export const generateTherapeuticResponse = functions.https.onRequest((req, res) => {
-  return corsHandler(req, res, async () => {
-    try {
-      const { affectName, context, direction, intensity, casArchetype } = req.body.data || req.body;
+export const generateTherapeuticResponse = functions.https.onCall(async (data, context) => {
+    const { affectName, domain, contextNotes, intensity, terrain } = data;
 
-      // Validate input
-      if (!affectName || typeof affectName !== 'string') {
-        res.status(400).json({ error: 'affectName is required and must be a string' });
-        return;
-      }
-      if (!context || typeof context !== 'string') {
-        res.status(400).json({ error: 'context is required and must be a string' });
-        return;
-      }
-      if (!direction || !['self', 'other', 'past', 'future'].includes(direction)) {
-        res.status(400).json({ error: 'direction must be one of: self, other, past, future' });
-        return;
-      }
-      if (!intensity || ![1, 2, 3, 4].includes(intensity)) {
-        res.status(400).json({ error: 'intensity must be 1, 2, 3, or 4' });
-        return;
-      }
-      // casArchetype is optional but should be a string if provided
-      if (casArchetype && typeof casArchetype !== 'string') {
-        res.status(400).json({ error: 'casArchetype must be a string if provided' });
-        return;
-      }
+    // Validate input
+    if (!affectName || typeof affectName !== 'string') {
+      throw new functions.https.HttpsError('invalid-argument', 'affectName is required and must be a string');
+    }
+    if (!domain || typeof domain !== 'string') {
+      throw new functions.https.HttpsError('invalid-argument', 'domain is required and must be a string');
+    }
+    if (!intensity || ![1, 2, 3, 4].includes(intensity)) {
+      throw new functions.https.HttpsError('invalid-argument', 'intensity must be 1, 2, 3, or 4');
+    }
+    if (!terrain || typeof terrain !== 'string') {
+      throw new functions.https.HttpsError('invalid-argument', 'terrain is required and must be a string');
+    }
+    // contextNotes is optional
+    if (contextNotes !== undefined && typeof contextNotes !== 'string') {
+      throw new functions.https.HttpsError('invalid-argument', 'contextNotes must be a string if provided');
+    }
+
+    try {
 
       const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
@@ -888,41 +883,41 @@ Generate a 3-paragraph therapeutic response (~150 words total) using this struct
 - Connect trigger type to user's context with specificity
 - Use Tomkins vocabulary: "triggered by [gradient/density description]"
 
-**Paragraph 2: Pattern Recognition with CAS Terrain (45-55 words)**
-- **IF CAS PROVIDED:** Start with "Given your [CAS ARCHETYPE] terrain, here's how you're processing this [AFFECT]:"
-  - Show how terrain amplifies/dampens the affect
-  - Reveal CAS-specific pattern (e.g., Heartfelt Defender hides fear and performs competence)
-  - Connect intensity to terrain-specific struggle
-- **IF NO CAS:** Interpret how direction + intensity shapes their experience
-- **CRITICAL**: Direction and intensity MUST meaningfully shape this paragraph. Same affect + same context but different direction/intensity = different response.
-- Direction-specific interpretation (integrate this deeply):
-  - Self: about identity, worth, capability ("turned inward on yourself")
-  - Other: about what they're doing, threat FROM them ("aimed at them, about what they're bringing")
-  - Past: processing what already happened ("looking backward, still holding it")
-  - Future: anticipating what might happen ("scanning ahead, bracing for what's coming")
+**Paragraph 2: Terrain Pattern Analysis (45-55 words)**
+- Start with "Given your [TERRAIN NAME] terrain, here's how you're processing this [AFFECT]:"
+- Show how terrain amplifies/dampens the affect
+- Reveal terrain-specific pattern (e.g., Heartfelt Defender hides fear and performs competence, Lone Wolf withdraws)
+- **CRITICAL**: Domain and intensity MUST meaningfully shape this paragraph. Same affect + same terrain but different domain/intensity = different response.
+- Domain-specific interpretation (integrate this deeply):
+  - Work/School: Performance, competence, evaluation, hierarchies ("how you show up professionally, proving your worth")
+  - Relationship/Family: Connection, abandonment, boundaries, intimacy ("how you connect and protect yourself from connection")
+  - Myself: Self-worth, identity, internal conflict, self-judgment ("turned inward on your sense of self")
+  - The future: Anticipation, uncertainty, control, possibility ("scanning ahead, bracing for what might happen")
+  - The past: Regret, grief, unprocessed events, rumination ("looking backward, still holding it")
+  - Not sure: Diffuse affect, pre-cognitive awareness ("your body knows before your mind does")
 - Intensity-specific language (show what this level DOES to them):
   - 1: "noticeable but manageable," "background signal," "you can still function"
   - 2: "persistent," "can't ignore," "steady presence," "follows you through the day"
   - 3: "demanding attention," "hard to focus on anything else," "drowning out other signals"
-  - 4: "flooding," "overwhelming," "taking over," "nothing else can get through"
-- Create "how do you know me?" moment by combining ALL inputs uniquely
+  - 4: "flooding," "overwhelming," "taking over," "nothing else can get through" - prioritize regulation
+- Create "how do you know me?" moment by combining affect + domain + intensity + terrain uniquely
 
 **Paragraph 3: The Opening (45-55 words)**
 - Start: "The opening is here:"
-- Provide specific leverage point based on affect + direction + intensity
+- Provide specific leverage point based on affect + domain + intensity + terrain
 - Reference Tomkins principle about affect function
 - End with reframe: "This isn't about making the affect go away - it's about [function-based reframe]"
-- For intensity 4: prioritize regulation before insight
+- For intensity 4: prioritize regulation before insight ("First: regulate. Then: understand.")
 
 # Critical Rules
 
 1. **Always ground in Tomkins** - use his language about triggers (gradients, density, rate of change)
-2. **Use user's exact context** - don't abstract "my mother" into "parental relationships"
+2. **Use specific domain context** - don't abstract "Work/School" into "professional life"
 3. **Match intensity to approach** - intensity 4 needs regulation first, not complex insight
-4. **Direction determines meaning** - same affect, different direction = different interpretation
-5. **Validation + Agency** - affect is real AND they have choice
-6. **Function over feeling** - "This affect is doing X" not "You shouldn't feel this"
-7. **Specific not generic** - use their actual words
+4. **Domain determines meaning** - same affect + terrain, different domain = different interpretation
+5. **Terrain determines pattern** - same affect, different terrain = different processing
+6. **Validation + Agency** - affect is real AND they have choice
+7. **Function over feeling** - "This affect is doing X" not "You shouldn't feel this"
 8. **Word count: 135-165 words total** (target: 150)
 
 # Output Format
@@ -937,18 +932,18 @@ Use \\n\\n between paragraphs for proper formatting.`;
       const userPrompt = `
 **User Input:**
 - Selected Affect: ${affectName}
-- Context: "${context}"
-- Direction: ${direction}
+- Domain: ${domain}
+${contextNotes ? `- Context Notes: "${contextNotes}"` : ''}
 - Intensity: ${intensity}
-${casArchetype ? `- CAS Terrain: ${casArchetype}` : ''}
+- Terrain: ${terrain}
 
-**CRITICAL REQUIREMENT**: Every single input above MUST meaningfully shape your response. Changing ANY of these variables should produce a DIFFERENT response:
-- Different context → completely different analysis of what's triggering this
-- Different direction (self vs other vs past vs future) → changes where the affect is aimed
-- Different intensity (1 vs 4) → dramatically changes how it's experienced
-- Different CAS terrain → changes the pattern of how they handle it
+**CRITICAL REQUIREMENT**: Every input MUST meaningfully shape your response. Changing ANY variable should produce a DIFFERENT response:
+- Different domain → changes the life area being affected (Work/School vs Relationship vs Myself, etc.)
+- Different intensity (1 vs 4) → dramatically changes approach (background signal vs overwhelming flood)
+- Different terrain → changes the processing pattern (Grounded Navigator vs Lone Wolf vs Heartfelt Defender, etc.)
+${contextNotes ? `- Use the context notes ("${contextNotes}") to make this deeply specific to their situation` : ''}
 
-Generate the 3-paragraph therapeutic response following the structure and rules above.${casArchetype ? ' Integrate the CAS terrain into Paragraph 2 as specified.' : ''} Make each response unique to THIS specific combination of inputs.`;
+Generate the 3-paragraph therapeutic response following the structure above. Integrate the terrain into Paragraph 2 as specified. Make each response unique to THIS specific combination of affect + domain + intensity + terrain.`;
 
       const fullPrompt = `${systemPrompt}\n\n${userPrompt}`;
 
@@ -962,13 +957,11 @@ Generate the 3-paragraph therapeutic response following the structure and rules 
         parsed = JSON.parse(cleanedResponse);
       } catch (parseError) {
         console.error('Failed to parse Gemini response:', response);
-        res.status(500).json({ error: 'Invalid JSON response from AI' });
-        return;
+        throw new functions.https.HttpsError('internal', 'Invalid JSON response from AI');
       }
 
       if (!parsed.response) {
-        res.status(500).json({ error: 'No response generated' });
-        return;
+        throw new functions.https.HttpsError('internal', 'No response generated');
       }
 
       // Second AI Pass: Copywriting & Story Enhancement
@@ -983,7 +976,7 @@ Rewrite this response with these goals:
 2. **Story & Flow**: Make it flow like a story someone is telling you, not a clinical assessment
 3. **Emotional Connection**: Keep the poetic, embodied language but make it more accessible
 4. **Maintain Structure**: Keep the 3-paragraph structure intact
-5. **Keep Key Elements**: Don't lose the Tomkins theory, the specific context ("${context}"), or the CAS terrain insights
+5. **Keep Key Elements**: Don't lose the Tomkins theory${contextNotes ? `, the specific context ("${contextNotes}")` : ''}, the domain (${domain}), or the terrain (${terrain}) insights
 6. **More Conversational**: Write like you're talking to a friend who trusts you, not like you're writing a textbook
 
 **Guidelines:**
@@ -1015,19 +1008,100 @@ Use \\n\\n between paragraphs for proper formatting.`;
         finalParsed = parsed;
       }
 
-      res.status(200).json({
-        result: {
-          response: finalParsed.response || parsed.response,
-          affectName,
-          context,
-          direction,
-          intensity
-        }
-      });
+      return {
+        response: finalParsed.response || parsed.response,
+        affectName,
+        domain,
+        intensity,
+        terrain
+      };
 
     } catch (error: any) {
       console.error('Error generating therapeutic response:', error);
-      res.status(500).json({ error: `Failed to generate response: ${error.message}` });
+      throw new functions.https.HttpsError('internal', `Failed to generate response: ${error.message}`);
+    }
+});
+
+/**
+ * Cloud Function: Clear Submissions
+ * Deletes all documents from the submissions collection
+ * For admin panel data management
+ */
+export const clearSubmissions = functions.https.onRequest((req, res) => {
+  return corsHandler(req, res, async () => {
+    try {
+      const db = admin.firestore();
+      const batch = db.batch();
+
+      const snapshot = await db.collection('submissions').get();
+
+      if (snapshot.empty) {
+        res.status(200).json({
+          result: {
+            message: 'No submissions to delete',
+            deletedCount: 0
+          }
+        });
+        return;
+      }
+
+      snapshot.docs.forEach((doc) => {
+        batch.delete(doc.ref);
+      });
+
+      await batch.commit();
+
+      res.status(200).json({
+        result: {
+          message: 'All submissions deleted successfully',
+          deletedCount: snapshot.docs.length
+        }
+      });
+    } catch (error: any) {
+      console.error('Error clearing submissions:', error);
+      res.status(500).json({ error: `Failed to clear submissions: ${error.message}` });
+    }
+  });
+});
+
+/**
+ * Cloud Function: Clear NPS Feedback
+ * Deletes all documents from the npsFeedback collection
+ * For admin panel data management
+ */
+export const clearNPSFeedback = functions.https.onRequest((req, res) => {
+  return corsHandler(req, res, async () => {
+    try {
+      const db = admin.firestore();
+      const batch = db.batch();
+
+      const snapshot = await db.collection('npsFeedback').get();
+
+      if (snapshot.empty) {
+        res.status(200).json({
+          result: {
+            message: 'No NPS feedback to delete',
+            deletedCount: 0
+          }
+        });
+        return;
+      }
+
+      snapshot.docs.forEach((doc) => {
+        batch.delete(doc.ref);
+      });
+
+      await batch.commit();
+
+      res.status(200).json({
+        result: {
+          message: 'All NPS feedback deleted successfully',
+          deletedCount: snapshot.docs.length
+        }
+      });
+    } catch (error: any) {
+      console.error('Error clearing NPS feedback:', error);
+      res.status(500).json({ error: `Failed to clear NPS feedback: ${error.message}` });
     }
   });
 });
