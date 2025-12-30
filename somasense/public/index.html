@@ -588,7 +588,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 20px;
-            z-index: 10;
+            z-index: 1020;
         }
 
         .user-name-tiny {
@@ -773,8 +773,14 @@
             color: var(--gray-400);
         }
 
-        /* Adjust daily-welcome screen-container to account for header */
-        #daily-welcome .screen-container {
+        /* Adjust screen-container to account for global header on all check-in flow screens */
+        #daily-welcome .screen-container,
+        #affect-selection .screen-container,
+        #relational-direction .screen-container,
+        #chronicity-selection .screen-container,
+        #intensity-selection .screen-container,
+        #action-impulse .screen-container,
+        #results .screen-container {
             padding-top: 80px;
         }
 
